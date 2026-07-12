@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -30,7 +31,36 @@
               }
             ],
             "styles": [
+              "public/assets/css/bootstrap.min.css",
+              "public/assets/css/all-fontawesome.min.css",
+              "public/assets/css/flaticon.css",
+              "public/assets/css/animate.min.css",
+              "public/assets/css/jquery-ui.min.css",
+              "public/assets/css/magnific-popup.min.css",
+              "public/assets/css/nice-select.min.css",
+              "public/assets/css/owl.carousel.min.css",
+              "public/assets/css/flex-slider.min.css",
+              "public/assets/css/style.css",
               "src/styles.scss"
+            ],
+            "scripts": [
+              "public/assets/js/modernizr.min.js",
+              "public/assets/js/jquery-3.6.0.min.js",
+              "public/assets/js/jquery-ui.min.js",
+              "public/assets/js/bootstrap.bundle.min.js",
+              "public/assets/js/jquery.easing.min.js",
+              "public/assets/js/jquery.appear.min.js",
+              "public/assets/js/jquery.magnific-popup.min.js",
+              "public/assets/js/jquery.nice-select.min.js",
+              "public/assets/js/owl.carousel.min.js",
+              "public/assets/js/imagesloaded.pkgd.min.js",
+              "public/assets/js/isotope.pkgd.min.js",
+              "public/assets/js/masonry.pkgd.min.js",
+              "public/assets/js/flex-slider.js",
+              "public/assets/js/counter-up.js",
+              "public/assets/js/countdown.min.js",
+              "public/assets/js/wow.min.js",
+              "public/assets/js/main.js"
             ]
           },
           "configurations": {
