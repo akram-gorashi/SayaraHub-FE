@@ -34,7 +34,7 @@
     <div class="main-navigation">
         <nav class="navbar navbar-expand-lg">
             <div class="container position-relative">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" routerLink="/">
                     <img src="assets/img/logo/logo.png" alt="logo">
                 </a>
                 <div class="mobile-menu-right">
@@ -48,24 +48,10 @@
                 </div>
                 <div class="collapse navbar-collapse" id="main_nav">
                     <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Home</a>
-                            <ul class="dropdown-menu fade-down">
-                                <li><a class="dropdown-item" href="index.html">Home Page 01</a></li>
-                                <li><a class="dropdown-item" href="index-2.html">Home Page 02</a></li>
-                                <li><a class="dropdown-item" href="index-3.html">Home Page 03</a></li>
-                            </ul>
-                        </li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Inventory</a>
-                            <ul class="dropdown-menu fade-down">
-                                <li><a class="dropdown-item" href="inventory-grid.html">Inventory Grid</a></li>
-                                <li><a class="dropdown-item" href="inventory-list.html">Inventory List</a></li>
-                                <li><a class="dropdown-item" href="inventory-single.html">Inventory Single</a></li>
-
-                            </ul>
-                        </li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/cars" routerLinkActive="active">Inventory</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Pages</a>
                             <ul class="dropdown-menu fade-down">

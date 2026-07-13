@@ -1,1 +1,12 @@
-<p>breadcrumb works!</p>
+<div class="site-breadcrumb">
+  <div class="container">
+    <h1 class="breadcrumb-title">{{ title() }}</h1>
+    <ul class="breadcrumb-menu">
+      <li><a routerLink="/">Home</a></li>
+      @if (title() !== parentLabel()) {
+        <li><a [routerLink]="parentLink()">{{ parentLabel() }}</a></li>
+      }
+      <li class="active">{{ title() }}</li>
+    </ul>
+  </div>
+</div>

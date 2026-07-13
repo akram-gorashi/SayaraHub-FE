@@ -1,0 +1,198 @@
+<main class="main">
+  <app-breadcrumb title="Car Listings" />
+
+  <section
+    class="car-area bg py-120"
+    [class.grid]="store.viewMode() === 'grid'"
+    [class.list]="store.viewMode() === 'list'">
+    <div class="container">
+      <div class="row">
+        <aside class="col-lg-3">
+          <form class="car-sidebar" (submit)="submitFilters($event)">
+            <div class="car-widget">
+              <div class="car-search-form">
+                <h4 class="car-widget-title">Search</h4>
+                <div class="form-group">
+                  <input
+                    type="search"
+                    class="form-control"
+                    placeholder="Search cars"
+                    aria-label="Search cars"
+                    [value]="store.filters().search"
+                    (input)="updateSearch($event)">
+                  <button type="submit" aria-label="Apply search"><i class="far fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="car-widget">
+              <h4 class="car-widget-title">Brands</h4>
+              <ul>
+                @for (brand of store.brands(); track brand.id) {
+                  <li>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        [id]="'brand-' + brand.id"
+                        [checked]="store.isSelected('brands', brand.name)"
+                        (change)="toggleFilter('brands', brand.name, $event)">
+                      <label class="form-check-label" [for]="'brand-' + brand.id">{{ brand.name }}</label>
+                    </div>
+                  </li>
+                }
+              </ul>
+            </div>
+
+            <div class="car-widget">
+              <h4 class="car-widget-title">Price Range</h4>
+              <div class="price-range-box">
+                <div class="price-range-input listing-price-inputs">
+                  <label class="visually-hidden" for="minimum-price">Minimum price</label>
+                  <input id="minimum-price" class="form-control" type="number" min="0" placeholder="Min"
+                    [value]="store.filters().minPrice ?? ''" (input)="updatePrice('minPrice', $event)">
+                  <label class="visually-hidden" for="maximum-price">Maximum price</label>
+                  <input id="maximum-price" class="form-control" type="number" min="0" placeholder="Max"
+                    [value]="store.filters().maxPrice ?? ''" (input)="updatePrice('maxPrice', $event)">
+                </div>
+              </div>
+            </div>
+
+            <div class="car-widget">
+              <h4 class="car-widget-title">Transmission</h4>
+              <ul>
+                @for (transmission of store.transmissions(); track transmission.id) {
+                  <li>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox"
+                        [id]="'transmission-' + transmission.id"
+                        [checked]="store.isSelected('transmissions', transmission.name)"
+                        (change)="toggleFilter('transmissions', transmission.name, $event)">
+                      <label class="form-check-label" [for]="'transmission-' + transmission.id">
+                        {{ transmission.name }}
+                      </label>
+                    </div>
+                  </li>
+                }
+              </ul>
+            </div>
+
+            <div class="car-widget">
+              <h4 class="car-widget-title">Fuel Type</h4>
+              <ul>
+                @for (fuelType of store.fuelTypes(); track fuelType.id) {
+                  <li>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox"
+                        [id]="'fuel-' + fuelType.id"
+                        [checked]="store.isSelected('fuelTypes', fuelType.name)"
+                        (change)="toggleFilter('fuelTypes', fuelType.name, $event)">
+                      <label class="form-check-label" [for]="'fuel-' + fuelType.id">{{ fuelType.name }}</label>
+                    </div>
+                  </li>
+                }
+              </ul>
+            </div>
+
+            <div class="car-widget">
+              <h4 class="car-widget-title">Features</h4>
+              <ul>
+                @for (feature of store.features(); track feature.id) {
+                  <li>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox"
+                        [id]="'feature-' + feature.id"
+                        [checked]="store.isSelected('features', feature.name)"
+                        (change)="toggleFilter('features', feature.name, $event)">
+                      <label class="form-check-label" [for]="'feature-' + feature.id">{{ feature.name }}</label>
+                    </div>
+                  </li>
+                }
+              </ul>
+            </div>
+
+            <div class="listing-filter-actions">
+              <button class="theme-btn" type="submit">Apply Filters</button>
+              <button class="theme-btn theme-btn2" type="button" (click)="store.resetFilters()">Reset</button>
+            </div>
+          </form>
+        </aside>
+
+        <div class="col-lg-9">
+          <div class="col-md-12">
+            <div class="car-sort">
+              <h6>Showing {{ store.showingFrom() }}-{{ store.showingTo() }} of {{ store.totalCount() }} Results</h6>
+              <div class="car-sort-list-grid" aria-label="Listing view">
+                <a href="/cars" class="car-sort-grid" [class.active]="store.viewMode() === 'grid'"
+                  aria-label="Grid view" [attr.aria-current]="store.viewMode() === 'grid' ? 'page' : null"
+                  (click)="setViewMode($event, 'grid')"><i class="far fa-grid-2"></i></a>
+                <a href="/cars" class="car-sort-list" [class.active]="store.viewMode() === 'list'"
+                  aria-label="List view" [attr.aria-current]="store.viewMode() === 'list' ? 'page' : null"
+                  (click)="setViewMode($event, 'list')"><i class="far fa-list-ul"></i></a>
+              </div>
+              <div class="col-md-3 car-sort-box">
+                <label class="visually-hidden" for="car-sort">Sort cars</label>
+                <select id="car-sort" class="listing-sort-select" [value]="store.filters().sort"
+                  (change)="updateSort($event)">
+                  <option value="latest">Sort By Latest</option>
+                  <option value="priceAsc">Sort By Low Price</option>
+                  <option value="priceDesc">Sort By High Price</option>
+                  <option value="yearDesc">Sort By Newest Model</option>
+                  <option value="mileageAsc">Sort By Lowest Mileage</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          @if (store.error(); as errorMessage) {
+            <div class="alert alert-danger listing-state" role="alert">
+              <span>{{ errorMessage }}</span>
+              <button class="btn btn-sm btn-outline-danger" type="button" (click)="store.retry()">Try again</button>
+            </div>
+          }
+
+          @if (store.loading()) {
+            <div class="listing-state" role="status">
+              <span class="spinner-border text-primary" aria-hidden="true"></span>
+              <span>Loading cars...</span>
+            </div>
+          } @else {
+            <div class="row">
+              @for (car of store.cars(); track car.id) {
+                <div [class]="store.viewMode() === 'grid' ? 'col-md-6 col-lg-4' : 'col-md-6 col-lg-12'">
+                  <app-car-card [car]="car" [viewMode]="store.viewMode()" />
+                </div>
+              } @empty {
+                <div class="col-12 listing-state">
+                  <i class="far fa-car listing-empty-icon"></i>
+                  <h3>No matching cars found</h3>
+                  <button class="theme-btn" type="button" (click)="store.resetFilters()">Clear filters</button>
+                </div>
+              }
+            </div>
+          }
+
+          @if (store.totalPages() > 1) {
+            <nav class="pagination-area" aria-label="Car listing pages">
+              <ul class="pagination">
+                <li class="page-item" [class.disabled]="store.page() === 1">
+                  <button class="page-link" type="button" aria-label="Previous page"
+                    (click)="store.goToPage(store.page() - 1)"><span aria-hidden="true"><i class="far fa-arrow-left"></i></span></button>
+                </li>
+                @for (page of store.visiblePages(); track page) {
+                  <li class="page-item" [class.active]="page === store.page()">
+                    <button class="page-link" type="button" (click)="store.goToPage(page)">{{ page }}</button>
+                  </li>
+                }
+                <li class="page-item" [class.disabled]="store.page() === store.totalPages()">
+                  <button class="page-link" type="button" aria-label="Next page"
+                    (click)="store.goToPage(store.page() + 1)"><span aria-hidden="true"><i class="far fa-arrow-right"></i></span></button>
+                </li>
+              </ul>
+            </nav>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

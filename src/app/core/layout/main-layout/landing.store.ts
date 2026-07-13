@@ -70,11 +70,6 @@ export class LandingStore {
     this.loadCars();
   }
 
-  selectBrand(brand: string): void {
-    this.updateFilter('brand', brand);
-    this.loadCars();
-  }
-
   reset(): void {
     this.filtersState.set({ ...INITIAL_FILTERS });
     this.loadCars();

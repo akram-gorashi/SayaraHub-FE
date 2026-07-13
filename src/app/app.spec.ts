@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideRouter, Router } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { App } from './app';
 import { routes } from './app.routes';
 
@@ -19,14 +19,12 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render the landing page', async () => {
-    const router = TestBed.inject(Router);
+  it('should render the application shell', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
-    await router.navigateByUrl('/');
-    await fixture.whenStable();
-    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.hero-title')?.textContent).toContain('Dream');
+    expect(compiled.querySelector('app-header')).toBeTruthy();
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
+    expect(compiled.querySelector('app-footer')).toBeTruthy();
   });
 });

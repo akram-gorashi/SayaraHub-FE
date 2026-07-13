@@ -1,12 +1,13 @@
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 import { LandingFilters, LandingStore } from './landing.store';
 import { TemplatePluginsService } from '../../services/template-plugins';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [CurrencyPipe, DecimalPipe],
+  imports: [CurrencyPipe, DecimalPipe, RouterLink],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,6 +16,7 @@ import { TemplatePluginsService } from '../../services/template-plugins';
 export class MainLayout {
   protected readonly store = inject(LandingStore);
   private readonly templatePlugins = inject(TemplatePluginsService);
+  private readonly router = inject(Router);
 
   constructor() {
     this.store.load();
@@ -39,10 +41,29 @@ export class MainLayout {
 
   protected submitSearch(event: Event): void {
     event.preventDefault();
-    this.store.search();
+    this.navigateToCarList();
+  }
+
+  protected browseBrand(brand: string): void {
+    void this.router.navigate(['/cars'], { queryParams: { brands: brand } });
   }
 
   protected useFallbackImage(event: Event): void {
     (event.target as HTMLImageElement).src = 'assets/img/car/01.jpg';
+  }
+
+  private navigateToCarList(): void {
+    const filters = this.store.filters();
+    void this.router.navigate(['/cars'], {
+      queryParams: {
+        search: filters.search || null,
+        brands: filters.brand || null,
+        transmissions: filters.transmission || null,
+        fuelTypes: filters.fuelType || null,
+        minYear: filters.minYear,
+        maxYear: filters.maxYear,
+        city: filters.city || null,
+      },
+    });
   }
 }

@@ -361,7 +361,7 @@
                                     </div>
                                     <div class="car-content">
                                         <div class="car-top">
-                                            <h4><a [attr.href]="'/cars/' + car.id">{{ car.title }}</a></h4>
+                                            <h4><a [routerLink]="['/cars', car.id]">{{ car.title }}</a></h4>
                                             <div class="car-rate">
                                                 <i class="fas fa-car" aria-hidden="true"></i>
                                                 <span>{{ car.brand }} {{ car.model }}</span>
@@ -375,7 +375,7 @@
                                         </ul>
                                         <div class="car-footer">
                                             <span class="car-price">{{ car.price | currency:'SAR':'symbol':'1.0-0' }}</span>
-                                            <a [attr.href]="'/cars/' + car.id" class="theme-btn">
+                                            <a [routerLink]="['/cars', car.id]" class="theme-btn">
                                                 <span class="far fa-eye"></span>Details
                                             </a>
                                         </div>
@@ -770,7 +770,7 @@
                             <button
                                 type="button"
                                 class="brand-item brand-button wow fadeInUp"
-                                (click)="store.selectBrand(brand.name)">
+                                (click)="browseBrand(brand.name)">
                                 <span class="brand-placeholder" aria-hidden="true">{{ brand.name.charAt(0) }}</span>
                                 <h5>{{ brand.name }}</h5>
                             </button>

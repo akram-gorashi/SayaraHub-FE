@@ -1,0 +1,200 @@
+<main class="main">
+  <app-breadcrumb [title]="store.car()?.title || 'Car Details'" />
+
+  <section class="car-item-single bg py-120">
+    <div class="container">
+      @if (store.loading()) {
+        <div class="details-state" role="status">
+          <span class="spinner-border text-primary" aria-hidden="true"></span>
+          <span>Loading car details...</span>
+        </div>
+      } @else if (store.error(); as errorMessage) {
+        <div class="details-state">
+          <i class="far fa-circle-exclamation details-state-icon"></i>
+          <h2>{{ errorMessage }}</h2>
+          <a routerLink="/cars" class="theme-btn">Back to listings</a>
+        </div>
+      } @else if (store.car(); as car) {
+        <div class="car-single-wrapper">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="car-single-details">
+                <div class="car-single-widget">
+                  <div class="car-single-top">
+                    <span class="car-status status-1">{{ car.status }}</span>
+                    <h3 class="car-single-title">{{ car.title }}</h3>
+                    <ul class="car-single-meta">
+                      <li><i class="far fa-clock"></i> Listed On: {{ car.listedDate | date:'EEE, MMM d, y' }}</li>
+                      <li><i class="far fa-eye"></i> Views: {{ car.views | number }}</li>
+                    </ul>
+                  </div>
+
+                  <div class="car-single-slider car-details-gallery">
+                    <div class="item-gallery gallery-stage">
+                      <img class="gallery-main" [src]="store.selectedImage()" [alt]="car.title"
+                        (error)="useFallbackImage($event)">
+                      @if (car.images.length > 1) {
+                        <button class="gallery-nav gallery-prev" type="button" aria-label="Previous image"
+                          (click)="store.previousImage()"><i class="far fa-chevron-left"></i></button>
+                        <button class="gallery-nav gallery-next" type="button" aria-label="Next image"
+                          (click)="store.nextImage()"><i class="far fa-chevron-right"></i></button>
+                      }
+                    </div>
+                    @if (car.images.length > 1) {
+                      <div class="gallery-thumbnails" aria-label="Car images">
+                        @for (image of car.images; track image) {
+                          <button type="button" [class.active]="image === store.selectedImage()"
+                            (click)="store.selectImage(image)">
+                            <img [src]="image" [alt]="car.title + ' thumbnail'" (error)="useFallbackImage($event)">
+                          </button>
+                        }
+                      </div>
+                    }
+                  </div>
+                </div>
+
+                <div class="car-single-widget">
+                  <h4 class="mb-4">Key Information</h4>
+                  <div class="car-key-info row">
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-car"></i></div><div class="car-key-content"><span>Body Type</span><h6>{{ car.bodyType }}</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>Condition</span><h6>{{ car.condition }}</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-speedometer"></i></div><div class="car-key-content"><span>Mileage</span><h6>{{ car.mileage | number }} km</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-gear"></i></div><div class="car-key-content"><span>Transmission</span><h6>{{ car.transmission }}</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-calendar"></i></div><div class="car-key-content"><span>Year</span><h6>{{ car.year }}</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-gas-station"></i></div><div class="car-key-content"><span>Fuel Type</span><h6>{{ car.fuelType }}</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>Color</span><h6>{{ car.color || 'N/A' }}</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>Doors</span><h6>{{ car.doors }}</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>Cylinders</span><h6>{{ car.cylinders }}</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>Engine</span><h6>{{ car.engineSize || 'N/A' }}</h6></div></div></div>
+                    <div class="col-lg-6 col-md-8 col-12"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>VIN</span><h6>{{ car.vin || 'N/A' }}</h6></div></div></div>
+                  </div>
+                </div>
+
+                <div class="car-single-widget">
+                  <div class="car-single-overview">
+                    <h4 class="mb-3">Description</h4>
+                    <p class="mb-4">{{ car.description || 'No description has been provided for this vehicle.' }}</p>
+
+                    <h4 class="mb-3">Car Features</h4>
+                    @if (car.features.length) {
+                      <div class="row mb-4">
+                        @for (feature of car.features; track feature) {
+                          <div class="col-md-6 col-lg-4">
+                            <ul class="car-single-list"><li><i class="far fa-check-circle"></i>{{ feature }}</li></ul>
+                          </div>
+                        }
+                      </div>
+                    } @else {
+                      <p class="mb-4">No features have been listed.</p>
+                    }
+
+                    <h4 class="mb-4">Vehicle History</h4>
+                    @if (car.vehicleHistories.length) {
+                      <ul class="car-single-list">
+                        @for (history of car.vehicleHistories; track $index) {
+                          <li><i class="far fa-check-circle"></i>{{ history }}</li>
+                        }
+                      </ul>
+                    } @else {
+                      <p>No vehicle history has been provided.</p>
+                    }
+
+                    <h4 class="mb-4 mt-4">Location</h4>
+                    <div class="car-single-map">
+                      <div class="contact-map details-location">
+                        <i class="far fa-location-dot"></i>
+                        <div><h5>{{ car.city }}</h5><p>{{ car.address || 'Contact the seller for the exact location.' }}</p></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="car-single-widget">
+                  <div class="car-single-review">
+                    <div class="blog-comments mb-0">
+                      <h4>Reviews ({{ car.reviewCount }})</h4>
+                      @if (store.reviews().length) {
+                        <div class="blog-comments-wrapper">
+                          @for (review of store.reviews(); track review.id) {
+                            <div class="blog-comments-single">
+                              <img [src]="review.reviewerImageUrl || 'assets/img/car/author.jpg'"
+                                [alt]="review.reviewerName" (error)="useAvatarFallback($event)">
+                              <div class="blog-comments-content">
+                                <h5>{{ review.reviewerName }}</h5>
+                                <span><i class="far fa-clock"></i>{{ review.createdAt | date:'mediumDate' }}</span>
+                                <p>{{ review.comment }}</p>
+                                <div class="review-stars" [attr.aria-label]="review.rating + ' out of 5 stars'">
+                                  @for (star of [1, 2, 3, 4, 5]; track star) {
+                                    <i [class]="star <= review.rating ? 'fas fa-star' : 'far fa-star'"></i>
+                                  }
+                                </div>
+                              </div>
+                            </div>
+                          }
+                        </div>
+                      } @else {
+                        <p>No seller reviews are available yet.</p>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <aside class="col-lg-4">
+              <div class="car-single-widget">
+                <h4 class="car-single-price">{{ car.price | currency:'SAR':'symbol':'1.0-0' }}</h4>
+                <ul class="car-single-meta">
+                  <li><i class="fa-regular fa-gauge-high"></i>{{ car.mileage | number }} km</li>
+                  <li><i class="far fa-location-dot"></i>{{ car.address || car.city }}</li>
+                  <li><i class="far fa-star"></i>{{ car.rating | number:'1.1-1' }} ({{ car.reviewCount }} reviews)</li>
+                </ul>
+              </div>
+
+              <div class="car-single-widget">
+                <div class="car-single-author">
+                  <img [src]="car.seller.imageUrl || 'assets/img/car/author.jpg'" [alt]="car.seller.fullName"
+                    (error)="useAvatarFallback($event)">
+                  <div class="car-single-author-content">
+                    <h5>{{ car.seller.fullName }}</h5>
+                    <span>Seller</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="car-single-widget">
+                <h5 class="mb-3">Contact Details</h5>
+                <div class="car-single-form">
+                  <form (submit)="submitContact($event)">
+                    <div class="form-group"><input type="text" class="form-control" placeholder="Enter Name"
+                      [value]="store.contactForm().name" (input)="updateContactField('name', $event)"></div>
+                    <div class="form-group"><input type="email" class="form-control" placeholder="Enter Email"
+                      [value]="store.contactForm().email" (input)="updateContactField('email', $event)"></div>
+                    <div class="form-group"><textarea class="form-control" rows="3" placeholder="Write Message"
+                      [value]="store.contactForm().message" (input)="updateContactField('message', $event)"></textarea></div>
+                    @if (store.contactError(); as message) { <div class="alert alert-danger py-2">{{ message }}</div> }
+                    @if (store.contactSuccess(); as message) { <div class="alert alert-success py-2">{{ message }}</div> }
+                    <div class="form-group"><button type="submit" class="theme-btn" [disabled]="store.contactSending()">
+                      {{ store.contactSending() ? 'Sending...' : 'Send Now' }}<i class="fas fa-arrow-right-long"></i>
+                    </button></div>
+                  </form>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          @if (store.relatedCars().length) {
+            <div class="car-single-related mt-5">
+              <h3 class="mb-30">Related Listing</h3>
+              <div class="row">
+                @for (relatedCar of store.relatedCars(); track relatedCar.id) {
+                  <div class="col-md-6 col-lg-4 col-xl-3"><app-car-card [car]="relatedCar" /></div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </section>
+</main>

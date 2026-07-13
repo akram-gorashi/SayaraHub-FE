@@ -1,0 +1,48 @@
+<article class="car-item">
+  <div class="car-img">
+    <span class="car-status status-1">{{ car().status }}</span>
+    <img
+      [src]="car().mainImageUrl || 'assets/img/car/01.jpg'"
+      [alt]="car().title"
+      loading="lazy"
+      (error)="useFallbackImage($event)">
+    <div class="car-btns">
+      <a href="/cars" [class.active]="isFavorite()" [attr.aria-pressed]="isFavorite()"
+        [attr.aria-label]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'"
+        [attr.title]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'"
+        (click)="toggleFavorite($event)">
+        <i [class]="isFavorite() ? 'fas fa-heart' : 'far fa-heart'" aria-hidden="true"></i>
+      </a>
+      <a href="/cars" aria-label="Share car" title="Share car" (click)="shareCar($event)">
+        <i class="far fa-arrows-repeat" aria-hidden="true"></i>
+      </a>
+    </div>
+    @if (actionMessage(); as message) {
+      <span class="car-action-message" role="status">{{ message }}</span>
+    }
+  </div>
+  <div class="car-content">
+    <div class="car-top">
+      <h4><a [routerLink]="['/cars', car().id]">{{ car().title }}</a></h4>
+      <div class="car-rate">
+        <i class="fas fa-car" aria-hidden="true"></i>
+        <span>{{ car().brand }} {{ car().model }}</span>
+      </div>
+    </div>
+    <ul class="car-list">
+      <li><i class="far fa-steering-wheel"></i>{{ car().transmission }}</li>
+      <li><i class="far fa-road"></i>{{ car().mileage | number }} km</li>
+      <li><i class="far fa-car"></i>Model: {{ car().year }}</li>
+      <li><i class="far fa-gas-pump"></i>{{ car().fuelType }}</li>
+    </ul>
+    @if (viewMode() === 'list') {
+      <p>{{ car().city }} | Listed {{ car().listedDate | date:'mediumDate' }}</p>
+    }
+    <div class="car-footer">
+      <span class="car-price">{{ car().price | currency:'SAR':'symbol':'1.0-0' }}</span>
+      <a [routerLink]="['/cars', car().id]" class="theme-btn">
+        <span class="far fa-eye"></span>Details
+      </a>
+    </div>
+  </div>
+</article>

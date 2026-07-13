@@ -1,0 +1,117 @@
+.details-state {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  min-height: 360px;
+  text-align: center;
+}
+
+.details-state-icon {
+  color: var(--theme-color);
+  font-size: 52px;
+}
+
+.car-details-gallery {
+  margin-top: 25px;
+}
+
+.gallery-stage {
+  position: relative;
+}
+
+.gallery-main {
+  aspect-ratio: 16 / 10;
+  border-radius: 10px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.gallery-thumbnails {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  margin-top: 12px;
+}
+
+.gallery-nav {
+  align-items: center;
+  background: rgb(0 0 0 / 65%);
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  height: 48px;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background-color 0.2s ease;
+  width: 48px;
+}
+
+.gallery-nav:hover,
+.gallery-nav:focus-visible {
+  background: var(--theme-color);
+}
+
+.gallery-prev {
+  left: 18px;
+}
+
+.gallery-next {
+  right: 18px;
+}
+
+.gallery-thumbnails button {
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.gallery-thumbnails button.active {
+  border-color: var(--theme-color);
+}
+
+.gallery-thumbnails img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  width: 100%;
+}
+
+.feature-item {
+  margin-bottom: 12px;
+}
+
+.feature-item i {
+  color: var(--theme-color);
+  margin-right: 8px;
+}
+
+.details-location {
+  align-items: center;
+  background: var(--theme-bg-light, #f5f7f9);
+  border-radius: 10px;
+  display: flex;
+  gap: 18px;
+  min-height: 150px;
+  padding: 30px;
+}
+
+.details-location > i {
+  color: var(--theme-color);
+  font-size: 42px;
+}
+
+.review-stars {
+  color: var(--theme-color);
+  margin-top: 8px;
+}
+
+.car-single-author img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}

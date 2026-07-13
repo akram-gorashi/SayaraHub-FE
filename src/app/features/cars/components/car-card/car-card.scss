@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+.car-img img {
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  width: 100%;
+}
+
+.car-btns a.active {
+  background: var(--color-dark);
+}
+
+.car-action-message {
+  background: rgb(0 0 0 / 78%);
+  border-radius: 6px;
+  bottom: 10px;
+  color: var(--color-white);
+  font-size: 12px;
+  left: 10px;
+  max-width: calc(100% - 20px);
+  padding: 5px 8px;
+  position: absolute;
+  z-index: 2;
+}
