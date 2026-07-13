@@ -7,6 +7,7 @@ export interface CarSummary {
   status: string;
   brand: string;
   model: string;
+  condition: string;
   year: number;
   mileage: number;
   transmission: string;

@@ -32,6 +32,10 @@ export class CarCard {
     (event.target as HTMLImageElement).src = 'assets/img/car/01.jpg';
   }
 
+  protected isNewCondition(): boolean {
+    return this.car().condition.trim().toLowerCase() === 'new';
+  }
+
   protected toggleFavorite(event: Event): void {
     event.preventDefault();
 
