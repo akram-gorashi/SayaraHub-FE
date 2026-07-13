@@ -112,96 +112,95 @@
             <div class="container">
                 <div class="find-car-form">
                     <h4 class="find-car-title">Let's Find Your Perfect Car</h4>
-                    <form action="#">
+                    <form (submit)="submitSearch($event)">
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Car Condition</label>
-                                    <select class="select">
-                                        <option value="1">All Status</option>
-                                        <option value="2">New Car</option>
-                                        <option value="3">Used Car</option>
+                                    <label for="landing-search">Search</label>
+                                    <input id="landing-search" class="form-control" type="search"
+                                        placeholder="Brand, model, or keyword"
+                                        [value]="store.filters().search"
+                                        (input)="updateTextFilter('search', $event)">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="landing-brand">Brand</label>
+                                    <select id="landing-brand" class="form-select"
+                                        [value]="store.filters().brand"
+                                        (change)="updateSelectFilter('brand', $event)">
+                                        <option value="">All brands</option>
+                                        @for (brand of store.brands(); track brand.id) {
+                                            <option [value]="brand.name">{{ brand.name }}</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Brand Name</label>
-                                    <select class="select">
-                                        <option value="1">All Brand</option>
-                                        <option value="2">BMW</option>
-                                        <option value="3">Ferrari</option>
-                                        <option value="4">Marcediz Benz</option>
-                                        <option value="5">Hyundai</option>
-                                        <option value="6">Nissan</option>
+                                    <label for="landing-transmission">Transmission</label>
+                                    <select id="landing-transmission" class="form-select"
+                                        [value]="store.filters().transmission"
+                                        (change)="updateSelectFilter('transmission', $event)">
+                                        <option value="">All transmissions</option>
+                                        @for (transmission of store.transmissions(); track transmission.id) {
+                                            <option [value]="transmission.name">{{ transmission.name }}</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Car Model</label>
-                                    <select class="select">
-                                        <option value="1">All Model</option>
-                                        <option value="2">3-Series </option>
-                                        <option value="3">Carrera</option>
-                                        <option value="4">G-TR</option>
-                                        <option value="3">Macan</option>
-                                        <option value="3">N-Series</option>
+                                    <label for="landing-fuel">Fuel type</label>
+                                    <select id="landing-fuel" class="form-select"
+                                        [value]="store.filters().fuelType"
+                                        (change)="updateSelectFilter('fuelType', $event)">
+                                        <option value="">All fuel types</option>
+                                        @for (fuelType of store.fuelTypes(); track fuelType.id) {
+                                            <option [value]="fuelType.name">{{ fuelType.name }}</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Choose Year</label>
-                                    <select class="select">
-                                        <option value="1">All Year</option>
-                                        <option value="2">2023</option>
-                                        <option value="3">2022</option>
-                                        <option value="4">2021</option>
-                                        <option value="5">2020</option>
+                                    <label for="landing-min-year">Minimum year</label>
+                                    <select id="landing-min-year" class="form-select"
+                                        [value]="store.filters().minYear ?? ''"
+                                        (change)="updateYearFilter('minYear', $event)">
+                                        <option value="">Any year</option>
+                                        @for (year of store.years(); track year) {
+                                            <option [value]="year">{{ year }}</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Choose Milieage</label>
-                                    <select class="select">
-                                        <option value="1">All Milieage</option>
-                                        <option value="2">2000 Miles</option>
-                                        <option value="3">3000 Miles</option>
-                                        <option value="4">4000 Miles</option>
-                                        <option value="5">5000 Miles</option>
+                                    <label for="landing-max-year">Maximum year</label>
+                                    <select id="landing-max-year" class="form-select"
+                                        [value]="store.filters().maxYear ?? ''"
+                                        (change)="updateYearFilter('maxYear', $event)">
+                                        <option value="">Any year</option>
+                                        @for (year of store.years(); track year) {
+                                            <option [value]="year">{{ year }}</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Price Range</label>
-                                    <select class="select">
-                                        <option value="1">All Price</option>
-                                        <option value="2">$1,000 - $5,000</option>
-                                        <option value="3">$5,000 - $10,000</option>
-                                        <option value="4">$15,000 - $20,000</option>
-                                        <option value="5">$20,000 - $25,000</option>
-                                        <option value="6">$25,000 - $30,000</option>
-                                    </select>
+                                    <label for="landing-city">City</label>
+                                    <input id="landing-city" class="form-control" type="text"
+                                        placeholder="Any city"
+                                        [value]="store.filters().city"
+                                        (input)="updateTextFilter('city', $event)">
                                 </div>
                             </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Body Type</label>
-                                    <select class="select">
-                                        <option value="1">All Body Type</option>
-                                        <option value="2">Sedan</option>
-                                        <option value="5">Compact</option>
-                                        <option value="3">Coupe</option>
-                                        <option value="4">Wagon</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 align-self-end">
+                            <div class="col-lg-3 align-self-end d-flex gap-2 find-car-actions">
                                 <button class="theme-btn" type="submit"><span class="far fa-search"></span> Find Your
                                     Car</button>
+                                <button class="theme-btn theme-btn2" type="button" (click)="store.reset()">Reset</button>
                             </div>
                         </div>
                     </form>
@@ -319,301 +318,84 @@
         <!-- counter area end -->
 
 
-        <!-- car area -->
-        <div class="car-area bg py-120">
+<!-- car area -->
+        <section class="car-area bg py-120" aria-labelledby="latest-cars-title">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 mx-auto">
                         <div class="site-heading text-center">
                             <span class="site-title-tagline"><i class="flaticon-drive"></i> New Arrivals</span>
-                            <h2 class="site-title">Let's Check Latest <span>Cars</span></h2>
+                            <h2 id="latest-cars-title" class="site-title">Let's Check Latest <span>Cars</span></h2>
                             <div class="heading-divider"></div>
+                            @if (store.totalCount() > 0) {
+                                <p>{{ store.totalCount() | number }} cars available</p>
+                            }
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="car-item wow fadeInUp" data-wow-delay=".25s">
-                            <div class="car-img">
-                                <span class="car-status status-1">Used</span>
-                                <img src="assets/img/car/01.jpg" alt="">
-                                <div class="car-btns">
-                                    <a href="#"><i class="far fa-heart"></i></a>
-                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
-                                </div>
-                            </div>
-                            <div class="car-content">
-                                <div class="car-top">
-                                    <h4><a href="#">Mercedes Benz Car</a></h4>
-                                    <div class="car-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>5.0 (58.5k Review)</span>
-                                    </div>
-                                </div>
-                                <ul class="car-list">
-                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
-                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
-                                    <li><i class="far fa-car"></i>Model: 2023</li>
-                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
-                                </ul>
-                                <div class="car-footer">
-                                    <span class="car-price">$45,620</span>
-                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
-                                </div>
-                            </div>
-                        </div>
+
+                @if (store.error(); as errorMessage) {
+                    <div class="alert alert-danger landing-alert" role="alert">
+                        <span>{{ errorMessage }}</span>
+                        <button class="btn btn-sm btn-outline-danger" type="button" (click)="store.search()">Try again</button>
                     </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="car-item wow fadeInUp" data-wow-delay=".50s">
-                            <div class="car-img">
-                                <img src="assets/img/car/02.jpg" alt="">
-                                <div class="car-btns">
-                                    <a href="#"><i class="far fa-heart"></i></a>
-                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
-                                </div>
-                            </div>
-                            <div class="car-content">
-                                <div class="car-top">
-                                    <h4><a href="#">Yellow Ferrari 458</a></h4>
-                                    <div class="car-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>5.0 (58.5k Review)</span>
-                                    </div>
-                                </div>
-                                <ul class="car-list">
-                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
-                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
-                                    <li><i class="far fa-car"></i>Model: 2023</li>
-                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
-                                </ul>
-                                <div class="car-footer">
-                                    <span class="car-price">$90,250</span>
-                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
-                                </div>
-                            </div>
-                        </div>
+                }
+
+                @if (store.loading() && store.cars().length === 0) {
+                    <div class="landing-loading" role="status">
+                        <span class="spinner-border text-primary" aria-hidden="true"></span>
+                        <span>Loading the latest cars...</span>
                     </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="car-item wow fadeInUp" data-wow-delay=".75s">
-                            <div class="car-img">
-                                <img src="assets/img/car/03.jpg" alt="">
-                                <div class="car-btns">
-                                    <a href="#"><i class="far fa-heart"></i></a>
-                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
-                                </div>
-                            </div>
-                            <div class="car-content">
-                                <div class="car-top">
-                                    <h4><a href="#">Black Audi Q7</a></h4>
-                                    <div class="car-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>5.0 (58.5k Review)</span>
+                } @else {
+                    <div class="row">
+                        @for (car of store.cars(); track car.id) {
+                            <div class="col-md-6 col-lg-4 col-xl-3">
+                                <article class="car-item wow fadeInUp">
+                                    <div class="car-img">
+                                        <span class="car-status status-1">{{ car.status }}</span>
+                                        <img
+                                            [src]="car.mainImageUrl || 'assets/img/car/01.jpg'"
+                                            [alt]="car.title"
+                                            loading="lazy"
+                                            (error)="useFallbackImage($event)">
                                     </div>
-                                </div>
-                                <ul class="car-list">
-                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
-                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
-                                    <li><i class="far fa-car"></i>Model: 2023</li>
-                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
-                                </ul>
-                                <div class="car-footer">
-                                    <span class="car-price">$44,350</span>
-                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="car-item wow fadeInUp" data-wow-delay="1s">
-                            <div class="car-img">
-                                <span class="car-status status-2">New</span>
-                                <img src="assets/img/car/04.jpg" alt="">
-                                <div class="car-btns">
-                                    <a href="#"><i class="far fa-heart"></i></a>
-                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
-                                </div>
-                            </div>
-                            <div class="car-content">
-                                <div class="car-top">
-                                    <h4><a href="#">BMW Sports Car</a></h4>
-                                    <div class="car-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>5.0 (58.5k Review)</span>
+                                    <div class="car-content">
+                                        <div class="car-top">
+                                            <h4><a [attr.href]="'/cars/' + car.id">{{ car.title }}</a></h4>
+                                            <div class="car-rate">
+                                                <i class="fas fa-car" aria-hidden="true"></i>
+                                                <span>{{ car.brand }} {{ car.model }}</span>
+                                            </div>
+                                        </div>
+                                        <ul class="car-list">
+                                            <li><i class="far fa-steering-wheel"></i>{{ car.transmission }}</li>
+                                            <li><i class="far fa-road"></i>{{ car.mileage | number }} km</li>
+                                            <li><i class="far fa-car"></i>Model: {{ car.year }}</li>
+                                            <li><i class="far fa-gas-pump"></i>{{ car.fuelType }}</li>
+                                        </ul>
+                                        <div class="car-footer">
+                                            <span class="car-price">{{ car.price | currency:'SAR':'symbol':'1.0-0' }}</span>
+                                            <a [attr.href]="'/cars/' + car.id" class="theme-btn">
+                                                <span class="far fa-eye"></span>Details
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <ul class="car-list">
-                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
-                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
-                                    <li><i class="far fa-car"></i>Model: 2023</li>
-                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
-                                </ul>
-                                <div class="car-footer">
-                                    <span class="car-price">$78,760</span>
-                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
+                                </article>
+                            </div>
+                        } @empty {
+                            <div class="col-12">
+                                <div class="landing-empty">
+                                    <i class="far fa-car" aria-hidden="true"></i>
+                                    <h3>No cars match these filters</h3>
+                                    <p>Try changing or clearing your search criteria.</p>
+                                    <button class="theme-btn" type="button" (click)="store.reset()">Clear filters</button>
                                 </div>
                             </div>
-                        </div>
+                        }
                     </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="car-item wow fadeInUp" data-wow-delay=".25s">
-                            <div class="car-img">
-                                <span class="car-status status-1">Used</span>
-                                <img src="assets/img/car/05.jpg" alt="">
-                                <div class="car-btns">
-                                    <a href="#"><i class="far fa-heart"></i></a>
-                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
-                                </div>
-                            </div>
-                            <div class="car-content">
-                                <div class="car-top">
-                                    <h4><a href="#">White Tesla Car</a></h4>
-                                    <div class="car-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>5.0 (58.5k Review)</span>
-                                    </div>
-                                </div>
-                                <ul class="car-list">
-                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
-                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
-                                    <li><i class="far fa-car"></i>Model: 2023</li>
-                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
-                                </ul>
-                                <div class="car-footer">
-                                    <span class="car-price">$64,230</span>
-                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="car-item wow fadeInUp" data-wow-delay=".50s">
-                            <div class="car-img">
-                                <span class="car-status status-2">New</span>
-                                <img src="assets/img/car/06.jpg" alt="">
-                                <div class="car-btns">
-                                    <a href="#"><i class="far fa-heart"></i></a>
-                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
-                                </div>
-                            </div>
-                            <div class="car-content">
-                                <div class="car-top">
-                                    <h4><a href="#">White Nissan Car</a></h4>
-                                    <div class="car-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>5.0 (58.5k Review)</span>
-                                    </div>
-                                </div>
-                                <ul class="car-list">
-                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
-                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
-                                    <li><i class="far fa-car"></i>Model: 2023</li>
-                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
-                                </ul>
-                                <div class="car-footer">
-                                    <span class="car-price">$34,540</span>
-                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="car-item wow fadeInUp" data-wow-delay=".75s">
-                            <div class="car-img">
-                                <img src="assets/img/car/07.jpg" alt="">
-                                <div class="car-btns">
-                                    <a href="#"><i class="far fa-heart"></i></a>
-                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
-                                </div>
-                            </div>
-                            <div class="car-content">
-                                <div class="car-top">
-                                    <h4><a href="#">Mercedes Benz Suv</a></h4>
-                                    <div class="car-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>5.0 (58.5k Review)</span>
-                                    </div>
-                                </div>
-                                <ul class="car-list">
-                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
-                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
-                                    <li><i class="far fa-car"></i>Model: 2023</li>
-                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
-                                </ul>
-                                <div class="car-footer">
-                                    <span class="car-price">$75,820</span>
-                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="car-item wow fadeInUp" data-wow-delay="1s">
-                            <div class="car-img">
-                                <img src="assets/img/car/08.jpg" alt="">
-                                <div class="car-btns">
-                                    <a href="#"><i class="far fa-heart"></i></a>
-                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
-                                </div>
-                            </div>
-                            <div class="car-content">
-                                <div class="car-top">
-                                    <h4><a href="#">Red Hyundai Car</a></h4>
-                                    <div class="car-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>5.0 (58.5k Review)</span>
-                                    </div>
-                                </div>
-                                <ul class="car-list">
-                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
-                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
-                                    <li><i class="far fa-car"></i>Model: 2023</li>
-                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
-                                </ul>
-                                <div class="car-footer">
-                                    <span class="car-price">$25,620</span>
-                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center mt-4">
-                    <a href="#" class="theme-btn">Load More <i class="far fa-arrow-rotate-right"></i> </a>
-                </div>
+                }
             </div>
-        </div>
+        </section>
         <!-- car area end -->
 
 
@@ -970,70 +752,40 @@
         <!-- choose area end -->
 
 
-        <!-- car brand -->
-        <div class="car-brand py-120">
+<!-- car brand -->
+        <section class="car-brand py-120" aria-labelledby="popular-brands-title">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 mx-auto">
                         <div class="site-heading text-center">
                             <span class="site-title-tagline"><i class="flaticon-drive"></i> Popular Brands</span>
-                            <h2 class="site-title">Our Top Quality <span>Brands</span></h2>
+                            <h2 id="popular-brands-title" class="site-title">Browse Our <span>Brands</span></h2>
                             <div class="heading-divider"></div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6 col-md-3 col-lg-2">
-                        <a href="#" class="brand-item wow fadeInUp" data-wow-delay=".25s">
-                            <div class="brand-img">
-                                <img src="assets/img/brand/01.png" alt="">
+                    @for (brand of store.brands(); track brand.id) {
+                        <div class="col-6 col-md-3 col-lg-2">
+                            <button
+                                type="button"
+                                class="brand-item brand-button wow fadeInUp"
+                                (click)="store.selectBrand(brand.name)">
+                                <span class="brand-placeholder" aria-hidden="true">{{ brand.name.charAt(0) }}</span>
+                                <h5>{{ brand.name }}</h5>
+                            </button>
+                        </div>
+                    } @empty {
+                        @if (store.loading()) {
+                            <div class="col-12 landing-loading" role="status">
+                                <span class="spinner-border text-primary" aria-hidden="true"></span>
+                                <span>Loading brands...</span>
                             </div>
-                            <h5>Ferrari</h5>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 col-lg-2">
-                        <a href="#" class="brand-item wow fadeInUp" data-wow-delay=".50s">
-                            <div class="brand-img">
-                                <img src="assets/img/brand/02.png" alt="">
-                            </div>
-                            <h5>Hyundai</h5>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 col-lg-2">
-                        <a href="#" class="brand-item wow fadeInUp" data-wow-delay=".75s">
-                            <div class="brand-img">
-                                <img src="assets/img/brand/03.png" alt="">
-                            </div>
-                            <h5>Mercedes Benz</h5>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 col-lg-2">
-                        <a href="#" class="brand-item wow fadeInUp" data-wow-delay="1s">
-                            <div class="brand-img">
-                                <img src="assets/img/brand/04.png" alt="">
-                            </div>
-                            <h5>Toyota</h5>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 col-lg-2">
-                        <a href="#" class="brand-item wow fadeInUp" data-wow-delay="1.25s">
-                            <div class="brand-img">
-                                <img src="assets/img/brand/05.png" alt="">
-                            </div>
-                            <h5>BMW</h5>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 col-lg-2">
-                        <a href="#" class="brand-item wow fadeInUp" data-wow-delay="1.50s">
-                            <div class="brand-img">
-                                <img src="assets/img/brand/06.png" alt="">
-                            </div>
-                            <h5>Nissan</h5>
-                        </a>
-                    </div>
+                        }
+                    }
                 </div>
             </div>
-        </div>
+        </section>
         <!-- car brand end-->
 
 

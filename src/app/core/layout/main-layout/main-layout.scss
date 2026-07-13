@@ -1,0 +1,58 @@
+:host {
+  display: block;
+}
+
+.find-car-actions .theme-btn {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  width: auto;
+}
+
+.landing-alert,
+.landing-loading {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.landing-alert {
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.landing-loading,
+.landing-empty {
+  min-height: 180px;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.landing-empty > i {
+  color: var(--theme-color, #f15b2a);
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.brand-button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.brand-placeholder {
+  align-items: center;
+  background: var(--theme-color, #f15b2a);
+  border-radius: 50%;
+  color: #fff;
+  display: inline-flex;
+  font-size: 2rem;
+  font-weight: 700;
+  height: 80px;
+  justify-content: center;
+  margin-bottom: 1rem;
+  width: 80px;
+}

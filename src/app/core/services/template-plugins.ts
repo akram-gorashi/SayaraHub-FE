@@ -45,7 +45,12 @@ export class TemplatePluginsService {
   }
 
   private initializeNiceSelect(): void {
-    const selects = $('select.nice-select');
+    const jquery = this.jquery();
+    if (!jquery) {
+      return;
+    }
+
+    const selects = jquery('select.nice-select');
 
     if (typeof selects.niceSelect === 'function') {
       selects.niceSelect();
@@ -53,7 +58,12 @@ export class TemplatePluginsService {
   }
 
   private initializeHeroSlider(): void {
-    const slider = $('.hero-slider');
+    const jquery = this.jquery();
+    if (!jquery) {
+      return;
+    }
+
+    const slider = jquery('.hero-slider');
 
     if (
       slider.length &&
@@ -72,8 +82,13 @@ export class TemplatePluginsService {
   }
 
   private initializeCarousels(): void {
-    $('.car-slider').each( () => {
-      const carousel = $(this);
+    const jquery = this.jquery();
+    if (!jquery) {
+      return;
+    }
+
+    jquery('.car-slider').each((_index: number, element: HTMLElement) => {
+      const carousel = jquery(element);
 
       if (
         typeof carousel.owlCarousel === 'function' &&
@@ -101,7 +116,12 @@ export class TemplatePluginsService {
   }
 
   private initializeMagnificPopup(): void {
-    const gallery = $('.popup-gallery');
+    const jquery = this.jquery();
+    if (!jquery) {
+      return;
+    }
+
+    const gallery = jquery('.popup-gallery');
 
     if (
       gallery.length &&
@@ -118,7 +138,12 @@ export class TemplatePluginsService {
   }
 
   private initializeCounters(): void {
-    const counters = $('.counter');
+    const jquery = this.jquery();
+    if (!jquery) {
+      return;
+    }
+
+    const counters = jquery('.counter');
 
     if (
       counters.length &&
@@ -132,7 +157,12 @@ export class TemplatePluginsService {
   }
 
   private initializeIsotope(): void {
-    const grid = $('.isotope-grid');
+    const jquery = this.jquery();
+    if (!jquery) {
+      return;
+    }
+
+    const grid = jquery('.isotope-grid');
 
     if (!grid.length || typeof grid.isotope !== 'function') {
       return;
@@ -158,5 +188,9 @@ export class TemplatePluginsService {
       .forEach(element => {
         bootstrapApi.Tooltip.getOrCreateInstance(element);
       });
+  }
+
+  private jquery(): any | null {
+    return typeof $ === 'undefined' ? null : $;
   }
 }

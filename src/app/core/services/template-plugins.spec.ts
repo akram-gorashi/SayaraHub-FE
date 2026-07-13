@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TemplatePlugins } from './template-plugins';
+import { TemplatePluginsService } from './template-plugins';
 
-describe('TemplatePlugins', () => {
-  let service: TemplatePlugins;
+describe('TemplatePluginsService', () => {
+  let service: TemplatePluginsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TemplatePlugins);
+    service = TestBed.inject(TemplatePluginsService);
   });
 
   it('should be created', () => {
