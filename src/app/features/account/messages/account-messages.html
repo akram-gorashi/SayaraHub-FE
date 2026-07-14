@@ -18,7 +18,7 @@
     </aside>
     <div class="message-content">
       @if (store.activeChat(); as chat) {
-        <div class="message-content-info">
+        <div #messageList class="message-content-info">
           @for (message of store.messages(); track message.id) {
             <div class="message-item" [class.me]="store.isMine(message)">
               <div class="message-description"><p>{{ message.content }}</p><small>{{ message.sentAt | date:'short' }}</small></div>
