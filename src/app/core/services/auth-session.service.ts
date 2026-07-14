@@ -27,6 +27,15 @@ export class AuthSessionService {
     this.storage?.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
   }
 
+  updateIdentity(identity: Pick<AuthSession, 'fullName' | 'email'>): void {
+    const session = this.sessionState();
+    if (!session) {
+      return;
+    }
+
+    this.set({ ...session, ...identity });
+  }
+
   clear(): void {
     this.sessionState.set(null);
     this.storage?.removeItem(SESSION_STORAGE_KEY);

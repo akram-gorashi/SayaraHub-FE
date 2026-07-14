@@ -1,0 +1,23 @@
+.field-error {
+  display: block;
+  margin-top: 6px;
+  color: #dc3545;
+  font-size: 0.875rem;
+}
+
+.form-hint {
+  display: block;
+  margin-top: 6px;
+  color: var(--body-text-color);
+  font-size: 0.825rem;
+}
+
+.form-control:disabled {
+  background: #f6f7f9;
+  opacity: 1;
+}
+
+.theme-btn:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}

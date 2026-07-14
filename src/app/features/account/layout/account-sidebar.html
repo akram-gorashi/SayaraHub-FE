@@ -1,0 +1,32 @@
+<aside class="user-profile-sidebar">
+  <div class="user-profile-sidebar-top">
+    <div class="user-profile-img">
+      <img [src]="store.imageUrl()" [alt]="store.profile()?.fullName || 'Profile image'" />
+      <button type="button" class="profile-img-btn" [disabled]="store.uploadingImage()"
+        aria-label="Change profile image" (click)="chooseImage()">
+        <i class="far" [class.fa-camera]="!store.uploadingImage()" [class.fa-spinner]="store.uploadingImage()"
+          [class.fa-spin]="store.uploadingImage()"></i>
+      </button>
+      <input #imageInput type="file" class="profile-img-file" accept="image/*" (change)="imageSelected($event)" />
+    </div>
+    @if (store.loading()) {
+      <span class="account-loading">Loading profile...</span>
+    } @else {
+      <h5>{{ store.profile()?.fullName }}</h5>
+      <p>{{ store.profile()?.email }}</p>
+    }
+  </div>
+
+  <nav aria-label="Account navigation">
+    <ul class="user-profile-sidebar-list">
+      <li><a routerLink="/account/dashboard" routerLinkActive="active"><i class="far fa-gauge-high"></i> Dashboard</a></li>
+      <li><a routerLink="/account/profile" routerLinkActive="active"><i class="far fa-user"></i> My Profile</a></li>
+      <li><a routerLink="/account/listings" routerLinkActive="active"><i class="far fa-layer-group"></i> My Listing</a></li>
+      <li><a routerLink="/account/add-listing" routerLinkActive="active"><i class="far fa-plus-circle"></i> Add Listing</a></li>
+      <li><a routerLink="/account/favorites" routerLinkActive="active"><i class="far fa-heart"></i> My Favorites</a></li>
+      <li><a routerLink="/account/messages" routerLinkActive="active"><i class="far fa-envelope"></i> Messages</a></li>
+      <li><a routerLink="/account/settings" routerLinkActive="active"><i class="far fa-gear"></i> Settings</a></li>
+      <li><button type="button" class="account-logout" (click)="logout()"><i class="far fa-sign-out"></i> Logout</button></li>
+    </ul>
+  </nav>
+</aside>

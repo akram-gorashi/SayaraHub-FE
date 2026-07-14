@@ -1,0 +1,7 @@
+.chat-select { position: relative; display: block; width: 100%; min-height: 105px; padding: 30px; text-align: left; background: transparent; border: 0; }
+.message-by-content h3 { margin: 0; font-size: 14px; }
+.unread-badge { position: absolute; right: 12px; bottom: 10px; }
+.message-content { min-height: 520px; padding-bottom: 100px; }
+.message-description small { display: block; margin-top: 6px; opacity: .7; }
+.empty-chat, .empty-message { padding: 30px; text-align: center; }
+@media (max-width: 991px) { .profile-message-wrapper { flex-direction: column; } .profile-message-inbox { max-width: none; margin-bottom: 20px; } .profile-message-inbox ul { width: 100%; } .message-content { padding-left: 0; } }

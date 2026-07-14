@@ -1,0 +1,87 @@
+@if (store.error(); as error) {
+  <div class="alert alert-danger account-state" role="alert">
+    <span>{{ error }}</span>
+    <button type="button" class="btn btn-sm btn-outline-danger" (click)="store.load()">Try again</button>
+  </div>
+}
+
+@if (store.loading()) {
+  <div class="account-state" role="status">
+    <span class="spinner-border text-primary" aria-hidden="true"></span>
+    <span>Loading dashboard...</span>
+  </div>
+} @else if (store.statistics(); as statistics) {
+  <div class="row">
+    <div class="col-md-6 col-lg-4">
+      <div class="dashboard-widget dashboard-widget-color-1">
+        <div class="dashboard-widget-info">
+          <h2>{{ statistics.activeListings }}</h2>
+          <span>Active Listing</span>
+        </div>
+        <div class="dashboard-widget-icon"><i class="fal fa-list"></i></div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <div class="dashboard-widget dashboard-widget-color-2">
+        <div class="dashboard-widget-info">
+          <h2>{{ statistics.totalViews }}</h2>
+          <span>Total Views</span>
+        </div>
+        <div class="dashboard-widget-icon"><i class="fal fa-eye"></i></div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <div class="dashboard-widget dashboard-widget-color-3">
+        <div class="dashboard-widget-info">
+          <h2>{{ statistics.totalListings }}</h2>
+          <span>Total Listing</span>
+        </div>
+        <div class="dashboard-widget-icon"><i class="fal fa-layer-group"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="user-profile-card">
+        <h2 class="user-profile-card-title">Recent Listing</h2>
+        <div class="table-responsive">
+          <table class="table text-nowrap">
+            <thead>
+              <tr>
+                <th>Car Info</th>
+                <th>Brand</th>
+                <th>Publish</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (car of store.recentListings(); track car.id) {
+                <tr>
+                  <td>
+                    <div class="table-list-info">
+                      <a [routerLink]="['/cars', car.id]">
+                        <img [src]="car.mainImageUrl || 'assets/img/car/01.jpg'" [alt]="car.title" />
+                        <div class="table-ad-content">
+                          <h3>{{ car.title }}</h3>
+                          <span>Car ID: #{{ car.id }}</span>
+                        </div>
+                      </a>
+                    </div>
+                  </td>
+                  <td>{{ car.brand }}</td>
+                  <td>{{ car.listedDate | date: 'mediumDate' }}</td>
+                  <td>{{ car.price | currency: 'SAR':'symbol-narrow':'1.0-0' }}</td>
+                  <td><span class="badge" [class]="statusClass(car.status)">{{ car.status | titlecase }}</span></td>
+                </tr>
+              } @empty {
+                <tr><td colspan="5" class="text-center py-4">You have no listings yet.</td></tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+}

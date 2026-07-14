@@ -1,0 +1,38 @@
+<section class="user-profile-card profile-ad" aria-labelledby="my-listing-title">
+  <div class="user-profile-card-header">
+    <h2 id="my-listing-title" class="user-profile-card-title">My Listing</h2>
+    <div class="user-profile-card-header-right">
+      <form class="user-profile-search" (submit)="submitSearch($event)">
+        <div class="form-group">
+          <input type="search" class="form-control" placeholder="Search..." [value]="search()" (input)="updateSearch($event)" />
+          <i class="far fa-search"></i>
+        </div>
+      </form>
+      <a routerLink="/account/add-listing" class="theme-btn"><i class="far fa-plus-circle"></i>Add Listing</a>
+    </div>
+  </div>
+  @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
+  @if (store.loading()) {
+    <div class="account-state"><span class="spinner-border text-primary"></span> Loading listings...</div>
+  } @else {
+    <div class="table-responsive">
+      <table class="table text-nowrap">
+        <thead><tr><th>Car Info</th><th>Brand</th><th>Publish</th><th>Price</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+          @for (car of store.cars(); track car.id) {
+            <tr>
+              <td><div class="table-list-info"><a [routerLink]="['/cars', car.id]">
+                <img [src]="car.mainImageUrl || 'assets/img/car/01.jpg'" [alt]="car.title" />
+                <div><h3>{{ car.title }}</h3><span>Car ID: #{{ car.id }}</span></div>
+              </a></div></td>
+              <td>{{ car.brand }}</td><td>{{ car.listedDate | date:'mediumDate' }}</td>
+              <td>{{ car.price | currency:'SAR':'symbol-narrow':'1.0-0' }}</td>
+              <td><span class="badge" [class]="statusClass(car.status)">{{ car.status | titlecase }}</span></td>
+              <td><a [routerLink]="['/cars', car.id]" class="btn btn-outline-secondary btn-sm rounded-2" title="Details"><i class="far fa-eye"></i></a></td>
+            </tr>
+          } @empty { <tr><td colspan="6" class="text-center py-4">No listings found.</td></tr> }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

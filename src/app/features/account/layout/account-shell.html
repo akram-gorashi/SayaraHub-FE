@@ -1,0 +1,18 @@
+<main class="main">
+  <app-breadcrumb [title]="title()" [parentLabel]="title()" parentLink="/account/dashboard" />
+
+  <section class="user-profile py-120" aria-label="User account">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <app-account-sidebar />
+        </div>
+        <div class="col-lg-9">
+          <div class="user-profile-wrapper">
+            <router-outlet />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

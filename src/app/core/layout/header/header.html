@@ -18,7 +18,9 @@
                 <div class="header-top-right">
                     <div class="header-top-link">
                         @if (session.isAuthenticated()) {
-                            <span class="auth-user"><i class="far fa-user"></i> {{ session.session()?.fullName }}</span>
+                            <a class="auth-user" routerLink="/account/dashboard">
+                                <i class="far fa-user"></i> {{ session.session()?.fullName }}
+                            </a>
                             <button type="button" class="auth-link-button" [disabled]="loggingOut()" (click)="logout()">
                                 <i class="far fa-arrow-right-from-bracket"></i>
                                 {{ loggingOut() ? 'Logging out...' : 'Logout' }}
@@ -76,14 +78,14 @@
                                 <li class="dropdown-submenu">
                                     <a class="dropdown-item dropdown-toggle" href="#">My Account</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="dashboard.html">Dashboard</a></li>
-                                        <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
-                                        <li><a class="dropdown-item" href="profile-listing.html">My Listing</a></li>
-                                        <li><a class="dropdown-item" href="add-listing.html">Add Listing</a></li>
-                                        <li><a class="dropdown-item" href="profile-favorite.html">My Favorites</a>
+                                        <li><a class="dropdown-item" routerLink="/account/dashboard">Dashboard</a></li>
+                                        <li><a class="dropdown-item" routerLink="/account/profile">My Profile</a></li>
+                                        <li><a class="dropdown-item" routerLink="/account/listings">My Listing</a></li>
+                                        <li><a class="dropdown-item" routerLink="/account/add-listing">Add Listing</a></li>
+                                        <li><a class="dropdown-item" routerLink="/account/favorites">My Favorites</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="profile-message.html">Messages</a></li>
-                                        <li><a class="dropdown-item" href="profile-setting.html">Settings</a></li>
+                                        <li><a class="dropdown-item" routerLink="/account/messages">Messages</a></li>
+                                        <li><a class="dropdown-item" routerLink="/account/settings">Settings</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-submenu">
@@ -153,7 +155,7 @@
                             <a href="#" class="nav-right-link"><i class="far fa-cart-plus"></i><span>0</span></a>
                         </div>
                         <div class="nav-right-btn mt-2">
-                            <a href="#" class="theme-btn"><span class="far fa-plus-circle"></span>Add Listing</a>
+                            <a routerLink="/account/add-listing" class="theme-btn"><span class="far fa-plus-circle"></span>Add Listing</a>
                         </div>
                         <div class="sidebar-btn">
                             <button type="button" class="nav-right-link"><i class="far fa-bars-sort"></i></button>

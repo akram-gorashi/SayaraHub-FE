@@ -1,0 +1,35 @@
+<section class="user-profile-card profile-message" aria-labelledby="messages-title">
+  <div class="user-profile-card-header"><h2 id="messages-title" class="user-profile-card-title">Messages</h2></div>
+  @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
+  <div class="profile-message-wrapper">
+    <aside class="profile-message-inbox" aria-label="Conversations">
+      <ul class="profile-message-list">
+        @for (chat of store.chats(); track chat.id) {
+          <li [class.message-active]="store.activeChat()?.id === chat.id">
+            <button type="button" class="chat-select" (click)="store.select(chat)">
+              <div class="message-avatar"><img [src]="chat.otherUserImageUrl || 'assets/img/account/user.jpg'" [alt]="chat.otherUserName" /></div>
+              <div class="message-by"><div class="message-by-content"><h3>{{ chat.otherUserName }}</h3>
+                <span>{{ chat.lastMessageAt | date:'short' }}</span></div><p>{{ chat.lastMessage || chat.carTitle }}</p></div>
+              @if (chat.unreadCount) { <span class="badge badge-danger unread-badge">{{ chat.unreadCount }}</span> }
+            </button>
+          </li>
+        } @empty { <li class="empty-chat">No conversations yet.</li> }
+      </ul>
+    </aside>
+    <div class="message-content">
+      @if (store.activeChat(); as chat) {
+        <div class="message-content-info">
+          @for (message of store.messages(); track message.id) {
+            <div class="message-item" [class.me]="store.isMine(message)">
+              <div class="message-description"><p>{{ message.content }}</p><small>{{ message.sentAt | date:'short' }}</small></div>
+            </div>
+          }
+        </div>
+        <form class="message-reply" (submit)="send($event)">
+          <textarea class="form-control" rows="2" placeholder="Write a message..." [value]="draft()" (input)="updateDraft($event)"></textarea>
+          <button type="submit" class="theme-btn" [disabled]="store.sending() || !draft().trim()"><i class="far fa-paper-plane"></i> Send Message</button>
+        </form>
+      } @else { <div class="empty-message">Select a conversation to view messages.</div> }
+    </div>
+  </div>
+</section>
