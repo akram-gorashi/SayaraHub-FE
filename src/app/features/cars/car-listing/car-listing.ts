@@ -29,7 +29,7 @@ export class CarListing {
     this.store.updatePrice(key, (event.target as HTMLInputElement).value);
   }
 
-  protected toggleFilter(key: MultiSelectFilter, value: string, event: Event): void {
+  protected toggleFilter(key: MultiSelectFilter, value: number, event: Event): void {
     this.store.toggleFilter(key, value, (event.target as HTMLInputElement).checked);
   }
 

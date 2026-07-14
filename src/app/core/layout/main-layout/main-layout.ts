@@ -1,13 +1,14 @@
-import { CurrencyPipe, DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
-import { LandingFilters, LandingStore } from './landing.store';
+import { CarCard } from '../../../features/cars/components/car-card/car-card';
 import { TemplatePluginsService } from '../../services/template-plugins';
+import { LandingFilters, LandingStore } from './landing.store';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [CurrencyPipe, DecimalPipe, RouterLink],
+  imports: [CarCard, DecimalPipe],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,10 +29,11 @@ export class MainLayout {
   }
 
   protected updateSelectFilter(
-    key: 'brand' | 'transmission' | 'fuelType' | 'sortDirection',
+    key: 'brandId' | 'transmissionId' | 'fuelTypeId',
     event: Event,
   ): void {
-    this.store.updateFilter(key, (event.target as HTMLSelectElement).value as LandingFilters[typeof key]);
+    const value = (event.target as HTMLSelectElement).value;
+    this.store.updateFilter(key, value ? Number(value) : null);
   }
 
   protected updateYearFilter(key: 'minYear' | 'maxYear', event: Event): void {
@@ -44,12 +46,8 @@ export class MainLayout {
     this.navigateToCarList();
   }
 
-  protected browseBrand(brand: string): void {
-    void this.router.navigate(['/cars'], { queryParams: { brands: brand } });
-  }
-
-  protected useFallbackImage(event: Event): void {
-    (event.target as HTMLImageElement).src = 'assets/img/car/01.jpg';
+  protected browseBrand(brandId: number): void {
+    void this.router.navigate(['/cars'], { queryParams: { brandIds: brandId } });
   }
 
   private navigateToCarList(): void {
@@ -57,9 +55,9 @@ export class MainLayout {
     void this.router.navigate(['/cars'], {
       queryParams: {
         search: filters.search || null,
-        brands: filters.brand || null,
-        transmissions: filters.transmission || null,
-        fuelTypes: filters.fuelType || null,
+        brandIds: filters.brandId,
+        transmissionIds: filters.transmissionId,
+        fuelTypeIds: filters.fuelTypeId,
         minYear: filters.minYear,
         maxYear: filters.maxYear,
         city: filters.city || null,

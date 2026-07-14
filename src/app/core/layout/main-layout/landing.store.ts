@@ -10,9 +10,9 @@ import { MasterDataService } from '../../services/master-data.service';
 
 export interface LandingFilters {
   search: string;
-  brand: string;
-  transmission: string;
-  fuelType: string;
+  brandId: number | null;
+  transmissionId: number | null;
+  fuelTypeId: number | null;
   minYear: number | null;
   maxYear: number | null;
   city: string;
@@ -21,9 +21,9 @@ export interface LandingFilters {
 
 const INITIAL_FILTERS: LandingFilters = {
   search: '',
-  brand: '',
-  transmission: '',
-  fuelType: '',
+  brandId: null,
+  transmissionId: null,
+  fuelTypeId: null,
   minYear: null,
   maxYear: null,
   city: '',
@@ -130,9 +130,9 @@ export class LandingStore {
     const filters = this.filtersState();
     return {
       search: filters.search || undefined,
-      brands: filters.brand ? [filters.brand] : undefined,
-      transmissions: filters.transmission ? [filters.transmission] : undefined,
-      fuelTypes: filters.fuelType ? [filters.fuelType] : undefined,
+      brandIds: filters.brandId ? [filters.brandId] : undefined,
+      transmissionIds: filters.transmissionId ? [filters.transmissionId] : undefined,
+      fuelTypeIds: filters.fuelTypeId ? [filters.fuelTypeId] : undefined,
       minYear: filters.minYear ?? undefined,
       maxYear: filters.maxYear ?? undefined,
       city: filters.city || undefined,

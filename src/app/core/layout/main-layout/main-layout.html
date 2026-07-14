@@ -127,11 +127,11 @@
                                 <div class="form-group">
                                     <label for="landing-brand">Brand</label>
                                     <select id="landing-brand" class="form-select"
-                                        [value]="store.filters().brand"
-                                        (change)="updateSelectFilter('brand', $event)">
+                                        [value]="store.filters().brandId ?? ''"
+                                        (change)="updateSelectFilter('brandId', $event)">
                                         <option value="">All brands</option>
                                         @for (brand of store.brands(); track brand.id) {
-                                            <option [value]="brand.name">{{ brand.name }}</option>
+                                            <option [value]="brand.id">{{ brand.name }}</option>
                                         }
                                     </select>
                                 </div>
@@ -140,11 +140,11 @@
                                 <div class="form-group">
                                     <label for="landing-transmission">Transmission</label>
                                     <select id="landing-transmission" class="form-select"
-                                        [value]="store.filters().transmission"
-                                        (change)="updateSelectFilter('transmission', $event)">
+                                        [value]="store.filters().transmissionId ?? ''"
+                                        (change)="updateSelectFilter('transmissionId', $event)">
                                         <option value="">All transmissions</option>
                                         @for (transmission of store.transmissions(); track transmission.id) {
-                                            <option [value]="transmission.name">{{ transmission.name }}</option>
+                                            <option [value]="transmission.id">{{ transmission.name }}</option>
                                         }
                                     </select>
                                 </div>
@@ -153,11 +153,11 @@
                                 <div class="form-group">
                                     <label for="landing-fuel">Fuel type</label>
                                     <select id="landing-fuel" class="form-select"
-                                        [value]="store.filters().fuelType"
-                                        (change)="updateSelectFilter('fuelType', $event)">
+                                        [value]="store.filters().fuelTypeId ?? ''"
+                                        (change)="updateSelectFilter('fuelTypeId', $event)">
                                         <option value="">All fuel types</option>
                                         @for (fuelType of store.fuelTypes(); track fuelType.id) {
-                                            <option [value]="fuelType.name">{{ fuelType.name }}</option>
+                                            <option [value]="fuelType.id">{{ fuelType.name }}</option>
                                         }
                                     </select>
                                 </div>
@@ -350,37 +350,7 @@
                     <div class="row">
                         @for (car of store.cars(); track car.id) {
                             <div class="col-md-6 col-lg-4 col-xl-3">
-                                <article class="car-item wow fadeInUp">
-                                    <div class="car-img">
-                                        <span class="car-status status-1">{{ car.status }}</span>
-                                        <img
-                                            [src]="car.mainImageUrl || 'assets/img/car/01.jpg'"
-                                            [alt]="car.title"
-                                            loading="lazy"
-                                            (error)="useFallbackImage($event)">
-                                    </div>
-                                    <div class="car-content">
-                                        <div class="car-top">
-                                            <h4><a [routerLink]="['/cars', car.id]">{{ car.title }}</a></h4>
-                                            <div class="car-rate">
-                                                <i class="fas fa-car" aria-hidden="true"></i>
-                                                <span>{{ car.brand }} {{ car.model }}</span>
-                                            </div>
-                                        </div>
-                                        <ul class="car-list">
-                                            <li><i class="far fa-steering-wheel"></i>{{ car.transmission }}</li>
-                                            <li><i class="far fa-road"></i>{{ car.mileage | number }} km</li>
-                                            <li><i class="far fa-car"></i>Model: {{ car.year }}</li>
-                                            <li><i class="far fa-gas-pump"></i>{{ car.fuelType }}</li>
-                                        </ul>
-                                        <div class="car-footer">
-                                            <span class="car-price">{{ car.price | currency:'SAR':'symbol':'1.0-0' }}</span>
-                                            <a [routerLink]="['/cars', car.id]" class="theme-btn">
-                                                <span class="far fa-eye"></span>Details
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
+                                <app-car-card [car]="car" />
                             </div>
                         } @empty {
                             <div class="col-12">
@@ -770,7 +740,7 @@
                             <button
                                 type="button"
                                 class="brand-item brand-button wow fadeInUp"
-                                (click)="browseBrand(brand.name)">
+                                (click)="browseBrand(brand.id)">
                                 <span class="brand-placeholder" aria-hidden="true">{{ brand.name.charAt(0) }}</span>
                                 <h5>{{ brand.name }}</h5>
                             </button>

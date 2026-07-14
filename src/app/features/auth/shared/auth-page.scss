@@ -1,0 +1,47 @@
+:host {
+  display: block;
+}
+
+.auth-alert {
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  color: #842029;
+  background: #f8d7da;
+  border: 1px solid #f5c2c7;
+  border-radius: 10px;
+}
+
+.form-control.ng-invalid.ng-touched {
+  border-color: #dc3545;
+}
+
+.field-error {
+  display: block;
+  margin-top: 6px;
+  color: #dc3545;
+  font-size: 0.875rem;
+}
+
+.password-control {
+  position: relative;
+
+  .form-control {
+    padding-right: 48px;
+  }
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  padding: 4px;
+  color: var(--body-text-color);
+  background: transparent;
+  border: 0;
+  transform: translateY(-50%);
+}
+
+.theme-btn:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}

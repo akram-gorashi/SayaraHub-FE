@@ -1,0 +1,59 @@
+<main class="main">
+  <app-breadcrumb title="Login" parentLabel="Login" parentLink="/login" />
+
+  <section class="login-area py-120" aria-labelledby="login-heading">
+    <div class="container">
+      <div class="col-md-7 col-lg-5 mx-auto">
+        <div class="login-form">
+          <div class="login-header">
+            <img src="assets/img/logo/logo.png" alt="SayaraHub" />
+            <h2 id="login-heading" class="visually-hidden">Login to SayaraHub</h2>
+            <p>Login with your SayaraHub account</p>
+          </div>
+
+          @if (store.error(); as error) {
+            <div class="auth-alert" role="alert">{{ error }}</div>
+          }
+
+          <form [formGroup]="form" (ngSubmit)="submit()" (input)="store.clearError()" novalidate>
+            <div class="form-group">
+              <label for="login-email">Email Address</label>
+              <input id="login-email" type="email" class="form-control" formControlName="email"
+                autocomplete="email" placeholder="Your Email" />
+              @if (form.controls.email.touched && form.controls.email.hasError('required')) {
+                <small class="field-error">Email address is required.</small>
+              } @else if (form.controls.email.touched && form.controls.email.hasError('email')) {
+                <small class="field-error">Enter a valid email address.</small>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <div class="password-control">
+                <input id="login-password" [type]="passwordType()" class="form-control"
+                  formControlName="password" autocomplete="current-password" placeholder="Your Password" />
+                <button type="button" class="password-toggle" (click)="togglePasswordVisibility()"
+                  [attr.aria-label]="passwordVisible() ? 'Hide password' : 'Show password'">
+                  <i class="far" [class.fa-eye]="!passwordVisible()" [class.fa-eye-slash]="passwordVisible()"></i>
+                </button>
+              </div>
+              @if (form.controls.password.touched && form.controls.password.hasError('required')) {
+                <small class="field-error">Password is required.</small>
+              }
+            </div>
+
+            <button type="submit" class="theme-btn" [disabled]="store.submitting()">
+              <i class="far" [class.fa-sign-in]="!store.submitting()" [class.fa-spinner]="store.submitting()"
+                [class.fa-spin]="store.submitting()"></i>
+              {{ store.submitting() ? 'Logging in...' : 'Login' }}
+            </button>
+          </form>
+
+          <div class="login-footer">
+            <p>Don't have an account? <a routerLink="/register">Register.</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

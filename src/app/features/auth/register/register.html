@@ -1,0 +1,76 @@
+<main class="main">
+  <app-breadcrumb title="Register" parentLabel="Register" parentLink="/register" />
+
+  <section class="login-area py-120" aria-labelledby="register-heading">
+    <div class="container">
+      <div class="col-md-7 col-lg-5 mx-auto">
+        <div class="login-form">
+          <div class="login-header">
+            <img src="assets/img/logo/logo.png" alt="SayaraHub" />
+            <h2 id="register-heading" class="visually-hidden">Create a SayaraHub account</h2>
+            <p>Create your SayaraHub account</p>
+          </div>
+
+          @if (store.error(); as error) {
+            <div class="auth-alert" role="alert">{{ error }}</div>
+          }
+
+          <form [formGroup]="form" (ngSubmit)="submit()" (input)="store.clearError()" novalidate>
+            <div class="form-group">
+              <label for="register-name">Full Name</label>
+              <input id="register-name" type="text" class="form-control" formControlName="fullName"
+                autocomplete="name" placeholder="Your Name" />
+              @if (form.controls.fullName.touched && form.controls.fullName.invalid) {
+                <small class="field-error">Enter a name between 2 and 100 characters.</small>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="register-email">Email Address</label>
+              <input id="register-email" type="email" class="form-control" formControlName="email"
+                autocomplete="email" placeholder="Your Email" />
+              @if (form.controls.email.touched && form.controls.email.hasError('required')) {
+                <small class="field-error">Email address is required.</small>
+              } @else if (form.controls.email.touched && form.controls.email.hasError('email')) {
+                <small class="field-error">Enter a valid email address.</small>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="register-password">Password</label>
+              <div class="password-control">
+                <input id="register-password" [type]="passwordType()" class="form-control"
+                  formControlName="password" autocomplete="new-password" placeholder="Your Password" />
+                <button type="button" class="password-toggle" (click)="togglePasswordVisibility()"
+                  [attr.aria-label]="passwordVisible() ? 'Hide password' : 'Show password'">
+                  <i class="far" [class.fa-eye]="!passwordVisible()" [class.fa-eye-slash]="passwordVisible()"></i>
+                </button>
+              </div>
+              @if (form.controls.password.touched && form.controls.password.invalid) {
+                <small class="field-error">Use at least 6 characters.</small>
+              }
+            </div>
+
+            <div class="form-check form-group">
+              <input id="accepted-terms" class="form-check-input" type="checkbox" formControlName="acceptedTerms" />
+              <label class="form-check-label" for="accepted-terms">I agree to the Terms of Service.</label>
+              @if (form.controls.acceptedTerms.touched && form.controls.acceptedTerms.invalid) {
+                <small class="field-error">You must accept the terms to register.</small>
+              }
+            </div>
+
+            <button type="submit" class="theme-btn" [disabled]="store.submitting()">
+              <i class="far" [class.fa-paper-plane]="!store.submitting()" [class.fa-spinner]="store.submitting()"
+                [class.fa-spin]="store.submitting()"></i>
+              {{ store.submitting() ? 'Creating account...' : 'Register' }}
+            </button>
+          </form>
+
+          <div class="login-footer">
+            <p>Already have an account? <a routerLink="/login">Login.</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

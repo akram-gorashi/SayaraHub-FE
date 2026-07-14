@@ -20,5 +20,17 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/cars/car-details/car-details').then(({ CarDetailsPage }) => CarDetailsPage),
   },
+  {
+    path: 'login',
+    title: 'Login | SayaraHub',
+    loadComponent: () =>
+      import('./features/auth/login/login').then(({ LoginPage }) => LoginPage),
+  },
+  {
+    path: 'register',
+    title: 'Register | SayaraHub',
+    loadComponent: () =>
+      import('./features/auth/register/register').then(({ RegisterPage }) => RegisterPage),
+  },
   { path: '**', redirectTo: '' },
 ];

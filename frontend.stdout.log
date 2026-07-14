@@ -1,0 +1,73 @@
+> Building...
+√ Building...
+Initial chunk files | Names         |  Raw size
+scripts.js          | scripts       | 783.54 kB | 
+main.js             | main          |  54.11 kB | 
+chunk-O6BEL4SX.js   | -             |   3.98 kB | 
+chunk-ITW6WFLR.js   | -             |   2.51 kB | 
+styles.css          | styles        |  96 bytes | 
+
+                    | Initial total | 844.23 kB
+
+Lazy chunk files    | Names         |  Raw size
+chunk-2I65L3Z2.js   | main-layout   | 131.84 kB | 
+chunk-3XS7FSEQ.js   | car-details   |  60.06 kB | 
+chunk-Q2TFZYLN.js   | car-listing   |  44.85 kB | 
+chunk-LHFZY62G.js   | register      |  17.76 kB | 
+chunk-D2GW7PLY.js   | -             |  17.65 kB | 
+chunk-M73YJFBE.js   | login         |  14.45 kB | 
+chunk-DSB2OPAV.js   | -             |   4.89 kB | 
+chunk-3KXDXVEC.js   | -             |   2.51 kB | 
+chunk-NA6IASX4.js   | -             |   2.15 kB | 
+
+Application bundle generation complete. [10.919 seconds] - 2026-07-14T18:55:23.937Z
+
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+[2m21:55:24[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m Re-optimizing dependencies because vite config has changed
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m4200[22m/[39m
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [14.459 seconds] - 2026-07-14T21:21:51.210Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [1.958 seconds] - 2026-07-14T21:21:53.386Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [1.578 seconds] - 2026-07-14T21:21:59.175Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [1.628 seconds] - 2026-07-14T21:22:02.373Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [1.549 seconds] - 2026-07-14T21:22:05.500Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names         |  Raw size
+scripts.js          | scripts       | 783.54 kB | 
+main.js             | main          |  54.11 kB | 
+chunk-O6BEL4SX.js   | -             |   3.98 kB | 
+chunk-ITW6WFLR.js   | -             |   2.51 kB | 
+styles.css          | styles        |  96 bytes | 
+
+                    | Initial total | 844.23 kB
+
+Lazy chunk files    | Names         |  Raw size
+chunk-7662AVBS.js   | main-layout   | 131.95 kB | 
+chunk-3XS7FSEQ.js   | car-details   |  60.06 kB | 
+chunk-UOPAUH3S.js   | car-listing   |  45.06 kB | 
+chunk-LHFZY62G.js   | register      |  17.76 kB | 
+chunk-D2GW7PLY.js   | -             |  17.65 kB | 
+chunk-M73YJFBE.js   | login         |  14.45 kB | 
+chunk-DSB2OPAV.js   | -             |   4.89 kB | 
+chunk-3KXDXVEC.js   | -             |   2.51 kB | 
+chunk-NA6IASX4.js   | -             |   2.15 kB | 
+
+Application bundle generation complete. [1.859 seconds] - 2026-07-14T21:22:09.206Z
+
+Page reload sent to client(s).

@@ -10,15 +10,15 @@ import { CarsService } from '../../../core/services/cars.service';
 import { MasterDataService } from '../../../core/services/master-data.service';
 import { CarViewMode } from '../models/car-view-mode';
 
-export type MultiSelectFilter = 'brands' | 'transmissions' | 'fuelTypes' | 'features';
+export type MultiSelectFilter = 'brandIds' | 'transmissionIds' | 'fuelTypeIds' | 'featureIds';
 export type CarSortOption = 'latest' | 'priceAsc' | 'priceDesc' | 'yearDesc' | 'mileageAsc';
 
 interface ListingFilters {
   search: string;
-  brands: string[];
-  transmissions: string[];
-  fuelTypes: string[];
-  features: string[];
+  brandIds: number[];
+  transmissionIds: number[];
+  fuelTypeIds: number[];
+  featureIds: number[];
   minPrice: number | null;
   maxPrice: number | null;
   minYear: number | null;
@@ -29,10 +29,10 @@ interface ListingFilters {
 
 const INITIAL_FILTERS: ListingFilters = {
   search: '',
-  brands: [],
-  transmissions: [],
-  fuelTypes: [],
-  features: [],
+  brandIds: [],
+  transmissionIds: [],
+  fuelTypeIds: [],
+  featureIds: [],
   minPrice: null,
   maxPrice: null,
   minYear: null,
@@ -85,9 +85,10 @@ export class CarListingStore {
     this.filtersState.update((filters) => ({
       ...filters,
       search: queryParams.get('search') ?? '',
-      brands: queryParams.getAll('brands').filter(Boolean),
-      transmissions: queryParams.getAll('transmissions').filter(Boolean),
-      fuelTypes: queryParams.getAll('fuelTypes').filter(Boolean),
+      brandIds: this.idParams(queryParams, 'brandIds'),
+      transmissionIds: this.idParams(queryParams, 'transmissionIds'),
+      fuelTypeIds: this.idParams(queryParams, 'fuelTypeIds'),
+      featureIds: this.idParams(queryParams, 'featureIds'),
       minYear: this.numberParam(queryParams, 'minYear'),
       maxYear: this.numberParam(queryParams, 'maxYear'),
       city: queryParams.get('city') ?? '',
@@ -116,7 +117,7 @@ export class CarListingStore {
     }));
   }
 
-  toggleFilter(key: MultiSelectFilter, value: string, checked: boolean): void {
+  toggleFilter(key: MultiSelectFilter, value: number, checked: boolean): void {
     this.filtersState.update((filters) => {
       const selected = filters[key];
       return {
@@ -126,7 +127,7 @@ export class CarListingStore {
     });
   }
 
-  isSelected(key: MultiSelectFilter, value: string): boolean {
+  isSelected(key: MultiSelectFilter, value: number): boolean {
     return this.filtersState()[key].includes(value);
   }
 
@@ -206,10 +207,10 @@ export class CarListingStore {
     const sort = this.sortQuery(filters.sort);
     return {
       search: filters.search || undefined,
-      brands: filters.brands.length ? filters.brands : undefined,
-      transmissions: filters.transmissions.length ? filters.transmissions : undefined,
-      fuelTypes: filters.fuelTypes.length ? filters.fuelTypes : undefined,
-      features: filters.features.length ? filters.features : undefined,
+      brandIds: filters.brandIds.length ? filters.brandIds : undefined,
+      transmissionIds: filters.transmissionIds.length ? filters.transmissionIds : undefined,
+      fuelTypeIds: filters.fuelTypeIds.length ? filters.fuelTypeIds : undefined,
+      featureIds: filters.featureIds.length ? filters.featureIds : undefined,
       minPrice: filters.minPrice ?? undefined,
       maxPrice: filters.maxPrice ?? undefined,
       minYear: filters.minYear ?? undefined,
@@ -260,5 +261,11 @@ export class CarListingStore {
     }
     const parsed = Number(value);
     return Number.isFinite(parsed) ? parsed : null;
+  }
+
+  private idParams(params: ParamMap, key: string): number[] {
+    return params.getAll(key)
+      .map(Number)
+      .filter((value) => Number.isInteger(value) && value > 0);
   }
 }

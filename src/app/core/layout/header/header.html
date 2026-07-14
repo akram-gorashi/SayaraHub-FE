@@ -17,8 +17,16 @@
                 </div>
                 <div class="header-top-right">
                     <div class="header-top-link">
-                        <a href="#"><i class="far fa-arrow-right-to-arc"></i> Login</a>
-                        <a href="#"><i class="far fa-user-vneck"></i> Register</a>
+                        @if (session.isAuthenticated()) {
+                            <span class="auth-user"><i class="far fa-user"></i> {{ session.session()?.fullName }}</span>
+                            <button type="button" class="auth-link-button" [disabled]="loggingOut()" (click)="logout()">
+                                <i class="far fa-arrow-right-from-bracket"></i>
+                                {{ loggingOut() ? 'Logging out...' : 'Logout' }}
+                            </button>
+                        } @else {
+                            <a routerLink="/login"><i class="far fa-arrow-right-to-arc"></i> Login</a>
+                            <a routerLink="/register"><i class="far fa-user-vneck"></i> Register</a>
+                        }
                     </div>
                     <div class="header-top-social">
                         <span>Follow Us: </span>
@@ -81,8 +89,8 @@
                                 <li class="dropdown-submenu">
                                     <a class="dropdown-item dropdown-toggle" href="#">Authentication</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="login.html">Login</a></li>
-                                        <li><a class="dropdown-item" href="register.html">Register</a></li>
+                                        <li><a class="dropdown-item" routerLink="/login">Login</a></li>
+                                        <li><a class="dropdown-item" routerLink="/register">Register</a></li>
                                         <li><a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
                                         </li>
                                     </ul>

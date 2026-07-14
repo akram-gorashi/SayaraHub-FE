@@ -56,10 +56,10 @@ export interface CarDetails {
 
 export interface CarQuery extends PageQuery {
   search?: string;
-  brands?: string[];
-  transmissions?: string[];
-  fuelTypes?: string[];
-  features?: string[];
+  brandIds?: number[];
+  transmissionIds?: number[];
+  fuelTypeIds?: number[];
+  featureIds?: number[];
   minPrice?: number;
   maxPrice?: number;
   minYear?: number;
