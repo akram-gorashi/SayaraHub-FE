@@ -1,0 +1,45 @@
+<section class="user-profile-card" aria-labelledby="add-listing-title">
+  <h2 id="add-listing-title" class="user-profile-card-title">Add New Listing</h2>
+  @if (store.error(); as error) { <div class="alert alert-danger" role="alert">{{ error }}</div> }
+  @if (store.loading()) {
+    <div class="text-center py-5"><span class="spinner-border text-primary" aria-label="Loading"></span></div>
+  } @else {
+    <div class="add-listing-form">
+      <h6 class="mb-1">Basic Information</h6>
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="row align-items-center">
+          <div class="col-lg-12"><div class="form-group"><label for="listing-title">Listing Title</label><input id="listing-title" type="text" class="form-control" formControlName="title" placeholder="Enter title" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="condition">Condition</label><select id="condition" class="form-control" formControlName="carConditionId"><option [ngValue]="0">Choose</option>@for (item of store.conditions(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="body-type">Body Type</label><select id="body-type" class="form-control" formControlName="bodyTypeId"><option [ngValue]="0">Choose</option>@for (item of store.bodyTypes(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="brand">Make/Brand</label><select id="brand" class="form-control" formControlName="carBrandId" (change)="brandChanged()"><option [ngValue]="0">Choose</option>@for (item of store.brands(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="model">Model</label><select id="model" class="form-control" formControlName="carModelId"><option [ngValue]="0">{{ store.loadingModels() ? 'Loading...' : 'Choose' }}</option>@for (item of store.models(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="price">Price</label><input id="price" type="number" class="form-control" formControlName="price" placeholder="Enter price" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="year">Year</label><select id="year" class="form-control" formControlName="year">@for (year of years; track year) { <option [ngValue]="year">{{ year }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="transmission">Transmission</label><select id="transmission" class="form-control" formControlName="transmissionId"><option [ngValue]="0">Choose</option>@for (item of store.transmissions(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="fuel-type">Fuel Type</label><select id="fuel-type" class="form-control" formControlName="fuelTypeId"><option [ngValue]="0">Choose</option>@for (item of store.fuelTypes(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="mileage">Mileage</label><input id="mileage" type="number" class="form-control" formControlName="mileage" placeholder="Enter mileage" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="engine-size">Engine Size</label><input id="engine-size" type="text" class="form-control" formControlName="engineSize" placeholder="Enter engine size" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="cylinders">Cylinders</label><input id="cylinders" type="number" class="form-control" formControlName="cylinders" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="color">Color</label><input id="color" type="text" class="form-control" formControlName="color" placeholder="Enter color" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="doors">Doors</label><input id="doors" type="number" class="form-control" formControlName="doors" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="vin">VIN</label><input id="vin" type="text" class="form-control" formControlName="vin" placeholder="Enter 17-character VIN" /></div></div>
+
+          <h6 class="fw-bold mt-4 mb-1">Upload Images</h6>
+          <div class="col-lg-12"><div class="form-group"><div class="list-upload-wrapper"><label class="list-img-upload" for="listing-images"><span><i class="far fa-images"></i> Upload Listing Images</span></label><input id="listing-images" type="file" class="list-img-file" accept="image/*" multiple (change)="chooseImages($event)" /></div>@if (imageNames()) { <small class="d-block mt-2">{{ imageNames() }}</small> }@if (imageError(); as error) { <small class="text-danger d-block mt-2">{{ error }}</small> }</div></div>
+
+          <h6 class="fw-bold mt-4 mb-1">Location</h6>
+          <div class="col-lg-6"><div class="form-group"><label for="address">Address</label><input id="address" type="text" class="form-control" formControlName="address" placeholder="Enter address" /></div></div>
+          <div class="col-lg-6"><div class="form-group"><label for="city">City</label><input id="city" type="text" class="form-control" formControlName="city" placeholder="Enter city" /></div></div>
+          <h6 class="fw-bold mt-4 mb-1">Detailed Information</h6>
+          <div class="col-lg-12"><div class="form-group"><label for="description">Description</label><textarea id="description" class="form-control" formControlName="description" placeholder="Write description" cols="30" rows="5"></textarea></div></div>
+
+          <h6 class="fw-bold my-4">Features</h6>
+          @for (feature of store.features(); track feature.id) {
+            <div class="col-6 col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" [id]="'feature-' + feature.id" (change)="toggleFeature(feature.id, $any($event.target).checked)" /><label class="form-check-label" [for]="'feature-' + feature.id">{{ feature.name }}</label></div></div>
+          }
+          <div class="col-lg-12"><button type="submit" class="theme-btn mt-4" [disabled]="store.submitting()"><i class="far fa-plus-circle"></i> {{ store.submitting() ? 'Submitting...' : 'Add Listing' }}</button></div>
+        </div>
+      </form>
+    </div>
+  }
+</section>

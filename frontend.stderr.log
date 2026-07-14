@@ -1,0 +1,27 @@
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './features/account/add-listing/account-add-listing' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.routes.ts:81:17:
+[37m      81 │ ...   import([32m'./features/account/add-listing/account-add-listing'[37m)...
+         ╵              [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "./features/account/add-listing/account-add-listing"[0m
+
+    src/app/app.routes.ts:65:44:
+[37m      65 │ ...=> import([32m'./features/account/add-listing/account-add-listing'[37m)...
+         ╵              [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG5002: Unexpected closing tag "div". It may happen when the tag has already been closed by another tag. For more info see https://www.w3.org/TR/html5/syntax.html#closing-elements-that-have-implied-end-tags[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/settings/account-settings.html:32:10:
+[37m      32 │     </div>[32m</div>[37m
+         ╵           [32m~~~~~~[0m
+
+  Error occurs in the template of component AccountSettings.
+
+    src/app/features/account/settings/account-settings.ts:6:92:
+[37m      6 │ ...dule], templateUrl: [32m'./account-settings.html'[37m, changeDetection: ...
+        ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+

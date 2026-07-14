@@ -78,7 +78,7 @@ export const routes: Routes = [
       {
         path: 'add-listing', title: 'Add Listing | SayaraHub', data: { accountTitle: 'Add Listing' },
         loadComponent: () =>
-          import('./features/account/shared/account-placeholder').then(({ AccountPlaceholder }) => AccountPlaceholder),
+          import('./features/account/add-listing/account-add-listing').then(({ AccountAddListing }) => AccountAddListing),
       },
     ],
   },

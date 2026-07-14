@@ -88,4 +88,11 @@ export interface SaveCarRequest {
 
 export interface CreateCarRequest extends SaveCarRequest {
   images: File[];
+  address: string;
+  description: string;
+  color: string;
+  doors: number;
+  cylinders: number;
+  engineSize: string;
+  vin: string;
 }
