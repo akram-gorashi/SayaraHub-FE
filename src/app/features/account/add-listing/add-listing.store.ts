@@ -26,12 +26,14 @@ export class AddListingStore {
   private readonly submittingState = signal(false);
   private readonly errorState = signal<string | null>(null);
   private readonly carState = signal<SellerCarDetails | null>(null);
+  private readonly uploadProgressState = signal(0);
 
   readonly loading = this.loadingState.asReadonly();
   readonly loadingModels = this.loadingModelsState.asReadonly();
   readonly submitting = this.submittingState.asReadonly();
   readonly error = this.errorState.asReadonly();
   readonly car = this.carState.asReadonly();
+  readonly uploadProgress = this.uploadProgressState.asReadonly();
   readonly models = this.modelsState.asReadonly();
   readonly brands = computed(() => this.masterDataState()?.carBrands.items ?? []);
   readonly bodyTypes = computed(() => this.masterDataState()?.bodyTypes.items ?? []);
@@ -80,8 +82,9 @@ export class AddListingStore {
 
   create(request: CreateCarRequest): void {
     this.submittingState.set(true);
+    this.uploadProgressState.set(0);
     this.errorState.set(null);
-    this.carsService.create(request)
+    this.carsService.create(request, (progress) => this.uploadProgressState.set(progress))
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.submittingState.set(false)))
       .subscribe({
         next: (response) => {
@@ -94,8 +97,9 @@ export class AddListingStore {
 
   update(carId: number, request: UpdateCarRequest): void {
     this.submittingState.set(true);
+    this.uploadProgressState.set(0);
     this.errorState.set(null);
-    this.carsService.update(carId, request)
+    this.carsService.update(carId, request, (progress) => this.uploadProgressState.set(progress))
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.submittingState.set(false)))
       .subscribe({
         next: (response) => {

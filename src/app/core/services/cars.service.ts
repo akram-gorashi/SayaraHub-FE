@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, filter, map, tap } from 'rxjs';
 
 import { API_ENDPOINTS } from '../api/api-endpoints';
 import { ApiResponse, PagedResponse, QueryParams } from '../models/api.models';
@@ -51,12 +51,12 @@ export class CarsService {
     return this.http.delete<ApiResponse<string>>(`${API_ENDPOINTS.cars}/${id}/favorite`);
   }
 
-  create(request: CreateCarRequest): Observable<ApiResponse<CarSummary>> {
-    return this.http.post<ApiResponse<CarSummary>>(API_ENDPOINTS.cars, this.toFormData(request));
+  create(request: CreateCarRequest, onProgress?: (progress: number) => void): Observable<ApiResponse<CarSummary>> {
+    return this.save('POST', API_ENDPOINTS.cars, request, onProgress);
   }
 
-  update(id: number, request: UpdateCarRequest): Observable<ApiResponse<CarSummary>> {
-    return this.http.put<ApiResponse<CarSummary>>(`${API_ENDPOINTS.cars}/${id}`, this.toFormData(request));
+  update(id: number, request: UpdateCarRequest, onProgress?: (progress: number) => void): Observable<ApiResponse<CarSummary>> {
+    return this.save('PUT', `${API_ENDPOINTS.cars}/${id}`, request, onProgress);
   }
 
   delete(id: number): Observable<void> {
@@ -74,7 +74,7 @@ export class CarsService {
     const { images, featureIds, ...fields } = request;
 
     for (const [key, value] of Object.entries(fields)) {
-      if (key === 'existingImageIds') continue;
+      if (key === 'existingImageIds' || key === 'imageOrder') continue;
       formData.append(key, String(value));
     }
     for (const featureId of featureIds) {
@@ -84,11 +84,35 @@ export class CarsService {
       for (const imageId of request.existingImageIds) {
         formData.append('ExistingImageIds', String(imageId));
       }
+      for (const imageKey of request.imageOrder) {
+        formData.append('ImageOrder', imageKey);
+      }
     }
     for (const image of images) {
       formData.append('Images', image);
     }
 
     return formData;
+  }
+
+  private save(
+    method: 'POST' | 'PUT',
+    url: string,
+    request: CreateCarRequest | UpdateCarRequest,
+    onProgress?: (progress: number) => void,
+  ): Observable<ApiResponse<CarSummary>> {
+    return this.http.request<ApiResponse<CarSummary>>(method, url, {
+      body: this.toFormData(request),
+      observe: 'events',
+      reportProgress: true,
+    }).pipe(
+      tap((event) => {
+        if (event.type === HttpEventType.UploadProgress && event.total) {
+          onProgress?.(Math.round((event.loaded / event.total) * 100));
+        }
+      }),
+      filter((event): event is HttpResponse<ApiResponse<CarSummary>> => event instanceof HttpResponse),
+      map((response) => response.body!),
+    );
   }
 }

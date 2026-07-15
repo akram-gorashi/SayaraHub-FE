@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { authGuard } from './core/guards/auth.guard';
+import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -89,6 +90,13 @@ export const routes: Routes = [
     title: 'Page Not Found | SayaraHub',
     loadComponent: () =>
       import('./features/content/not-found/not-found-page').then(({ NotFoundPage }) => NotFoundPage),
+  },
+  {
+    path: 'admin/moderation',
+    canActivate: [adminGuard],
+    title: 'Listing Moderation | SayaraHub',
+    loadComponent: () =>
+      import('./features/admin/moderation/admin-moderation-page').then(({ AdminModerationPage }) => AdminModerationPage),
   },
   {
     path: 'account',

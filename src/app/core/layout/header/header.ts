@@ -4,6 +4,8 @@ import { finalize } from 'rxjs';
 
 import { AuthService } from '../../services/auth.service';
 import { AuthSessionService } from '../../services/auth-session.service';
+import { Notification } from '../../models/notification.models';
+import { NotificationCenterService } from '../../services/notification-center.service';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +20,12 @@ export class Header {
 
   protected readonly session = inject(AuthSessionService);
   protected readonly loggingOut = signal(false);
+  protected readonly notifications = inject(NotificationCenterService);
+
+  protected openNotification(notification: Notification): void {
+    this.notifications.markRead(notification);
+    if (notification.actionUrl) void this.router.navigateByUrl(notification.actionUrl);
+  }
 
   protected logout(): void {
     if (this.loggingOut()) {

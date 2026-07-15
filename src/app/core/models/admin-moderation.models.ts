@@ -27,6 +27,12 @@ export interface ModerationCar {
   moderationReason: string | null;
   moderatedAt: string | null;
   moderatedByUserId: number | null;
+  description: string;
+  city: string;
+  vin: string;
+  year: number;
+  mileage: number;
+  images: string[];
 }
 
 export interface ModerationStatistics {

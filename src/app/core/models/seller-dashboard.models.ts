@@ -5,6 +5,7 @@ export interface SellerCarImage {
   imageUrl: string;
   thumbnailUrl: string | null;
   isMain: boolean;
+  displayOrder: number;
   processingStatus: string;
   processingError: string | null;
   processingAttempts: number;

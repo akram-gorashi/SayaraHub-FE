@@ -13,6 +13,7 @@ export class AuthSessionService {
     const session = this.sessionState();
     return session !== null && new Date(session.accessTokenExpiresAt).getTime() > Date.now();
   });
+  readonly isAdmin = computed(() => this.sessionState()?.roles?.includes('Admin') ?? false);
 
   get accessToken(): string | null {
     return this.sessionState()?.token ?? null;
@@ -48,7 +49,8 @@ export class AuthSessionService {
     }
 
     try {
-      return JSON.parse(value) as AuthSession;
+      const session = JSON.parse(value) as AuthSession;
+      return { ...session, roles: session.roles ?? [] };
     } catch {
       this.storage?.removeItem(SESSION_STORAGE_KEY);
       return null;

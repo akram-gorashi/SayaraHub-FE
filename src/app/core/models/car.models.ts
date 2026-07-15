@@ -96,8 +96,11 @@ export interface CreateCarRequest extends SaveCarRequest {
   cylinders: number;
   engineSize: string;
   vin: string;
+  mainImageIndex: number;
 }
 
 export interface UpdateCarRequest extends CreateCarRequest {
   existingImageIds: number[];
+  imageOrder: string[];
+  mainImageKey: string;
 }

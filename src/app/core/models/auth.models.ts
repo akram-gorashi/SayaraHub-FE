@@ -14,4 +14,5 @@ export interface AuthSession {
   refreshTokenExpiresAt: string;
   fullName: string;
   email: string;
+  roles: string[];
 }

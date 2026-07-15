@@ -1,0 +1,32 @@
+<main class="admin-moderation">
+  <div class="container">
+    <div class="admin-heading"><div><span>Administration</span><h1>Listing moderation</h1><p>Review seller submissions before they appear publicly.</p></div></div>
+    <div class="moderation-stats"><article><span>Pending</span><strong>{{ store.statistics().pending | number }}</strong></article><article><span>Approved</span><strong>{{ store.statistics().approved | number }}</strong></article><article><span>Rejected</span><strong>{{ store.statistics().rejected | number }}</strong></article></div>
+    @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
+    @if (store.success(); as success) { <div class="alert alert-success">{{ success }}</div> }
+    <div class="status-tabs" aria-label="Moderation status">@for (status of statuses; track status) { <button type="button" [class.active]="store.status() === status" (click)="chooseStatus(status)">{{ status === 'Available' ? 'Approved' : status }}</button> }</div>
+    <div class="moderation-layout">
+      <section class="queue" aria-label="Listings awaiting review">
+        @if (store.loading()) { <div class="queue-empty"><span class="spinner-border"></span> Loading listings...</div> }
+        @for (car of store.cars(); track car.id) {
+          <button type="button" class="queue-item" [class.active]="selected()?.id === car.id" (click)="review(car)">
+            <img [src]="car.images[0] || 'assets/img/car/01.jpg'" [alt]="car.title" />
+            <span><strong>{{ car.title }}</strong><small>{{ car.sellerName }} · {{ car.listedDate | date:'mediumDate' }}</small><small>{{ car.brand }} {{ car.model }} · {{ car.price | currency:'SAR':'symbol-narrow':'1.0-0' }}</small></span>
+          </button>
+        } @empty { @if (!store.loading()) { <div class="queue-empty">No {{ store.status() | titlecase }} listings.</div> } }
+      </section>
+      <section class="review-panel">
+        @if (selected(); as car) {
+          <div class="review-gallery">@for (image of car.images; track image) { <img [src]="image" [alt]="car.title" /> }</div>
+          <div class="review-title"><div><span class="status">{{ car.status }}</span><h2>{{ car.title }}</h2><p>Submitted by {{ car.sellerName }}</p></div><strong>{{ car.price | currency:'SAR':'symbol-narrow':'1.0-0' }}</strong></div>
+          <dl><div><dt>Vehicle</dt><dd>{{ car.year }} {{ car.brand }} {{ car.model }}</dd></div><div><dt>Mileage</dt><dd>{{ car.mileage | number }} km</dd></div><div><dt>City</dt><dd>{{ car.city }}</dd></div><div><dt>VIN</dt><dd>{{ car.vin }}</dd></div></dl>
+          <p class="description">{{ car.description }}</p>
+          @if (car.status === 'Pending' || car.status === 'Inactive') {
+            <label for="rejection-reason">Rejection reason</label><textarea id="rejection-reason" rows="4" [ngModel]="rejectionReason()" (ngModelChange)="rejectionReason.set($event)" placeholder="Explain what the seller needs to correct (minimum 10 characters)"></textarea>
+            <div class="moderation-actions"><button type="button" class="approve" [disabled]="store.moderating() === car.id" (click)="approve()"><i class="far fa-check"></i> Approve</button><button type="button" class="reject" [disabled]="rejectionReason().trim().length < 10 || store.moderating() === car.id" (click)="reject()"><i class="far fa-xmark"></i> Reject</button></div>
+          } @else if (car.moderationReason) { <div class="alert alert-danger"><strong>Rejection reason:</strong> {{ car.moderationReason }}</div> }
+        } @else { <div class="review-placeholder"><i class="far fa-shield-check"></i><h2>Select a listing</h2><p>Vehicle details and moderation controls will appear here.</p></div> }
+      </section>
+    </div>
+  </div>
+</main>

@@ -66,3 +66,43 @@
          ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
 
 
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2741: Property 'mainImageIndex' is missing in type '{ featureIds: number[]; images: File[]; title: string; carConditionId: number; bodyTypeId: number; carBrandId: number; carModelId: number; price: number; year: number; transmissionId: number; ... 9 more ...; description: string; }' but required in type 'CreateCarRequest'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:124:10:
+[37m      124 │     const [32mrequest[37m: CreateCarRequest = {
+          ╵           [32m~~~~~~~[0m
+
+  'mainImageIndex' is declared here.
+
+    src/app/core/models/car.models.ts:99:2:
+[37m      99 │   [32mmainImageIndex[37m: number;
+         ╵   [32m~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2739: Type '{ existingImageIds: number[]; images: File[]; address: string; description: string; color: string; doors: number; cylinders: number; engineSize: string; vin: string; mainImageIndex: number; title: string; ... 10 more ...; featureIds: number[]; }' is missing the following properties from type 'UpdateCarRequest': imageOrder, mainImageKey[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:128:12:
+[37m      128 │       const [32mupdateRequest[37m: UpdateCarRequest = {
+          ╵             [32m~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2741: Property 'mainImageIndex' is missing in type '{ featureIds: number[]; images: File[]; title: string; carConditionId: number; bodyTypeId: number; carBrandId: number; carModelId: number; price: number; year: number; transmissionId: number; ... 9 more ...; description: string; }' but required in type 'CreateCarRequest'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:124:10:
+[37m      124 │     const [32mrequest[37m: CreateCarRequest = {
+          ╵           [32m~~~~~~~[0m
+
+  'mainImageIndex' is declared here.
+
+    src/app/core/models/car.models.ts:99:2:
+[37m      99 │   [32mmainImageIndex[37m: number;
+         ╵   [32m~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2739: Type '{ existingImageIds: number[]; images: File[]; address: string; description: string; color: string; doors: number; cylinders: number; engineSize: string; vin: string; mainImageIndex: number; title: string; ... 10 more ...; featureIds: number[]; }' is missing the following properties from type 'UpdateCarRequest': imageOrder, mainImageKey[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:128:12:
+[37m      128 │       const [32mupdateRequest[37m: UpdateCarRequest = {
+          ╵             [32m~~~~~~~~~~~~~[0m
+
+

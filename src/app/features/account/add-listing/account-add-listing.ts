@@ -28,6 +28,8 @@ export class AccountAddListing {
   protected readonly imagePreviews = signal<{ file: File; url: string }[]>([]);
   protected readonly existingImages = signal<SellerCarImage[]>([]);
   protected readonly imageError = signal<string | null>(null);
+  protected readonly mainExistingImageId = signal<number | null>(null);
+  protected readonly mainNewImage = signal<File | null>(null);
   private readonly initialized = signal(false);
   protected readonly form = this.fb.nonNullable.group({
     title: ['', [Validators.required, Validators.maxLength(150)]],
@@ -77,6 +79,7 @@ export class AccountAddListing {
       });
       this.selectedFeatureIds.set(car.featureIds);
       this.existingImages.set(car.imageProcessing);
+      this.mainExistingImageId.set(car.imageProcessing.find((image) => image.isMain)?.id ?? car.imageProcessing[0]?.id ?? null);
       this.store.loadModels(car.carBrandId);
       this.initialized.set(true);
     });
@@ -102,10 +105,15 @@ export class AccountAddListing {
     this.imagePreviews().forEach(({ url }) => URL.revokeObjectURL(url));
     this.selectedImages.set(files);
     this.imagePreviews.set(files.map((file) => ({ file, url: URL.createObjectURL(file) })));
+    if (!this.mainExistingImageId() && files.length) this.mainNewImage.set(files[0]);
   }
 
   protected removeExistingImage(imageId: number): void {
     this.existingImages.update((images) => images.filter((image) => image.id !== imageId));
+    if (this.mainExistingImageId() === imageId) {
+      this.mainExistingImageId.set(this.existingImages()[0]?.id ?? null);
+      if (!this.mainExistingImageId()) this.mainNewImage.set(this.selectedImages()[0] ?? null);
+    }
   }
 
   protected removeNewImage(file: File): void {
@@ -113,6 +121,29 @@ export class AccountAddListing {
     if (preview) URL.revokeObjectURL(preview.url);
     this.imagePreviews.update((previews) => previews.filter((item) => item.file !== file));
     this.selectedImages.update((images) => images.filter((image) => image !== file));
+    if (this.mainNewImage() === file) {
+      this.mainNewImage.set(this.selectedImages()[0] ?? null);
+      if (!this.mainNewImage()) this.mainExistingImageId.set(this.existingImages()[0]?.id ?? null);
+    }
+  }
+
+  protected setMainExisting(imageId: number): void {
+    this.mainExistingImageId.set(imageId);
+    this.mainNewImage.set(null);
+  }
+
+  protected setMainNew(file: File): void {
+    this.mainNewImage.set(file);
+    this.mainExistingImageId.set(null);
+  }
+
+  protected moveExisting(index: number, offset: -1 | 1): void {
+    this.existingImages.update((images) => this.move(images, index, offset));
+  }
+
+  protected moveNew(index: number, offset: -1 | 1): void {
+    this.imagePreviews.update((previews) => this.move(previews, index, offset));
+    this.selectedImages.set(this.imagePreviews().map((preview) => preview.file));
   }
 
   protected submit(): void {
@@ -123,15 +154,31 @@ export class AccountAddListing {
     }
     const request: CreateCarRequest = {
       ...this.form.getRawValue(), featureIds: this.selectedFeatureIds(), images: this.selectedImages(),
+      mainImageIndex: Math.max(0, this.selectedImages().indexOf(this.mainNewImage() ?? this.selectedImages()[0])),
     };
     if (this.listingId) {
       const updateRequest: UpdateCarRequest = {
         ...request,
         existingImageIds: this.existingImages().map((image) => image.id),
+        imageOrder: [
+          ...this.existingImages().map((image) => `existing:${image.id}`),
+          ...this.selectedImages().map((_, index) => `new:${index}`),
+        ],
+        mainImageKey: this.mainExistingImageId()
+          ? `existing:${this.mainExistingImageId()}`
+          : `new:${Math.max(0, this.selectedImages().indexOf(this.mainNewImage() ?? this.selectedImages()[0]))}`,
       };
       this.store.update(this.listingId, updateRequest);
     } else {
       this.store.create(request);
     }
+  }
+
+  private move<T>(items: T[], index: number, offset: -1 | 1): T[] {
+    const target = index + offset;
+    if (target < 0 || target >= items.length) return items;
+    const reordered = [...items];
+    [reordered[index], reordered[target]] = [reordered[target], reordered[index]];
+    return reordered;
   }
 }
