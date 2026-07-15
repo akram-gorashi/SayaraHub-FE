@@ -7,6 +7,12 @@
     <div class="add-listing-form">
       <h6 class="mb-1">Basic Information</h6>
       <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        @if (validationErrors().length) {
+          <div class="alert alert-danger listing-validation-summary" role="alert" aria-live="polite">
+            <strong>Please correct the following before saving:</strong>
+            <ul class="mb-0 mt-2">@for (error of validationErrors(); track error) { <li>{{ error }}</li> }</ul>
+          </div>
+        }
         <div class="row align-items-center">
           <div class="col-lg-12"><div class="form-group"><label for="listing-title">Listing Title</label><input id="listing-title" type="text" class="form-control" formControlName="title" placeholder="Enter title" /></div></div>
           <div class="col-lg-4"><div class="form-group"><label for="condition">Condition</label><select id="condition" class="form-control" formControlName="carConditionId"><option [ngValue]="0">Choose</option>@for (item of store.conditions(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
