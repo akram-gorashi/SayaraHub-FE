@@ -730,3 +730,38 @@ Application bundle generation complete. [4.147 seconds] - 2026-07-15T09:10:29.31
 
 Page reload sent to client(s).
 > Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names                   |  Raw size
+scripts.js          | scripts                 | 106.54 kB | 
+main.js             | main                    |  44.77 kB | 
+chunk-M3UOZXUS.js   | -                       |   5.69 kB | 
+chunk-7M7NEB3L.js   | -                       |   3.26 kB | 
+chunk-P7QY2ULX.js   | -                       |   2.54 kB | 
+chunk-GOMI4DH3.js   | -                       |   1.37 kB | 
+chunk-2RXHTWJM.js   | -                       | 643 bytes | 
+chunk-HADNFOJP.js   | -                       | 605 bytes | 
+styles.css          | styles                  |  96 bytes | 
+
+                    | Initial total           | 165.52 kB
+
+Lazy chunk files    | Names                   |  Raw size
+chunk-T3R6SJNQ.js   | main-layout             | 132.58 kB | 
+chunk-ST654VUA.js   | car-details             |  66.60 kB | 
+chunk-K52ADBV2.js   | account-add-listing     |  66.36 kB | 
+chunk-GOET7L2G.js   | admin-moderation-page   |  63.28 kB | 
+chunk-6OAXYABP.js   | car-listing             |  45.19 kB | 
+chunk-GQFVTDWJ.js   | seller-profile          |  37.80 kB | 
+chunk-SRZKNK54.js   | account-listing-details |  37.29 kB | 
+chunk-YXNU6ZXD.js   | account-notifications   |  36.08 kB | 
+chunk-J25GH467.js   | admin-operations-page   |  31.40 kB | 
+chunk-HCMWHTOH.js   | account-inquiries       |  30.22 kB | 
+chunk-3F4ART46.js   | account-messages        |  26.55 kB | 
+chunk-FDALQHCT.js   | account-listings        |  24.21 kB | 
+chunk-3UYLATNN.js   | account-settings        |  23.65 kB | 
+chunk-YSQECDZG.js   | account-profile         |  18.43 kB | 
+chunk-7BQZUF2T.js   | account-safety          |  18.25 kB | 
+...and 27 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [0.905 seconds] - 2026-07-15T09:10:30.243Z
+
+Component update sent to client(s).
