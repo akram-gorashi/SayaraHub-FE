@@ -1,5 +1,5 @@
 import { CurrencyPipe, DatePipe, DecimalPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, effect, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { Breadcrumb } from '../../../shared/ui/breadcrumb/breadcrumb';
@@ -17,6 +17,9 @@ import { CarDetailsStore } from './car-details.store';
 export class CarDetailsPage {
   readonly id = input.required<string>();
   protected readonly store = inject(CarDetailsStore);
+  protected readonly reportOpen = signal(false);
+  protected readonly reportReason = signal('');
+  protected readonly reportDetails = signal('');
 
   constructor() {
     effect(() => this.store.load(Number(this.id())));
@@ -38,5 +41,10 @@ export class CarDetailsPage {
   protected submitContact(event: Event): void {
     event.preventDefault();
     this.store.sendContact();
+  }
+
+  protected submitReport(event: Event): void {
+    event.preventDefault();
+    this.store.reportListing(this.reportReason(), this.reportDetails());
   }
 }

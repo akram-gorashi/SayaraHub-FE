@@ -156,10 +156,11 @@
                   <img [src]="car.seller.imageUrl || 'assets/img/car/author-v2.jpg'" [alt]="car.seller.fullName"
                     (error)="useAvatarFallback($event)">
                   <div class="car-single-author-content">
-                    <h5>{{ car.seller.fullName }}</h5>
+                    <h5><a [routerLink]="['/sellers', car.seller.id]">{{ car.seller.fullName }}</a></h5>
                     <span>Seller</span>
                   </div>
                 </div>
+                <a [routerLink]="['/sellers', car.seller.id]" class="btn btn-outline-secondary w-100 mt-3">View Seller Profile</a>
               </div>
 
               <div class="car-single-widget">
@@ -180,6 +181,21 @@
                   </form>
                 </div>
               </div>
+
+              @if (store.isAuthenticated()) {
+                <div class="car-single-widget">
+                  <button type="button" class="btn btn-outline-danger w-100" (click)="reportOpen.set(!reportOpen())"><i class="far fa-flag"></i> Report Listing</button>
+                  @if (reportOpen()) {
+                    <form class="car-single-form mt-3" (submit)="submitReport($event)">
+                      <div class="form-group"><input class="form-control" maxlength="200" required placeholder="Reason for reporting" [value]="reportReason()" (input)="reportReason.set($any($event.target).value)"></div>
+                      <div class="form-group"><textarea class="form-control" rows="3" maxlength="2000" placeholder="Additional details (optional)" [value]="reportDetails()" (input)="reportDetails.set($any($event.target).value)"></textarea></div>
+                      @if (store.reportError(); as message) { <div class="alert alert-danger py-2">{{ message }}</div> }
+                      @if (store.reportSuccess(); as message) { <div class="alert alert-success py-2">{{ message }}</div> }
+                      <button type="submit" class="theme-btn" [disabled]="store.reportSending() || !reportReason().trim()">{{ store.reportSending() ? 'Submitting...' : 'Submit Report' }}</button>
+                    </form>
+                  }
+                </div>
+              }
             </aside>
           </div>
 

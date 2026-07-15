@@ -1,0 +1,25 @@
+:host { display: block; min-width: 0; }
+.user-profile-card-header p { margin: 4px 0 0; color: #77808f; }
+.inquiry-filter { width: 160px; }
+.inquiry-layout { display: grid; grid-template-columns: minmax(260px, .85fr) minmax(0, 1.3fr); min-height: 430px; border: 1px solid #edf0f4; border-radius: 8px; overflow: hidden; }
+.inquiry-list { border-right: 1px solid #edf0f4; }
+.inquiry-item { display: flex; width: 100%; min-width: 0; gap: 12px; padding: 15px; text-align: left; border: 0; border-bottom: 1px solid #edf0f4; background: #fff; }
+.inquiry-item.unread { box-shadow: inset 3px 0 var(--theme-color); background: #fff7f7; }
+.inquiry-item.active { background: #f4f6f8; }
+.inquiry-item > span:last-child { min-width: 0; }
+.inquiry-item strong, .inquiry-item small, .inquiry-item p { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.inquiry-item small { margin: 3px 0; color: #77808f; font-size: 12px; }
+.inquiry-item p { margin: 0; }
+.inquiry-icon { display: grid; flex: 0 0 38px; width: 38px; height: 38px; place-items: center; color: var(--theme-color); background: #ffeaea; border-radius: 50%; }
+.inquiry-detail { min-width: 0; padding: 24px; }
+.inquiry-detail-header { display: flex; justify-content: space-between; gap: 15px; margin-bottom: 20px; }
+.inquiry-detail-header span, dt { color: #77808f; font-size: 12px; }
+.inquiry-detail-header h3 { margin: 3px 0 0; }
+.inquiry-detail dl { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.inquiry-detail dl div { padding: 10px; background: #f7f8fa; border-radius: 7px; }
+.inquiry-detail dd { margin: 3px 0 0; }
+.inquiry-message { min-height: 100px; padding: 15px; white-space: pre-wrap; background: #f7f8fa; border-radius: 8px; }
+.inquiry-actions { display: flex; align-items: center; gap: 10px; }
+.inquiry-empty { display: grid; min-height: 180px; place-items: center; align-content: center; gap: 8px; padding: 30px; color: #77808f; text-align: center; }
+.inquiry-empty i { color: var(--theme-color); font-size: 36px; }
+@media (max-width: 767px) { .inquiry-layout { grid-template-columns: 1fr; } .inquiry-list { border-right: 0; } .inquiry-filter { width: 100%; } .inquiry-detail dl { grid-template-columns: 1fr; } }

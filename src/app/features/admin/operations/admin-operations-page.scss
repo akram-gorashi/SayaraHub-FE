@@ -1,0 +1,14 @@
+:host { display: block; background: #f5f7fa; }
+.admin-operations { min-height: 70vh; padding: 55px 0 80px; }
+.admin-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+.admin-heading span { color: var(--theme-color); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.admin-heading h1 { margin: 4px 0; }
+.operation-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.operation-tabs .active { color: #fff; background: var(--theme-color); border-color: var(--theme-color); }
+.operation-card { padding: 20px; }
+.operation-card td small { display: block; max-width: 330px; color: #77808f; white-space: normal; }
+.table-actions { display: flex; gap: 6px; }
+.retry-btn { padding: 7px 13px; font-size: 13px; }
+.error-cell { max-width: 420px; white-space: normal; overflow-wrap: anywhere; }
+.empty-state { padding: 45px !important; color: #77808f; text-align: center; }
+@media (max-width: 767px) { .admin-heading { align-items: flex-start; flex-direction: column; } }

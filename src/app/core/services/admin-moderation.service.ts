@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { API_ENDPOINTS } from '../api/api-endpoints';
 import {
   ModerateCarRequest,
+  AuditLog,
+  AuditLogQuery,
   ModerationCar,
   ModerationHistory,
   ModerationQueueQuery,
@@ -44,6 +46,12 @@ export class AdminModerationService {
     return this.http.get<ApiResponse<ModerationHistory[]>>(
       `${API_ENDPOINTS.adminModeration}/cars/${carId}/history`,
     );
+  }
+
+  getAuditLogs(query: AuditLogQuery = {}): Observable<ApiResponse<PagedResponse<AuditLog>>> {
+    return this.http.get<ApiResponse<PagedResponse<AuditLog>>>(`${API_ENDPOINTS.adminModeration}/audit-logs`, {
+      params: toHttpParams(query as QueryParams),
+    });
   }
 
   getReports(query: ReportQuery = {}): Observable<ApiResponse<PagedResponse<UserReport>>> {

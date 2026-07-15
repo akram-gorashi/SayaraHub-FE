@@ -1,0 +1,21 @@
+<section class="user-profile-card inquiry-page" aria-labelledby="inquiries-title">
+  <div class="user-profile-card-header"><div><h2 id="inquiries-title" class="user-profile-card-title">Contact Inquiries</h2><p>Read and manage questions submitted from your listings.</p></div><select class="form-select inquiry-filter" aria-label="Filter inquiries" #filterControl (change)="filter(filterControl.value)"><option value="">All inquiries</option><option value="unread">Unread</option><option value="read">Read</option></select></div>
+  @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
+  <div class="inquiry-layout">
+    <div class="inquiry-list">
+      @if (store.loading()) { <div class="inquiry-empty"><span class="spinner-border text-primary"></span></div> }
+      @for (item of store.items(); track item.id) {
+        <button type="button" class="inquiry-item" [class.unread]="!item.isRead" [class.active]="store.selected()?.id === item.id" (click)="store.open(item)"><span class="inquiry-icon"><i class="far fa-envelope"></i></span><span><strong>{{ item.subject }}</strong><small>{{ item.name }} &middot; {{ item.createdAt | date:'medium' }}</small><p>{{ item.carTitle }}</p></span></button>
+      } @empty { @if (!store.loading()) { <div class="inquiry-empty">No inquiries match this filter.</div> } }
+    </div>
+    <article class="inquiry-detail">
+      @if (store.selected(); as item) {
+        <div class="inquiry-detail-header"><div><span>Inquiry about</span><h3>{{ item.carTitle }}</h3></div><button type="button" class="btn btn-outline-danger btn-sm" (click)="remove(item)"><i class="far fa-trash-can"></i> Delete</button></div>
+        <dl><div><dt>From</dt><dd>{{ item.name }}</dd></div><div><dt>Email</dt><dd><a [href]="'mailto:' + item.email">{{ item.email }}</a></dd></div>@if (item.phoneNumber) { <div><dt>Phone</dt><dd><a [href]="'tel:' + item.phoneNumber">{{ item.phoneNumber }}</a></dd></div> }</dl>
+        <h4>{{ item.subject }}</h4><p class="inquiry-message">{{ item.message }}</p>
+        <div class="inquiry-actions"><a class="theme-btn" [href]="'mailto:' + item.email + '?subject=Re: ' + item.subject"><i class="far fa-reply"></i> Reply by email</a><a class="btn btn-outline-secondary" [routerLink]="['/cars', item.carId]"><i class="far fa-car"></i> View listing</a></div>
+      } @else { <div class="inquiry-empty"><i class="far fa-envelope-open-text"></i><p>Select an inquiry to read it.</p></div> }
+    </article>
+  </div>
+  @if (store.total() > 0) { <nav class="pagination-area" aria-label="Inquiry pages"><ul class="pagination"><li class="page-item" [class.disabled]="store.currentPage() === 1"><button class="page-link" type="button" [disabled]="store.currentPage() === 1" (click)="page(store.currentPage() - 1)"><i class="far fa-arrow-left"></i></button></li>@for (pageNumber of store.visiblePages(); track pageNumber) { <li class="page-item" [class.active]="pageNumber === store.currentPage()"><button class="page-link" type="button" (click)="page(pageNumber)">{{ pageNumber }}</button></li> }<li class="page-item" [class.disabled]="store.currentPage() === store.totalPages()"><button class="page-link" type="button" [disabled]="store.currentPage() === store.totalPages()" (click)="page(store.currentPage() + 1)"><i class="far fa-arrow-right"></i></button></li></ul></nav> }
+</section>
