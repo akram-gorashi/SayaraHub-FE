@@ -73,7 +73,7 @@ export class CarDetailsStore {
             return;
           }
           this.carState.set(response.data);
-          this.selectedImageState.set(response.data.images[0] || 'assets/img/car/01.jpg');
+          this.selectedImageState.set(response.data.images[0] || 'assets/img/car/01-v2.jpg');
           this.loadRelated(id);
           this.loadReviews(response.data.seller.id);
         },

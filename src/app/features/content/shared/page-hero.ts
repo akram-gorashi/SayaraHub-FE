@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-page-hero',
   imports: [RouterLink],
   template: `
-    <div class="site-breadcrumb" style="background: url(assets/img/breadcrumb/01.jpg)">
+    <div class="site-breadcrumb" style="background: url(assets/img/breadcrumb/01-v2.jpg)">
       <div class="container">
         <h1 class="breadcrumb-title">{{ title() }}</h1>
         <ul class="breadcrumb-menu">

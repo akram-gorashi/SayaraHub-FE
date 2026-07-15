@@ -29,7 +29,7 @@ export class CarCard {
   protected readonly actionMessage = signal<string | null>(null);
 
   protected useFallbackImage(event: Event): void {
-    (event.target as HTMLImageElement).src = 'assets/img/car/01.jpg';
+    (event.target as HTMLImageElement).src = 'assets/img/car/01-v2.jpg';
   }
 
   protected isNewCondition(): boolean {

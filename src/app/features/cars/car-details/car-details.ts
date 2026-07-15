@@ -23,11 +23,11 @@ export class CarDetailsPage {
   }
 
   protected useFallbackImage(event: Event): void {
-    (event.target as HTMLImageElement).src = 'assets/img/car/01.jpg';
+    (event.target as HTMLImageElement).src = 'assets/img/car/01-v2.jpg';
   }
 
   protected useAvatarFallback(event: Event): void {
-    (event.target as HTMLImageElement).src = 'assets/img/car/author.jpg';
+    (event.target as HTMLImageElement).src = 'assets/img/car/author-v2.jpg';
   }
 
   protected updateContactField(key: 'name' | 'email' | 'message', event: Event): void {

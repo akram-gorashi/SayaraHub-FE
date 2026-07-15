@@ -22,7 +22,7 @@
           @if (store.loading()) { <div class="queue-empty"><span class="spinner-border"></span> Loading listings...</div> }
           @for (car of store.cars(); track car.id) {
             <button type="button" class="queue-item" [class.active]="selected()?.id === car.id" (click)="review(car)">
-              <img [src]="car.images[0] || 'assets/img/car/01.jpg'" [alt]="car.title" loading="lazy" decoding="async" />
+              <img [src]="car.images[0] || 'assets/img/car/01-v2.jpg'" [alt]="car.title" loading="lazy" decoding="async" />
               <span><strong>{{ car.title }}</strong><small>{{ car.sellerName }} · {{ car.listedDate | date:'mediumDate' }}</small><small>{{ car.brand }} {{ car.model }} · {{ car.price | currency:'SAR':'symbol-narrow':'1.0-0' }}</small></span>
             </button>
           } @empty { @if (!store.loading()) { <div class="queue-empty">No {{ store.status() | titlecase }} listings match these filters.</div> } }
