@@ -24,6 +24,12 @@ export const routes: Routes = [
       import('./features/cars/car-details/car-details').then(({ CarDetailsPage }) => CarDetailsPage),
   },
   {
+    path: 'sellers/:id',
+    title: 'Seller Profile | SayaraHub',
+    loadComponent: () =>
+      import('./features/sellers/profile/seller-profile').then(({ SellerProfilePage }) => SellerProfilePage),
+  },
+  {
     path: 'login',
     title: 'Login | SayaraHub',
     loadComponent: () =>
@@ -99,6 +105,13 @@ export const routes: Routes = [
       import('./features/admin/moderation/admin-moderation-page').then(({ AdminModerationPage }) => AdminModerationPage),
   },
   {
+    path: 'admin/operations',
+    canActivate: [adminGuard],
+    title: 'Safety & Operations | SayaraHub',
+    loadComponent: () =>
+      import('./features/admin/operations/admin-operations-page').then(({ AdminOperationsPage }) => AdminOperationsPage),
+  },
+  {
     path: 'account',
     canActivate: [authGuard],
     loadComponent: () =>
@@ -143,6 +156,16 @@ export const routes: Routes = [
         path: 'messages', title: 'Messages | SayaraHub', data: { accountTitle: 'Messages' },
         loadComponent: () =>
           import('./features/account/messages/account-messages').then(({ AccountMessages }) => AccountMessages),
+      },
+      {
+        path: 'inquiries', title: 'Contact Inquiries | SayaraHub', data: { accountTitle: 'Contact Inquiries' },
+        loadComponent: () =>
+          import('./features/account/inquiries/account-inquiries').then(({ AccountInquiries }) => AccountInquiries),
+      },
+      {
+        path: 'safety', title: 'Safety Center | SayaraHub', data: { accountTitle: 'Safety Center' },
+        loadComponent: () =>
+          import('./features/account/safety/account-safety').then(({ AccountSafety }) => AccountSafety),
       },
       {
         path: 'settings', title: 'Settings | SayaraHub', data: { accountTitle: 'Settings' },

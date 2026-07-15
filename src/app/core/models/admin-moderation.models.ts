@@ -54,3 +54,20 @@ export interface ModerationStatistics {
   approved: number;
   rejected: number;
 }
+
+export interface AuditLogQuery extends PageQuery {
+  action?: string;
+  entityType?: string;
+}
+
+export interface AuditLog {
+  id: number;
+  actorUserId: number | null;
+  actorName: string | null;
+  action: string;
+  entityType: string;
+  entityId: string | null;
+  details: string | null;
+  ipAddress: string | null;
+  createdAt: string;
+}

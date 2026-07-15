@@ -14,6 +14,7 @@ export class AuthSessionService {
     return session !== null && new Date(session.accessTokenExpiresAt).getTime() > Date.now();
   });
   readonly isAdmin = computed(() => this.sessionState()?.roles?.includes('Admin') ?? false);
+  readonly userId = computed(() => this.readUserId(this.sessionState()?.token));
 
   get accessToken(): string | null {
     return this.sessionState()?.token ?? null;
@@ -53,6 +54,20 @@ export class AuthSessionService {
       return { ...session, roles: session.roles ?? [] };
     } catch {
       this.storage?.removeItem(SESSION_STORAGE_KEY);
+      return null;
+    }
+  }
+
+  private readUserId(token: string | undefined): number | null {
+    if (!token) return null;
+    try {
+      const payload = token.split('.')[1];
+      const normalized = payload.replace(/-/g, '+').replace(/_/g, '/');
+      const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '=');
+      const claims = JSON.parse(atob(padded)) as { sub?: string };
+      const userId = Number(claims.sub);
+      return Number.isInteger(userId) && userId > 0 ? userId : null;
+    } catch {
       return null;
     }
   }

@@ -8,6 +8,8 @@ import { Review } from '../../../core/models/review.models';
 import { CarsService } from '../../../core/services/cars.service';
 import { ContactMessagesService } from '../../../core/services/contact-messages.service';
 import { ReviewsService } from '../../../core/services/reviews.service';
+import { AuthSessionService } from '../../../core/services/auth-session.service';
+import { UserSafetyService } from '../../../core/services/user-safety.service';
 
 interface ContactFormState {
   name: string;
@@ -20,6 +22,8 @@ export class CarDetailsStore {
   private readonly carsService = inject(CarsService);
   private readonly contactMessagesService = inject(ContactMessagesService);
   private readonly reviewsService = inject(ReviewsService);
+  private readonly safetyService = inject(UserSafetyService);
+  private readonly session = inject(AuthSessionService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly carState = signal<CarDetails | null>(null);
   private readonly loadingState = signal(false);
@@ -31,6 +35,9 @@ export class CarDetailsStore {
   private readonly contactSendingState = signal(false);
   private readonly contactSuccessState = signal<string | null>(null);
   private readonly contactErrorState = signal<string | null>(null);
+  private readonly reportSendingState = signal(false);
+  private readonly reportSuccessState = signal<string | null>(null);
+  private readonly reportErrorState = signal<string | null>(null);
   private request?: Subscription;
   private relatedRequest?: Subscription;
   private reviewsRequest?: Subscription;
@@ -46,6 +53,10 @@ export class CarDetailsStore {
   readonly contactSending = this.contactSendingState.asReadonly();
   readonly contactSuccess = this.contactSuccessState.asReadonly();
   readonly contactError = this.contactErrorState.asReadonly();
+  readonly reportSending = this.reportSendingState.asReadonly();
+  readonly reportSuccess = this.reportSuccessState.asReadonly();
+  readonly reportError = this.reportErrorState.asReadonly();
+  readonly isAuthenticated = this.session.isAuthenticated;
 
   load(id: number): void {
     this.request?.unsubscribe();
@@ -131,6 +142,20 @@ export class CarDetailsStore {
           this.contactFormState.set({ name: '', email: '', message: '' });
         },
         error: (error: unknown) => this.contactErrorState.set(this.errorMessage(error)),
+      });
+  }
+
+  reportListing(reason: string, details: string): void {
+    const car = this.carState();
+    if (!car || !reason.trim() || this.reportSendingState()) return;
+    this.reportSendingState.set(true);
+    this.reportErrorState.set(null);
+    this.reportSuccessState.set(null);
+    this.safetyService.report({ targetType: 'Car', targetId: car.id, reason: reason.trim(), details: details.trim() || null })
+      .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.reportSendingState.set(false)))
+      .subscribe({
+        next: response => this.reportSuccessState.set(response.message || 'The listing was reported for review.'),
+        error: (error: unknown) => this.reportErrorState.set(this.errorMessage(error)),
       });
   }
 

@@ -1,0 +1,9 @@
+:host { display: block; min-width: 0; }
+.user-profile-card-header p { margin: 4px 0 0; color: #77808f; }
+.safety-section + .safety-section { margin-top: 32px; padding-top: 25px; border-top: 1px solid #edf0f4; }
+.safety-section h3 { margin-bottom: 15px; font-size: 19px; }
+.blocked-list article { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid #edf0f4; }
+.blocked-list img { width: 48px; height: 48px; object-fit: cover; border-radius: 50%; }
+.blocked-list article > div { flex: 1; min-width: 0; }
+.blocked-list small, td small { display: block; color: #77808f; }
+.empty-state { padding: 30px; color: #77808f; text-align: center; }

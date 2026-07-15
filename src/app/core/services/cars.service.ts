@@ -31,6 +31,12 @@ export class CarsService {
     return this.http.get<ApiResponse<CarSummary[]>>(`${API_ENDPOINTS.cars}/${id}/related`);
   }
 
+  getBySeller(id: number, query: CarQuery = {}): Observable<ApiResponse<PagedResponse<CarSummary>>> {
+    return this.http.get<ApiResponse<PagedResponse<CarSummary>>>(`${API_ENDPOINTS.cars}/seller/${id}`, {
+      params: toHttpParams(query as QueryParams),
+    });
+  }
+
   getMine(query: CarQuery = {}): Observable<ApiResponse<PagedResponse<CarSummary>>> {
     return this.http.get<ApiResponse<PagedResponse<CarSummary>>>(`${API_ENDPOINTS.cars}/mine`, {
       params: toHttpParams(query as QueryParams),

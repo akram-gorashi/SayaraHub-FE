@@ -11,3 +11,13 @@
 .listing-features { display: flex; flex-wrap: wrap; gap: 10px; }
 .listing-features span { padding: 7px 12px; background: #f8f9fa; border-radius: 20px; }
 .listing-features i { margin-right: 6px; color: #29bf6c; }
+.history-manager { margin-top: 32px; padding-top: 28px; border-top: 1px solid #edf1f9; }
+.history-heading h3 { margin: 0 0 5px; font-size: 22px; }
+.history-heading p, .history-empty { color: #757f95; }
+.history-form { display: grid; gap: 12px; margin: 20px 0; }
+.history-form-actions, .history-list article > div { display: flex; gap: 10px; }
+.history-list { display: grid; gap: 12px; }
+.history-list article { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; padding: 16px; border: 1px solid #edf1f9; border-radius: 10px; }
+.history-list article > i { color: var(--theme-color); font-size: 20px; }
+.history-list p { margin: 0; }
+@media (max-width: 767px) { .history-list article { grid-template-columns: auto 1fr; } .history-list article > div { grid-column: 1 / -1; } }

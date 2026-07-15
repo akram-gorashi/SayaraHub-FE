@@ -1,0 +1,21 @@
+:host { display: block; }
+.seller-profile { background: #f5f7fa; }
+.seller-hero { display: flex; align-items: center; gap: 22px; padding: 28px; }
+.seller-hero > img { width: 110px; height: 110px; object-fit: cover; border: 4px solid var(--theme-color); border-radius: 50%; }
+.seller-hero span { color: var(--theme-color); font-weight: 600; }
+.seller-hero h1 { margin: 4px 0 8px; }
+.seller-actions { display: flex; gap: 8px; margin-left: auto; }
+.seller-section { margin-top: 60px; }
+.report-card, .review-editor { max-width: 760px; }
+.report-card .form-group { margin-bottom: 15px; }
+.rating-input { display: flex; gap: 3px; margin: 12px 0; }
+.rating-input button { padding: 2px; color: #d5d9df; border: 0; background: transparent; font-size: 23px; }
+.rating-input button.active, .review-stars { color: #f6a900; }
+.review-editor-actions { display: flex; align-items: center; gap: 10px; margin-top: 15px; }
+.review-list article { display: flex; gap: 15px; }
+.review-list article > img { width: 58px; height: 58px; object-fit: cover; border-radius: 50%; }
+.review-list article > div { flex: 1; min-width: 0; }
+.review-heading { display: flex; justify-content: space-between; gap: 10px; }
+.review-heading span { color: #77808f; font-size: 13px; }
+.review-list p { margin: 7px 0 0; }
+@media (max-width: 575px) { .seller-hero { align-items: flex-start; flex-wrap: wrap; } .seller-actions { width: 100%; margin-left: 0; } }

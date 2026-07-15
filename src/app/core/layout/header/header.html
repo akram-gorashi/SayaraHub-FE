@@ -7,7 +7,7 @@
     <div class="header-top-right"><div class="header-top-link">
       @if (session.isAuthenticated()) {
         <div class="notification-menu dropdown"><button type="button" class="notification-trigger" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications"><i class="far fa-bell"></i>@if (notifications.unread()) { <span>{{ notifications.unread() > 99 ? '99+' : notifications.unread() }}</span> }</button><div class="dropdown-menu notification-dropdown">@for (notification of notifications.items(); track notification.id) { <button type="button" [class.unread]="!notification.isRead" (click)="openNotification(notification)"><strong>{{ notification.title }}</strong><small>{{ notification.message }}</small></button> } @empty { <p>No notifications yet.</p> }<a routerLink="/account/notifications" class="notification-history-link">View all notifications</a></div></div>
-        @if (session.isAdmin()) { <a routerLink="/admin/moderation"><i class="far fa-shield-check"></i> Moderation</a> }
+        @if (session.isAdmin()) { <a routerLink="/admin/moderation"><i class="far fa-shield-check"></i> Moderation</a><a routerLink="/admin/operations"><i class="far fa-user-shield"></i> Operations</a> }
         <a class="auth-user" routerLink="/account/dashboard"><i class="far fa-user"></i> {{ session.session()?.fullName }}</a>
         <button type="button" class="auth-link-button" [disabled]="loggingOut()" (click)="logout()"><i class="far fa-arrow-right-from-bracket"></i> {{ loggingOut() ? 'Logging out...' : 'Logout' }}</button>
       } @else {
