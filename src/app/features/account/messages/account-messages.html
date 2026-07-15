@@ -7,7 +7,7 @@
         @for (chat of store.chats(); track chat.id) {
           <li [class.message-active]="store.activeChat()?.id === chat.id">
             <button type="button" class="chat-select" (click)="store.select(chat)">
-              <div class="message-avatar"><img [src]="chat.otherUserImageUrl || 'assets/img/account/user.jpg'" [alt]="chat.otherUserName" /></div>
+              <div class="message-avatar"><img [src]="chat.otherUserImageUrl || 'assets/img/account/user-v2.jpg'" [alt]="chat.otherUserName" /></div>
               <div class="message-by"><div class="message-by-content"><h3>{{ chat.otherUserName }}</h3>
                 <span>{{ chat.lastMessageAt | date:'short' }}</span></div><p>{{ chat.lastMessage || chat.carTitle }}</p></div>
               @if (chat.unreadCount) { <span class="badge badge-danger unread-badge">{{ chat.unreadCount }}</span> }

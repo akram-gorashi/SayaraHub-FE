@@ -29,7 +29,7 @@ export class AccountStore {
   readonly uploadingImage = this.uploadingImageState.asReadonly();
   readonly error = this.errorState.asReadonly();
   readonly success = this.successState.asReadonly();
-  readonly imageUrl = computed(() => this.profileState()?.imageUrl || 'assets/img/account/user.jpg');
+  readonly imageUrl = computed(() => this.profileState()?.imageUrl || 'assets/img/account/user-v2.jpg');
 
   load(): void {
     if (this.profileRequested) {

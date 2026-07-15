@@ -117,7 +117,7 @@
                         <div class="blog-comments-wrapper">
                           @for (review of store.reviews(); track review.id) {
                             <div class="blog-comments-single">
-                              <img [src]="review.reviewerImageUrl || 'assets/img/car/author.jpg'"
+                              <img [src]="review.reviewerImageUrl || 'assets/img/car/author-v2.jpg'"
                                 [alt]="review.reviewerName" (error)="useAvatarFallback($event)">
                               <div class="blog-comments-content">
                                 <h5>{{ review.reviewerName }}</h5>
@@ -153,7 +153,7 @@
 
               <div class="car-single-widget">
                 <div class="car-single-author">
-                  <img [src]="car.seller.imageUrl || 'assets/img/car/author.jpg'" [alt]="car.seller.fullName"
+                  <img [src]="car.seller.imageUrl || 'assets/img/car/author-v2.jpg'" [alt]="car.seller.fullName"
                     (error)="useAvatarFallback($event)">
                   <div class="car-single-author-content">
                     <h5>{{ car.seller.fullName }}</h5>

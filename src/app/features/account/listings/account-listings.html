@@ -23,7 +23,7 @@
           @for (car of store.cars(); track car.id) {
             <tr>
               <td><div class="table-list-info"><a [routerLink]="['/cars', car.id]">
-                <img [src]="car.mainImageUrl || 'assets/img/car/01.jpg'" [alt]="car.title" />
+                <img [src]="car.mainImageUrl || 'assets/img/car/01-v2.jpg'" [alt]="car.title" />
                 <div><h3>{{ car.title }}</h3><span>Car ID: #{{ car.id }}</span></div>
               </a></div></td>
               <td>{{ car.brand }}</td><td>{{ car.listedDate | date:'mediumDate' }}</td>
