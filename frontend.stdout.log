@@ -528,3 +528,47 @@ chunk-APBNUOMM.js   | admin-moderation-page | 65.34 kB |
 Application bundle generation complete. [4.069 seconds] - 2026-07-15T07:29:52.320Z
 
 Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               | Raw size
+main.js             | main                | 43.58 kB | 
+
+Lazy chunk files    | Names               | Raw size
+chunk-BAXIJMNJ.js   | account-add-listing | 63.77 kB | 
+
+Application bundle generation complete. [23.370 seconds] - 2026-07-15T07:56:05.315Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               | Raw size
+main.js             | main                | 43.58 kB | 
+
+Lazy chunk files    | Names               | Raw size
+chunk-GYHIWYAT.js   | account-add-listing | 65.49 kB | 
+
+Application bundle generation complete. [8.618 seconds] - 2026-07-15T07:57:43.341Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               | Raw size
+main.js             | main                | 43.58 kB | 
+
+Lazy chunk files    | Names               | Raw size
+chunk-JBD4QM6R.js   | account-add-listing | 66.14 kB | 
+
+Application bundle generation complete. [7.142 seconds] - 2026-07-15T07:57:52.117Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               | Raw size
+main.js             | main                | 43.58 kB | 
+
+Lazy chunk files    | Names               | Raw size
+chunk-Y6L4E5BU.js   | account-add-listing | 66.36 kB | 
+
+Application bundle generation complete. [6.346 seconds] - 2026-07-15T07:58:02.865Z
+
+Page reload sent to client(s).

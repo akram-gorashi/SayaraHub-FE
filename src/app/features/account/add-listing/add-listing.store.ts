@@ -111,8 +111,14 @@ export class AddListingStore {
   }
 
   private errorMessage(error: unknown, fallback: string): string {
-    return error instanceof HttpErrorResponse
-      ? (error.error as Partial<ApiResponse<unknown>> | null)?.message || fallback
-      : fallback;
+    if (!(error instanceof HttpErrorResponse)) return fallback;
+    const response = error.error as (Partial<ApiResponse<unknown>> & {
+      title?: string;
+      errors?: Record<string, string[]>;
+    }) | null;
+    const validationErrors = response?.errors
+      ? Object.values(response.errors).flat().filter(Boolean)
+      : [];
+    return response?.message || validationErrors.join(' ') || response?.title || fallback;
   }
 }

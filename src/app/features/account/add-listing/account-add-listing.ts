@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, effect, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -18,16 +19,20 @@ export class AccountAddListing {
   private readonly fb = inject(FormBuilder);
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   protected readonly store = inject(AddListingStore);
   protected readonly listingId = Number(this.route.snapshot.paramMap.get('id')) || null;
   protected readonly isEditing = this.listingId !== null;
-  protected readonly currentYear = new Date().getFullYear() + 1;
-  protected readonly years = Array.from({ length: 50 }, (_, index) => this.currentYear - index);
+  protected readonly currentYear = new Date().getFullYear();
+  protected readonly maxYear = this.currentYear + 1;
+  protected readonly years = Array.from({ length: 50 }, (_, index) => this.maxYear - index);
   protected readonly selectedFeatureIds = signal<number[]>([]);
   protected readonly selectedImages = signal<File[]>([]);
   protected readonly imagePreviews = signal<{ file: File; url: string }[]>([]);
   protected readonly existingImages = signal<SellerCarImage[]>([]);
   protected readonly imageError = signal<string | null>(null);
+  protected readonly validationErrors = signal<string[]>([]);
+  protected readonly submitAttempted = signal(false);
   protected readonly mainExistingImageId = signal<number | null>(null);
   protected readonly mainNewImage = signal<File | null>(null);
   private readonly initialized = signal(false);
@@ -38,7 +43,7 @@ export class AccountAddListing {
     carBrandId: [0, [Validators.required, Validators.min(1)]],
     carModelId: [0, [Validators.required, Validators.min(1)]],
     price: [0, [Validators.required, Validators.min(1)]],
-    year: [this.currentYear, [Validators.required, Validators.min(1990), Validators.max(this.currentYear + 1)]],
+    year: [this.currentYear, [Validators.required, Validators.min(1990), Validators.max(this.maxYear)]],
     transmissionId: [0, [Validators.required, Validators.min(1)]],
     fuelTypeId: [0, [Validators.required, Validators.min(1)]],
     mileage: [0, [Validators.required, Validators.min(0)]],
@@ -83,6 +88,9 @@ export class AccountAddListing {
       this.store.loadModels(car.carBrandId);
       this.initialized.set(true);
     });
+    this.form.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      if (this.submitAttempted()) this.updateValidationErrors();
+    });
     this.destroyRef.onDestroy(() => this.imagePreviews().forEach(({ url }) => URL.revokeObjectURL(url)));
   }
 
@@ -106,6 +114,7 @@ export class AccountAddListing {
     this.selectedImages.set(files);
     this.imagePreviews.set(files.map((file) => ({ file, url: URL.createObjectURL(file) })));
     if (!this.mainExistingImageId() && files.length) this.mainNewImage.set(files[0]);
+    if (this.submitAttempted()) this.updateValidationErrors();
   }
 
   protected removeExistingImage(imageId: number): void {
@@ -114,6 +123,7 @@ export class AccountAddListing {
       this.mainExistingImageId.set(this.existingImages()[0]?.id ?? null);
       if (!this.mainExistingImageId()) this.mainNewImage.set(this.selectedImages()[0] ?? null);
     }
+    if (this.submitAttempted()) this.updateValidationErrors();
   }
 
   protected removeNewImage(file: File): void {
@@ -125,6 +135,7 @@ export class AccountAddListing {
       this.mainNewImage.set(this.selectedImages()[0] ?? null);
       if (!this.mainNewImage()) this.mainExistingImageId.set(this.existingImages()[0]?.id ?? null);
     }
+    if (this.submitAttempted()) this.updateValidationErrors();
   }
 
   protected setMainExisting(imageId: number): void {
@@ -147,11 +158,19 @@ export class AccountAddListing {
   }
 
   protected submit(): void {
+    this.submitAttempted.set(true);
     if (this.form.invalid || this.existingImages().length + this.selectedImages().length === 0) {
       this.form.markAllAsTouched();
       if (this.existingImages().length + this.selectedImages().length === 0) this.imageError.set('Add at least one listing image.');
+      this.updateValidationErrors();
+      queueMicrotask(() => {
+        const firstInvalid = this.elementRef.nativeElement.querySelector<HTMLElement>('.form-control.ng-invalid, #listing-images');
+        firstInvalid?.focus();
+        firstInvalid?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
       return;
     }
+    this.validationErrors.set([]);
     const request: CreateCarRequest = {
       ...this.form.getRawValue(), featureIds: this.selectedFeatureIds(), images: this.selectedImages(),
       mainImageIndex: Math.max(0, this.selectedImages().indexOf(this.mainNewImage() ?? this.selectedImages()[0])),
@@ -180,5 +199,29 @@ export class AccountAddListing {
     const reordered = [...items];
     [reordered[index], reordered[target]] = [reordered[target], reordered[index]];
     return reordered;
+  }
+
+  private updateValidationErrors(): void {
+    const labels: Record<string, string> = {
+      title: 'Listing title', carConditionId: 'Condition', bodyTypeId: 'Body type',
+      carBrandId: 'Make/brand', carModelId: 'Model', price: 'Price', year: 'Year',
+      transmissionId: 'Transmission', fuelTypeId: 'Fuel type', mileage: 'Mileage',
+      engineSize: 'Engine size', cylinders: 'Cylinders', color: 'Color', doors: 'Doors',
+      vin: 'VIN', address: 'Address', city: 'City', description: 'Description',
+    };
+    const errors = Object.entries(this.form.controls)
+      .filter(([, control]) => control.invalid)
+      .map(([name, control]) => {
+        const label = labels[name] ?? name;
+        if (control.hasError('required')) return `${label} is required.`;
+        if (name === 'vin') return 'VIN must contain exactly 17 characters.';
+        if (control.hasError('min')) return `${label} must be greater than the minimum allowed value.`;
+        if (control.hasError('max')) return `${label} exceeds the maximum allowed value.`;
+        return `${label} is invalid.`;
+      });
+    if (this.existingImages().length + this.selectedImages().length === 0) {
+      errors.push('At least one listing image is required.');
+    }
+    this.validationErrors.set(errors);
   }
 }
