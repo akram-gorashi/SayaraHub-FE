@@ -1,59 +1,82 @@
-# SayaraHubFE
+# SayaraHub Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.6.
+Angular 22 standalone application for browsing vehicles, managing seller listings, messaging, account settings, notifications, and administration.
 
-## Development server
+## Technology
 
-To start a local development server, run:
+- Angular 22 with standalone components, lazy routes, signals, and `OnPush` change detection
+- Strict TypeScript and Angular template checking
+- SignalR for chat, user notifications, and live moderation alerts
+- Vitest for unit tests
+- Nginx production image with SPA fallback and WebSocket proxying
 
-```bash
-ng serve
+## Requirements
+
+- Node.js 24 or newer
+- npm 11
+- SayaraHub API running at `http://localhost:8080`
+
+## Local development
+
+```powershell
+npm install
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open `http://localhost:4200`. The development server uses [proxy.conf.json](proxy.conf.json) for `/api`, `/uploads`, and SignalR hub traffic, so API URLs stay same-origin.
 
-## Code scaffolding
+Useful commands:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```powershell
+npm test -- --watch=false
+npx ngc -p tsconfig.app.json --noEmit
+npm run build -- --configuration production
+npm audit
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Application structure
 
-```bash
-ng generate --help
+```text
+src/app/
+  core/       API contracts, guards, interceptors, layout, and singleton services
+  features/   Lazy-loaded feature areas such as cars, account, auth, admin, and content
 ```
 
-## Building
+Feature state is kept close to its page in signal-based stores. Shared API models and services live under `core`; feature-specific presentation remains inside its feature folder.
 
-To build the project run:
+## Main routes
 
-```bash
-ng build
+- `/cars` and `/cars/:id` — public browsing and vehicle details
+- `/account/*` — dashboard, listings, favorites, messages, settings, and notification history
+- `/admin/moderation` — searchable, paginated moderation queue with filters, fullscreen images, history, and live pending-listing updates
+
+Authenticated routes use guards and the HTTP interceptor attaches access tokens. Refresh tokens are handled by the backend session flow. Notification preferences can be managed per event type from `/account/notifications`.
+
+## Performance
+
+- Feature pages are route-lazy-loaded.
+- Images added by Angular templates use lazy loading where appropriate.
+- Only Bootstrap's runtime bundle is global. jQuery and Owl Carousel are loaded on demand by the home route; other legacy plugins are excluded from the initial bundle.
+- Production budgets are 600 kB warning and 800 kB error for the initial bundle.
+- Hashed production assets receive long-lived immutable caching from Nginx.
+
+## Production container
+
+Build directly:
+
+```powershell
+docker build -t sayarahub-frontend .
+docker run --rm -p 8081:8080 sayarahub-frontend
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The Nginx configuration provides:
 
-## Running unit tests
+- SPA fallback to `index.html` for deep-link refreshes
+- `/healthz` health check
+- reverse proxying for API, uploads, health endpoints, and WebSocket hubs
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+For the complete HTTPS deployment, use the root backend Compose production overlay and follow its `deploy/PRODUCTION.md` guide.
 
-```bash
-ng test
-```
+## Dependency security
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+`package.json` pins patched compatible transitive versions of Babel and esbuild. Run `npm audit` after dependency changes and avoid force-fixing advisories that require an Angular major downgrade or upgrade without a full regression test.

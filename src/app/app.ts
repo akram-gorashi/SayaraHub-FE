@@ -1,4 +1,4 @@
-import { afterNextRender, Component, signal } from '@angular/core';
+import { afterNextRender, Component, DestroyRef, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from "./core/layout/header/header";
 import { Footer } from "./core/layout/footer/footer";
@@ -11,13 +11,37 @@ import { Footer } from "./core/layout/footer/footer";
 })
 export class App {
   protected readonly title = signal('sayara-hub-FE');
+  private readonly destroyRef = inject(DestroyRef);
 
   constructor() {
     afterNextRender(() => {
-      const themeScript = document.createElement('script');
-      themeScript.src = 'assets/js/main.js';
-      themeScript.dataset['themeInitializer'] = 'true';
-      document.body.appendChild(themeScript);
+      document.querySelector('.preloader')?.remove();
+
+      document.querySelectorAll<HTMLElement>('[data-background]').forEach(element => {
+        const image = element.dataset['background'];
+        if (image) element.style.backgroundImage = `url(${image})`;
+      });
+
+      const scrollTop = document.querySelector<HTMLElement>('#scroll-top');
+      const navbar = document.querySelector<HTMLElement>('.navbar');
+      const handleScroll = (): void => {
+        const offset = window.scrollY || document.documentElement.scrollTop;
+        scrollTop?.classList.toggle('active', offset > 100);
+        navbar?.classList.toggle('fixed-top', offset > 50);
+      };
+      const returnToTop = (event: Event): void => {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      scrollTop?.addEventListener('click', returnToTop);
+      handleScroll();
+
+      this.destroyRef.onDestroy(() => {
+        window.removeEventListener('scroll', handleScroll);
+        scrollTop?.removeEventListener('click', returnToTop);
+      });
     });
   }
 }

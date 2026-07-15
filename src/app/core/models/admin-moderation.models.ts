@@ -7,6 +7,20 @@ export enum ModerationDecision {
 
 export interface ModerationQueueQuery extends PageQuery {
   status?: string;
+  search?: string;
+  listedFrom?: string;
+  listedTo?: string;
+}
+
+export interface ModerationHistory {
+  id: number;
+  carId: number;
+  adminUserId: number;
+  adminName: string;
+  previousStatus: string;
+  newStatus: string;
+  reason: string | null;
+  createdAt: string;
 }
 
 export interface ModerateCarRequest {

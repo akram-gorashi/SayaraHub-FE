@@ -4,7 +4,13 @@ import { Observable } from 'rxjs';
 
 import { API_ENDPOINTS } from '../api/api-endpoints';
 import { ApiResponse, EmptyResult, PagedResponse, QueryParams } from '../models/api.models';
-import { Notification, NotificationQuery, UnreadNotificationCount } from '../models/notification.models';
+import {
+  Notification,
+  NotificationPreference,
+  NotificationQuery,
+  UnreadNotificationCount,
+  UpdateNotificationPreferencesRequest,
+} from '../models/notification.models';
 import { toHttpParams } from '../utils/http-params';
 
 @Injectable({ providedIn: 'root' })
@@ -31,5 +37,17 @@ export class NotificationsService {
 
   delete(id: number): Observable<ApiResponse<EmptyResult>> {
     return this.http.delete<ApiResponse<EmptyResult>>(`${API_ENDPOINTS.notifications}/${id}`);
+  }
+
+  getPreferences(): Observable<ApiResponse<NotificationPreference[]>> {
+    return this.http.get<ApiResponse<NotificationPreference[]>>(`${API_ENDPOINTS.notifications}/preferences`);
+  }
+
+  updatePreferences(
+    request: UpdateNotificationPreferencesRequest,
+  ): Observable<ApiResponse<NotificationPreference[]>> {
+    return this.http.put<ApiResponse<NotificationPreference[]>>(
+      `${API_ENDPOINTS.notifications}/preferences`, request,
+    );
   }
 }

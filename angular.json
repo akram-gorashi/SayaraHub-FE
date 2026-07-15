@@ -34,22 +34,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "public/assets/js/modernizr.min.js",
-              "public/assets/js/jquery-3.6.0.min.js",
-              "public/assets/js/jquery-ui.min.js",
-              "public/assets/js/bootstrap.bundle.min.js",
-              "public/assets/js/jquery.easing.min.js",
-              "public/assets/js/jquery.appear.min.js",
-              "public/assets/js/jquery.magnific-popup.min.js",
-              "public/assets/js/jquery.nice-select.min.js",
-              "public/assets/js/owl.carousel.min.js",
-              "public/assets/js/imagesloaded.pkgd.min.js",
-              "public/assets/js/isotope.pkgd.min.js",
-              "public/assets/js/masonry.pkgd.min.js",
-              "public/assets/js/flex-slider.js",
-              "public/assets/js/counter-up.js",
-              "public/assets/js/countdown.min.js",
-              "public/assets/js/wow.min.js"
+              "public/assets/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
@@ -57,12 +42,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "600kB",
+                  "maximumError": "800kB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
+                  "maximumWarning": "5kB",
                   "maximumError": "8kB"
                 }
               ],

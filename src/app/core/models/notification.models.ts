@@ -30,3 +30,12 @@ export interface DeadLetterNotification {
   deadLetteredAt: string | null;
   lastError: string | null;
 }
+
+export interface NotificationPreference {
+  eventType: string;
+  isEnabled: boolean;
+}
+
+export interface UpdateNotificationPreferencesRequest {
+  preferences: NotificationPreference[];
+}

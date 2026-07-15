@@ -6,6 +6,7 @@ import { API_ENDPOINTS } from '../api/api-endpoints';
 import {
   ModerateCarRequest,
   ModerationCar,
+  ModerationHistory,
   ModerationQueueQuery,
   ModerationStatistics,
 } from '../models/admin-moderation.models';
@@ -37,6 +38,12 @@ export class AdminModerationService {
 
   getStatistics(): Observable<ApiResponse<ModerationStatistics>> {
     return this.http.get<ApiResponse<ModerationStatistics>>(`${API_ENDPOINTS.adminModeration}/statistics`);
+  }
+
+  getHistory(carId: number): Observable<ApiResponse<ModerationHistory[]>> {
+    return this.http.get<ApiResponse<ModerationHistory[]>>(
+      `${API_ENDPOINTS.adminModeration}/cars/${carId}/history`,
+    );
   }
 
   getReports(query: ReportQuery = {}): Observable<ApiResponse<PagedResponse<UserReport>>> {

@@ -150,6 +150,11 @@ export const routes: Routes = [
           import('./features/account/settings/account-settings').then(({ AccountSettings }) => AccountSettings),
       },
       {
+        path: 'notifications', title: 'Notifications | SayaraHub', data: { accountTitle: 'Notifications' },
+        loadComponent: () =>
+          import('./features/account/notifications/account-notifications').then(({ AccountNotifications }) => AccountNotifications),
+      },
+      {
         path: 'add-listing', title: 'Add Listing | SayaraHub', data: { accountTitle: 'Add Listing' },
         loadComponent: () =>
           import('./features/account/add-listing/account-add-listing').then(({ AccountAddListing }) => AccountAddListing),

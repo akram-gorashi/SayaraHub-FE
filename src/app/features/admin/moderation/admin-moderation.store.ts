@@ -1,10 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { DestroyRef, Injectable, inject, signal } from '@angular/core';
+import { DestroyRef, Injectable, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize, forkJoin } from 'rxjs';
 
 import { ApiResponse } from '../../../core/models/api.models';
-import { ModerationCar, ModerationDecision, ModerationStatistics } from '../../../core/models/admin-moderation.models';
+import {
+  ModerationCar,
+  ModerationDecision,
+  ModerationHistory,
+  ModerationQueueQuery,
+  ModerationStatistics,
+} from '../../../core/models/admin-moderation.models';
 import { AdminModerationService } from '../../../core/services/admin-moderation.service';
 
 @Injectable()
@@ -12,37 +18,56 @@ export class AdminModerationStore {
   private readonly service = inject(AdminModerationService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly carsState = signal<ModerationCar[]>([]);
+  private readonly historyState = signal<ModerationHistory[]>([]);
   private readonly statisticsState = signal<ModerationStatistics>({ pending: 0, approved: 0, rejected: 0 });
-  private readonly statusState = signal('Pending');
+  private readonly queryState = signal<Required<Pick<ModerationQueueQuery, 'status' | 'pageNumber' | 'pageSize'>> & ModerationQueueQuery>({ status: 'Pending', pageNumber: 1, pageSize: 10 });
+  private readonly totalState = signal(0);
   private readonly loadingState = signal(false);
+  private readonly historyLoadingState = signal(false);
   private readonly moderatingState = signal<number | null>(null);
   private readonly errorState = signal<string | null>(null);
   private readonly successState = signal<string | null>(null);
 
   readonly cars = this.carsState.asReadonly();
+  readonly history = this.historyState.asReadonly();
   readonly statistics = this.statisticsState.asReadonly();
-  readonly status = this.statusState.asReadonly();
+  readonly query = this.queryState.asReadonly();
+  readonly status = computed(() => this.queryState().status);
+  readonly total = this.totalState.asReadonly();
+  readonly totalPages = computed(() => Math.max(1, Math.ceil(this.totalState() / this.queryState().pageSize)));
   readonly loading = this.loadingState.asReadonly();
+  readonly historyLoading = this.historyLoadingState.asReadonly();
   readonly moderating = this.moderatingState.asReadonly();
   readonly error = this.errorState.asReadonly();
   readonly success = this.successState.asReadonly();
 
-  load(status = this.statusState()): void {
-    this.statusState.set(status);
+  load(changes: ModerationQueueQuery = {}): void {
+    const query = { ...this.queryState(), ...changes };
+    this.queryState.set(query);
     this.loadingState.set(true);
     this.errorState.set(null);
-    forkJoin({
-      cars: this.service.getCars({ status, pageNumber: 1, pageSize: 50 }),
-      statistics: this.service.getStatistics(),
-    }).pipe(
+    forkJoin({ cars: this.service.getCars(query), statistics: this.service.getStatistics() }).pipe(
       takeUntilDestroyed(this.destroyRef),
       finalize(() => this.loadingState.set(false)),
     ).subscribe({
       next: ({ cars, statistics }) => {
         this.carsState.set(cars.data?.items ?? []);
+        this.totalState.set(cars.data?.totalCount ?? 0);
         if (statistics.data) this.statisticsState.set(statistics.data);
       },
       error: (error: unknown) => this.errorState.set(this.message(error, 'Unable to load moderation queue.')),
+    });
+  }
+
+  loadHistory(carId: number): void {
+    this.historyState.set([]);
+    this.historyLoadingState.set(true);
+    this.service.getHistory(carId).pipe(
+      takeUntilDestroyed(this.destroyRef),
+      finalize(() => this.historyLoadingState.set(false)),
+    ).subscribe({
+      next: (response) => this.historyState.set(response.data ?? []),
+      error: (error: unknown) => this.errorState.set(this.message(error, 'Unable to load moderation history.')),
     });
   }
 
@@ -54,10 +79,7 @@ export class AdminModerationStore {
       takeUntilDestroyed(this.destroyRef),
       finalize(() => this.moderatingState.set(null)),
     ).subscribe({
-      next: (response) => {
-        this.successState.set(response.message);
-        this.load();
-      },
+      next: (response) => { this.successState.set(response.message); this.load(); this.loadHistory(carId); },
       error: (error: unknown) => this.errorState.set(this.message(error, 'Unable to moderate this listing.')),
     });
   }

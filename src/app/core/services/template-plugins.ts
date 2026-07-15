@@ -3,7 +3,6 @@ import {
   Injectable,
 } from '@angular/core';
 
-declare const $: any;
 declare const WOW: any;
 
 @Injectable({
@@ -20,9 +19,11 @@ export class TemplatePluginsService {
 
   initializeHomePlugins(): void {
     afterNextRender(() => {
-      this.initializeHeroSlider();
-      this.initializeCarousels();
-      this.initializeCounters();
+      void this.loadHomeDependencies().then(() => {
+        this.initializeHeroSlider();
+        this.initializeCarousels();
+        this.initializeCounters();
+      }).catch(() => this.showStaticCarousels());
     });
   }
 
@@ -113,6 +114,19 @@ export class TemplatePluginsService {
         });
       }
     });
+
+    jquery('.testimonial-slider').each((_index: number, element: HTMLElement) => {
+      const carousel = jquery(element);
+      if (typeof carousel.owlCarousel === 'function' && !carousel.hasClass('owl-loaded')) {
+        carousel.owlCarousel({
+          loop: true,
+          margin: 20,
+          nav: true,
+          dots: true,
+          responsive: { 0: { items: 1 }, 768: { items: 2 }, 1200: { items: 3 } },
+        });
+      }
+    });
   }
 
   private initializeMagnificPopup(): void {
@@ -191,6 +205,37 @@ export class TemplatePluginsService {
   }
 
   private jquery(): any | null {
-    return typeof $ === 'undefined' ? null : $;
+    return (window as Window & { jQuery?: any }).jQuery ?? null;
+  }
+
+  private async loadHomeDependencies(): Promise<void> {
+    if (!this.jquery())
+      await this.loadScript('assets/js/jquery-3.6.0.min.js', 'jquery');
+    if (typeof this.jquery()?.fn?.owlCarousel !== 'function')
+      await this.loadScript('assets/js/owl.carousel.min.js', 'owl-carousel');
+  }
+
+  private loadScript(source: string, key: string): Promise<void> {
+    const selector = `script[data-template-plugin="${key}"]`;
+    const existing = document.querySelector<HTMLScriptElement>(selector);
+    if (existing?.dataset['loaded'] === 'true') return Promise.resolve();
+
+    return new Promise((resolve, reject) => {
+      const script = existing ?? document.createElement('script');
+      const loaded = (): void => { script.dataset['loaded'] = 'true'; resolve(); };
+      script.addEventListener('load', loaded, { once: true });
+      script.addEventListener('error', () => reject(new Error(`Unable to load ${source}`)), { once: true });
+      if (!existing) {
+        script.src = source;
+        script.async = true;
+        script.dataset['templatePlugin'] = key;
+        document.body.appendChild(script);
+      }
+    });
+  }
+
+  private showStaticCarousels(): void {
+    document.querySelectorAll<HTMLElement>('.owl-carousel')
+      .forEach(carousel => carousel.classList.add('owl-loaded'));
   }
 }

@@ -19,6 +19,7 @@ export class NotificationCenterService {
   private readonly zone = inject(NgZone);
   private readonly itemsState = signal<Notification[]>([]);
   private readonly unreadState = signal(0);
+  private readonly latestState = signal<Notification | null>(null);
   private startPromise: Promise<void> | null = null;
   private readonly connection: HubConnection = new HubConnectionBuilder()
     .withUrl(notificationHubUrl, { accessTokenFactory: () => this.session.accessToken ?? '' })
@@ -28,11 +29,13 @@ export class NotificationCenterService {
 
   readonly items = this.itemsState.asReadonly();
   readonly unread = this.unreadState.asReadonly();
+  readonly latest = this.latestState.asReadonly();
 
   constructor() {
     this.connection.on('NotificationReceived', (notification: Notification) => {
       this.zone.run(() => {
         this.itemsState.update((items) => [notification, ...items.filter((item) => item.id !== notification.id)].slice(0, 8));
+        this.latestState.set(notification);
         if (!notification.isRead) this.unreadState.update((count) => count + 1);
       });
     });
@@ -60,7 +63,7 @@ export class NotificationCenterService {
     });
   }
 
-  private load(): void {
+  load(): void {
     this.api.getAll({ pageNumber: 1, pageSize: 8 }).subscribe({
       next: (response) => this.itemsState.set(response.data?.items ?? []),
     });

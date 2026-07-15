@@ -1,0 +1,74 @@
+<section class="user-profile-card notification-page" aria-labelledby="notifications-title">
+  <div class="user-profile-card-header">
+    <div>
+      <h2 id="notifications-title" class="user-profile-card-title">Notifications</h2>
+      <p>Review your complete notification history and choose which events you receive.</p>
+    </div>
+    <div class="user-profile-card-header-right">
+      <button type="button" class="theme-btn" (click)="store.markAllRead()">
+        <i class="far fa-check-double"></i> Mark all read
+      </button>
+    </div>
+  </div>
+
+  @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
+  @if (store.success(); as success) { <div class="alert alert-success">{{ success }}</div> }
+
+  <div class="row notification-filters">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="notification-state">State</label>
+        <select id="notification-state" class="form-select" #readFilter (change)="filterRead(readFilter.value)">
+          <option value="">All</option><option value="unread">Unread</option><option value="read">Read</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="notification-type">Event type</label>
+        <select id="notification-type" class="form-select" #typeFilter (change)="filterType(typeFilter.value)">
+          <option value="">All types</option>
+          @for (preference of store.preferences(); track preference.eventType) {
+            <option [value]="preference.eventType">{{ label(preference.eventType) }}</option>
+          }
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="notification-list">
+    @if (store.loading()) { <div class="notification-empty"><span class="spinner-border text-primary"></span></div> }
+    @for (item of store.items(); track item.id) {
+      <article [class.unread]="!item.isRead">
+        <button type="button" class="notification-content" (click)="open(item)">
+          <span class="notification-icon"><i class="far fa-bell"></i></span>
+          <span><strong>{{ item.title }}</strong><small>{{ item.createdAt | date:'medium' }} &middot; {{ label(item.type) }}</small><p>{{ item.message }}</p></span>
+        </button>
+        <div class="notification-actions">
+          @if (!item.isRead) { <button type="button" class="btn btn-outline-secondary btn-sm rounded-2" (click)="store.markRead(item)">Mark read</button> }
+          <button type="button" class="btn btn-outline-danger btn-sm rounded-2" (click)="store.delete(item)" aria-label="Delete notification"><i class="far fa-trash-can"></i></button>
+        </div>
+      </article>
+    } @empty { @if (!store.loading()) { <div class="notification-empty">No notifications match this filter.</div> } }
+  </div>
+
+  @if (store.total() > 0) {
+    <nav class="pagination-area" aria-label="Notification history pages">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="store.currentPage() === 1"><button class="page-link" type="button" aria-label="Previous page" [disabled]="store.currentPage() === 1" (click)="page(store.currentPage() - 1)"><i class="far fa-arrow-left"></i></button></li>
+        @for (pageNumber of store.visiblePages(); track pageNumber) { <li class="page-item" [class.active]="pageNumber === store.currentPage()"><button class="page-link" type="button" (click)="page(pageNumber)">{{ pageNumber }}</button></li> }
+        <li class="page-item" [class.disabled]="store.currentPage() >= store.totalPages()"><button class="page-link" type="button" aria-label="Next page" [disabled]="store.currentPage() >= store.totalPages()" (click)="page(store.currentPage() + 1)"><i class="far fa-arrow-right"></i></button></li>
+      </ul>
+    </nav>
+  }
+
+  <section class="notification-preferences">
+    <h3>Notification preferences</h3><p>Turn individual real-time and history events on or off.</p>
+    <div class="row">
+      @for (preference of store.preferences(); track preference.eventType) {
+        <div class="col-md-6"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" [id]="'preference-' + preference.eventType" [checked]="preference.isEnabled" (change)="store.setPreference(preference.eventType, $any($event.target).checked)" /><label class="form-check-label" [for]="'preference-' + preference.eventType">{{ label(preference.eventType) }}</label></div></div>
+      }
+    </div>
+    <button type="button" class="theme-btn mt-4" [disabled]="store.saving()" (click)="store.savePreferences()"><i class="far fa-bell"></i> {{ store.saving() ? 'Saving...' : 'Save preferences' }}</button>
+  </section>
+</section>
