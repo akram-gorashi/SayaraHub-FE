@@ -35,6 +35,62 @@ export const routes: Routes = [
       import('./features/auth/register/register').then(({ RegisterPage }) => RegisterPage),
   },
   {
+    path: 'about',
+    title: 'About Us | SayaraHub',
+    loadComponent: () =>
+      import('./features/content/about/about-page').then(({ AboutPage }) => AboutPage),
+  },
+  {
+    path: 'team',
+    title: 'Our Team | SayaraHub',
+    loadComponent: () =>
+      import('./features/content/team/team-page').then(({ TeamPage }) => TeamPage),
+  },
+  {
+    path: 'blog',
+    title: 'Blog | SayaraHub',
+    loadComponent: () =>
+      import('./features/content/blog/blog-page').then(({ BlogPage }) => BlogPage),
+  },
+  {
+    path: 'contact',
+    title: 'Contact Us | SayaraHub',
+    loadComponent: () =>
+      import('./features/content/contact/contact-page').then(({ ContactPage }) => ContactPage),
+  },
+  {
+    path: 'faq',
+    title: 'Frequently Asked Questions | SayaraHub',
+    loadComponent: () =>
+      import('./features/content/faq/faq-page').then(({ FaqPage }) => FaqPage),
+  },
+  {
+    path: 'privacy',
+    title: 'Privacy Policy | SayaraHub',
+    data: { document: 'privacy' },
+    loadComponent: () =>
+      import('./features/content/legal/legal-page').then(({ LegalPage }) => LegalPage),
+  },
+  {
+    path: 'terms',
+    title: 'Terms Of Service | SayaraHub',
+    data: { document: 'terms' },
+    loadComponent: () =>
+      import('./features/content/legal/legal-page').then(({ LegalPage }) => LegalPage),
+  },
+  {
+    path: 'coming-soon',
+    title: 'Coming Soon | SayaraHub',
+    loadComponent: () =>
+      import('./features/content/coming-soon/coming-soon-page').then(({ ComingSoonPage }) => ComingSoonPage),
+  },
+  {
+    path: '404',
+    title: 'Page Not Found | SayaraHub',
+    loadComponent: () =>
+      import('./features/content/not-found/not-found-page').then(({ NotFoundPage }) => NotFoundPage),
+  },
+  {
     path: 'account',
     canActivate: [authGuard],
     loadComponent: () =>
@@ -82,5 +138,10 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '**', redirectTo: '' },
+  {
+    path: '**',
+    title: 'Page Not Found | SayaraHub',
+    loadComponent: () =>
+      import('./features/content/not-found/not-found-page').then(({ NotFoundPage }) => NotFoundPage),
+  },
 ];

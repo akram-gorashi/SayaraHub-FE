@@ -1,0 +1,5 @@
+<main class="main"><app-page-hero [title]="document().title" />
+  <section class="py-120"><div class="container"><div class="row"><div class="col">@for (section of document().sections; track section.heading) {
+    <div class="terms-content"><h2>{{ section.heading }}</h2><p>{{ section.body }}</p></div>
+  }</div></div></div></section>
+</main>

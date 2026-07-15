@@ -1,0 +1,8 @@
+<main class="main"><app-page-hero title="Our Blog" />
+  <section class="blog-area py-120"><div class="container">
+    <div class="row"><div class="col-lg-6 mx-auto"><div class="site-heading text-center"><span class="site-title-tagline"><i class="flaticon-drive"></i> Our Blog</span><h2 class="site-title">Latest News & <span>Guides</span></h2><div class="heading-divider"></div></div></div></div>
+    <div class="row">@for (post of posts; track post.title) {
+      <div class="col-md-6 col-lg-4"><article class="blog-item wow fadeInUp"><div class="blog-item-img"><img [src]="'assets/img/blog/' + post.image" [alt]="post.title" /></div><div class="blog-item-info"><div class="blog-item-meta"><ul><li><i class="far fa-user-circle"></i> SayaraHub Team</li><li><i class="far fa-calendar-alt"></i> Latest guide</li></ul></div><h3 class="blog-title">{{ post.title }}</h3><a class="theme-btn" routerLink="/coming-soon">Read More <i class="fas fa-arrow-right-long"></i></a></div></article></div>
+    }</div>
+  </div></section>
+</main>

@@ -1,0 +1,8 @@
+<main class="main"><app-page-hero title="Frequently Asked Questions" />
+  <section class="faq-area py-120"><div class="container"><div class="row">
+    <div class="col-lg-6"><div class="faq-right"><div class="site-heading mb-3"><span class="site-title-tagline justify-content-start">FAQ</span><h2 class="site-title my-3">General <span>frequently</span> asked questions</h2></div><p class="about-text">Find quick answers about browsing, selling, messaging, favorites, and managing your SayaraHub account.</p><div class="faq-img mt-3"><img src="assets/img/faq/01.jpg" alt="Customer reviewing vehicle information" /></div></div></div>
+    <div class="col-lg-6"><div class="accordion">@for (item of questions; track item.question; let index = $index) {
+      <div class="accordion-item"><h3 class="accordion-header"><button type="button" class="accordion-button" [class.collapsed]="activeQuestion() !== index" [attr.aria-expanded]="activeQuestion() === index" (click)="toggle(index)"><span><i class="far fa-question"></i></span>{{ item.question }}</button></h3>@if (activeQuestion() === index) { <div class="accordion-collapse collapse show"><div class="accordion-body">{{ item.answer }}</div></div> }</div>
+    }</div></div>
+  </div></div></section>
+</main>
