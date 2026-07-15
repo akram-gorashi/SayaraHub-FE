@@ -37,11 +37,13 @@ export class AdminModerationPage {
   ), { initialValue: '' });
 
   constructor() {
-    this.store.load();
+    this.store.loadStatistics();
     effect(() => this.store.load({ search: this.searchTerm().trim() || undefined, pageNumber: 1 }));
     effect(() => {
-      if (this.notifications.latest()?.type === 'ListingPendingReview')
+      if (this.notifications.latest()?.type === 'ListingPendingReview') {
         this.store.load({ pageNumber: 1 });
+        this.store.loadStatistics();
+      }
     });
     const requestedCarId = Number(this.route.snapshot.queryParamMap.get('carId'));
     if (Number.isInteger(requestedCarId) && requestedCarId > 0) {
@@ -77,6 +79,14 @@ export class AdminModerationPage {
 
   protected changePageSize(event: Event): void {
     this.store.load({ pageSize: Number((event.target as HTMLSelectElement).value), pageNumber: 1 });
+  }
+
+  protected statusClass(status: string): string {
+    return ({
+      available: 'badge-success',
+      pending: 'badge-info',
+      rejected: 'badge-danger',
+    } as Record<string, string>)[status.toLowerCase()] || 'badge-primary';
   }
 
   protected review(car: ModerationCar): void {
