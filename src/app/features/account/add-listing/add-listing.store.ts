@@ -5,15 +5,18 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 
 import { ApiResponse } from '../../../core/models/api.models';
-import { CreateCarRequest } from '../../../core/models/car.models';
+import { CreateCarRequest, UpdateCarRequest } from '../../../core/models/car.models';
 import { CarModelMasterData, MasterData } from '../../../core/models/master-data.models';
+import { SellerCarDetails } from '../../../core/models/seller-dashboard.models';
 import { CarsService } from '../../../core/services/cars.service';
 import { MasterDataService } from '../../../core/services/master-data.service';
+import { SellerDashboardService } from '../../../core/services/seller-dashboard.service';
 
 @Injectable()
 export class AddListingStore {
   private readonly carsService = inject(CarsService);
   private readonly masterDataService = inject(MasterDataService);
+  private readonly sellerDashboard = inject(SellerDashboardService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private readonly masterDataState = signal<MasterData | null>(null);
@@ -22,11 +25,13 @@ export class AddListingStore {
   private readonly loadingModelsState = signal(false);
   private readonly submittingState = signal(false);
   private readonly errorState = signal<string | null>(null);
+  private readonly carState = signal<SellerCarDetails | null>(null);
 
   readonly loading = this.loadingState.asReadonly();
   readonly loadingModels = this.loadingModelsState.asReadonly();
   readonly submitting = this.submittingState.asReadonly();
   readonly error = this.errorState.asReadonly();
+  readonly car = this.carState.asReadonly();
   readonly models = this.modelsState.asReadonly();
   readonly brands = computed(() => this.masterDataState()?.carBrands.items ?? []);
   readonly bodyTypes = computed(() => this.masterDataState()?.bodyTypes.items ?? []);
@@ -35,10 +40,10 @@ export class AddListingStore {
   readonly transmissions = computed(() => this.masterDataState()?.transmissions.items ?? []);
   readonly features = computed(() => this.masterDataState()?.features.items ?? []);
 
-  load(): void {
+  load(carId?: number): void {
     this.loadingState.set(true);
     this.errorState.set(null);
-    this.masterDataService.getAll({ pageNumber: 1, pageSize: 100 })
+    this.masterDataService.getAll({ pageNumber: 1, pageSize: 50 })
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.loadingState.set(false)))
       .subscribe({
         next: (response) => {
@@ -47,13 +52,22 @@ export class AddListingStore {
         },
         error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to load listing options.')),
       });
+    if (carId) {
+      this.sellerDashboard.getCar(carId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+        next: (response) => {
+          if (response.success && response.data) this.carState.set(response.data);
+          else this.errorState.set(response.message);
+        },
+        error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to load the listing.')),
+      });
+    }
   }
 
   loadModels(carBrandId: number): void {
     this.modelsState.set([]);
     if (!carBrandId) return;
     this.loadingModelsState.set(true);
-    this.masterDataService.getCarModelsByBrand(carBrandId, { pageNumber: 1, pageSize: 100 })
+    this.masterDataService.getCarModelsByBrand(carBrandId, { pageNumber: 1, pageSize: 50 })
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.loadingModelsState.set(false)))
       .subscribe({
         next: (response) => {
@@ -75,6 +89,20 @@ export class AddListingStore {
           else this.errorState.set(response.message);
         },
         error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to create the listing.')),
+      });
+  }
+
+  update(carId: number, request: UpdateCarRequest): void {
+    this.submittingState.set(true);
+    this.errorState.set(null);
+    this.carsService.update(carId, request)
+      .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.submittingState.set(false)))
+      .subscribe({
+        next: (response) => {
+          if (response.success && response.data) void this.router.navigate(['/account/listings', carId]);
+          else this.errorState.set(response.message);
+        },
+        error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to update the listing.')),
       });
   }
 

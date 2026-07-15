@@ -11,6 +11,14 @@ export interface SellerCarImage {
 }
 
 export interface SellerCarDetails extends CarDetails {
+  carBrandId: number;
+  carModelId: number;
+  bodyTypeId: number;
+  carConditionId: number;
+  transmissionId: number;
+  fuelTypeId: number;
+  featureIds: number[];
+  moderationReason: string | null;
   favoritesCount: number;
   imageProcessing: SellerCarImage[];
 }

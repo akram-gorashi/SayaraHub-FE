@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
-import { CreateCarRequest } from '../../../core/models/car.models';
+import { CreateCarRequest, UpdateCarRequest } from '../../../core/models/car.models';
+import { SellerCarImage } from '../../../core/models/seller-dashboard.models';
 import { AddListingStore } from './add-listing.store';
 
 @Component({
@@ -14,21 +16,27 @@ import { AddListingStore } from './add-listing.store';
 })
 export class AccountAddListing {
   private readonly fb = inject(FormBuilder);
+  private readonly route = inject(ActivatedRoute);
+  private readonly destroyRef = inject(DestroyRef);
   protected readonly store = inject(AddListingStore);
+  protected readonly listingId = Number(this.route.snapshot.paramMap.get('id')) || null;
+  protected readonly isEditing = this.listingId !== null;
   protected readonly currentYear = new Date().getFullYear() + 1;
   protected readonly years = Array.from({ length: 50 }, (_, index) => this.currentYear - index);
   protected readonly selectedFeatureIds = signal<number[]>([]);
   protected readonly selectedImages = signal<File[]>([]);
-  protected readonly imageNames = computed(() => this.selectedImages().map(({ name }) => name).join(', '));
+  protected readonly imagePreviews = signal<{ file: File; url: string }[]>([]);
+  protected readonly existingImages = signal<SellerCarImage[]>([]);
   protected readonly imageError = signal<string | null>(null);
+  private readonly initialized = signal(false);
   protected readonly form = this.fb.nonNullable.group({
-    title: ['', [Validators.required, Validators.maxLength(200)]],
+    title: ['', [Validators.required, Validators.maxLength(150)]],
     carConditionId: [0, [Validators.required, Validators.min(1)]],
     bodyTypeId: [0, [Validators.required, Validators.min(1)]],
     carBrandId: [0, [Validators.required, Validators.min(1)]],
     carModelId: [0, [Validators.required, Validators.min(1)]],
     price: [0, [Validators.required, Validators.min(1)]],
-    year: [this.currentYear, [Validators.required, Validators.min(1886)]],
+    year: [this.currentYear, [Validators.required, Validators.min(1990), Validators.max(this.currentYear + 1)]],
     transmissionId: [0, [Validators.required, Validators.min(1)]],
     fuelTypeId: [0, [Validators.required, Validators.min(1)]],
     mileage: [0, [Validators.required, Validators.min(0)]],
@@ -42,7 +50,38 @@ export class AccountAddListing {
     description: ['', [Validators.required, Validators.maxLength(4000)]],
   });
 
-  constructor() { this.store.load(); }
+  constructor() {
+    this.store.load(this.listingId ?? undefined);
+    effect(() => {
+      const car = this.store.car();
+      if (!car || this.initialized()) return;
+      this.form.patchValue({
+        title: car.title,
+        carConditionId: car.carConditionId,
+        bodyTypeId: car.bodyTypeId,
+        carBrandId: car.carBrandId,
+        carModelId: car.carModelId,
+        price: car.price,
+        year: car.year,
+        transmissionId: car.transmissionId,
+        fuelTypeId: car.fuelTypeId,
+        mileage: car.mileage,
+        engineSize: car.engineSize,
+        cylinders: car.cylinders,
+        color: car.color,
+        doors: car.doors,
+        vin: car.vin,
+        address: car.address,
+        city: car.city,
+        description: car.description,
+      });
+      this.selectedFeatureIds.set(car.featureIds);
+      this.existingImages.set(car.imageProcessing);
+      this.store.loadModels(car.carBrandId);
+      this.initialized.set(true);
+    });
+    this.destroyRef.onDestroy(() => this.imagePreviews().forEach(({ url }) => URL.revokeObjectURL(url)));
+  }
 
   protected brandChanged(): void {
     this.form.controls.carModelId.setValue(0);
@@ -55,23 +94,44 @@ export class AccountAddListing {
 
   protected chooseImages(event: Event): void {
     const files = Array.from((event.target as HTMLInputElement).files ?? []);
-    if (files.length > 10) { this.imageError.set('Choose no more than 10 images.'); return; }
+    if (this.existingImages().length + files.length > 10) { this.imageError.set('Choose no more than 10 images in total.'); return; }
     if (files.some((file) => !file.type.startsWith('image/') || file.size > 5 * 1024 * 1024)) {
       this.imageError.set('Each file must be an image no larger than 5 MB.'); return;
     }
     this.imageError.set(files.length ? null : 'Add at least one listing image.');
+    this.imagePreviews().forEach(({ url }) => URL.revokeObjectURL(url));
     this.selectedImages.set(files);
+    this.imagePreviews.set(files.map((file) => ({ file, url: URL.createObjectURL(file) })));
+  }
+
+  protected removeExistingImage(imageId: number): void {
+    this.existingImages.update((images) => images.filter((image) => image.id !== imageId));
+  }
+
+  protected removeNewImage(file: File): void {
+    const preview = this.imagePreviews().find((item) => item.file === file);
+    if (preview) URL.revokeObjectURL(preview.url);
+    this.imagePreviews.update((previews) => previews.filter((item) => item.file !== file));
+    this.selectedImages.update((images) => images.filter((image) => image !== file));
   }
 
   protected submit(): void {
-    if (this.form.invalid || this.selectedImages().length === 0) {
+    if (this.form.invalid || this.existingImages().length + this.selectedImages().length === 0) {
       this.form.markAllAsTouched();
-      if (!this.selectedImages().length) this.imageError.set('Add at least one listing image.');
+      if (this.existingImages().length + this.selectedImages().length === 0) this.imageError.set('Add at least one listing image.');
       return;
     }
     const request: CreateCarRequest = {
       ...this.form.getRawValue(), featureIds: this.selectedFeatureIds(), images: this.selectedImages(),
     };
-    this.store.create(request);
+    if (this.listingId) {
+      const updateRequest: UpdateCarRequest = {
+        ...request,
+        existingImageIds: this.existingImages().map((image) => image.id),
+      };
+      this.store.update(this.listingId, updateRequest);
+    } else {
+      this.store.create(request);
+    }
   }
 }

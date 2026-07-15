@@ -168,3 +168,262 @@ chunk-P47RJQOJ.js   | about-page          |   8.38 kB |
 
 Application bundle generation complete. [0.044 seconds] - 2026-07-14T23:56:21.054Z
 
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names     | Raw size
+main.js             | main      | 30.38 kB | 
+
+Lazy chunk files    | Names     | Raw size
+chunk-RTS4MIL6.js   | blog-page |  6.19 kB | 
+
+Application bundle generation complete. [1.856 seconds] - 2026-07-14T23:59:00.815Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 30.39 kB | 
+
+Application bundle generation complete. [13.432 seconds] - 2026-07-15T00:07:39.875Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names | Raw size
+main.js             | main  | 30.52 kB | 
+
+Application bundle generation complete. [5.328 seconds] - 2026-07-15T00:09:38.830Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+scripts.js          | scripts             | 783.54 kB | 
+main.js             | main                |  30.52 kB | 
+chunk-IXJVACYZ.js   | -                   |   2.54 kB | 
+chunk-L4ZVQVIR.js   | -                   |   2.31 kB | 
+chunk-GOMI4DH3.js   | -                   |   1.37 kB | 
+chunk-2RXHTWJM.js   | -                   | 643 bytes | 
+styles.css          | styles              |  96 bytes | 
+
+                    | Initial total       | 821.02 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-3FECHATP.js   | main-layout         | 132.08 kB | 
+chunk-UMJDVBBQ.js   | car-details         |  60.20 kB | 
+chunk-4MOD5HEY.js   | car-listing         |  45.19 kB | 
+chunk-5A2ZN7QB.js   | account-add-listing |  40.21 kB | 
+chunk-XV3FPZDR.js   | account-messages    |  26.51 kB | 
+chunk-KK7OLKS5.js   | account-settings    |  23.65 kB | 
+chunk-6W64RBUP.js   | account-profile     |  18.40 kB | 
+chunk-ZTKWPGWX.js   | account-dashboard   |  17.82 kB | 
+chunk-BVPTTNNS.js   | register            |  17.82 kB | 
+chunk-WWZQUTXR.js   | account-shell       |  16.11 kB | 
+chunk-Y25AKYHG.js   | login               |  14.51 kB | 
+chunk-DR27AVQS.js   | -                   |  14.33 kB | 
+chunk-IDN2EI3G.js   | account-listings    |  12.83 kB | 
+chunk-TKJQTBJS.js   | contact-page        |  11.56 kB | 
+chunk-P47RJQOJ.js   | about-page          |   8.38 kB | 
+...and 16 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [19.994 seconds] - 2026-07-15T00:26:42.878Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+scripts.js          | scripts             | 783.54 kB | 
+main.js             | main                |  30.52 kB | 
+chunk-IXJVACYZ.js   | -                   |   2.54 kB | 
+chunk-L4ZVQVIR.js   | -                   |   2.31 kB | 
+chunk-GOMI4DH3.js   | -                   |   1.37 kB | 
+chunk-2RXHTWJM.js   | -                   | 643 bytes | 
+styles.css          | styles              |  96 bytes | 
+
+                    | Initial total       | 821.02 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-3FECHATP.js   | main-layout         | 132.08 kB | 
+chunk-UMJDVBBQ.js   | car-details         |  60.20 kB | 
+chunk-4MOD5HEY.js   | car-listing         |  45.19 kB | 
+chunk-5A2ZN7QB.js   | account-add-listing |  40.21 kB | 
+chunk-XV3FPZDR.js   | account-messages    |  26.51 kB | 
+chunk-KK7OLKS5.js   | account-settings    |  23.65 kB | 
+chunk-6W64RBUP.js   | account-profile     |  18.40 kB | 
+chunk-ZTKWPGWX.js   | account-dashboard   |  17.82 kB | 
+chunk-BVPTTNNS.js   | register            |  17.82 kB | 
+chunk-WWZQUTXR.js   | account-shell       |  16.11 kB | 
+chunk-Y25AKYHG.js   | login               |  14.51 kB | 
+chunk-DR27AVQS.js   | -                   |  14.33 kB | 
+chunk-IDN2EI3G.js   | account-listings    |  12.83 kB | 
+chunk-TKJQTBJS.js   | contact-page        |  11.56 kB | 
+chunk-P47RJQOJ.js   | about-page          |   8.38 kB | 
+...and 16 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [4.220 seconds] - 2026-07-15T00:26:47.238Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                |  30.52 kB | 
+
+Lazy chunk files    | Names               |  Raw size
+chunk-73HJHQKF.js   | main-layout         | 132.08 kB | 
+chunk-WZY5BCJ5.js   | car-details         |  60.20 kB | 
+chunk-B2KMH33H.js   | car-listing         |  45.19 kB | 
+chunk-PSYYANXC.js   | account-add-listing |  40.21 kB | 
+chunk-M3KDBBJH.js   | -                   |  14.33 kB | 
+chunk-NKY2IBKJ.js   | account-listings    |  12.83 kB | 
+chunk-NFJNEEP2.js   | account-favorites   |   7.85 kB | 
+chunk-UWAU2ZST.js   | -                   |   3.24 kB | 
+chunk-L5CWPCNX.js   | -                   |   2.99 kB | 
+
+Application bundle generation complete. [5.857 seconds] - 2026-07-15T00:26:57.849Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               | Raw size
+main.js             | main                | 30.52 kB | 
+
+Lazy chunk files    | Names               | Raw size
+chunk-O3HTK64U.js   | account-add-listing | 41.51 kB | 
+
+Application bundle generation complete. [6.769 seconds] - 2026-07-15T00:27:41.065Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [7.445 seconds] - 2026-07-15T00:28:25.312Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+scripts.js          | scripts             | 783.54 kB | 
+main.js             | main                |  30.52 kB | 
+chunk-IXJVACYZ.js   | -                   |   2.54 kB | 
+chunk-L4ZVQVIR.js   | -                   |   2.31 kB | 
+chunk-GOMI4DH3.js   | -                   |   1.37 kB | 
+chunk-2RXHTWJM.js   | -                   | 643 bytes | 
+styles.css          | styles              |  96 bytes | 
+
+                    | Initial total       | 821.02 kB
+
+Lazy chunk files    | Names               |  Raw size
+chunk-73HJHQKF.js   | main-layout         | 132.08 kB | 
+chunk-WZY5BCJ5.js   | car-details         |  60.20 kB | 
+chunk-E2SZYUJR.js   | account-add-listing |  48.27 kB | 
+chunk-B2KMH33H.js   | car-listing         |  45.19 kB | 
+chunk-XV3FPZDR.js   | account-messages    |  26.51 kB | 
+chunk-KK7OLKS5.js   | account-settings    |  23.65 kB | 
+chunk-6W64RBUP.js   | account-profile     |  18.40 kB | 
+chunk-ZTKWPGWX.js   | account-dashboard   |  17.82 kB | 
+chunk-BVPTTNNS.js   | register            |  17.82 kB | 
+chunk-WWZQUTXR.js   | account-shell       |  16.11 kB | 
+chunk-Y25AKYHG.js   | login               |  14.51 kB | 
+chunk-M3KDBBJH.js   | -                   |  14.33 kB | 
+chunk-NKY2IBKJ.js   | account-listings    |  12.83 kB | 
+chunk-TKJQTBJS.js   | contact-page        |  11.56 kB | 
+chunk-P47RJQOJ.js   | about-page          |   8.38 kB | 
+...and 16 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [20.072 seconds] - 2026-07-15T00:29:27.047Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               | Raw size
+main.js             | main                | 30.52 kB | 
+
+Lazy chunk files    | Names               | Raw size
+chunk-V256KCM5.js   | account-add-listing | 49.93 kB | 
+
+Application bundle generation complete. [21.997 seconds] - 2026-07-15T00:29:49.099Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               |  Raw size
+main.js             | main                |  30.52 kB | 
+
+Lazy chunk files    | Names               |  Raw size
+chunk-63N5D33T.js   | main-layout         | 132.08 kB | 
+chunk-PPNCFIQE.js   | car-details         |  60.20 kB | 
+chunk-5Y36GKK4.js   | account-add-listing |  49.93 kB | 
+chunk-Y4AEFI4T.js   | car-listing         |  45.19 kB | 
+chunk-4GBFESKD.js   | -                   |  14.33 kB | 
+chunk-6VSRWETU.js   | account-listings    |  12.83 kB | 
+chunk-IYTY5WYJ.js   | account-favorites   |   7.85 kB | 
+chunk-24VLWAZN.js   | -                   |   3.24 kB | 
+chunk-UJQER746.js   | -                   |   3.04 kB | 
+
+Application bundle generation complete. [4.891 seconds] - 2026-07-15T00:30:02.752Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names             | Raw size
+main.js             | main              | 30.52 kB | 
+
+Lazy chunk files    | Names             | Raw size
+chunk-PDGY73AI.js   | account-listings  | 12.83 kB | 
+chunk-3WFMOS4P.js   | account-favorites |  7.85 kB | 
+chunk-MRJRT6U7.js   | -                 |  4.77 kB | 
+
+Application bundle generation complete. [6.416 seconds] - 2026-07-15T00:30:50.062Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names            | Raw size
+main.js             | main             | 30.52 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-V5SNQMUB.js   | account-listings | 13.39 kB | 
+
+Application bundle generation complete. [6.882 seconds] - 2026-07-15T00:31:02.707Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names            | Raw size
+main.js             | main             | 30.52 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-ZT7T6TBP.js   | account-listings | 22.40 kB | 
+
+Application bundle generation complete. [6.433 seconds] - 2026-07-15T00:31:50.441Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names            | Raw size
+main.js             | main             | 30.52 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-LP56KV75.js   | account-listings | 24.21 kB | 
+
+Application bundle generation complete. [11.362 seconds] - 2026-07-15T00:32:13.016Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names                   | Raw size
+main.js             | main                    | 31.04 kB | 
+
+Lazy chunk files    | Names                   | Raw size
+chunk-YDWN6STH.js   | account-listing-details | 22.82 kB | 
+
+Application bundle generation complete. [21.162 seconds] - 2026-07-15T00:34:27.518Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names               | Raw size
+main.js             | main                | 31.04 kB | 
+
+Lazy chunk files    | Names               | Raw size
+chunk-2V2CNEZP.js   | account-add-listing | 49.97 kB | 
+
+Application bundle generation complete. [9.957 seconds] - 2026-07-15T00:49:49.519Z
+
+Page reload sent to client(s).

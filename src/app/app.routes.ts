@@ -117,6 +117,16 @@ export const routes: Routes = [
           import('./features/account/listings/account-listings').then(({ AccountListings }) => AccountListings),
       },
       {
+        path: 'listings/:id/edit', title: 'Edit Listing | SayaraHub', data: { accountTitle: 'Edit Listing' },
+        loadComponent: () =>
+          import('./features/account/add-listing/account-add-listing').then(({ AccountAddListing }) => AccountAddListing),
+      },
+      {
+        path: 'listings/:id', title: 'Listing Details | SayaraHub', data: { accountTitle: 'Listing Details' },
+        loadComponent: () =>
+          import('./features/account/listing-details/account-listing-details').then(({ AccountListingDetails }) => AccountListingDetails),
+      },
+      {
         path: 'favorites', title: 'My Favorites | SayaraHub', data: { accountTitle: 'My Favorites' },
         loadComponent: () =>
           import('./features/account/favorites/account-favorites').then(({ AccountFavorites }) => AccountFavorites),

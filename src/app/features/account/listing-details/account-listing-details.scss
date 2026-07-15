@@ -1,0 +1,13 @@
+.listing-state { display: flex; justify-content: center; gap: 10px; padding: 60px; }
+.listing-header-actions { display: flex; gap: 10px; }
+.listing-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; margin: 24px 0; }
+.listing-gallery figure { overflow: hidden; margin: 0; border: 1px solid #edf1f9; border-radius: 10px; }
+.listing-gallery img { width: 100%; height: 145px; object-fit: cover; }
+.listing-gallery figcaption { padding: 8px 10px; font-size: 12px; }
+.listing-summary, .listing-specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 22px 0; }
+.listing-summary div, .listing-specs div { padding: 16px; background: #f8f9fa; border-radius: 8px; }
+.listing-summary span, .listing-specs span { display: block; margin-bottom: 5px; color: #757f95; font-size: 13px; }
+.listing-copy h3 { margin-top: 25px; font-size: 19px; }
+.listing-features { display: flex; flex-wrap: wrap; gap: 10px; }
+.listing-features span { padding: 7px 12px; background: #f8f9fa; border-radius: 20px; }
+.listing-features i { margin-right: 6px; color: #29bf6c; }

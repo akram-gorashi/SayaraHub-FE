@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { API_ENDPOINTS } from '../api/api-endpoints';
 import { ApiResponse, PagedResponse, QueryParams } from '../models/api.models';
-import { CarDetails, CarQuery, CarSummary, CreateCarRequest, SaveCarRequest } from '../models/car.models';
+import { CarDetails, CarQuery, CarSummary, CreateCarRequest, UpdateCarRequest } from '../models/car.models';
 import { toHttpParams } from '../utils/http-params';
 
 @Injectable({ providedIn: 'root' })
@@ -55,8 +55,8 @@ export class CarsService {
     return this.http.post<ApiResponse<CarSummary>>(API_ENDPOINTS.cars, this.toFormData(request));
   }
 
-  update(id: number, request: SaveCarRequest): Observable<CarDetails> {
-    return this.http.put<CarDetails>(`${API_ENDPOINTS.cars}/${id}`, request);
+  update(id: number, request: UpdateCarRequest): Observable<ApiResponse<CarSummary>> {
+    return this.http.put<ApiResponse<CarSummary>>(`${API_ENDPOINTS.cars}/${id}`, this.toFormData(request));
   }
 
   delete(id: number): Observable<void> {
@@ -69,15 +69,21 @@ export class CarsService {
     return this.http.post<ApiResponse<string>>(`${API_ENDPOINTS.cars}/upload`, formData);
   }
 
-  private toFormData(request: CreateCarRequest): FormData {
+  private toFormData(request: CreateCarRequest | UpdateCarRequest): FormData {
     const formData = new FormData();
     const { images, featureIds, ...fields } = request;
 
     for (const [key, value] of Object.entries(fields)) {
+      if (key === 'existingImageIds') continue;
       formData.append(key, String(value));
     }
     for (const featureId of featureIds) {
       formData.append('FeatureIds', String(featureId));
+    }
+    if ('existingImageIds' in request) {
+      for (const imageId of request.existingImageIds) {
+        formData.append('ExistingImageIds', String(imageId));
+      }
     }
     for (const image of images) {
       formData.append('Images', image);

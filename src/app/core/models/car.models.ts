@@ -15,6 +15,7 @@ export interface CarSummary {
   city: string;
   listedDate: string;
   mainImageUrl: string | null;
+  moderationReason: string | null;
 }
 
 export interface SellerSummary {
@@ -95,4 +96,8 @@ export interface CreateCarRequest extends SaveCarRequest {
   cylinders: number;
   engineSize: string;
   vin: string;
+}
+
+export interface UpdateCarRequest extends CreateCarRequest {
+  existingImageIds: number[];
 }
