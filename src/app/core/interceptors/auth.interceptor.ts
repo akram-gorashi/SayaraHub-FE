@@ -1,12 +1,10 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Observable, catchError, finalize, map, shareReplay, switchMap, throwError } from 'rxjs';
+import { catchError, map, switchMap, throwError } from 'rxjs';
 
 import { API_ENDPOINTS } from '../api/api-endpoints';
 import { AuthSessionService } from '../services/auth-session.service';
 import { AuthService } from '../services/auth.service';
-
-let refreshRequest: Observable<string> | null = null;
 
 export const authInterceptor: HttpInterceptorFn = (request, next) => {
   const session = inject(AuthSessionService);
@@ -20,23 +18,12 @@ export const authInterceptor: HttpInterceptorFn = (request, next) => {
 
   return next(authorizedRequest).pipe(
     catchError((error: unknown) => {
-      if (!(error instanceof HttpErrorResponse) || error.status !== 401 || isPublicAuthRequest || !session.refreshToken) {
+      if (!(error instanceof HttpErrorResponse) || error.status !== 401 || isPublicAuthRequest || !session.canRefresh()) {
         return throwError(() => error);
       }
 
-      if (!refreshRequest) {
-        refreshRequest = auth.refresh().pipe(
-          map((newSession) => newSession.token),
-          catchError((refreshError: unknown) => {
-            auth.clearSession();
-            return throwError(() => refreshError);
-          }),
-          finalize(() => (refreshRequest = null)),
-          shareReplay({ bufferSize: 1, refCount: false }),
-        );
-      }
-
-      return refreshRequest.pipe(
+      return auth.refresh().pipe(
+        map((newSession) => newSession.token),
         switchMap((token) => next(request.clone({ setHeaders: { Authorization: `Bearer ${token}` } }))),
       );
     }),

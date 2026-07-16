@@ -9,7 +9,8 @@ export interface RegisterRequest extends LoginRequest {
 
 export interface AuthSession {
   token: string;
-  refreshToken: string;
+  /** Legacy migration only. New refresh tokens are held in an HttpOnly cookie. */
+  refreshToken?: string;
   accessTokenExpiresAt: string;
   refreshTokenExpiresAt: string;
   fullName: string;
