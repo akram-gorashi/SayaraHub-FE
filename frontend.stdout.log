@@ -1301,3 +1301,25 @@ chunk-IHNJT7UX.js   | -             |  2.51 kB |
 Application bundle generation complete. [14.620 seconds] - 2026-07-16T14:46:28.920Z
 
 Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names            | Raw size
+main.js             | main             | 45.07 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-FFRH642B.js   | account-sessions | 30.82 kB | 
+
+Application bundle generation complete. [16.370 seconds] - 2026-07-16T16:22:30.312Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names         | Raw size
+main.js             | main          | 45.07 kB | 
+
+Lazy chunk files    | Names         | Raw size
+chunk-47WBCUUH.js   | account-shell | 19.81 kB | 
+
+Application bundle generation complete. [1.846 seconds] - 2026-07-16T16:22:32.214Z
+
+Component update sent to client(s).

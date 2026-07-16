@@ -1,0 +1,75 @@
+<section class="user-profile-card" aria-labelledby="sessions-title">
+  <div class="sessions-header">
+    <div>
+      <h2 id="sessions-title" class="user-profile-card-title">Login Sessions</h2>
+      <p>Review devices signed in to your account and remove any you do not recognize.</p>
+    </div>
+    @if (store.sessions().length > 1) {
+      <button type="button" class="theme-btn" [disabled]="store.processing() !== null"
+        (click)="confirmation.set({ kind: 'others' })">
+        <i class="far fa-sign-out"></i> Log Out Other Devices
+      </button>
+    }
+  </div>
+
+  @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
+  @if (store.success(); as success) { <div class="alert alert-success">{{ success }}</div> }
+
+  @if (store.loading()) {
+    <div class="text-center py-5"><span class="spinner-border text-primary"></span></div>
+  } @else if (store.sessions().length === 0) {
+    <div class="sessions-empty"><i class="far fa-laptop-mobile"></i><p>No active sessions were found.</p></div>
+  } @else {
+    <div class="sessions-list">
+      @for (session of store.sessions(); track session.id) {
+        <article class="session-item" [class.current-session]="session.isCurrent">
+          <div class="session-icon" aria-hidden="true"><i class="far fa-laptop-mobile"></i></div>
+          <div class="session-details">
+            <div class="session-title">
+              <h3>{{ session.deviceName }}</h3>
+              @if (session.isCurrent) { <span class="session-badge">Current session</span> }
+            </div>
+            <p><i class="far fa-browser"></i> {{ session.browser }}</p>
+            <div class="session-meta">
+              <span><strong>IP:</strong> {{ session.ipAddress || 'Unavailable' }}</span>
+              <span><strong>Signed in:</strong> {{ session.createdAt | date:'medium' }}</span>
+              <span><strong>Last active:</strong> {{ session.lastActivityAt | date:'medium' }}</span>
+            </div>
+          </div>
+          <button type="button" class="session-revoke" [disabled]="store.processing() !== null"
+            [attr.aria-label]="'Log out ' + session.deviceName"
+            (click)="confirmation.set({ kind: 'session', session })">
+            @if (store.processing() === session.id) { <i class="far fa-spinner fa-spin"></i> }
+            @else { <i class="far fa-sign-out"></i> }
+            {{ session.isCurrent ? 'Log Out' : 'Revoke' }}
+          </button>
+        </article>
+      }
+    </div>
+  }
+</section>
+
+@if (confirmation(); as action) {
+  <div class="confirmation-backdrop" role="presentation" (click)="confirmation.set(null)">
+    <div class="confirmation-dialog" role="alertdialog" aria-modal="true" aria-labelledby="session-confirmation-title"
+      (click)="$event.stopPropagation()">
+      <div class="confirmation-icon"><i class="far fa-shield-check"></i></div>
+      <h3 id="session-confirmation-title">
+        {{ action.kind === 'others' ? 'Log out other devices?' : 'Log out this session?' }}
+      </h3>
+      <p>
+        @if (action.kind === 'others') {
+          Every device except this one will need to sign in again.
+        } @else if (action.session.isCurrent) {
+          This is your current session. You will be returned to the login page.
+        } @else {
+          {{ action.session.deviceName }} using {{ action.session.browser }} will need to sign in again.
+        }
+      </p>
+      <div class="confirmation-actions">
+        <button type="button" class="btn btn-outline-secondary" (click)="confirmation.set(null)">Cancel</button>
+        <button type="button" class="theme-btn" (click)="confirm()">Confirm</button>
+      </div>
+    </div>
+  </div>
+}
