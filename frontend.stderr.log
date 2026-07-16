@@ -382,3 +382,477 @@
          ╵                                            [32m~~~~~~~~~~~[0m
 
 
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:3:13:
+[37m      3 │   @if (store.[32merror[37m(); as error) { <div class="alert alert-danger">{...
+        ╵              [32m~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:3:13:
+[37m      3 │   @if (store.[32merror[37m(); as error) { <div class="alert alert-danger">{...
+        ╵              [32m~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:3:97:
+[37m      3 │ ... error }}</div> } @if (store.[32msuccess[37m(); as success) { <div class...
+        ╵                                 [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:3:97:
+[37m      3 │ ... error }}</div> } @if (store.[32msuccess[37m(); as success) { <div class...
+        ╵                                 [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:6:15:
+[37m      6 │     @if (store.[32mloading[37m()) { <div class="empty-state"><span class="s...
+        ╵                [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:7:16:
+[37m      7 │     @if (!store.[32mloading[37m() && activeTab() === 'reports') { <div clas...
+        ╵                 [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:7:271:
+[37m      7 │ ...<tbody>@for (report of store.[32mreports[37m(); track report.id) { <tr><...
+        ╵                                 [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:8:16:
+[37m      8 │     @if (!store.[32mloading[37m() && activeTab() === 'audit') { <div class=...
+        ╵                 [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:8:256:
+[37m      8 │ ...<tbody>@for (entry of store.[32mauditLogs[37m(); track entry.id) { <tr><...
+        ╵                                [32m~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:9:16:
+[37m      9 │     @if (!store.[32mloading[37m() && activeTab() === 'notifications') { <di...
+        ╵                 [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:9:269:
+[37m      9 │ ...<tbody>@for (item of store.[32mdeadLetters[37m(); track item.id) { <tr><...
+        ╵                               [32m~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:9:574:
+[37m      9 │ ...btn retry-btn" (click)="store.[32mretry[37m(item)"><i class="far fa-rota...
+        ╵                                  [32m~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './admin-operations.store' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.ts:6:37:
+[37m      6 │ import { AdminOperationsStore } from [32m'./admin-operations.store'[37m;
+        ╵                                      [32m~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.ts:13:18:
+[37m      13 │   constructor() { [32mthis.store[37m.load(); }
+         ╵                   [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.ts:16:4:
+[37m      16 │     [32mthis.store[37m.resolve(report, decision, note.trim());
+         ╵     [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:3:13:
+[37m      3 │   @if (store.[32merror[37m(); as error) { <div class="alert alert-danger">{...
+        ╵              [32m~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:3:13:
+[37m      3 │   @if (store.[32merror[37m(); as error) { <div class="alert alert-danger">{...
+        ╵              [32m~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:3:97:
+[37m      3 │ ... error }}</div> } @if (store.[32msuccess[37m(); as success) { <div class...
+        ╵                                 [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:3:97:
+[37m      3 │ ... error }}</div> } @if (store.[32msuccess[37m(); as success) { <div class...
+        ╵                                 [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:6:15:
+[37m      6 │     @if (store.[32mloading[37m()) { <div class="empty-state"><span class="s...
+        ╵                [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:7:16:
+[37m      7 │     @if (!store.[32mloading[37m() && activeTab() === 'reports') { <div clas...
+        ╵                 [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:7:271:
+[37m      7 │ ...<tbody>@for (report of store.[32mreports[37m(); track report.id) { <tr><...
+        ╵                                 [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:8:16:
+[37m      8 │     @if (!store.[32mloading[37m() && activeTab() === 'audit') { <div class=...
+        ╵                 [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:8:256:
+[37m      8 │ ...<tbody>@for (entry of store.[32mauditLogs[37m(); track entry.id) { <tr><...
+        ╵                                [32m~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:9:16:
+[37m      9 │     @if (!store.[32mloading[37m() && activeTab() === 'notifications') { <di...
+        ╵                 [32m~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:9:269:
+[37m      9 │ ...<tbody>@for (item of store.[32mdeadLetters[37m(); track item.id) { <tr><...
+        ╵                               [32m~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.html:9:574:
+[37m      9 │ ...btn retry-btn" (click)="store.[32mretry[37m(item)"><i class="far fa-rota...
+        ╵                                  [32m~~~~~[0m
+
+  Error occurs in the template of component AdminOperationsPage.
+
+    src/app/features/admin/operations/admin-operations-page.ts:8:113:
+[37m      8 │ ...e], templateUrl: [32m'./admin-operations-page.html'[37m, styleUrl: './ad...
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './admin-operations.store' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.ts:6:37:
+[37m      6 │ import { AdminOperationsStore } from [32m'./admin-operations.store'[37m;
+        ╵                                      [32m~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.ts:13:18:
+[37m      13 │   constructor() { [32mthis.store[37m.load(); }
+         ╵                   [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2571: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/operations/admin-operations-page.ts:16:4:
+[37m      16 │     [32mthis.store[37m.resolve(report, decision, note.trim());
+         ╵     [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './features/admin/operations/admin-operations-page' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.routes.ts:112:13:
+[37m      112 │       import([32m'./features/admin/operations/admin-operations-page'[37m)...
+          ╵              [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "./features/admin/operations/admin-operations-page"[0m
+
+    src/app/app.routes.ts:92:36:
+[37m      92 │ ...=> import([32m'./features/admin/operations/admin-operations-page'[37m)....
+         ╵              [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './features/admin/operations/admin-operations-page' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.routes.ts:112:13:
+[37m      112 │       import([32m'./features/admin/operations/admin-operations-page'[37m)...
+          ╵              [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "./features/admin/operations/admin-operations-page"[0m
+
+    src/app/app.routes.ts:92:36:
+[37m      92 │ ...=> import([32m'./features/admin/operations/admin-operations-page'[37m)....
+         ╵              [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './features/admin/operations/admin-operations-page' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.routes.ts:112:13:
+[37m      112 │       import([32m'./features/admin/operations/admin-operations-page'[37m)...
+          ╵              [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "./features/admin/operations/admin-operations-page"[0m
+
+    src/app/app.routes.ts:92:36:
+[37m      92 │ ...=> import([32m'./features/admin/operations/admin-operations-page'[37m)....
+         ╵              [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './features/admin/operations/admin-operations-page' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.routes.ts:112:13:
+[37m      112 │       import([32m'./features/admin/operations/admin-operations-page'[37m)...
+          ╵              [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "./features/admin/operations/admin-operations-page"[0m
+
+    src/app/app.routes.ts:92:36:
+[37m      92 │ ...=> import([32m'./features/admin/operations/admin-operations-page'[37m)....
+         ╵              [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ description: string; }' is not assignable to parameter of type 'SaveVehicleHistoryRequest'.
+  Type '{ description: string; }' is missing the following properties from type 'SaveVehicleHistoryRequest': serviceDate, mileage, provider, recordType[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/listing-details/listing-details.store.ts:56:46:
+[37m      56 │       ? this.vehicleHistory.update(historyId, [32m{ description: value }[37m)
+         ╵                                               [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ description: string; }' is not assignable to parameter of type 'SaveVehicleHistoryRequest'.
+  Type '{ description: string; }' is missing the following properties from type 'SaveVehicleHistoryRequest': serviceDate, mileage, provider, recordType[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/listing-details/listing-details.store.ts:57:42:
+[37m      57 │       : this.vehicleHistory.create(carId, [32m{ description: value }[37m);
+         ╵                                           [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ description: string; }' is not assignable to parameter of type 'SaveVehicleHistoryRequest'.
+  Type '{ description: string; }' is missing the following properties from type 'SaveVehicleHistoryRequest': serviceDate, mileage, provider, recordType[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/listing-details/listing-details.store.ts:56:46:
+[37m      56 │       ? this.vehicleHistory.update(historyId, [32m{ description: value }[37m)
+         ╵                                               [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ description: string; }' is not assignable to parameter of type 'SaveVehicleHistoryRequest'.
+  Type '{ description: string; }' is missing the following properties from type 'SaveVehicleHistoryRequest': serviceDate, mileage, provider, recordType[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/listing-details/listing-details.store.ts:57:42:
+[37m      57 │       : this.vehicleHistory.create(carId, [32m{ description: value }[37m);
+         ╵                                           [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type 'string' is not assignable to parameter of type 'SaveVehicleHistoryRequest'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/listing-details/account-listing-details.ts:35:39:
+[37m      35 │ ...istory(this.carId, [32mthis.historyDescription()[37m, this.editingHisto...
+         ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2554: Expected 1 arguments, but got 2.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/listing-details/account-listing-details.html:15:265:
+[37m      15 │ ...editHistory(record.id, [32mrecord.description[37m)"><i class="far fa-pe...
+         ╵                           [32m~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component AccountListingDetails.
+
+    src/app/features/account/listing-details/account-listing-details.ts:9:15:
+[37m      9 │   templateUrl: [32m'./account-listing-details.html'[37m,
+        ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[2m13:18:27[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+Error: socket hang up
+    at Socket.socketOnEnd (node:_http_client:631:25)
+    at Socket.emit (node:events:521:24)
+    at endReadableNT (node:internal/streams/readable:1744:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2m13:18:30[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+Error: socket hang up
+    at Socket.socketOnEnd (node:_http_client:631:25)
+    at Socket.emit (node:events:521:24)
+    at endReadableNT (node:internal/streams/readable:1744:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)

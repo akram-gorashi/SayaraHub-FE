@@ -15,6 +15,7 @@ import {
 import { ApiResponse, EmptyResult, PageQuery, PagedResponse, QueryParams } from '../models/api.models';
 import { DeadLetterNotification } from '../models/notification.models';
 import { ReportQuery, ResolveReportRequest, UserReport } from '../models/safety.models';
+import { ModerateReviewRequest, Review, ReviewQuery } from '../models/review.models';
 import { toHttpParams } from '../utils/http-params';
 
 @Injectable({ providedIn: 'root' })
@@ -54,6 +55,12 @@ export class AdminModerationService {
     });
   }
 
+  exportAuditLogs(query: AuditLogQuery = {}): Observable<Blob> {
+    return this.http.get(`${API_ENDPOINTS.adminModeration}/audit-logs/export`, {
+      params: toHttpParams(query as QueryParams), responseType: 'blob',
+    });
+  }
+
   getReports(query: ReportQuery = {}): Observable<ApiResponse<PagedResponse<UserReport>>> {
     return this.http.get<ApiResponse<PagedResponse<UserReport>>>(`${API_ENDPOINTS.adminModeration}/reports`, {
       params: toHttpParams(query as QueryParams),
@@ -65,6 +72,16 @@ export class AdminModerationService {
       `${API_ENDPOINTS.adminModeration}/reports/${reportId}`,
       request,
     );
+  }
+
+  getReviews(query: ReviewQuery = {}): Observable<ApiResponse<PagedResponse<Review>>> {
+    return this.http.get<ApiResponse<PagedResponse<Review>>>(`${API_ENDPOINTS.adminModeration}/reviews`, {
+      params: toHttpParams(query as QueryParams),
+    });
+  }
+
+  moderateReview(reviewId: number, request: ModerateReviewRequest): Observable<ApiResponse<Review>> {
+    return this.http.patch<ApiResponse<Review>>(`${API_ENDPOINTS.adminModeration}/reviews/${reviewId}`, request);
   }
 
   getNotificationDeadLetters(

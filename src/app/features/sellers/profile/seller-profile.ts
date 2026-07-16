@@ -45,4 +45,8 @@ export class SellerProfilePage {
     this.store.report(this.reportReason().trim(), this.reportDetails().trim());
     this.reportOpen.set(false);
   }
+
+  protected reportReview(reviewId: number): void {
+    if (globalThis.confirm('Report this review as inappropriate or misleading?')) this.store.reportReview(reviewId);
+  }
 }

@@ -58,6 +58,7 @@ export interface ModerationStatistics {
 export interface AuditLogQuery extends PageQuery {
   action?: string;
   entityType?: string;
+  search?: string;
 }
 
 export interface AuditLog {

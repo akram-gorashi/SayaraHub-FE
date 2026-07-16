@@ -7,6 +7,7 @@ import { ApiResponse } from '../../../core/models/api.models';
 import { SellerCarDetails } from '../../../core/models/seller-dashboard.models';
 import { SellerDashboardService } from '../../../core/services/seller-dashboard.service';
 import { VehicleHistory } from '../../../core/models/vehicle-history.models';
+import { SaveVehicleHistoryRequest } from '../../../core/models/vehicle-history.models';
 import { VehicleHistoryService } from '../../../core/services/vehicle-history.service';
 
 @Injectable()
@@ -46,21 +47,20 @@ export class ListingDetailsStore {
     });
   }
 
-  saveHistory(carId: number, description: string, historyId?: number): void {
-    const value = description.trim();
-    if (!value || this.historySavingState()) return;
+  saveHistory(carId: number, requestValue: SaveVehicleHistoryRequest, historyId?: number): void {
+    if (!requestValue.description.trim() || this.historySavingState()) return;
     this.historySavingState.set(true);
     this.errorState.set(null);
     this.successState.set(null);
     const request = historyId
-      ? this.vehicleHistory.update(historyId, { description: value })
-      : this.vehicleHistory.create(carId, { description: value });
+      ? this.vehicleHistory.update(historyId, requestValue)
+      : this.vehicleHistory.create(carId, requestValue);
     request.pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.historySavingState.set(false))).subscribe({
       next: response => {
         if (!response.data) { this.errorState.set(response.message); return; }
         this.historyState.update(items => historyId
           ? items.map(item => item.id === historyId ? response.data! : item)
-          : [...items, response.data!]);
+          : [response.data!, ...items]);
         this.successState.set(historyId ? 'History record updated.' : 'History record added.');
       },
       error: (error: unknown) => this.errorState.set(this.message(error, 'Unable to save the history record.')),

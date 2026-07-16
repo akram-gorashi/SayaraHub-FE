@@ -3,6 +3,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { AccountStore } from '../data-access/account.store';
+import { InquiryCenterService } from '../../../core/services/inquiry-center.service';
 
 @Component({
   selector: 'app-account-sidebar',
@@ -17,6 +18,7 @@ export class AccountSidebar {
   private readonly imageInput = viewChild<ElementRef<HTMLInputElement>>('imageInput');
 
   protected readonly store = inject(AccountStore);
+  protected readonly inquiries = inject(InquiryCenterService);
 
   constructor() {
     this.store.load();

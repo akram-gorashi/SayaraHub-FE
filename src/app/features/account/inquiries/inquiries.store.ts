@@ -1,16 +1,18 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { DestroyRef, Injectable, computed, inject, signal, untracked } from '@angular/core';
+import { DestroyRef, Injectable, computed, effect, inject, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
 
 import { ApiResponse } from '../../../core/models/api.models';
 import { ContactMessage, ContactMessageQuery } from '../../../core/models/contact-message.models';
 import { ContactMessagesService } from '../../../core/services/contact-messages.service';
+import { InquiryCenterService } from '../../../core/services/inquiry-center.service';
 
 @Injectable()
 export class InquiriesStore {
   private readonly api = inject(ContactMessagesService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly center = inject(InquiryCenterService);
   private readonly itemsState = signal<ContactMessage[]>([]);
   private readonly selectedState = signal<ContactMessage | null>(null);
   private readonly queryState = signal<ContactMessageQuery>({ pageNumber: 1, pageSize: 10 });
@@ -33,6 +35,15 @@ export class InquiriesStore {
     const end = Math.min(total, start + 4);
     return Array.from({ length: end - start + 1 }, (_, index) => start + index);
   });
+
+  constructor() {
+    let initialized = false;
+    effect(() => {
+      this.center.version();
+      if (initialized) this.load();
+      initialized = true;
+    });
+  }
 
   load(changes: ContactMessageQuery = {}): void {
     const query = { ...untracked(this.queryState), ...changes };
@@ -59,6 +70,7 @@ export class InquiriesStore {
         const updated = response.data ?? { ...item, isRead: true };
         this.selectedState.set(updated);
         this.itemsState.update(items => items.map(value => value.id === item.id ? updated : value));
+        this.center.refresh();
       },
       error: error => this.errorState.set(this.message(error, 'Unable to mark the inquiry as read.')),
     });
@@ -69,6 +81,7 @@ export class InquiriesStore {
       next: () => {
         if (this.selectedState()?.id === item.id) this.selectedState.set(null);
         this.load();
+        this.center.refresh();
       },
       error: error => this.errorState.set(this.message(error, 'Unable to delete the inquiry.')),
     });

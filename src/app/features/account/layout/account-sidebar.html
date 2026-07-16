@@ -26,7 +26,7 @@
       <li><a routerLink="/account/favorites" routerLinkActive="active"><i class="far fa-heart"></i> My Favorites</a></li>
       <li><a routerLink="/account/messages" routerLinkActive="active"><i class="far fa-envelope"></i> Messages</a></li>
       @if (store.profile()?.roles?.includes('Seller') || store.profile()?.roles?.includes('Admin')) {
-        <li><a routerLink="/account/inquiries" routerLinkActive="active"><i class="far fa-envelope-open-text"></i> Contact Inquiries</a></li>
+        <li><a routerLink="/account/inquiries" routerLinkActive="active"><i class="far fa-envelope-open-text"></i> Contact Inquiries @if (inquiries.unread()) { <span class="account-nav-count">{{ inquiries.unread() > 99 ? '99+' : inquiries.unread() }}</span> }</a></li>
       }
       <li><a routerLink="/account/safety" routerLinkActive="active"><i class="far fa-shield-heart"></i> Safety Center</a></li>
       <li><a routerLink="/account/notifications" routerLinkActive="active"><i class="far fa-bell"></i> Notifications</a></li>

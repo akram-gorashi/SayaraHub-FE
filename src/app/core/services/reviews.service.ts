@@ -17,6 +17,10 @@ export class ReviewsService {
     });
   }
 
+  getMine(sellerId: number): Observable<ApiResponse<Review | null>> {
+    return this.http.get<ApiResponse<Review | null>>(`${API_ENDPOINTS.reviews}/mine`, { params: { sellerId } });
+  }
+
   create(sellerId: number, request: SaveReviewRequest): Observable<ApiResponse<Review>> {
     return this.http.post<ApiResponse<Review>>(`${API_ENDPOINTS.sellers}/${sellerId}/reviews`, request);
   }

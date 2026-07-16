@@ -10,6 +10,7 @@ export type SafetyQuery = PageQuery;
 export interface ReportQuery extends PageQuery {
   status?: string;
   targetType?: string;
+  search?: string;
 }
 
 export interface CreateReportRequest {
@@ -44,4 +45,6 @@ export interface UserReport {
   resolvedAt: string | null;
   resolvedByUserId: number | null;
   resolutionNote: string | null;
+  targetLabel: string;
+  targetUrl: string | null;
 }
