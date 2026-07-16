@@ -1,0 +1,51 @@
+<section class="user-profile-card saved-search-page" aria-labelledby="saved-searches-title">
+  <div class="user-profile-card-header">
+    <div><h2 id="saved-searches-title" class="user-profile-card-title">Saved Searches</h2><p>Save vehicle filters and receive live alerts when matching listings change.</p></div>
+  </div>
+
+  @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
+  @if (store.success(); as success) { <div class="alert alert-success">{{ success }}</div> }
+
+  <form class="saved-search-form" [formGroup]="form" (ngSubmit)="save()" novalidate>
+    <h3>{{ editingId() ? 'Edit saved search' : 'Create a saved search' }}</h3>
+    <div class="row">
+      <div class="col-md-6"><div class="form-group"><label for="search-name">Search name</label><input id="search-name" class="form-control" formControlName="name" placeholder="Example: Toyota in Riyadh" /></div></div>
+      <div class="col-md-3"><div class="form-group"><label for="search-brand">Brand</label><select id="search-brand" class="form-select" formControlName="carBrandId"><option [ngValue]="null">Any brand</option>@for (brand of store.brands(); track brand.id) { <option [ngValue]="brand.id">{{ brand.name }}</option> }</select></div></div>
+      <div class="col-md-3"><div class="form-group"><label for="search-model">Model</label><select id="search-model" class="form-select" formControlName="carModelId" [disabled]="!form.controls.carBrandId.value"><option [ngValue]="null">Any model</option>@for (model of store.models(); track model.id) { <option [ngValue]="model.id">{{ model.name }}</option> }</select></div></div>
+      <div class="col-md-3"><div class="form-group"><label for="search-min-price">Minimum price</label><input id="search-min-price" class="form-control" type="number" min="0" formControlName="minPrice" placeholder="No minimum" /></div></div>
+      <div class="col-md-3"><div class="form-group"><label for="search-max-price">Maximum price</label><input id="search-max-price" class="form-control" type="number" min="0" formControlName="maxPrice" placeholder="No maximum" />@if (form.controls.maxPrice.hasError('range')) { <small class="text-danger">Maximum must be greater than minimum.</small> }</div></div>
+      <div class="col-md-6"><div class="form-group"><label for="search-city">Location</label><input id="search-city" class="form-control" formControlName="city" placeholder="City, for example Riyadh" /></div></div>
+    </div>
+    <div class="alert-options">
+      <div class="form-check form-switch"><input id="alert-new" class="form-check-input" type="checkbox" formControlName="notifyNewListings" /><label for="alert-new" class="form-check-label">New matching listings</label></div>
+      <div class="form-check form-switch"><input id="alert-price" class="form-check-input" type="checkbox" formControlName="notifyPriceDrops" /><label for="alert-price" class="form-check-label">Price drops</label></div>
+      <div class="form-check form-switch"><input id="alert-sold" class="form-check-input" type="checkbox" formControlName="notifySold" /><label for="alert-sold" class="form-check-label">Sold listings</label></div>
+      <div class="form-check form-switch"><input id="search-enabled" class="form-check-input" type="checkbox" formControlName="isEnabled" /><label for="search-enabled" class="form-check-label">Alerts enabled</label></div>
+    </div>
+    <div class="saved-search-actions"><button type="submit" class="theme-btn" [disabled]="store.saving()"><i class="far fa-bell"></i> {{ store.saving() ? 'Saving...' : editingId() ? 'Update Search' : 'Save Search' }}</button>@if (editingId()) { <button type="button" class="btn btn-outline-secondary" (click)="reset()">Cancel</button> }</div>
+  </form>
+
+  <div class="saved-search-list">
+    @if (store.loading()) { <div class="saved-search-empty"><span class="spinner-border text-primary"></span></div> }
+    @for (search of store.searches(); track search.id) {
+      <article [class.disabled-search]="!search.isEnabled">
+        <div class="saved-search-icon"><i class="far fa-magnifying-glass-location"></i></div>
+        <div class="saved-search-details">
+          <div class="saved-search-title"><h3>{{ search.name }}</h3><span [class.enabled]="search.isEnabled">{{ search.isEnabled ? 'Active' : 'Paused' }}</span></div>
+          <p>{{ search.brandName || 'Any brand' }}@if (search.modelName) { · {{ search.modelName }} } · {{ search.city || 'Any location' }}</p>
+          <div class="saved-search-meta"><span><strong>Price:</strong> {{ search.minPrice ?? 0 }} – {{ search.maxPrice ?? 'Any' }}</span><span><strong>Alerts:</strong> @if (search.notifyNewListings) { New } @if (search.notifyPriceDrops) { · Price drops } @if (search.notifySold) { · Sold }</span><span>Updated {{ search.updatedAt | date:'mediumDate' }}</span></div>
+        </div>
+        <div class="saved-search-item-actions">
+          <a class="btn btn-outline-secondary btn-sm" routerLink="/cars" [queryParams]="browseParams(search)"><i class="far fa-eye"></i> View</a>
+          <button type="button" class="btn btn-outline-secondary btn-sm" (click)="edit(search)"><i class="far fa-pen"></i> Edit</button>
+          <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="store.saving()" (click)="store.toggle(search)">{{ search.isEnabled ? 'Pause' : 'Enable' }}</button>
+          <button type="button" class="btn btn-outline-danger btn-sm" [disabled]="store.processing() === search.id" (click)="deleting.set(search)" aria-label="Delete saved search"><i class="far fa-trash-can"></i></button>
+        </div>
+      </article>
+    } @empty { @if (!store.loading()) { <div class="saved-search-empty"><i class="far fa-bell-slash"></i><p>You have not saved any searches yet.</p></div> } }
+  </div>
+</section>
+
+@if (deleting(); as search) {
+  <div class="confirmation-backdrop" role="presentation" (click)="deleting.set(null)"><div class="confirmation-dialog" role="alertdialog" aria-modal="true" aria-labelledby="delete-search-title" (click)="$event.stopPropagation()"><div class="confirmation-icon"><i class="far fa-trash-can"></i></div><h3 id="delete-search-title">Delete this saved search?</h3><p>“{{ search.name }}” and its future alerts will be removed.</p><div class="confirmation-actions"><button type="button" class="btn btn-outline-secondary" (click)="deleting.set(null)">Cancel</button><button type="button" class="theme-btn" (click)="confirmDelete()">Delete</button></div></div></div>
+}

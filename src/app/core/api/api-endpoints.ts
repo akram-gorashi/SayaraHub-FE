@@ -9,6 +9,7 @@ export const API_ENDPOINTS = {
   notifications: `${API_ROOT}/notifications`,
   reports: `${API_ROOT}/reports`,
   reviews: `${API_ROOT}/reviews`,
+  savedSearches: `${API_ROOT}/saved-searches`,
   seller: `${API_ROOT}/seller`,
   sellers: `${API_ROOT}/sellers`,
   settings: `${API_ROOT}/settings`,
