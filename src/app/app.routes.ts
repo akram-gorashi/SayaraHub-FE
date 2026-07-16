@@ -178,6 +178,11 @@ export const routes: Routes = [
           import('./features/account/sessions/account-sessions').then(({ AccountSessions }) => AccountSessions),
       },
       {
+        path: 'saved-searches', title: 'Saved Searches | SayaraHub', data: { accountTitle: 'Saved Searches' },
+        loadComponent: () =>
+          import('./features/account/saved-searches/account-saved-searches').then(({ AccountSavedSearches }) => AccountSavedSearches),
+      },
+      {
         path: 'notifications', title: 'Notifications | SayaraHub', data: { accountTitle: 'Notifications' },
         loadComponent: () =>
           import('./features/account/notifications/account-notifications').then(({ AccountNotifications }) => AccountNotifications),

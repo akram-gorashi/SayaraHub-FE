@@ -16,6 +16,7 @@ export type CarSortOption = 'latest' | 'priceAsc' | 'priceDesc' | 'yearDesc' | '
 interface ListingFilters {
   search: string;
   brandIds: number[];
+  modelIds: number[];
   transmissionIds: number[];
   fuelTypeIds: number[];
   featureIds: number[];
@@ -30,6 +31,7 @@ interface ListingFilters {
 const INITIAL_FILTERS: ListingFilters = {
   search: '',
   brandIds: [],
+  modelIds: [],
   transmissionIds: [],
   fuelTypeIds: [],
   featureIds: [],
@@ -86,11 +88,14 @@ export class CarListingStore {
       ...filters,
       search: queryParams.get('search') ?? '',
       brandIds: this.idParams(queryParams, 'brandIds'),
+      modelIds: this.idParams(queryParams, 'modelIds'),
       transmissionIds: this.idParams(queryParams, 'transmissionIds'),
       fuelTypeIds: this.idParams(queryParams, 'fuelTypeIds'),
       featureIds: this.idParams(queryParams, 'featureIds'),
       minYear: this.numberParam(queryParams, 'minYear'),
       maxYear: this.numberParam(queryParams, 'maxYear'),
+      minPrice: this.numberParam(queryParams, 'minPrice'),
+      maxPrice: this.numberParam(queryParams, 'maxPrice'),
       city: queryParams.get('city') ?? '',
     }));
     const requestedPage = Number(queryParams.get('page'));
@@ -208,6 +213,7 @@ export class CarListingStore {
     return {
       search: filters.search || undefined,
       brandIds: filters.brandIds.length ? filters.brandIds : undefined,
+      modelIds: filters.modelIds.length ? filters.modelIds : undefined,
       transmissionIds: filters.transmissionIds.length ? filters.transmissionIds : undefined,
       fuelTypeIds: filters.fuelTypeIds.length ? filters.fuelTypeIds : undefined,
       featureIds: filters.featureIds.length ? filters.featureIds : undefined,

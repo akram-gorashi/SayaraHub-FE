@@ -6,6 +6,10 @@
 /out-tsc
 /bazel-out
 
+# TypeScript files accidentally emitted beside Angular source files
+/src/**/*.js
+/src/**/*.js.map
+
 # Node
 /node_modules
 npm-debug.log
