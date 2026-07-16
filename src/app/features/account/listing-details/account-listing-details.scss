@@ -15,9 +15,17 @@
 .history-heading h3 { margin: 0 0 5px; font-size: 22px; }
 .history-heading p, .history-empty { color: #757f95; }
 .history-form { display: grid; gap: 12px; margin: 20px 0; }
+.history-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.history-fields label { color: #111; font-weight: 600; }
+.history-fields small { display: block; margin-top: 4px; color: #757f95; font-weight: 400; }
 .history-form-actions, .history-list article > div { display: flex; gap: 10px; }
 .history-list { display: grid; gap: 12px; }
 .history-list article { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; padding: 16px; border: 1px solid #edf1f9; border-radius: 10px; }
 .history-list article > i { color: var(--theme-color); font-size: 20px; }
 .history-list p { margin: 0; }
-@media (max-width: 767px) { .history-list article { grid-template-columns: auto 1fr; } .history-list article > div { grid-column: 1 / -1; } }
+.history-record { display: grid; gap: 5px; }
+.history-record > div { display: flex; gap: 10px; align-items: center; }
+.history-record span, .history-record small { color: #757f95; }
+.history-record > a { color: var(--theme-color); font-size: 13px; font-weight: 600; }
+@media (max-width: 991px) { .history-fields { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 767px) { .history-fields { grid-template-columns: 1fr; } .history-list article { grid-template-columns: auto 1fr; } .history-list article > div:last-child { grid-column: 1 / -1; } }

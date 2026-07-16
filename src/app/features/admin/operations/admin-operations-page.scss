@@ -6,9 +6,22 @@
 .operation-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
 .operation-tabs .active { color: #fff; background: var(--theme-color); border-color: var(--theme-color); }
 .operation-card { padding: 20px; }
+.operation-filters { display: grid; grid-template-columns: minmax(240px, 1fr) repeat(2, minmax(150px, .35fr)) auto auto; gap: 10px; margin-bottom: 18px; }
+.operation-filters .theme-btn, .operation-filters .btn { white-space: nowrap; }
+.target-preview { color: var(--theme-color); font-weight: 600; }
+.target-preview i { margin-right: 4px; }
+.review-rating { color: #ff9f00; font-weight: 700; }
 .operation-card td small { display: block; max-width: 330px; color: #77808f; white-space: normal; }
 .table-actions { display: flex; gap: 6px; }
 .retry-btn { padding: 7px 13px; font-size: 13px; }
 .error-cell { max-width: 420px; white-space: normal; overflow-wrap: anywhere; }
 .empty-state { padding: 45px !important; color: #77808f; text-align: center; }
-@media (max-width: 767px) { .admin-heading { align-items: flex-start; flex-direction: column; } }
+.pagination-area { margin-top: 25px; }
+.operation-modal-backdrop { position: fixed; z-index: 1100; inset: 0; display: grid; place-items: center; padding: 20px; background: rgb(8 14 24 / 65%); }
+.operation-modal { position: relative; width: min(520px, 100%); padding: 32px; border-radius: 12px; background: #fff; box-shadow: 0 24px 70px rgb(0 0 0 / 25%); }
+.modal-close { position: absolute; top: 14px; right: 14px; border: 0; background: transparent; font-size: 22px; }
+.modal-icon { display: grid; place-items: center; width: 54px; height: 54px; margin-bottom: 15px; border-radius: 50%; color: var(--theme-color); background: rgb(245 30 48 / 10%); font-size: 22px; }
+.operation-modal label { display: block; margin: 18px 0 7px; font-weight: 600; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+@media (max-width: 991px) { .operation-filters { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 767px) { .admin-heading { align-items: flex-start; flex-direction: column; } .operation-filters { grid-template-columns: 1fr; } }

@@ -24,6 +24,7 @@ export class SellerProfileStore {
   private readonly profileState = signal<PublicUserProfile | null>(null);
   private readonly listingsState = signal<CarSummary[]>([]);
   private readonly reviewsState = signal<Review[]>([]);
+  private readonly myReviewState = signal<Review | null>(null);
   private readonly loadingState = signal(false);
   private readonly savingState = signal(false);
   private readonly blockedState = signal(false);
@@ -40,7 +41,7 @@ export class SellerProfileStore {
   readonly success = this.successState.asReadonly();
   readonly isAuthenticated = this.session.isAuthenticated;
   readonly isOwnProfile = computed(() => this.session.userId() === this.profileState()?.id);
-  readonly myReview = computed(() => this.reviewsState().find(review => review.reviewerId === this.session.userId()) ?? null);
+  readonly myReview = this.myReviewState.asReadonly();
 
   load(sellerId: number): void {
     this.loadingState.set(true);
@@ -49,14 +50,18 @@ export class SellerProfileStore {
       profile: this.users.getPublicProfile(sellerId),
       listings: this.cars.getBySeller(sellerId, { pageNumber: 1, pageSize: 12, sortBy: 'listedDate', sortDirection: 'desc' }),
       reviews: this.reviewsApi.getBySeller(sellerId, { pageNumber: 1, pageSize: 50 }),
+      mine: this.session.isAuthenticated() && this.session.userId() !== sellerId
+        ? this.reviewsApi.getMine(sellerId)
+        : of(null),
       blocked: this.session.isAuthenticated()
         ? this.safety.getBlocked({ pageNumber: 1, pageSize: 100 })
         : of(null),
     }).pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.loadingState.set(false))).subscribe({
-      next: ({ profile, listings, reviews, blocked }) => {
+      next: ({ profile, listings, reviews, mine, blocked }) => {
         this.profileState.set(profile.data ?? null);
         this.listingsState.set(listings.data?.items ?? []);
         this.reviewsState.set(reviews.data?.items ?? []);
+        this.myReviewState.set(mine?.data ?? null);
         this.blockedState.set(blocked?.data?.items.some(user => user.userId === sellerId) ?? false);
       },
       error: error => this.errorState.set(this.message(error, 'Unable to load this seller.')),
@@ -76,8 +81,11 @@ export class SellerProfileStore {
     operation.pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.savingState.set(false))).subscribe({
       next: response => {
         if (response.data) {
-          this.reviewsState.update(items => [response.data!, ...items.filter(item => item.id !== response.data!.id)]);
-          this.successState.set(current ? 'Review updated.' : 'Review added.');
+          this.myReviewState.set(response.data);
+          this.reviewsState.update(items => response.data!.status === 'Approved'
+            ? [response.data!, ...items.filter(item => item.id !== response.data!.id)]
+            : items.filter(item => item.id !== response.data!.id));
+          this.successState.set(current ? 'Review updated and sent for moderation.' : 'Review sent for moderation.');
         }
       },
       error: error => this.errorState.set(this.message(error, 'Unable to save your review.')),
@@ -88,7 +96,7 @@ export class SellerProfileStore {
     const review = this.myReview();
     if (!review) return;
     this.reviewsApi.delete(review.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: () => { this.reviewsState.update(items => items.filter(item => item.id !== review.id)); this.successState.set('Review deleted.'); },
+      next: () => { this.myReviewState.set(null); this.reviewsState.update(items => items.filter(item => item.id !== review.id)); this.successState.set('Review deleted.'); },
       error: error => this.errorState.set(this.message(error, 'Unable to delete your review.')),
     });
   }
@@ -116,6 +124,14 @@ export class SellerProfileStore {
       .pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: () => this.successState.set('Report submitted for administrator review.'),
         error: error => this.errorState.set(this.message(error, 'Unable to submit the report.')),
+      });
+  }
+
+  reportReview(reviewId: number): void {
+    this.safety.report({ targetType: 'Review', targetId: reviewId, reason: 'Inappropriate or misleading review' })
+      .pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+        next: () => this.successState.set('Review reported for administrator review.'),
+        error: error => this.errorState.set(this.message(error, 'Unable to report this review.')),
       });
   }
 

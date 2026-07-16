@@ -1,6 +1,6 @@
 import { PageQuery } from './api.models';
 
-export type ReviewQuery = PageQuery;
+export interface ReviewQuery extends PageQuery { status?: string; search?: string; }
 
 export interface SaveReviewRequest {
   rating: number;
@@ -16,4 +16,8 @@ export interface Review {
   reviewerName: string;
   reviewerImageUrl: string | null;
   sellerId: number;
+  status: string;
+  moderationReason: string | null;
 }
+
+export interface ModerateReviewRequest { decision: number | null; reason?: string | null; }
