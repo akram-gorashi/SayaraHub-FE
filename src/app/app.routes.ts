@@ -173,6 +173,11 @@ export const routes: Routes = [
           import('./features/account/settings/account-settings').then(({ AccountSettings }) => AccountSettings),
       },
       {
+        path: 'sessions', title: 'Login Sessions | SayaraHub', data: { accountTitle: 'Login Sessions' },
+        loadComponent: () =>
+          import('./features/account/sessions/account-sessions').then(({ AccountSessions }) => AccountSessions),
+      },
+      {
         path: 'notifications', title: 'Notifications | SayaraHub', data: { accountTitle: 'Notifications' },
         loadComponent: () =>
           import('./features/account/notifications/account-notifications').then(({ AccountNotifications }) => AccountNotifications),
