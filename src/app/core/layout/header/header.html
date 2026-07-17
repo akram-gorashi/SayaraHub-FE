@@ -6,7 +6,7 @@
     </ul></div></div>
     <div class="header-top-right"><div class="header-top-link">
       @if (session.isAuthenticated()) {
-        <div class="notification-menu dropdown"><button type="button" class="notification-trigger" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications"><i class="far fa-bell"></i>@if (notifications.unread()) { <span>{{ notifications.unread() > 99 ? '99+' : notifications.unread() }}</span> }</button><div class="dropdown-menu notification-dropdown">@for (notification of notifications.items(); track notification.id) { <button type="button" [class.unread]="!notification.isRead" (click)="openNotification(notification)"><strong>{{ notification.title }}</strong><small>{{ notification.message }}</small></button> } @empty { <p>No notifications yet.</p> }<a routerLink="/account/notifications" class="notification-history-link">View all notifications</a></div></div>
+        <div class="notification-menu dropdown"><button type="button" class="notification-trigger" [attr.aria-expanded]="notificationOpen()" aria-label="Notifications" (click)="toggleNotifications($event)"><i class="far fa-bell"></i>@if (notifications.unread()) { <span>{{ notifications.unread() > 99 ? '99+' : notifications.unread() }}</span> }</button><div class="dropdown-menu notification-dropdown" [class.show]="notificationOpen()">@for (notification of notifications.items(); track notification.id) { <button type="button" [class.unread]="!notification.isRead" (click)="openNotification(notification)"><strong>{{ notification.title }}</strong><small>{{ notification.message }}</small></button> } @empty { <p>No notifications yet.</p> }<a routerLink="/account/notifications" class="notification-history-link" (click)="closeNavigation()">View all notifications</a></div></div>
         @if (session.isAdmin()) { <a routerLink="/admin/moderation"><i class="far fa-shield-check"></i> Moderation</a><a routerLink="/admin/operations"><i class="far fa-user-shield"></i> Operations</a> }
         <a class="auth-user" routerLink="/account/dashboard"><i class="far fa-user"></i> {{ session.session()?.fullName }}</a>
         <button type="button" class="auth-link-button" [disabled]="loggingOut()" (click)="logout()"><i class="far fa-arrow-right-from-bracket"></i> {{ loggingOut() ? 'Logging out...' : 'Logout' }}</button>
@@ -19,21 +19,21 @@
 
   <div class="main-navigation"><nav class="navbar navbar-expand-lg"><div class="container position-relative">
     <a class="navbar-brand" routerLink="/" aria-label="SayaraHub home"><img src="assets/img/logo/logo.png" alt="SayaraHub" /></a>
-    <div class="mobile-menu-right"><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav" aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-mobile-icon"><i class="far fa-bars"></i></span></button></div>
-    <div class="collapse navbar-collapse" id="main_nav">
+    <div class="mobile-menu-right"><button class="navbar-toggler" type="button" aria-controls="main_nav" [attr.aria-expanded]="mobileNavigationOpen()" aria-label="Toggle navigation" (click)="toggleMobileNavigation($event)"><span class="navbar-toggler-mobile-icon"><i class="far fa-bars"></i></span></button></div>
+    <div class="collapse navbar-collapse" id="main_nav" [class.show]="mobileNavigationOpen()">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/about" routerLinkActive="active">About</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/cars" routerLinkActive="active">Browse Cars</a></li>
-        <li class="nav-item dropdown" routerLinkActive="active">
-          <button type="button" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Pages</button>
-          <ul class="dropdown-menu fade-down">
-            <li><a class="dropdown-item" routerLink="/team" routerLinkActive="active">Our Team</a></li>
-            <li><a class="dropdown-item" routerLink="/faq" routerLinkActive="active">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeNavigation()">Home</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/about" routerLinkActive="active" (click)="closeNavigation()">About</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/cars" routerLinkActive="active" (click)="closeNavigation()">Browse Cars</a></li>
+        <li class="nav-item dropdown" routerLinkActive="active" [class.show]="pagesOpen()">
+          <button type="button" class="nav-link dropdown-toggle" [attr.aria-expanded]="pagesOpen()" (click)="togglePages($event)">Pages</button>
+          <ul class="dropdown-menu fade-down" [class.show]="pagesOpen()">
+            <li><a class="dropdown-item" routerLink="/team" routerLinkActive="active" (click)="closeNavigation()">Our Team</a></li>
+            <li><a class="dropdown-item" routerLink="/faq" routerLinkActive="active" (click)="closeNavigation()">FAQ</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" routerLink="/blog" routerLinkActive="active">Blog</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/blog" routerLinkActive="active" (click)="closeNavigation()">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/contact" routerLinkActive="active" (click)="closeNavigation()">Contact</a></li>
       </ul>
       <div class="nav-right"><div class="nav-right-btn mt-2"><a routerLink="/account/add-listing" class="theme-btn"><span class="far fa-plus-circle"></span>Add Listing</a></div></div>
     </div>

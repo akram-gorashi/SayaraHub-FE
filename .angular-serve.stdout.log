@@ -1,0 +1,37 @@
+> Building...
+√ Building...
+Initial chunk files | Names                   |  Raw size
+main.js             | main                    |  49.56 kB | 
+chunk-P4EPZXAV.js   | -                       |   6.09 kB | 
+chunk-BQ2Q34K5.js   | -                       |   4.98 kB | 
+chunk-A547TKYS.js   | -                       |   3.34 kB | 
+chunk-GOMI4DH3.js   | -                       |   1.37 kB | 
+chunk-TGLSZDWZ.js   | -                       | 690 bytes | 
+chunk-HADNFOJP.js   | -                       | 605 bytes | 
+styles.css          | styles                  |  96 bytes | 
+
+                    | Initial total           |  66.73 kB
+
+Lazy chunk files    | Names                   |  Raw size
+chunk-X3BKU3TG.js   | main-layout             | 134.81 kB | 
+chunk-AMAGEY5C.js   | admin-operations-page   |  94.59 kB | 
+chunk-5UZDSP4H.js   | car-details             |  66.60 kB | 
+chunk-6W7UHEZY.js   | account-add-listing     |  66.36 kB | 
+chunk-LBZ5IXCG.js   | admin-moderation-page   |  63.28 kB | 
+chunk-F53U7SDY.js   | account-listing-details |  50.58 kB | 
+chunk-4GRBKHPU.js   | account-saved-searches  |  48.80 kB | 
+chunk-SNGTQTKF.js   | car-listing             |  45.45 kB | 
+chunk-6PQRPDRQ.js   | seller-profile          |  42.76 kB | 
+chunk-Z5RZR7ZI.js   | account-notifications   |  36.08 kB | 
+chunk-MYR42OJC.js   | account-sessions        |  30.82 kB | 
+chunk-K6JUV5RJ.js   | account-inquiries       |  30.63 kB | 
+chunk-HXCP5IEE.js   | account-messages        |  26.55 kB | 
+chunk-6I55EOG5.js   | account-listings        |  24.21 kB | 
+chunk-2ZAQ5M2P.js   | account-settings        |  23.65 kB | 
+...and 30 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [80.581 seconds] - 2026-07-17T02:46:11.677Z
+
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m4200[22m/[39m

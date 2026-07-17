@@ -1,5 +1,5 @@
 import { Injectable, NgZone, effect, inject, signal } from '@angular/core';
-import { HubConnection, HubConnectionBuilder, HubConnectionState, LogLevel } from '@microsoft/signalr';
+import type { HubConnection } from '@microsoft/signalr';
 
 import { Notification } from '../models/notification.models';
 import { AuthSessionService } from './auth-session.service';
@@ -21,26 +21,14 @@ export class NotificationCenterService {
   private readonly unreadState = signal(0);
   private readonly latestState = signal<Notification | null>(null);
   private startPromise: Promise<void> | null = null;
-  private readonly connection: HubConnection = new HubConnectionBuilder()
-    .withUrl(notificationHubUrl, { accessTokenFactory: () => this.session.accessToken ?? '' })
-    .withAutomaticReconnect([0, 2_000, 10_000, 30_000])
-    .configureLogging(LogLevel.Warning)
-    .build();
+  private connectionPromise: Promise<HubConnection> | null = null;
+  private connection: HubConnection | null = null;
 
   readonly items = this.itemsState.asReadonly();
   readonly unread = this.unreadState.asReadonly();
   readonly latest = this.latestState.asReadonly();
 
   constructor() {
-    this.connection.on('NotificationReceived', (notification: Notification) => {
-      this.zone.run(() => {
-        this.itemsState.update((items) => [notification, ...items.filter((item) => item.id !== notification.id)].slice(0, 8));
-        this.latestState.set(notification);
-        if (!notification.isRead) this.unreadState.update((count) => count + 1);
-      });
-    });
-    this.connection.onreconnected(() => this.load());
-
     effect(() => {
       if (this.session.isAuthenticated()) {
         this.load();
@@ -48,7 +36,7 @@ export class NotificationCenterService {
       } else {
         this.itemsState.set([]);
         this.unreadState.set(0);
-        if (this.connection.state !== HubConnectionState.Disconnected) void this.connection.stop();
+        void this.connection?.stop();
       }
     });
   }
@@ -73,10 +61,37 @@ export class NotificationCenterService {
   }
 
   private async start(): Promise<void> {
-    if (this.connection.state === HubConnectionState.Connected) return;
+    const connection = await this.getConnection();
+    if (!this.session.isAuthenticated()) return;
+    if (connection.state === 'Connected') return;
     if (!this.startPromise) {
-      this.startPromise = this.connection.start().finally(() => { this.startPromise = null; });
+      this.startPromise = connection.start().finally(() => { this.startPromise = null; });
     }
     await this.startPromise;
+  }
+
+  private async getConnection(): Promise<HubConnection> {
+    if (this.connection) return this.connection;
+    if (!this.connectionPromise) {
+      this.connectionPromise = import('@microsoft/signalr').then(signalR => {
+        const connection = new signalR.HubConnectionBuilder()
+          .withUrl(notificationHubUrl, { accessTokenFactory: () => this.session.accessToken ?? '' })
+          .withAutomaticReconnect([0, 2_000, 10_000, 30_000])
+          .configureLogging(signalR.LogLevel.Warning)
+          .build();
+        connection.on('NotificationReceived', (notification: Notification) => {
+          this.zone.run(() => {
+            this.itemsState.update(items =>
+              [notification, ...items.filter(item => item.id !== notification.id)].slice(0, 8));
+            this.latestState.set(notification);
+            if (!notification.isRead) this.unreadState.update(count => count + 1);
+          });
+        });
+        connection.onreconnected(() => this.load());
+        this.connection = connection;
+        return connection;
+      }).finally(() => { this.connectionPromise = null; });
+    }
+    return this.connectionPromise;
   }
 }
