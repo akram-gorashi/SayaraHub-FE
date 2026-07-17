@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sayarahub-fev1",
+  "compatibility_date": "2026-07-17",
+  "main": "./worker/index.ts",
+  "assets": {
+    "directory": "./dist/sayara-hub-FE/browser",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": [
+      "/api",
+      "/api/*",
+      "/uploads",
+      "/uploads/*",
+      "/hubs",
+      "/hubs/*",
+      "/health",
+      "/health/*"
+    ]
+  },
+  "vars": {
+    "API_ORIGIN": "https://sayarahub-api-thv0.onrender.com"
+  }
+}
