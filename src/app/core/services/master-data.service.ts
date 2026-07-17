@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 
 import { API_ENDPOINTS } from '../api/api-endpoints';
 import { ApiResponse, PagedResponse, QueryParams } from '../models/api.models';
@@ -11,12 +11,12 @@ type MasterDataItemPath = 'body-types' | 'car-brands' | 'car-conditions' | 'feat
 
 @Injectable({ providedIn: 'root' })
 export class MasterDataService {
+  private readonly cache = new Map<string, Observable<unknown>>();
+
   constructor(private readonly http: HttpClient) {}
 
   getAll(query: MasterDataQuery = {}): Observable<ApiResponse<MasterData>> {
-    return this.http.get<ApiResponse<MasterData>>(API_ENDPOINTS.masterData, {
-      params: this.params(query),
-    });
+    return this.getCached<MasterData>(API_ENDPOINTS.masterData, query);
   }
 
   getBodyTypes(query: MasterDataQuery = {}) {
@@ -44,18 +44,19 @@ export class MasterDataService {
   }
 
   getCarModels(query: MasterDataQuery = {}): Observable<ApiResponse<PagedResponse<CarModelMasterData>>> {
-    return this.http.get<ApiResponse<PagedResponse<CarModelMasterData>>>(`${API_ENDPOINTS.masterData}/car-models`, {
-      params: this.params(query),
-    });
+    return this.getCached<PagedResponse<CarModelMasterData>>(
+      `${API_ENDPOINTS.masterData}/car-models`,
+      query,
+    );
   }
 
   getCarModelsByBrand(
     carBrandId: number,
     query: MasterDataQuery = {},
   ): Observable<ApiResponse<PagedResponse<CarModelMasterData>>> {
-    return this.http.get<ApiResponse<PagedResponse<CarModelMasterData>>>(
+    return this.getCached<PagedResponse<CarModelMasterData>>(
       `${API_ENDPOINTS.masterData}/car-brands/${carBrandId}/models`,
-      { params: this.params(query) },
+      query,
     );
   }
 
@@ -63,9 +64,23 @@ export class MasterDataService {
     path: MasterDataItemPath,
     query: MasterDataQuery,
   ): Observable<ApiResponse<PagedResponse<MasterDataItem>>> {
-    return this.http.get<ApiResponse<PagedResponse<MasterDataItem>>>(`${API_ENDPOINTS.masterData}/${path}`, {
-      params: this.params(query),
-    });
+    return this.getCached<PagedResponse<MasterDataItem>>(
+      `${API_ENDPOINTS.masterData}/${path}`,
+      query,
+    );
+  }
+
+  private getCached<T>(url: string, query: MasterDataQuery): Observable<ApiResponse<T>> {
+    const params = this.params(query);
+    const key = `${url}?${params.toString()}`;
+    const cached = this.cache.get(key) as Observable<ApiResponse<T>> | undefined;
+    if (cached) return cached;
+
+    const request = this.http.get<ApiResponse<T>>(url, { params }).pipe(
+      shareReplay({ bufferSize: 1, refCount: false }),
+    );
+    this.cache.set(key, request);
+    return request;
   }
 
   private params(query: MasterDataQuery) {

@@ -13,6 +13,9 @@ import { NotificationCenterService } from '../../services/notification-center.se
   templateUrl: './header.html',
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(document:click)': 'closeMenus()',
+  },
 })
 export class Header {
   private readonly auth = inject(AuthService);
@@ -21,8 +24,39 @@ export class Header {
   protected readonly session = inject(AuthSessionService);
   protected readonly loggingOut = signal(false);
   protected readonly notifications = inject(NotificationCenterService);
+  protected readonly notificationOpen = signal(false);
+  protected readonly pagesOpen = signal(false);
+  protected readonly mobileNavigationOpen = signal(false);
+
+  protected toggleNotifications(event: Event): void {
+    event.stopPropagation();
+    this.notificationOpen.update(open => !open);
+    this.pagesOpen.set(false);
+  }
+
+  protected togglePages(event: Event): void {
+    event.stopPropagation();
+    this.pagesOpen.update(open => !open);
+    this.notificationOpen.set(false);
+  }
+
+  protected toggleMobileNavigation(event: Event): void {
+    event.stopPropagation();
+    this.mobileNavigationOpen.update(open => !open);
+  }
+
+  protected closeMenus(): void {
+    this.notificationOpen.set(false);
+    this.pagesOpen.set(false);
+  }
+
+  protected closeNavigation(): void {
+    this.mobileNavigationOpen.set(false);
+    this.closeMenus();
+  }
 
   protected openNotification(notification: Notification): void {
+    this.closeMenus();
     this.notifications.markRead(notification);
     if (notification.actionUrl) void this.router.navigateByUrl(notification.actionUrl);
   }

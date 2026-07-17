@@ -5,6 +5,7 @@
       [src]="car().mainImageUrl || 'assets/img/car/01-v2.jpg'"
       [alt]="car().title"
       loading="lazy"
+      decoding="async"
       (error)="useFallbackImage($event)">
     <div class="car-btns">
       <a href="/cars" [class.active]="isFavorite()" [attr.aria-pressed]="isFavorite()"

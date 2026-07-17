@@ -22,4 +22,23 @@ describe('Header', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('toggles the pages menu without Bootstrap JavaScript', () => {
+    const button = fixture.nativeElement.querySelector('.dropdown-toggle') as HTMLButtonElement;
+    button.click();
+    fixture.detectChanges();
+
+    expect(button.getAttribute('aria-expanded')).toBe('true');
+    expect(fixture.nativeElement.querySelector('.navbar-nav .dropdown-menu').classList)
+      .toContain('show');
+  });
+
+  it('toggles the mobile navigation without Bootstrap JavaScript', () => {
+    const button = fixture.nativeElement.querySelector('.navbar-toggler') as HTMLButtonElement;
+    button.click();
+    fixture.detectChanges();
+
+    expect(button.getAttribute('aria-expanded')).toBe('true');
+    expect(fixture.nativeElement.querySelector('#main_nav').classList).toContain('show');
+  });
 });
