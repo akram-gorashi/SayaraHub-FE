@@ -84,11 +84,11 @@ The Angular SPA and its same-origin API proxy are configured in
 
 - Root directory: leave empty when deploying the `SayaraHub-FE` repository;
   use `sayara-hub-FE` only when deploying from the full-stack monorepo.
-- Build command: leave empty.
-- Deploy command: `npm run deploy`.
+- Build command: `npm run build`.
+- Deploy command: `npx wrangler deploy`.
 
-`npm run deploy` builds Angular and deploys
-`dist/sayara-hub-FE/browser`. Worker static assets provide Angular route
+The build creates `dist/sayara-hub-FE/browser`, which Wrangler deploys using
+the checked-in configuration. Worker static assets provide Angular route
 fallback, while `/api`, `/uploads`, `/hubs`, and `/health` are proxied to the
 backend configured by `API_ORIGIN`.
 
