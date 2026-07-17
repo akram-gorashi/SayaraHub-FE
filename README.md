@@ -77,6 +77,21 @@ The Nginx configuration provides:
 
 For the complete HTTPS deployment, use the root backend Compose production overlay and follow its `deploy/PRODUCTION.md` guide.
 
+## Cloudflare Workers deployment
+
+The Angular SPA and its same-origin API proxy are configured in
+`wrangler.jsonc`. In Cloudflare Workers Builds use:
+
+- Root directory: leave empty when deploying the `SayaraHub-FE` repository;
+  use `sayara-hub-FE` only when deploying from the full-stack monorepo.
+- Build command: leave empty.
+- Deploy command: `npm run deploy`.
+
+`npm run deploy` builds Angular and deploys
+`dist/sayara-hub-FE/browser`. Worker static assets provide Angular route
+fallback, while `/api`, `/uploads`, `/hubs`, and `/health` are proxied to the
+backend configured by `API_ORIGIN`.
+
 ## Dependency security
 
 `package.json` pins patched compatible transitive versions of Babel and esbuild. Run `npm audit` after dependency changes and avoid force-fixing advisories that require an Angular major downgrade or upgrade without a full regression test.
