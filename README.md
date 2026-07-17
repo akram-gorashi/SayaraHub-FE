@@ -2,6 +2,8 @@
 
 Angular 22 standalone application for browsing vehicles, managing seller listings, messaging, account settings, notifications, and administration.
 
+Live application: [https://sayarahub-web.akramgorashi6.workers.dev/](https://sayarahub-web.akramgorashi6.workers.dev/)
+
 ## Technology
 
 - Angular 22 with standalone components, lazy routes, signals, and `OnPush` change detection
