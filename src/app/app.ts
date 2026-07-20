@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Header } from "./core/layout/header/header";
 import { Footer } from "./core/layout/footer/footer";
 import { AuthSessionService } from './core/services/auth-session.service';
+import { NotificationCenterService } from './core/services/notification-center.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { AuthSessionService } from './core/services/auth-session.service';
 export class App {
   protected readonly title = signal('sayara-hub-FE');
   protected readonly session = inject(AuthSessionService);
+  protected readonly notifications = inject(NotificationCenterService);
   private readonly destroyRef = inject(DestroyRef);
 
   constructor() {

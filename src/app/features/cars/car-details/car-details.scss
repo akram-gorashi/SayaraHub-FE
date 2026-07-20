@@ -115,3 +115,227 @@
   aspect-ratio: 1;
   object-fit: cover;
 }
+
+.mobile-car-price,
+.mobile-seller-summary,
+.mobile-section-toggle,
+.mobile-buyer-actions,
+.mobile-action-message {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .car-item-single {
+    padding-bottom: 150px !important;
+    padding-top: 20px !important;
+  }
+
+  .car-single-widget {
+    border-radius: 14px;
+    margin-bottom: 14px;
+    padding: 16px;
+  }
+
+  .car-single-top .car-single-title {
+    font-size: 25px;
+    margin: 10px 0 4px;
+  }
+
+  .mobile-car-price {
+    color: var(--theme-color);
+    display: block;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .car-single-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+  }
+
+  .car-single-meta li {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .car-details-gallery {
+    margin-top: 16px;
+    touch-action: pan-y;
+  }
+
+  .gallery-main {
+    aspect-ratio: 4 / 3;
+  }
+
+  .gallery-nav {
+    height: 40px;
+    width: 40px;
+  }
+
+  .gallery-prev { left: 10px; }
+  .gallery-next { right: 10px; }
+
+  .gallery-thumbnails {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .gallery-thumbnails button {
+    flex: 0 0 74px;
+    scroll-snap-align: start;
+  }
+
+  .mobile-seller-summary {
+    align-items: center;
+    border-top: 1px solid #edf0f4;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 48px 1fr 38px;
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+
+  .mobile-seller-summary img {
+    border-radius: 50%;
+    height: 48px;
+    object-fit: cover;
+    width: 48px;
+  }
+
+  .mobile-seller-summary span {
+    color: #717987;
+    font-size: 11px;
+  }
+
+  .mobile-seller-summary h4 {
+    font-size: 16px;
+    margin: 1px 0 0;
+  }
+
+  .mobile-seller-summary > a {
+    align-items: center;
+    background: #f4f6f8;
+    border-radius: 50%;
+    color: var(--color-dark);
+    display: flex;
+    height: 38px;
+    justify-content: center;
+    width: 38px;
+  }
+
+  .desktop-section-title,
+  .details-collapsible .collapsible-content,
+  .desktop-summary,
+  .desktop-seller {
+    display: none;
+  }
+
+  .details-collapsible.mobile-open .collapsible-content {
+    display: flex;
+  }
+
+  .details-collapsible.mobile-open .car-single-overview {
+    display: block;
+    padding-top: 16px;
+  }
+
+  .mobile-section-toggle {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--color-dark);
+    display: flex;
+    font-size: 17px;
+    font-weight: 700;
+    justify-content: space-between;
+    padding: 2px 0;
+    width: 100%;
+  }
+
+  .mobile-section-toggle i {
+    transition: transform 180ms ease;
+  }
+
+  .mobile-open .mobile-section-toggle i {
+    transform: rotate(180deg);
+  }
+
+  .car-key-info {
+    padding-top: 14px;
+  }
+
+  .car-key-item {
+    min-height: 92px;
+  }
+
+  .details-location {
+    min-height: auto;
+    padding: 18px;
+  }
+
+  .details-location > i {
+    font-size: 30px;
+  }
+
+  .seller-contact-widget {
+    scroll-margin-top: 16px;
+  }
+
+  .mobile-buyer-actions {
+    background: #fff;
+    border: 1px solid #e6e9ee;
+    border-radius: 14px;
+    bottom: calc(76px + env(safe-area-inset-bottom));
+    box-shadow: 0 -8px 28px rgb(20 32 50 / 14%);
+    display: grid;
+    gap: 6px;
+    grid-template-columns: repeat(3, 1fr);
+    left: 12px;
+    padding: 8px;
+    position: fixed;
+    right: 12px;
+    z-index: 1070;
+  }
+
+  .mobile-buyer-actions button {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 9px;
+    color: #4f5967;
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    font-weight: 700;
+    gap: 4px;
+    min-height: 48px;
+  }
+
+  .mobile-buyer-actions button:first-child {
+    background: var(--theme-color);
+    color: #fff;
+  }
+
+  .mobile-buyer-actions i {
+    font-size: 17px;
+  }
+
+  .mobile-action-message {
+    background: var(--color-dark);
+    border-radius: 9px;
+    bottom: calc(148px + env(safe-area-inset-bottom));
+    color: #fff;
+    display: block;
+    font-size: 12px;
+    left: 50%;
+    max-width: calc(100% - 32px);
+    padding: 9px 14px;
+    position: fixed;
+    transform: translateX(-50%);
+    z-index: 1071;
+  }
+}

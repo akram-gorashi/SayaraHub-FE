@@ -81,6 +81,26 @@
             </tbody>
           </table>
         </div>
+        <div class="recent-car-cards">
+          @for (car of store.recentListings(); track car.id) {
+            <article class="recent-car-card">
+              <a class="recent-car-card__main" [routerLink]="['/cars', car.id]">
+                <img [src]="car.mainImageUrl || 'assets/img/car/01-v2.jpg'" [alt]="car.title" />
+                <span><strong>{{ car.title }}</strong><small>{{ car.brand }} · ID #{{ car.id }}</small></span>
+              </a>
+              <dl>
+                <div><dt>Published</dt><dd>{{ car.listedDate | date: 'mediumDate' }}</dd></div>
+                <div><dt>Price</dt><dd>{{ car.price | currency: 'SAR':'symbol-narrow':'1.0-0' }}</dd></div>
+              </dl>
+              <div class="recent-car-card__footer">
+                <span class="badge" [class]="statusClass(car.status)">{{ car.status | titlecase }}</span>
+                <a class="btn btn-outline-primary btn-sm" [routerLink]="['/cars', car.id]">View car</a>
+              </div>
+            </article>
+          } @empty {
+            <p class="recent-car-cards__empty">You have not added any cars yet.</p>
+          }
+        </div>
       </div>
     </div>
   </div>

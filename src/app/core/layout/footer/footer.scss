@@ -3,3 +3,6 @@
     display: none;
   }
 }
+:host { display: block; }
+.footer-brand { display: inline-block; color: #fff; font-size: 29px; font-weight: 900; letter-spacing: -.05em; line-height: 1; }
+.footer-brand span { color: var(--theme-color); }

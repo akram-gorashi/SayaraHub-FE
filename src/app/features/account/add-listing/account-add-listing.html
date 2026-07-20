@@ -5,8 +5,13 @@
     <div class="text-center py-5"><span class="spinner-border text-primary" aria-label="Loading"></span></div>
   } @else {
     <div class="add-listing-form">
-      <h6 class="mb-1">Basic Information</h6>
-      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="mobile-listing-stepper" aria-label="Car advert progress">
+        <div class="mobile-listing-stepper__summary"><span>Step {{ currentStep() }} of {{ mobileSteps.length }}</span><strong>{{ mobileSteps[currentStep() - 1] }}</strong></div>
+        <ol>@for (step of mobileSteps; track step; let number = $index) { <li [class.active]="number + 1 === currentStep()" [class.complete]="number + 1 < currentStep()"><span>{{ number + 1 }}</span><small>{{ step }}</small></li> }</ol>
+      </div>
+      <h6 class="mb-1 desktop-basic-heading">Basic Information</h6>
+      <form [formGroup]="form" [class]="'mobile-step-' + currentStep()" (ngSubmit)="submit()" novalidate>
+        @if (stepError(); as error) { <div class="mobile-step-error" role="alert"><i class="far fa-circle-exclamation"></i>{{ error }}</div> }
         @if (validationErrors().length) {
           <div class="alert alert-danger listing-validation-summary" role="alert" aria-live="polite">
             <strong>Please correct the following before saving:</strong>
@@ -52,6 +57,14 @@
             <div class="col-6 col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" [id]="'feature-' + feature.id" [checked]="selectedFeatureIds().includes(feature.id)" (change)="toggleFeature(feature.id, $any($event.target).checked)" /><label class="form-check-label" [for]="'feature-' + feature.id">{{ feature.name }}</label></div></div>
           }
           <div class="col-lg-12">@if (store.submitting()) { <div class="upload-progress mt-4" role="progressbar" [attr.aria-valuenow]="store.uploadProgress()" aria-valuemin="0" aria-valuemax="100"><div [style.width.%]="store.uploadProgress()"></div><span>Uploading {{ store.uploadProgress() }}%</span></div> }<button type="submit" class="theme-btn mt-4" [disabled]="store.submitting()"><i [class]="isEditing ? 'far fa-pen' : 'far fa-plus-circle'"></i> {{ store.submitting() ? 'Saving...' : isEditing ? 'Save Changes' : 'Submit Car for Review' }}</button></div>
+        </div>
+        <div class="mobile-wizard-actions">
+          @if (currentStep() > 1) { <button type="button" class="mobile-wizard-back" (click)="previousStep()"><i class="far fa-arrow-left"></i> Back</button> }
+          @if (currentStep() < 4) {
+            <button type="button" class="theme-btn mobile-wizard-next" (click)="nextStep()">Next <i class="far fa-arrow-right"></i></button>
+          } @else {
+            <button type="submit" class="theme-btn mobile-wizard-next" [disabled]="store.submitting()"><i [class]="isEditing ? 'far fa-pen' : 'far fa-check-circle'"></i> {{ store.submitting() ? 'Saving...' : isEditing ? 'Save Changes' : 'Submit for Review' }}</button>
+          }
         </div>
       </form>
     </div>

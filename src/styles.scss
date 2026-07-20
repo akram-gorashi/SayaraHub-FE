@@ -7,6 +7,14 @@
     overflow-x: hidden;
   }
 
+  body:has([aria-modal="true"]) {
+    overflow: hidden;
+  }
+
+  body:has([aria-modal="true"]) .mobile-bottom-nav {
+    display: none !important;
+  }
+
   .py-120 {
     padding-bottom: 42px !important;
     padding-top: 42px !important;

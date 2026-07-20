@@ -7,107 +7,107 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    title: 'SayaraHub | Find your next car',
+    title: 'SayaraMatch | The right car. The right match.',
     loadComponent: () =>
       import('./core/layout/main-layout/main-layout').then(({ MainLayout }) => MainLayout),
   },
   {
     path: 'cars',
-    title: 'Cars | SayaraHub',
+    title: 'Cars | SayaraMatch',
     loadComponent: () =>
       import('./features/cars/car-listing/car-listing').then(({ CarListing }) => CarListing),
   },
   {
     path: 'cars/:id',
-    title: 'Car Details | SayaraHub',
+    title: 'Car Details | SayaraMatch',
     loadComponent: () =>
       import('./features/cars/car-details/car-details').then(({ CarDetailsPage }) => CarDetailsPage),
   },
   {
     path: 'sellers/:id',
-    title: 'Seller Profile | SayaraHub',
+    title: 'Seller Profile | SayaraMatch',
     loadComponent: () =>
       import('./features/sellers/profile/seller-profile').then(({ SellerProfilePage }) => SellerProfilePage),
   },
   {
     path: 'login',
-    title: 'Login | SayaraHub',
+    title: 'Login | SayaraMatch',
     loadComponent: () =>
       import('./features/auth/login/login').then(({ LoginPage }) => LoginPage),
   },
   {
     path: 'register',
-    title: 'Register | SayaraHub',
+    title: 'Register | SayaraMatch',
     loadComponent: () =>
       import('./features/auth/register/register').then(({ RegisterPage }) => RegisterPage),
   },
   {
     path: 'about',
-    title: 'About Us | SayaraHub',
+    title: 'About Us | SayaraMatch',
     loadComponent: () =>
       import('./features/content/about/about-page').then(({ AboutPage }) => AboutPage),
   },
   {
     path: 'team',
-    title: 'Our Team | SayaraHub',
+    title: 'Our Team | SayaraMatch',
     loadComponent: () =>
       import('./features/content/team/team-page').then(({ TeamPage }) => TeamPage),
   },
   {
     path: 'blog',
-    title: 'Blog | SayaraHub',
+    title: 'Blog | SayaraMatch',
     loadComponent: () =>
       import('./features/content/blog/blog-page').then(({ BlogPage }) => BlogPage),
   },
   {
     path: 'contact',
-    title: 'Contact Us | SayaraHub',
+    title: 'Contact Us | SayaraMatch',
     loadComponent: () =>
       import('./features/content/contact/contact-page').then(({ ContactPage }) => ContactPage),
   },
   {
     path: 'faq',
-    title: 'Frequently Asked Questions | SayaraHub',
+    title: 'Frequently Asked Questions | SayaraMatch',
     loadComponent: () =>
       import('./features/content/faq/faq-page').then(({ FaqPage }) => FaqPage),
   },
   {
     path: 'privacy',
-    title: 'Privacy Policy | SayaraHub',
+    title: 'Privacy Policy | SayaraMatch',
     data: { document: 'privacy' },
     loadComponent: () =>
       import('./features/content/legal/legal-page').then(({ LegalPage }) => LegalPage),
   },
   {
     path: 'terms',
-    title: 'Terms Of Service | SayaraHub',
+    title: 'Terms Of Service | SayaraMatch',
     data: { document: 'terms' },
     loadComponent: () =>
       import('./features/content/legal/legal-page').then(({ LegalPage }) => LegalPage),
   },
   {
     path: 'coming-soon',
-    title: 'Coming Soon | SayaraHub',
+    title: 'Coming Soon | SayaraMatch',
     loadComponent: () =>
       import('./features/content/coming-soon/coming-soon-page').then(({ ComingSoonPage }) => ComingSoonPage),
   },
   {
     path: '404',
-    title: 'Page Not Found | SayaraHub',
+    title: 'Page Not Found | SayaraMatch',
     loadComponent: () =>
       import('./features/content/not-found/not-found-page').then(({ NotFoundPage }) => NotFoundPage),
   },
   {
     path: 'admin/moderation',
     canActivate: [adminGuard],
-    title: 'Car Moderation | SayaraHub',
+    title: 'Car Moderation | SayaraMatch',
     loadComponent: () =>
       import('./features/admin/moderation/admin-moderation-page').then(({ AdminModerationPage }) => AdminModerationPage),
   },
   {
     path: 'admin/operations',
     canActivate: [adminGuard],
-    title: 'Safety & Operations | SayaraHub',
+    title: 'Safety & Operations | SayaraMatch',
     loadComponent: () =>
       import('./features/admin/operations/admin-operations-page').then(({ AdminOperationsPage }) => AdminOperationsPage),
   },
@@ -120,75 +120,75 @@ export const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       {
         path: 'dashboard',
-        title: 'Dashboard | SayaraHub',
+        title: 'Dashboard | SayaraMatch',
         data: { accountTitle: 'Dashboard' },
         loadComponent: () =>
           import('./features/account/dashboard/account-dashboard').then(({ AccountDashboard }) => AccountDashboard),
       },
       {
         path: 'profile',
-        title: 'My Profile | SayaraHub',
+        title: 'My Profile | SayaraMatch',
         data: { accountTitle: 'My Profile' },
         loadComponent: () =>
           import('./features/account/profile/account-profile').then(({ AccountProfile }) => AccountProfile),
       },
       {
-        path: 'listings', title: 'My Cars | SayaraHub', data: { accountTitle: 'My Cars' },
+        path: 'listings', title: 'My Cars | SayaraMatch', data: { accountTitle: 'My Cars' },
         loadComponent: () =>
           import('./features/account/listings/account-listings').then(({ AccountListings }) => AccountListings),
       },
       {
-        path: 'listings/:id/edit', title: 'Edit Car | SayaraHub', data: { accountTitle: 'Edit Car' },
+        path: 'listings/:id/edit', title: 'Edit Car | SayaraMatch', data: { accountTitle: 'Edit Car' },
         loadComponent: () =>
           import('./features/account/add-listing/account-add-listing').then(({ AccountAddListing }) => AccountAddListing),
       },
       {
-        path: 'listings/:id', title: 'Car Details | SayaraHub', data: { accountTitle: 'Car Details' },
+        path: 'listings/:id', title: 'Car Details | SayaraMatch', data: { accountTitle: 'Car Details' },
         loadComponent: () =>
           import('./features/account/listing-details/account-listing-details').then(({ AccountListingDetails }) => AccountListingDetails),
       },
       {
-        path: 'favorites', title: 'My Favorites | SayaraHub', data: { accountTitle: 'My Favorites' },
+        path: 'favorites', title: 'My Favorites | SayaraMatch', data: { accountTitle: 'My Favorites' },
         loadComponent: () =>
           import('./features/account/favorites/account-favorites').then(({ AccountFavorites }) => AccountFavorites),
       },
       {
-        path: 'messages', title: 'Messages | SayaraHub', data: { accountTitle: 'Messages' },
+        path: 'messages', title: 'Messages | SayaraMatch', data: { accountTitle: 'Messages' },
         loadComponent: () =>
           import('./features/account/messages/account-messages').then(({ AccountMessages }) => AccountMessages),
       },
       {
-        path: 'inquiries', title: 'Contact Inquiries | SayaraHub', data: { accountTitle: 'Contact Inquiries' },
+        path: 'inquiries', title: 'Contact Inquiries | SayaraMatch', data: { accountTitle: 'Contact Inquiries' },
         loadComponent: () =>
           import('./features/account/inquiries/account-inquiries').then(({ AccountInquiries }) => AccountInquiries),
       },
       {
-        path: 'safety', title: 'Safety Center | SayaraHub', data: { accountTitle: 'Safety Center' },
+        path: 'safety', title: 'Safety Center | SayaraMatch', data: { accountTitle: 'Safety Center' },
         loadComponent: () =>
           import('./features/account/safety/account-safety').then(({ AccountSafety }) => AccountSafety),
       },
       {
-        path: 'settings', title: 'Settings | SayaraHub', data: { accountTitle: 'Settings' },
+        path: 'settings', title: 'Settings | SayaraMatch', data: { accountTitle: 'Settings' },
         loadComponent: () =>
           import('./features/account/settings/account-settings').then(({ AccountSettings }) => AccountSettings),
       },
       {
-        path: 'sessions', title: 'Login Sessions | SayaraHub', data: { accountTitle: 'Login Sessions' },
+        path: 'sessions', title: 'Login Sessions | SayaraMatch', data: { accountTitle: 'Login Sessions' },
         loadComponent: () =>
           import('./features/account/sessions/account-sessions').then(({ AccountSessions }) => AccountSessions),
       },
       {
-        path: 'saved-searches', title: 'Saved Searches | SayaraHub', data: { accountTitle: 'Saved Searches' },
+        path: 'saved-searches', title: 'Saved Searches | SayaraMatch', data: { accountTitle: 'Saved Searches' },
         loadComponent: () =>
           import('./features/account/saved-searches/account-saved-searches').then(({ AccountSavedSearches }) => AccountSavedSearches),
       },
       {
-        path: 'notifications', title: 'Notifications | SayaraHub', data: { accountTitle: 'Notifications' },
+        path: 'notifications', title: 'Notifications | SayaraMatch', data: { accountTitle: 'Notifications' },
         loadComponent: () =>
           import('./features/account/notifications/account-notifications').then(({ AccountNotifications }) => AccountNotifications),
       },
       {
-        path: 'add-listing', title: 'Sell a Car | SayaraHub', data: { accountTitle: 'Sell a Car' },
+        path: 'add-listing', title: 'Sell a Car | SayaraMatch', data: { accountTitle: 'Sell a Car' },
         loadComponent: () =>
           import('./features/account/add-listing/account-add-listing').then(({ AccountAddListing }) => AccountAddListing),
       },
@@ -196,7 +196,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    title: 'Page Not Found | SayaraHub',
+    title: 'Page Not Found | SayaraMatch',
     loadComponent: () =>
       import('./features/content/not-found/not-found-page').then(({ NotFoundPage }) => NotFoundPage),
   },

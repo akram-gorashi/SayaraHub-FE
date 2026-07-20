@@ -114,7 +114,7 @@ export class AdminOperationsStore {
       next: blob => {
         const url = URL.createObjectURL(blob);
         const anchor = document.createElement('a');
-        anchor.href = url; anchor.download = `sayarahub-audit-${new Date().toISOString().slice(0, 10)}.csv`; anchor.click();
+        anchor.href = url; anchor.download = `sayaramatch-audit-${new Date().toISOString().slice(0, 10)}.csv`; anchor.click();
         URL.revokeObjectURL(url);
       },
       error: error => this.errorState.set(this.message(error, 'Unable to export audit logs.')),

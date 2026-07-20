@@ -83,7 +83,25 @@ export class CarListingStore {
       + filters.fuelTypeIds.length
       + filters.featureIds.length
       + Number(filters.minPrice !== null)
-      + Number(filters.maxPrice !== null);
+      + Number(filters.maxPrice !== null)
+      + Number(filters.minYear !== null)
+      + Number(filters.maxYear !== null)
+      + Number(Boolean(filters.city));
+  });
+  readonly activeFilterLabels = computed(() => {
+    const filters = this.filtersState();
+    const labels: string[] = [];
+    if (filters.search) labels.push(`“${filters.search}”`);
+    this.appendNames(labels, filters.brandIds, this.brands());
+    this.appendNames(labels, filters.transmissionIds, this.transmissions());
+    this.appendNames(labels, filters.fuelTypeIds, this.fuelTypes());
+    this.appendNames(labels, filters.featureIds, this.features());
+    if (filters.minPrice !== null) labels.push(`From SAR ${filters.minPrice.toLocaleString()}`);
+    if (filters.maxPrice !== null) labels.push(`Up to SAR ${filters.maxPrice.toLocaleString()}`);
+    if (filters.minYear !== null) labels.push(`From ${filters.minYear}`);
+    if (filters.maxYear !== null) labels.push(`Up to ${filters.maxYear}`);
+    if (filters.city) labels.push(filters.city);
+    return labels;
   });
   readonly visiblePages = computed(() => {
     const totalPages = this.totalPages();
@@ -283,5 +301,9 @@ export class CarListingStore {
     return params.getAll(key)
       .map(Number)
       .filter((value) => Number.isInteger(value) && value > 0);
+  }
+
+  private appendNames(labels: string[], ids: number[], items: ReadonlyArray<{ id: number; name: string }>): void {
+    ids.forEach(id => labels.push(items.find(item => item.id === id)?.name ?? `Filter #${id}`));
   }
 }

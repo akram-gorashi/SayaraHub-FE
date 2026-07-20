@@ -48,6 +48,11 @@ button.nav-link {
   background: transparent;
   border: 0;
 }
+.sayaramatch-brand { display: inline-flex; align-items: center; gap: 10px; }
+.sayaramatch-brand__mark { display: grid; place-items: center; width: 44px; height: 38px; border-radius: 10px; color: #fff; background: var(--theme-color); font-size: 22px; transform: skewX(-8deg); }
+.sayaramatch-brand__mark i { transform: skewX(8deg); }
+.sayaramatch-brand__name { color: #111; font-size: clamp(22px, 2vw, 30px); font-weight: 900; letter-spacing: -.05em; line-height: 1; }
+.sayaramatch-brand__name span { color: var(--theme-color); }
 :host { position: relative; z-index: 1050; display: block; }
 .header, .header-top { position: relative; overflow: visible; }
 .header-top { z-index: 1051; }
@@ -92,8 +97,6 @@ button.nav-link {
     transform: none !important;
   }
 
-  .navbar-brand img {
-    max-height: 42px;
-    width: auto;
-  }
+  .sayaramatch-brand__mark { width: 38px; height: 34px; font-size: 18px; }
+  .sayaramatch-brand__name { font-size: 23px; }
 }

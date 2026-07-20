@@ -24,7 +24,7 @@ export class ContactPage {
     const value = this.form.getRawValue();
     const body = `Name: ${value.name}\nEmail: ${value.email}\nPhone: ${value.phone || 'Not provided'}\n\n${value.message}`;
     this.openingEmail.set(true);
-    globalThis.location.href = `mailto:support@sayarahub.com?subject=${encodeURIComponent(value.subject)}&body=${encodeURIComponent(body)}`;
+    globalThis.location.href = `mailto:support@sayaramatch.com?subject=${encodeURIComponent(value.subject)}&body=${encodeURIComponent(body)}`;
     this.openingEmail.set(false);
   }
 }

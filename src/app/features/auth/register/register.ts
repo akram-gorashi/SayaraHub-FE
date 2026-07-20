@@ -2,12 +2,11 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
-import { Breadcrumb } from '../../../shared/ui/breadcrumb/breadcrumb';
 import { AuthStore } from '../data-access/auth.store';
 
 @Component({
   selector: 'app-register-page',
-  imports: [Breadcrumb, ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
