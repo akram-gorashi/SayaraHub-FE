@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { AccountStore } from '../data-access/account.store';
 
 @Component({
   selector: 'app-account-profile',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './account-profile.html',
   styleUrl: './account-profile.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

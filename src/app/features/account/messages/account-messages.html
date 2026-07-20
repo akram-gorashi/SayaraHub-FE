@@ -26,8 +26,8 @@
           }
         </div>
         <form class="message-reply" (submit)="send($event)">
-          <textarea class="form-control" rows="2" placeholder="Write a message..." [value]="draft()" (input)="updateDraft($event)"></textarea>
-          <button type="submit" class="theme-btn" [disabled]="store.sending() || !draft().trim()"><i class="far fa-paper-plane"></i> Send Message</button>
+          <textarea class="form-control" rows="2" [placeholder]="'account.writeMessage' | translate" [value]="draft()" (input)="updateDraft($event)"></textarea>
+          <button type="submit" class="theme-btn" [disabled]="store.sending() || !draft().trim()"><i class="far fa-paper-plane"></i>{{ 'account.sendMessage' | translate }}</button>
         </form>
       } @else { <div class="empty-message">Select a conversation to view messages.</div> }
     </div>

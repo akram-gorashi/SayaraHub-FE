@@ -14,7 +14,7 @@
           <div class="form-group">
             <label for="profile-full-name">Full Name</label>
             <input id="profile-full-name" type="text" class="form-control" formControlName="fullName"
-              autocomplete="name" placeholder="Full Name" />
+              autocomplete="name" [placeholder]="'auth.placeholders.name' | translate" />
             @if (profileForm.controls.fullName.touched && profileForm.controls.fullName.invalid) {
               <small class="field-error">Enter a name between 2 and 100 characters.</small>
             }
@@ -27,7 +27,7 @@
           <div class="form-group">
             <label for="profile-phone">Phone</label>
             <input id="profile-phone" type="tel" class="form-control" formControlName="phoneNumber"
-              autocomplete="tel" placeholder="Phone Number" />
+              autocomplete="tel" [placeholder]="'account.phoneNumber' | translate" />
           </div>
           <button type="submit" class="theme-btn my-3" [disabled]="store.savingProfile()">
             <i class="far" [class.fa-user]="!store.savingProfile()" [class.fa-spinner]="store.savingProfile()"
@@ -47,12 +47,12 @@
           <div class="form-group">
             <label for="current-password">Old Password</label>
             <input id="current-password" type="password" class="form-control" formControlName="currentPassword"
-              autocomplete="current-password" placeholder="Old Password" />
+              autocomplete="current-password" [placeholder]="'account.oldPassword' | translate" />
           </div>
           <div class="form-group">
             <label for="new-password">New Password</label>
             <input id="new-password" type="password" class="form-control" formControlName="newPassword"
-              autocomplete="new-password" placeholder="New Password" />
+              autocomplete="new-password" [placeholder]="'account.newPassword' | translate" />
             @if (passwordForm.controls.newPassword.touched && passwordForm.controls.newPassword.invalid) {
               <small class="field-error">Use at least 6 characters.</small>
             }
@@ -60,7 +60,7 @@
           <div class="form-group">
             <label for="confirm-password">Re-Type Password</label>
             <input id="confirm-password" type="password" class="form-control" formControlName="confirmNewPassword"
-              autocomplete="new-password" placeholder="Re-Type Password" />
+              autocomplete="new-password" [placeholder]="'account.confirmPassword' | translate" />
             @if (passwordMismatch()) {
               <small class="field-error">The new passwords do not match.</small>
             }

@@ -406,3 +406,1654 @@ AggregateError [ECONNREFUSED]:
         ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
 
 
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: CdkDropList is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:33:
+[37m      17 │ ...ports: [ReactiveFormsModule, [32mCdkDropList[37m, CdkDrag, TranslatePipe],
+         ╵                                 [32m~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: CdkDrag is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:46:
+[37m      17 │ ...ports: [ReactiveFormsModule, CdkDropList, [32mCdkDrag[37m, TranslatePipe],
+         ╵                                              [32m~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:55:
+[37m      17 │ ...ports: [ReactiveFormsModule, CdkDropList, CdkDrag, [32mTranslatePipe[37m],
+         ╵                                                       [32m~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'preventUnsavedExit' does not exist on type 'AccountAddListing'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:22:36:
+[37m      22 │   host: { '(window:beforeunload)': '[32mpreventUnsavedExit[37m($event)' },
+         ╵                                     [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'restoreDraft' does not exist on type 'AccountAddListing'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:76:30:
+[37m      76 │     if (!this.isEditing) this.[32mrestoreDraft[37m();
+         ╵                               [32m~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'saveDraft' does not exist on type 'AccountAddListing'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:109:109:
+[37m      109 │ ...tilDestroyed(this.destroyRef)).subscribe(() => this.[32msaveDraft[37m());
+          ╵                                                        [32m~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: CdkDropList is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:33:
+[37m      17 │ ...ports: [ReactiveFormsModule, [32mCdkDropList[37m, CdkDrag, TranslatePipe],
+         ╵                                 [32m~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: CdkDrag is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:46:
+[37m      17 │ ...ports: [ReactiveFormsModule, CdkDropList, [32mCdkDrag[37m, TranslatePipe],
+         ╵                                              [32m~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:55:
+[37m      17 │ ...ports: [ReactiveFormsModule, CdkDropList, CdkDrag, [32mTranslatePipe[37m],
+         ╵                                                       [32m~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2554: Expected 1 arguments, but got 2.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:259:33:
+[37m      259 │       this.store.create(request, [32m() => this.clearDraft()[37m);
+          ╵                                  [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:353:63:
+[37m      353 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:353:41:
+[37m      353 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:358:21:
+[37m      358 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:358:73:
+[37m      358 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: CdkDropList is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:33:
+[37m      17 │ ...ports: [ReactiveFormsModule, [32mCdkDropList[37m, CdkDrag, TranslatePipe],
+         ╵                                 [32m~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: CdkDrag is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:46:
+[37m      17 │ ...ports: [ReactiveFormsModule, CdkDropList, [32mCdkDrag[37m, TranslatePipe],
+         ╵                                              [32m~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:55:
+[37m      17 │ ...ports: [ReactiveFormsModule, CdkDropList, CdkDrag, [32mTranslatePipe[37m],
+         ╵                                                       [32m~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:353:63:
+[37m      353 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:353:41:
+[37m      353 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:358:21:
+[37m      358 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:358:73:
+[37m      358 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: CdkDropList is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:33:
+[37m      17 │ ...ports: [ReactiveFormsModule, [32mCdkDropList[37m, CdkDrag, TranslatePipe],
+         ╵                                 [32m~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: CdkDrag is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:46:
+[37m      17 │ ...ports: [ReactiveFormsModule, CdkDropList, [32mCdkDrag[37m, TranslatePipe],
+         ╵                                              [32m~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:55:
+[37m      17 │ ...ports: [ReactiveFormsModule, CdkDropList, CdkDrag, [32mTranslatePipe[37m],
+         ╵                                                       [32m~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: CdkDropList is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:33:
+[37m      17 │ ...ports: [ReactiveFormsModule, [32mCdkDropList[37m, CdkDrag, TranslatePipe],
+         ╵                                 [32m~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: CdkDrag is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:46:
+[37m      17 │ ...ports: [ReactiveFormsModule, CdkDropList, [32mCdkDrag[37m, TranslatePipe],
+         ╵                                              [32m~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of AccountAddListing[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:17:55:
+[37m      17 │ ...ports: [ReactiveFormsModule, CdkDropList, CdkDrag, [32mTranslatePipe[37m],
+         ╵                                                       [32m~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:45:
+[37m      17 │ ...mb, CarCard, RouterLink, [32mTranslatePipe[37m, LocalizedCurrencyPipe, ...
+         ╵                             [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedCurrencyPipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:60:
+[37m      17 │ ...Link, TranslatePipe, [32mLocalizedCurrencyPipe[37m, LocalizedDatePipe, ...
+         ╵                         [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedDatePipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:83:
+[37m      17 │ ...e, LocalizedCurrencyPipe, [32mLocalizedDatePipe[37m, LocalizedNumberPipe],
+         ╵                              [32m~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedNumberPipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:102:
+[37m      17 │ ...e, LocalizedCurrencyPipe, LocalizedDatePipe, [32mLocalizedNumberPipe[37m],
+         ╵                                                 [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'currency'.
+To fix this, import the "CurrencyPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:26:68:
+[37m      26 │ ...e-car-price">{{ car.price | [32mcurrency[37m:'SAR':'symbol':'1.0-0' }}<...
+         ╵                                [32m~~~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:28:86:
+[37m      28 │ ..."></i> Listed On: {{ car.listedDate | [32mdate[37m:'EEE, MMM d, y' }}</li>
+         ╵                                          [32m~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:29:75:
+[37m      29 │ ...li><i class="far fa-eye"></i> Views: {{ car.views | [32mnumber[37m }}</li>
+         ╵                                                        [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:72:221:
+[37m      72 │ ...age</span><h6>{{ car.mileage | [32mnumber[37m }} km</h6></div></div></div>
+         ╵                                   [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:138:88:
+[37m      138 │ ...r fa-clock"></i>{{ review.createdAt | [32mdate[37m:'mediumDate' }}</span>
+          ╵                                          [32m~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'currency'.
+To fix this, import the "CurrencyPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:160:60:
+[37m      160 │ ...ngle-price">{{ car.price | [32mcurrency[37m:'SAR':'symbol':'1.0-0' }}<...
+          ╵                               [32m~~~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:162:79:
+[37m      162 │ ..."fa-regular fa-gauge-high"></i>{{ car.mileage | [32mnumber[37m }} km</li>
+          ╵                                                    [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:164:65:
+[37m      164 │ ...a-star"></i>{{ car.rating | [32mnumber[37m:'1.1-1' }} ({{ car.reviewCo...
+          ╵                                [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:45:
+[37m      17 │ ...mb, CarCard, RouterLink, [32mTranslatePipe[37m, LocalizedCurrencyPipe, ...
+         ╵                             [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedCurrencyPipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:60:
+[37m      17 │ ...Link, TranslatePipe, [32mLocalizedCurrencyPipe[37m, LocalizedDatePipe, ...
+         ╵                         [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedDatePipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:83:
+[37m      17 │ ...e, LocalizedCurrencyPipe, [32mLocalizedDatePipe[37m, LocalizedNumberPipe],
+         ╵                              [32m~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedNumberPipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:102:
+[37m      17 │ ...e, LocalizedCurrencyPipe, LocalizedDatePipe, [32mLocalizedNumberPipe[37m],
+         ╵                                                 [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of CarCard[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/components/car-card/car-card.ts:15:24:
+[37m      15 │   imports: [RouterLink, [32mTranslatePipe[37m, LocalizedCurrencyPipe, Loca...
+         ╵                         [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedCurrencyPipe is not used within the template of CarCard[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/components/car-card/car-card.ts:15:39:
+[37m      15 │ ...Link, TranslatePipe, [32mLocalizedCurrencyPipe[37m, LocalizedDatePipe, ...
+         ╵                         [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedDatePipe is not used within the template of CarCard[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/components/car-card/car-card.ts:15:62:
+[37m      15 │ ...e, LocalizedCurrencyPipe, [32mLocalizedDatePipe[37m, LocalizedNumberPipe],
+         ╵                              [32m~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedNumberPipe is not used within the template of CarCard[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/components/car-card/car-card.ts:15:81:
+[37m      15 │ ...e, LocalizedCurrencyPipe, LocalizedDatePipe, [32mLocalizedNumberPipe[37m],
+         ╵                                                 [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'currency'.
+To fix this, import the "CurrencyPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:26:68:
+[37m      26 │ ...e-car-price">{{ car.price | [32mcurrency[37m:'SAR':'symbol':'1.0-0' }}<...
+         ╵                                [32m~~~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:28:86:
+[37m      28 │ ..."></i> Listed On: {{ car.listedDate | [32mdate[37m:'EEE, MMM d, y' }}</li>
+         ╵                                          [32m~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:29:75:
+[37m      29 │ ...li><i class="far fa-eye"></i> Views: {{ car.views | [32mnumber[37m }}</li>
+         ╵                                                        [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:72:221:
+[37m      72 │ ...age</span><h6>{{ car.mileage | [32mnumber[37m }} km</h6></div></div></div>
+         ╵                                   [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:138:88:
+[37m      138 │ ...r fa-clock"></i>{{ review.createdAt | [32mdate[37m:'mediumDate' }}</span>
+          ╵                                          [32m~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'currency'.
+To fix this, import the "CurrencyPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:160:60:
+[37m      160 │ ...ngle-price">{{ car.price | [32mcurrency[37m:'SAR':'symbol':'1.0-0' }}<...
+          ╵                               [32m~~~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:162:79:
+[37m      162 │ ..."fa-regular fa-gauge-high"></i>{{ car.mileage | [32mnumber[37m }} km</li>
+          ╵                                                    [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:164:65:
+[37m      164 │ ...a-star"></i>{{ car.rating | [32mnumber[37m:'1.1-1' }} ({{ car.reviewCo...
+          ╵                                [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/components/car-card/car-card.html:37:56:
+[37m      37 │ ...li><i class="far fa-road"></i>{{ car().mileage | [32mnumber[37m }} km</li>
+         ╵                                                     [32m~~~~~~[0m
+
+  Error occurs in the template of component CarCard.
+
+    src/app/features/cars/components/car-card/car-card.ts:16:15:
+[37m      16 │   templateUrl: [32m'./car-card.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/components/car-card/car-card.html:42:57:
+[37m      42 │ ...().city }} | Listed {{ car().listedDate | [32mdate[37m:'mediumDate' }}</p>
+         ╵                                              [32m~~~~[0m
+
+  Error occurs in the template of component CarCard.
+
+    src/app/features/cars/components/car-card/car-card.ts:16:15:
+[37m      16 │   templateUrl: [32m'./car-card.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'currency'.
+To fix this, import the "CurrencyPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/components/car-card/car-card.html:45:47:
+[37m      45 │ ...car-price">{{ car().price | [32mcurrency[37m:'SAR':'symbol':'1.0-0' }}<...
+         ╵                                [32m~~~~~~~~[0m
+
+  Error occurs in the template of component CarCard.
+
+    src/app/features/cars/components/car-card/car-card.ts:16:15:
+[37m      16 │   templateUrl: [32m'./car-card.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:45:
+[37m      17 │ ...mb, CarCard, RouterLink, [32mTranslatePipe[37m, LocalizedCurrencyPipe, ...
+         ╵                             [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedCurrencyPipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:60:
+[37m      17 │ ...Link, TranslatePipe, [32mLocalizedCurrencyPipe[37m, LocalizedDatePipe, ...
+         ╵                         [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedDatePipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:83:
+[37m      17 │ ...e, LocalizedCurrencyPipe, [32mLocalizedDatePipe[37m, LocalizedNumberPipe],
+         ╵                              [32m~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedNumberPipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:102:
+[37m      17 │ ...e, LocalizedCurrencyPipe, LocalizedDatePipe, [32mLocalizedNumberPipe[37m],
+         ╵                                                 [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'currency'.
+To fix this, import the "CurrencyPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:26:68:
+[37m      26 │ ...e-car-price">{{ car.price | [32mcurrency[37m:'SAR':'symbol':'1.0-0' }}<...
+         ╵                                [32m~~~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:28:86:
+[37m      28 │ ..."></i> Listed On: {{ car.listedDate | [32mdate[37m:'EEE, MMM d, y' }}</li>
+         ╵                                          [32m~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:29:75:
+[37m      29 │ ...li><i class="far fa-eye"></i> Views: {{ car.views | [32mnumber[37m }}</li>
+         ╵                                                        [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:72:221:
+[37m      72 │ ...age</span><h6>{{ car.mileage | [32mnumber[37m }} km</h6></div></div></div>
+         ╵                                   [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:138:88:
+[37m      138 │ ...r fa-clock"></i>{{ review.createdAt | [32mdate[37m:'mediumDate' }}</span>
+          ╵                                          [32m~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'currency'.
+To fix this, import the "CurrencyPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:160:60:
+[37m      160 │ ...ngle-price">{{ car.price | [32mcurrency[37m:'SAR':'symbol':'1.0-0' }}<...
+          ╵                               [32m~~~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:162:79:
+[37m      162 │ ..."fa-regular fa-gauge-high"></i>{{ car.mileage | [32mnumber[37m }} km</li>
+          ╵                                                    [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:164:65:
+[37m      164 │ ...a-star"></i>{{ car.rating | [32mnumber[37m:'1.1-1' }} ({{ car.reviewCo...
+          ╵                                [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:45:
+[37m      17 │ ...mb, CarCard, RouterLink, [32mTranslatePipe[37m, LocalizedCurrencyPipe, ...
+         ╵                             [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedCurrencyPipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:60:
+[37m      17 │ ...Link, TranslatePipe, [32mLocalizedCurrencyPipe[37m, LocalizedDatePipe, ...
+         ╵                         [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedDatePipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:83:
+[37m      17 │ ...e, LocalizedCurrencyPipe, [32mLocalizedDatePipe[37m, LocalizedNumberPipe],
+         ╵                              [32m~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedNumberPipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:102:
+[37m      17 │ ...e, LocalizedCurrencyPipe, LocalizedDatePipe, [32mLocalizedNumberPipe[37m],
+         ╵                                                 [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'currency'.
+To fix this, import the "CurrencyPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:26:68:
+[37m      26 │ ...e-car-price">{{ car.price | [32mcurrency[37m:'SAR':'symbol':'1.0-0' }}<...
+         ╵                                [32m~~~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:28:86:
+[37m      28 │ ..."></i> Listed On: {{ car.listedDate | [32mdate[37m:'EEE, MMM d, y' }}</li>
+         ╵                                          [32m~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:29:75:
+[37m      29 │ ...li><i class="far fa-eye"></i> Views: {{ car.views | [32mnumber[37m }}</li>
+         ╵                                                        [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:72:221:
+[37m      72 │ ...age</span><h6>{{ car.mileage | [32mnumber[37m }} km</h6></div></div></div>
+         ╵                                   [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:138:88:
+[37m      138 │ ...r fa-clock"></i>{{ review.createdAt | [32mdate[37m:'mediumDate' }}</span>
+          ╵                                          [32m~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'currency'.
+To fix this, import the "CurrencyPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:160:60:
+[37m      160 │ ...ngle-price">{{ car.price | [32mcurrency[37m:'SAR':'symbol':'1.0-0' }}<...
+          ╵                               [32m~~~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:162:79:
+[37m      162 │ ..."fa-regular fa-gauge-high"></i>{{ car.mileage | [32mnumber[37m }} km</li>
+          ╵                                                    [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:164:65:
+[37m      164 │ ...a-star"></i>{{ car.rating | [32mnumber[37m:'1.1-1' }} ({{ car.reviewCo...
+          ╵                                [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:45:
+[37m      17 │ ...mb, CarCard, RouterLink, [32mTranslatePipe[37m, LocalizedCurrencyPipe, ...
+         ╵                             [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedCurrencyPipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:60:
+[37m      17 │ ...Link, TranslatePipe, [32mLocalizedCurrencyPipe[37m, LocalizedDatePipe, ...
+         ╵                         [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedDatePipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:83:
+[37m      17 │ ...e, LocalizedCurrencyPipe, [32mLocalizedDatePipe[37m, LocalizedNumberPipe],
+         ╵                              [32m~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LocalizedNumberPipe is not used within the template of CarDetailsPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.ts:17:102:
+[37m      17 │ ...e, LocalizedCurrencyPipe, LocalizedDatePipe, [32mLocalizedNumberPipe[37m],
+         ╵                                                 [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'currency'.
+To fix this, import the "CurrencyPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:26:68:
+[37m      26 │ ...e-car-price">{{ car.price | [32mcurrency[37m:'SAR':'symbol':'1.0-0' }}<...
+         ╵                                [32m~~~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:28:86:
+[37m      28 │ ..."></i> Listed On: {{ car.listedDate | [32mdate[37m:'EEE, MMM d, y' }}</li>
+         ╵                                          [32m~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:29:75:
+[37m      29 │ ...li><i class="far fa-eye"></i> Views: {{ car.views | [32mnumber[37m }}</li>
+         ╵                                                        [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:72:221:
+[37m      72 │ ...age</span><h6>{{ car.mileage | [32mnumber[37m }} km</h6></div></div></div>
+         ╵                                   [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:138:88:
+[37m      138 │ ...r fa-clock"></i>{{ review.createdAt | [32mdate[37m:'mediumDate' }}</span>
+          ╵                                          [32m~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'currency'.
+To fix this, import the "CurrencyPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:160:60:
+[37m      160 │ ...ngle-price">{{ car.price | [32mcurrency[37m:'SAR':'symbol':'1.0-0' }}<...
+          ╵                               [32m~~~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:162:79:
+[37m      162 │ ..."fa-regular fa-gauge-high"></i>{{ car.mileage | [32mnumber[37m }} km</li>
+          ╵                                                    [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:164:65:
+[37m      164 │ ...a-star"></i>{{ car.rating | [32mnumber[37m:'1.1-1' }} ({{ car.reviewCo...
+          ╵                                [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:138:88:
+[37m      138 │ ...r fa-clock"></i>{{ review.createdAt | [32mdate[37m:'mediumDate' }}</span>
+          ╵                                          [32m~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'currency'.
+To fix this, import the "CurrencyPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:160:60:
+[37m      160 │ ...ngle-price">{{ car.price | [32mcurrency[37m:'SAR':'symbol':'1.0-0' }}<...
+          ╵                               [32m~~~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:162:79:
+[37m      162 │ ..."fa-regular fa-gauge-high"></i>{{ car.mileage | [32mnumber[37m }} km</li>
+          ╵                                                    [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'number'.
+To fix this, import the "DecimalPipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:164:65:
+[37m      164 │ ...a-star"></i>{{ car.rating | [32mnumber[37m:'1.1-1' }} ({{ car.reviewCo...
+          ╵                                [32m~~~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8004: No pipe found with name 'date'.
+To fix this, import the "DatePipe" class from "@angular/common" and add it to the "imports" array of the component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/cars/car-details/car-details.html:149:88:
+[37m      149 │ ...r fa-clock"></i>{{ review.createdAt | [32mdate[37m:'mediumDate' }}</span>
+          ╵                                          [32m~~~~[0m
+
+  Error occurs in the template of component CarDetailsPage.
+
+    src/app/features/cars/car-details/car-details.ts:18:15:
+[37m      18 │   templateUrl: [32m'./car-details.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of SellerProfilePage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/sellers/profile/seller-profile.ts:12:56:
+[37m      12 │ ...orts: [Breadcrumb, CarCard, DatePipe, FormsModule, [32mTranslatePipe[37m],
+         ╵                                                       [32m~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2683: 'this' implicitly has type 'any' because it does not have a type annotation.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:63:
+[37m      359 │ ...) as { form?: Partial<typeof [32mthis[37m.form.value>; featureIds?: nu...
+          ╵                                 [32m~~~~[0m
+
+  An outer value of 'this' is shadowed by this container.
+
+    src/app/features/account/add-listing/account-add-listing.ts:359:41:
+[37m      359 │ ...draft = JSON.parse(raw) as { [32mform[37m?: Partial<typeof this.form.v...
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:21:
+[37m      364 │       if (draft.form.[32mcarBrandId[37m) this.store.loadModels(Number(dra...
+          ╵                      [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS4111: Property 'carBrandId' comes from an index signature, so it must be accessed with ['carBrandId'].[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/add-listing/account-add-listing.ts:364:73:
+[37m      364 │ ...carBrandId) this.store.loadModels(Number(draft.form.[32mcarBrandId[37m));
+          ╵                                                        [32m~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of LoginPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/auth/login/login.ts:10:45:
+[37m      10 │   imports: [ReactiveFormsModule, RouterLink, [32mTranslatePipe[37m],
+         ╵                                              [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of LoginPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/auth/login/login.ts:10:45:
+[37m      10 │   imports: [ReactiveFormsModule, RouterLink, [32mTranslatePipe[37m],
+         ╵                                              [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of RegisterPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/auth/register/register.ts:10:45:
+[37m      10 │   imports: [ReactiveFormsModule, RouterLink, [32mTranslatePipe[37m],
+         ╵                                              [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of RegisterPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/auth/register/register.ts:10:45:
+[37m      10 │   imports: [ReactiveFormsModule, RouterLink, [32mTranslatePipe[37m],
+         ╵                                              [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of AccountSettings[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/settings/account-settings.ts:8:78:
+[37m      8 │ ...ts: [ReactiveFormsModule, [32mTranslatePipe[37m], templateUrl: './accoun...
+        ╵                              [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of AccountSettings[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/settings/account-settings.ts:8:78:
+[37m      8 │ ...ts: [ReactiveFormsModule, [32mTranslatePipe[37m], templateUrl: './accoun...
+        ╵                              [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of AccountSettings[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/settings/account-settings.ts:8:78:
+[37m      8 │ ...ts: [ReactiveFormsModule, [32mTranslatePipe[37m], templateUrl: './accoun...
+        ╵                              [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of AccountSettings[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/settings/account-settings.ts:8:78:
+[37m      8 │ ...ts: [ReactiveFormsModule, [32mTranslatePipe[37m], templateUrl: './accoun...
+        ╵                              [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of AccountSettings[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/settings/account-settings.ts:8:78:
+[37m      8 │ ...ts: [ReactiveFormsModule, [32mTranslatePipe[37m], templateUrl: './accoun...
+        ╵                              [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of AccountSettings[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/settings/account-settings.ts:8:78:
+[37m      8 │ ...ts: [ReactiveFormsModule, [32mTranslatePipe[37m], templateUrl: './accoun...
+        ╵                              [32m~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TranslatePipe is not used within the template of AccountSettings[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/settings/account-settings.ts:8:78:
+[37m      8 │ ...ts: [ReactiveFormsModule, [32mTranslatePipe[37m], templateUrl: './accoun...
+        ╵                              [32m~~~~~~~~~~~~~[0m
+
+

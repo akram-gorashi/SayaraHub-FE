@@ -8,13 +8,13 @@
     <div class="container">
       <div class="mobile-listing-heading">
         <div>
-          <span>Marketplace</span>
-          <h1>Browse cars</h1>
+          <span>{{ 'cars.marketplace' | translate }}</span>
+          <h1>{{ 'cars.browseCars' | translate }}</h1>
         </div>
         <button type="button" class="mobile-filter-button" aria-controls="car-filters"
           [attr.aria-expanded]="filtersOpen()" (click)="openFilters()">
           <i class="far fa-sliders" aria-hidden="true"></i>
-          Filters
+          {{ 'cars.filters' | translate }}
           @if (store.activeFilterCount() > 0) {
             <span>{{ store.activeFilterCount() }}</span>
           }
@@ -23,12 +23,12 @@
       @if (store.activeFilterLabels().length) {
         <div class="mobile-filter-chips" aria-label="Active filters">
           @for (label of store.activeFilterLabels(); track $index) { <span>{{ label }}</span> }
-          <button type="button" (click)="store.resetFilters()">Clear all</button>
+          <button type="button" (click)="store.resetFilters()">{{ 'common.clear' | translate }}</button>
         </div>
       }
 
       @if (filtersOpen()) {
-        <button class="filter-backdrop" type="button" aria-label="Close filters" (click)="closeFilters()"></button>
+        <button class="filter-backdrop" type="button" [attr.aria-label]="'cars.closeFilters' | translate" (click)="closeFilters()"></button>
       }
 
       <div class="row">
@@ -38,31 +38,31 @@
             aria-labelledby="mobile-filter-title" (submit)="submitFilters($event)">
             <div class="mobile-filter-header">
               <div>
-                <span>Refine results</span>
-                <h2 id="mobile-filter-title">Filters</h2>
+                <span>{{ 'cars.refineResults' | translate }}</span>
+                <h2 id="mobile-filter-title">{{ 'cars.filters' | translate }}</h2>
               </div>
-              <button type="button" aria-label="Close filters" (click)="closeFilters()">
+              <button type="button" [attr.aria-label]="'cars.closeFilters' | translate" (click)="closeFilters()">
                 <i class="far fa-times" aria-hidden="true"></i>
               </button>
             </div>
             <div class="car-widget">
               <div class="car-search-form">
-                <h4 class="car-widget-title">Search</h4>
+                <h4 class="car-widget-title">{{ 'cars.search' | translate }}</h4>
                 <div class="form-group">
                   <input
                     type="search"
                     class="form-control"
-                    placeholder="Search cars"
-                    aria-label="Search cars"
+                    [placeholder]="'cars.searchPlaceholder' | translate"
+                    [attr.aria-label]="'cars.searchPlaceholder' | translate"
                     [value]="store.filters().search"
                     (input)="updateSearch($event)">
-                  <button type="submit" aria-label="Apply search"><i class="far fa-search"></i></button>
+                  <button type="submit" [attr.aria-label]="'cars.applySearch' | translate"><i class="far fa-search"></i></button>
                 </div>
               </div>
             </div>
 
             <div class="car-widget">
-              <h4 class="car-widget-title">Brands</h4>
+              <h4 class="car-widget-title">{{ 'cars.brands' | translate }}</h4>
               <ul>
                 @for (brand of store.brands(); track brand.id) {
                   <li>
@@ -81,21 +81,21 @@
             </div>
 
             <div class="car-widget">
-              <h4 class="car-widget-title">Price Range</h4>
+              <h4 class="car-widget-title">{{ 'cars.priceRange' | translate }}</h4>
               <div class="price-range-box">
                 <div class="price-range-input listing-price-inputs">
-                  <label class="visually-hidden" for="minimum-price">Minimum price</label>
-                  <input id="minimum-price" class="form-control" type="number" min="0" placeholder="Min"
+                  <label class="visually-hidden" for="minimum-price">{{ 'cars.minPrice' | translate }}</label>
+                  <input id="minimum-price" class="form-control" type="number" min="0" [placeholder]="'cars.min' | translate"
                     [value]="store.filters().minPrice ?? ''" (input)="updatePrice('minPrice', $event)">
-                  <label class="visually-hidden" for="maximum-price">Maximum price</label>
-                  <input id="maximum-price" class="form-control" type="number" min="0" placeholder="Max"
+                  <label class="visually-hidden" for="maximum-price">{{ 'cars.maxPrice' | translate }}</label>
+                  <input id="maximum-price" class="form-control" type="number" min="0" [placeholder]="'cars.max' | translate"
                     [value]="store.filters().maxPrice ?? ''" (input)="updatePrice('maxPrice', $event)">
                 </div>
               </div>
             </div>
 
             <div class="car-widget">
-              <h4 class="car-widget-title">Transmission</h4>
+              <h4 class="car-widget-title">{{ 'listing.transmission' | translate }}</h4>
               <ul>
                 @for (transmission of store.transmissions(); track transmission.id) {
                   <li>
@@ -114,7 +114,7 @@
             </div>
 
             <div class="car-widget">
-              <h4 class="car-widget-title">Fuel Type</h4>
+              <h4 class="car-widget-title">{{ 'listing.fuelType' | translate }}</h4>
               <ul>
                 @for (fuelType of store.fuelTypes(); track fuelType.id) {
                   <li>
@@ -131,7 +131,7 @@
             </div>
 
             <div class="car-widget">
-              <h4 class="car-widget-title">Features</h4>
+              <h4 class="car-widget-title">{{ 'listing.features' | translate }}</h4>
               <ul>
                 @for (feature of store.features(); track feature.id) {
                   <li>
@@ -148,8 +148,8 @@
             </div>
 
             <div class="listing-filter-actions">
-              <button class="theme-btn" type="submit">Apply Filters</button>
-              <button class="theme-btn theme-btn2" type="button" (click)="store.resetFilters()">Reset</button>
+              <button class="theme-btn" type="submit">{{ 'cars.applyFilters' | translate }}</button>
+              <button class="theme-btn theme-btn2" type="button" (click)="store.resetFilters()">{{ 'cars.reset' | translate }}</button>
             </div>
           </form>
         </aside>
@@ -157,24 +157,24 @@
         <div class="col-lg-9">
           <div class="col-md-12">
             <div class="car-sort">
-              <h6>Showing {{ store.showingFrom() }}-{{ store.showingTo() }} of {{ store.totalCount() }} Results</h6>
-              <div class="car-sort-list-grid" aria-label="Car results view">
+              <h6>{{ 'cars.showingResults' | translate:{ from: store.showingFrom(), to: store.showingTo(), total: store.totalCount() } }}</h6>
+              <div class="car-sort-list-grid" [attr.aria-label]="'cars.viewMode' | translate">
                 <a href="/cars" class="car-sort-grid" [class.active]="store.viewMode() === 'grid'"
-                  aria-label="Grid view" [attr.aria-current]="store.viewMode() === 'grid' ? 'page' : null"
+                  [attr.aria-label]="'cars.gridView' | translate" [attr.aria-current]="store.viewMode() === 'grid' ? 'page' : null"
                   (click)="setViewMode($event, 'grid')"><i class="far fa-grid-2"></i></a>
                 <a href="/cars" class="car-sort-list" [class.active]="store.viewMode() === 'list'"
-                  aria-label="List view" [attr.aria-current]="store.viewMode() === 'list' ? 'page' : null"
+                  [attr.aria-label]="'cars.listView' | translate" [attr.aria-current]="store.viewMode() === 'list' ? 'page' : null"
                   (click)="setViewMode($event, 'list')"><i class="far fa-list-ul"></i></a>
               </div>
               <div class="col-md-3 car-sort-box">
-                <label class="visually-hidden" for="car-sort">Sort cars</label>
+                <label class="visually-hidden" for="car-sort">{{ 'cars.sortCars' | translate }}</label>
                 <select id="car-sort" class="listing-sort-select" [value]="store.filters().sort"
                   (change)="updateSort($event)">
-                  <option value="latest">Sort By Latest</option>
-                  <option value="priceAsc">Sort By Low Price</option>
-                  <option value="priceDesc">Sort By High Price</option>
-                  <option value="yearDesc">Sort By Newest Model</option>
-                  <option value="mileageAsc">Sort By Lowest Mileage</option>
+                  <option value="latest">{{ 'cars.sortLatest' | translate }}</option>
+                  <option value="priceAsc">{{ 'cars.sortLowPrice' | translate }}</option>
+                  <option value="priceDesc">{{ 'cars.sortHighPrice' | translate }}</option>
+                  <option value="yearDesc">{{ 'cars.sortNewestModel' | translate }}</option>
+                  <option value="mileageAsc">{{ 'cars.sortLowestMileage' | translate }}</option>
                 </select>
               </div>
             </div>
@@ -183,14 +183,14 @@
           @if (store.error(); as errorMessage) {
             <div class="alert alert-danger listing-state" role="alert">
               <span>{{ errorMessage }}</span>
-              <button class="btn btn-sm btn-outline-danger" type="button" (click)="store.retry()">Try again</button>
+              <button class="btn btn-sm btn-outline-danger" type="button" (click)="store.retry()">{{ 'common.retry' | translate }}</button>
             </div>
           }
 
           @if (store.loading()) {
             <div class="listing-state" role="status">
               <span class="spinner-border text-primary" aria-hidden="true"></span>
-              <span>Loading cars...</span>
+              <span>{{ 'cars.loadingCars' | translate }}</span>
             </div>
           } @else {
             <div class="row">
@@ -201,18 +201,18 @@
               } @empty {
                 <div class="col-12 listing-state">
                   <i class="far fa-car listing-empty-icon"></i>
-                  <h3>No matching cars found</h3>
-                  <button class="theme-btn" type="button" (click)="store.resetFilters()">Clear filters</button>
+                  <h3>{{ 'cars.noMatches' | translate }}</h3>
+                  <button class="theme-btn" type="button" (click)="store.resetFilters()">{{ 'cars.clearFilters' | translate }}</button>
                 </div>
               }
             </div>
           }
 
           @if (store.totalPages() > 1) {
-            <nav class="pagination-area" aria-label="Car result pages">
+            <nav class="pagination-area" [attr.aria-label]="'cars.resultPages' | translate">
               <ul class="pagination">
                 <li class="page-item" [class.disabled]="store.page() === 1">
-                  <button class="page-link" type="button" aria-label="Previous page"
+                  <button class="page-link" type="button" [attr.aria-label]="'cars.previousPage' | translate"
                     (click)="store.goToPage(store.page() - 1)"><span aria-hidden="true"><i class="far fa-arrow-left"></i></span></button>
                 </li>
                 @for (page of store.visiblePages(); track page) {
@@ -221,7 +221,7 @@
                   </li>
                 }
                 <li class="page-item" [class.disabled]="store.page() === store.totalPages()">
-                  <button class="page-link" type="button" aria-label="Next page"
+                  <button class="page-link" type="button" [attr.aria-label]="'cars.nextPage' | translate"
                     (click)="store.goToPage(store.page() + 1)"><span aria-hidden="true"><i class="far fa-arrow-right"></i></span></button>
                 </li>
               </ul>

@@ -1,6 +1,7 @@
 import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { CarCard } from '../../../features/cars/components/car-card/car-card';
 import { TemplatePluginsService } from '../../services/template-plugins';
@@ -8,7 +9,7 @@ import { LandingFilters, LandingStore } from './landing.store';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [CarCard, DecimalPipe],
+  imports: [CarCard, DecimalPipe, TranslatePipe],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SayaraMatch">
+  <rect width="64" height="64" rx="15" fill="#f51e30"/>
+  <path d="M13 38h5l4-10c1-3 4-5 7-5h13c3 0 5 2 7 5l3 10h2c3 0 5 2 5 5v4H8v-4c0-3 2-5 5-5Zm12-9-3 9h25l-3-9c-.4-1-1-2-3-2H29c-2 0-3 1-4 2Z" fill="#fff"/>
+  <circle cx="19" cy="47" r="5" fill="#fff"/>
+  <circle cx="48" cy="47" r="5" fill="#fff"/>
+</svg>

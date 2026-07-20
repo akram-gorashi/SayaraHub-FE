@@ -154,8 +154,8 @@ export class AccountAddListing {
     const input = event.target as HTMLInputElement;
     const files = Array.from(input.files ?? []);
     const remaining = 10 - this.existingImages().length - this.selectedImages().length;
-    if (files.length > remaining) { this.imageError.set(`Choose no more than ${remaining} additional images.`); input.value = ''; return; }
-    if (files.some(file => !file.type.startsWith('image/'))) { this.imageError.set('Only image files can be uploaded.'); input.value = ''; return; }
+    if (files.length > remaining) { this.imageError.set(this.translate.instant('validation.maxImages', { count: remaining })); input.value = ''; return; }
+    if (files.some(file => !file.type.startsWith('image/'))) { this.imageError.set(this.translate.instant('validation.imagesOnly')); input.value = ''; return; }
     if (!files.length) return;
     this.optimizingImages.set(true);
     this.imageError.set(null);
@@ -170,7 +170,7 @@ export class AccountAddListing {
       this.form.markAsDirty();
       if (this.submitAttempted()) this.updateValidationErrors();
     } catch {
-      this.imageError.set('One or more photos could not be processed. Please try different images.');
+      this.imageError.set(this.translate.instant('validation.photoProcessing'));
     } finally {
       this.optimizingImages.set(false);
       input.value = '';
@@ -234,7 +234,7 @@ export class AccountAddListing {
     this.submitAttempted.set(true);
     if (this.form.invalid || this.existingImages().length + this.selectedImages().length === 0) {
       this.form.markAllAsTouched();
-      if (this.existingImages().length + this.selectedImages().length === 0) this.imageError.set('Add at least one car photo.');
+      if (this.existingImages().length + this.selectedImages().length === 0) this.imageError.set(this.translate.instant('validation.photoRequired'));
       this.updateValidationErrors();
       queueMicrotask(() => {
         const firstInvalid = this.elementRef.nativeElement.querySelector<HTMLElement>('.form-control.ng-invalid, #listing-images');
@@ -295,24 +295,24 @@ export class AccountAddListing {
 
   private updateValidationErrors(): void {
     const labels: Record<string, string> = {
-      title: 'Car ad title', carConditionId: 'Condition', bodyTypeId: 'Body type',
-      carBrandId: 'Make/brand', carModelId: 'Model', price: 'Price', year: 'Year',
-      transmissionId: 'Transmission', fuelTypeId: 'Fuel type', mileage: 'Mileage',
-      engineSize: 'Engine size', cylinders: 'Cylinders', color: 'Color', doors: 'Doors',
-      vin: 'VIN', address: 'Address', city: 'City', description: 'Description',
+      title: 'listing.title', carConditionId: 'listing.condition', bodyTypeId: 'listing.bodyType',
+      carBrandId: 'listing.brand', carModelId: 'listing.model', price: 'listing.price', year: 'listing.year',
+      transmissionId: 'listing.transmission', fuelTypeId: 'listing.fuelType', mileage: 'listing.mileage',
+      engineSize: 'listing.engineSize', cylinders: 'listing.cylinders', color: 'listing.color', doors: 'listing.doors',
+      vin: 'listing.vin', address: 'listing.address', city: 'listing.city', description: 'listing.description',
     };
     const errors = Object.entries(this.form.controls)
       .filter(([, control]) => control.invalid)
       .map(([name, control]) => {
-        const label = labels[name] ?? name;
+        const label = labels[name] ? this.translate.instant(labels[name]) : name;
         if (control.hasError('required')) return this.translate.instant('validation.required', { field: label });
         if (name === 'vin') return this.translate.instant('validation.vin');
-        if (control.hasError('min')) return `${label} must be greater than the minimum allowed value.`;
-        if (control.hasError('max')) return `${label} exceeds the maximum allowed value.`;
-        return `${label} is invalid.`;
+        if (control.hasError('min')) return this.translate.instant('validation.min', { field: label });
+        if (control.hasError('max')) return this.translate.instant('validation.max', { field: label });
+        return this.translate.instant('validation.invalid', { field: label });
       });
     if (this.existingImages().length + this.selectedImages().length === 0) {
-      errors.push('At least one car photo is required.');
+      errors.push(this.translate.instant('validation.photoRequired'));
     }
     this.validationErrors.set(errors);
   }
