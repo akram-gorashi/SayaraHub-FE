@@ -78,6 +78,31 @@ html[dir="rtl"] .fa-arrow-right, html[dir="rtl"] .fa-arrow-left,
 html[dir="rtl"] .fa-chevron-right, html[dir="rtl"] .fa-chevron-left,
 html[dir="rtl"] .fa-arrow-right-long { transform: scaleX(-1); }
 html[dir="rtl"] .mobile-bottom-nav { direction: rtl; }
+html[dir="rtl"] a i,
+html[dir="rtl"] button i,
+html[dir="rtl"] label i,
+html[dir="rtl"] span i,
+html[dir="rtl"] li i {
+  margin-left: 8px;
+  margin-right: 0;
+}
+html[dir="rtl"] .theme-btn,
+html[dir="rtl"] .mobile-filter-button,
+html[dir="rtl"] .mobile-wizard-actions button,
+html[dir="rtl"] .mobile-photo-actions label span,
+html[dir="rtl"] .draft-banner span,
+html[dir="rtl"] .draft-saved,
+html[dir="rtl"] .footer-list a,
+html[dir="rtl"] .footer-contact li,
+html[dir="rtl"] .footer-contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+html[dir="rtl"] .footer-list a i,
+html[dir="rtl"] .fa-caret-right {
+  transform: scaleX(-1);
+}
 
 @media (max-width: 767px) {
   html[dir="rtl"] .mobile-listing-stepper ol,

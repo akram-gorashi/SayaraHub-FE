@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { Breadcrumb } from '../../../shared/ui/breadcrumb/breadcrumb';
 import { CarCard } from '../components/car-card/car-card';
@@ -7,7 +8,7 @@ import { CarSortOption, CarListingStore, MultiSelectFilter } from './car-listing
 
 @Component({
   selector: 'app-car-listing',
-  imports: [Breadcrumb, CarCard],
+  imports: [Breadcrumb, CarCard, TranslatePipe],
   templateUrl: './car-listing.html',
   styleUrl: './car-listing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

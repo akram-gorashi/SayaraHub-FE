@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 import { PageHero } from '../shared/page-hero';
 
 @Component({
   selector: 'app-contact-page',
-  imports: [PageHero, ReactiveFormsModule],
+  imports: [PageHero, ReactiveFormsModule, TranslatePipe],
   templateUrl: './contact-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

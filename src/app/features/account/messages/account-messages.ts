@@ -1,11 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, afterRenderEffect, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { MessagesStore } from './messages.store';
 
 @Component({
-  selector: 'app-account-messages', imports: [DatePipe, FormsModule], templateUrl: './account-messages.html',
+  selector: 'app-account-messages', imports: [DatePipe, FormsModule, TranslatePipe], templateUrl: './account-messages.html',
   styleUrl: './account-messages.scss', changeDetection: ChangeDetectionStrategy.OnPush, providers: [MessagesStore],
 })
 export class AccountMessages {

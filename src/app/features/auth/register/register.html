@@ -17,7 +17,7 @@
             <div class="form-group">
               <label for="register-name">{{ 'auth.name' | translate }}</label>
               <input id="register-name" type="text" class="form-control" formControlName="fullName"
-                autocomplete="name" placeholder="Your Name" />
+                autocomplete="name" [placeholder]="'auth.placeholders.name' | translate" />
               @if (form.controls.fullName.touched && form.controls.fullName.invalid) {
                 <small class="field-error">{{ 'auth.nameInvalid' | translate }}</small>
               }
@@ -26,7 +26,7 @@
             <div class="form-group">
               <label for="register-email">{{ 'auth.email' | translate }}</label>
               <input id="register-email" type="email" class="form-control" formControlName="email"
-                autocomplete="email" placeholder="Your Email" />
+                autocomplete="email" [placeholder]="'auth.placeholders.email' | translate" />
               @if (form.controls.email.touched && form.controls.email.hasError('required')) {
                 <small class="field-error">{{ 'auth.emailRequired' | translate }}</small>
               } @else if (form.controls.email.touched && form.controls.email.hasError('email')) {
@@ -38,7 +38,7 @@
               <label for="register-password">{{ 'auth.password' | translate }}</label>
               <div class="password-control">
                 <input id="register-password" [type]="passwordType()" class="form-control"
-                  formControlName="password" autocomplete="new-password" placeholder="Your Password" />
+                  formControlName="password" autocomplete="new-password" [placeholder]="'auth.placeholders.password' | translate" />
                 <button type="button" class="password-toggle" (click)="togglePasswordVisibility()"
                   [attr.aria-label]="(passwordVisible() ? 'auth.hidePassword' : 'auth.showPassword') | translate">
                   <i class="far" [class.fa-eye]="!passwordVisible()" [class.fa-eye-slash]="passwordVisible()"></i>

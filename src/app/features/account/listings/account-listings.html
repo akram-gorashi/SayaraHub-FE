@@ -4,7 +4,7 @@
     <div class="user-profile-card-header-right">
       <form class="user-profile-search" (submit)="submitSearch($event)">
         <div class="form-group">
-          <input type="search" class="form-control" placeholder="Search..." [value]="search()" (input)="updateSearch($event)" />
+          <input type="search" class="form-control" [placeholder]="'account.search' | translate" [value]="search()" (input)="updateSearch($event)" />
           <i class="far fa-search"></i>
         </div>
       </form>

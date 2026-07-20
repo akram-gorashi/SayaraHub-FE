@@ -114,7 +114,7 @@
                                 <div class="form-group">
                                     <label for="landing-search">Search</label>
                                     <input id="landing-search" class="form-control" type="search"
-                                        placeholder="Brand, model, or keyword"
+                                        [placeholder]="'cars.homeSearchPlaceholder' | translate"
                                         [value]="store.filters().search"
                                         (input)="updateTextFilter('search', $event)">
                                 </div>
@@ -188,7 +188,7 @@
                                 <div class="form-group">
                                     <label for="landing-city">City</label>
                                     <input id="landing-city" class="form-control" type="text"
-                                        placeholder="Any city"
+                                        [placeholder]="'cars.anyCity' | translate"
                                         [value]="store.filters().city"
                                         (input)="updateTextFilter('city', $event)">
                                 </div>
