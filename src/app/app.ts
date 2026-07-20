@@ -1,16 +1,18 @@
 import { afterNextRender, Component, DestroyRef, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Header } from "./core/layout/header/header";
 import { Footer } from "./core/layout/footer/footer";
+import { AuthSessionService } from './core/services/auth-session.service';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, RouterOutlet, Footer],
+  imports: [Header, RouterLink, RouterLinkActive, RouterOutlet, Footer],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
   protected readonly title = signal('sayara-hub-FE');
+  protected readonly session = inject(AuthSessionService);
   private readonly destroyRef = inject(DestroyRef);
 
   constructor() {

@@ -62,3 +62,38 @@ button.nav-link {
 .notification-dropdown p { margin: 0; padding: 20px; text-align: center; color: #6d7582; }
 .notification-history-link { display: block; margin: 7px 0 0 !important; padding: 10px; color: var(--color-dark) !important; text-align: center; border-radius: 5px; font-weight: 600; }
 .notification-history-link:hover { color: var(--theme-color) !important; background: #fff3f3; }
+
+@media (max-width: 767px) {
+  .header-top,
+  .mobile-menu-right,
+  #main_nav {
+    display: none !important;
+  }
+
+  .main-navigation {
+    background: #fff;
+    border-bottom: 1px solid #edf0f4;
+    box-shadow: 0 4px 18px rgb(20 32 50 / 7%);
+  }
+
+  .main-navigation .navbar {
+    background: #fff;
+    inset: auto !important;
+    min-height: 62px;
+    padding: 8px 0;
+    position: relative !important;
+    transform: none !important;
+  }
+
+  .main-navigation .navbar.fixed-top {
+    animation: none;
+    inset: auto !important;
+    position: relative !important;
+    transform: none !important;
+  }
+
+  .navbar-brand img {
+    max-height: 42px;
+    width: auto;
+  }
+}

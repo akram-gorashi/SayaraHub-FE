@@ -12,7 +12,7 @@
         <div class="details-state">
           <i class="far fa-circle-exclamation details-state-icon"></i>
           <h2>{{ errorMessage }}</h2>
-          <a routerLink="/cars" class="theme-btn">Back to listings</a>
+          <a routerLink="/cars" class="theme-btn">Back to cars</a>
         </div>
       } @else if (store.car(); as car) {
         <div class="car-single-wrapper">
@@ -184,7 +184,7 @@
 
               @if (store.isAuthenticated()) {
                 <div class="car-single-widget">
-                  <button type="button" class="btn btn-outline-danger w-100" (click)="reportOpen.set(!reportOpen())"><i class="far fa-flag"></i> Report Listing</button>
+                  <button type="button" class="btn btn-outline-danger w-100" (click)="reportOpen.set(!reportOpen())"><i class="far fa-flag"></i> Report Car Ad</button>
                   @if (reportOpen()) {
                     <form class="car-single-form mt-3" (submit)="submitReport($event)">
                       <div class="form-group"><input class="form-control" maxlength="200" required placeholder="Reason for reporting" [value]="reportReason()" (input)="reportReason.set($any($event.target).value)"></div>
@@ -201,7 +201,7 @@
 
           @if (store.relatedCars().length) {
             <div class="car-single-related mt-5">
-              <h3 class="mb-30">Related Listing</h3>
+              <h3 class="mb-30">Similar Cars</h3>
               <div class="row">
                 @for (relatedCar of store.relatedCars(); track relatedCar.id) {
                   <div class="col-md-6 col-lg-4 col-xl-3"><app-car-card [car]="relatedCar" /></div>

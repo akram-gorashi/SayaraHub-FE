@@ -24,3 +24,51 @@
   position: absolute;
   z-index: 2;
 }
+
+@media (max-width: 767px) {
+  .car-item {
+    align-items: stretch !important;
+  }
+
+  .car-btns {
+    opacity: 1;
+    right: 10px;
+    visibility: visible;
+  }
+
+  .car-content {
+    box-sizing: border-box;
+    padding: 16px 8px 8px;
+    width: 100%;
+  }
+
+  .car-top {
+    text-align: left;
+    width: 100%;
+  }
+
+  .car-top h4 {
+    margin-bottom: 6px;
+  }
+
+  .car-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px 10px;
+    width: 100%;
+  }
+
+  .car-list li {
+    margin: 0;
+  }
+
+  .car-footer .theme-btn {
+    align-items: center;
+    display: inline-flex;
+  }
+
+  .car-footer {
+    gap: 12px;
+    width: 100%;
+  }
+}

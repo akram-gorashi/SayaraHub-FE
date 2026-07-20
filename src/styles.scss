@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+@media (max-width: 767px) {
+  html {
+    scroll-padding-bottom: 90px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .py-120 {
+    padding-bottom: 42px !important;
+    padding-top: 42px !important;
+  }
+
+  .pt-100,
+  .pt-120 {
+    padding-top: 42px !important;
+  }
+
+  .pb-70,
+  .pb-120 {
+    padding-bottom: 42px !important;
+  }
+
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .site-title {
+    font-size: clamp(28px, 8vw, 36px) !important;
+    line-height: 1.2;
+  }
+
+  .theme-btn {
+    min-height: 44px;
+  }
+
+  .table-responsive {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #scroll-top {
+    bottom: calc(84px + env(safe-area-inset-bottom));
+  }
+}

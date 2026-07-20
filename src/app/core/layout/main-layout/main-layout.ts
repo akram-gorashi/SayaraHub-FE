@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CarCard } from '../../../features/cars/components/car-card/car-card';
@@ -13,9 +13,13 @@ import { LandingFilters, LandingStore } from './landing.store';
   styleUrl: './main-layout.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [LandingStore],
+  host: {
+    '(document:keydown.escape)': 'closeMobileSearch()',
+  },
 })
 export class MainLayout {
   protected readonly store = inject(LandingStore);
+  protected readonly mobileSearchOpen = signal(false);
   private readonly templatePlugins = inject(TemplatePluginsService);
   private readonly router = inject(Router);
 
@@ -43,7 +47,16 @@ export class MainLayout {
 
   protected submitSearch(event: Event): void {
     event.preventDefault();
+    this.closeMobileSearch();
     this.navigateToCarList();
+  }
+
+  protected openMobileSearch(): void {
+    this.mobileSearchOpen.set(true);
+  }
+
+  protected closeMobileSearch(): void {
+    this.mobileSearchOpen.set(false);
   }
 
   protected browseBrand(brandId: number): void {

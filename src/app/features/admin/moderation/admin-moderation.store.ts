@@ -101,7 +101,7 @@ export class AdminModerationStore {
         this.loadStatistics();
         this.loadHistory(carId);
       },
-      error: (error: unknown) => this.errorState.set(this.message(error, 'Unable to moderate this listing.')),
+      error: (error: unknown) => this.errorState.set(this.message(error, 'Unable to moderate this car.')),
     });
   }
 

@@ -1,5 +1,5 @@
 <section class="user-profile-card" aria-labelledby="add-listing-title">
-  <h2 id="add-listing-title" class="user-profile-card-title">{{ isEditing ? 'Edit Listing' : 'Add New Listing' }}</h2>
+  <h2 id="add-listing-title" class="user-profile-card-title">{{ isEditing ? 'Edit Car' : 'Sell Your Car' }}</h2>
   @if (store.error(); as error) { <div class="alert alert-danger" role="alert">{{ error }}</div> }
   @if (store.loading()) {
     <div class="text-center py-5"><span class="spinner-border text-primary" aria-label="Loading"></span></div>
@@ -14,7 +14,7 @@
           </div>
         }
         <div class="row align-items-center">
-          <div class="col-lg-12"><div class="form-group"><label for="listing-title">Listing Title</label><input id="listing-title" type="text" class="form-control" formControlName="title" placeholder="Enter title" /></div></div>
+          <div class="col-lg-12"><div class="form-group"><label for="listing-title">Car Ad Title</label><input id="listing-title" type="text" class="form-control" formControlName="title" placeholder="Enter a clear title" /></div></div>
           <div class="col-lg-4"><div class="form-group"><label for="condition">Condition</label><select id="condition" class="form-control" formControlName="carConditionId"><option [ngValue]="0">Choose</option>@for (item of store.conditions(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
           <div class="col-lg-4"><div class="form-group"><label for="body-type">Body Type</label><select id="body-type" class="form-control" formControlName="bodyTypeId"><option [ngValue]="0">Choose</option>@for (item of store.bodyTypes(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
           <div class="col-lg-4"><div class="form-group"><label for="brand">Make/Brand</label><select id="brand" class="form-control" formControlName="carBrandId" (change)="brandChanged()"><option [ngValue]="0">Choose</option>@for (item of store.brands(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
@@ -31,7 +31,7 @@
           <div class="col-lg-4"><div class="form-group"><label for="vin">VIN</label><input id="vin" type="text" class="form-control" formControlName="vin" placeholder="Enter 17-character VIN" /></div></div>
 
           <h6 class="fw-bold mt-4 mb-1">Upload Images</h6>
-          <div class="col-lg-12"><div class="form-group"><div class="list-upload-wrapper"><label class="list-img-upload" for="listing-images"><span><i class="far fa-images"></i> Upload Listing Images</span></label><input id="listing-images" type="file" class="list-img-file" accept="image/jpeg,image/png,image/webp" multiple (change)="chooseImages($event)" /></div>
+          <div class="col-lg-12"><div class="form-group"><div class="list-upload-wrapper"><label class="list-img-upload" for="listing-images"><span><i class="far fa-images"></i> Upload Car Photos</span></label><input id="listing-images" type="file" class="list-img-file" accept="image/jpeg,image/png,image/webp" multiple (change)="chooseImages($event)" /></div>
             @if (existingImages().length || imagePreviews().length) {
               <div class="listing-image-previews mt-3">
                 @for (image of existingImages(); track image.id; let index = $index) { <div class="listing-image-preview" [class.is-main]="mainExistingImageId() === image.id"><img [src]="image.thumbnailUrl || image.imageUrl" alt="Existing listing" /><div class="image-actions"><button type="button" title="Move left" [disabled]="$first" (click)="moveExisting(index, -1)"><i class="far fa-arrow-left"></i></button><button type="button" title="Move right" [disabled]="$last && !imagePreviews().length" (click)="moveExisting(index, 1)"><i class="far fa-arrow-right"></i></button><button type="button" title="Set as main image" (click)="setMainExisting(image.id)"><i class="far fa-star"></i></button><button type="button" title="Remove image" (click)="removeExistingImage(image.id)"><i class="far fa-trash-can"></i></button></div>@if (mainExistingImageId() === image.id) { <span>Main</span> }</div> }
@@ -51,7 +51,7 @@
           @for (feature of store.features(); track feature.id) {
             <div class="col-6 col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" [id]="'feature-' + feature.id" [checked]="selectedFeatureIds().includes(feature.id)" (change)="toggleFeature(feature.id, $any($event.target).checked)" /><label class="form-check-label" [for]="'feature-' + feature.id">{{ feature.name }}</label></div></div>
           }
-          <div class="col-lg-12">@if (store.submitting()) { <div class="upload-progress mt-4" role="progressbar" [attr.aria-valuenow]="store.uploadProgress()" aria-valuemin="0" aria-valuemax="100"><div [style.width.%]="store.uploadProgress()"></div><span>Uploading {{ store.uploadProgress() }}%</span></div> }<button type="submit" class="theme-btn mt-4" [disabled]="store.submitting()"><i [class]="isEditing ? 'far fa-pen' : 'far fa-plus-circle'"></i> {{ store.submitting() ? 'Saving...' : isEditing ? 'Save Changes' : 'Add Listing' }}</button></div>
+          <div class="col-lg-12">@if (store.submitting()) { <div class="upload-progress mt-4" role="progressbar" [attr.aria-valuenow]="store.uploadProgress()" aria-valuemin="0" aria-valuemax="100"><div [style.width.%]="store.uploadProgress()"></div><span>Uploading {{ store.uploadProgress() }}%</span></div> }<button type="submit" class="theme-btn mt-4" [disabled]="store.submitting()"><i [class]="isEditing ? 'far fa-pen' : 'far fa-plus-circle'"></i> {{ store.submitting() ? 'Saving...' : isEditing ? 'Save Changes' : 'Submit Car for Review' }}</button></div>
         </div>
       </form>
     </div>

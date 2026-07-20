@@ -58,7 +58,7 @@ export class AccountCarsStore {
     ).subscribe({
       next: () => {
         this.carsState.update((cars) => cars.filter((car) => car.id !== carId));
-        this.successState.set('Listing deleted successfully.');
+        this.successState.set('Car ad deleted successfully.');
       },
       error: (error: unknown) => this.errorState.set(this.errorMessage(error)),
     });
@@ -73,7 +73,7 @@ export class AccountCarsStore {
     ).subscribe({
       next: () => {
         this.carsState.update((cars) => cars.map((car) => car.id === carId ? { ...car, status: 'Sold' } : car));
-        this.successState.set('Listing marked as sold.');
+        this.successState.set('Car marked as sold.');
       },
       error: (error: unknown) => this.errorState.set(this.errorMessage(error)),
     });

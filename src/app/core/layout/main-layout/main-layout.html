@@ -93,9 +93,26 @@
 
 
         <!-- find car form -->
-        <div class="find-car">
+        <div class="find-car" [class.mobile-dialog-open]="mobileSearchOpen()">
             <div class="container">
-                <div class="find-car-form">
+                <button class="mobile-home-search-trigger" type="button" aria-controls="landing-search-panel"
+                    [attr.aria-expanded]="mobileSearchOpen()" (click)="openMobileSearch()">
+                    <span><i class="far fa-search" aria-hidden="true"></i> Search make, model, or city</span>
+                    <i class="far fa-sliders" aria-hidden="true"></i>
+                </button>
+                @if (mobileSearchOpen()) {
+                    <button class="mobile-search-backdrop" type="button" aria-label="Close search"
+                        (click)="closeMobileSearch()"></button>
+                }
+                <div id="landing-search-panel" class="find-car-form" [class.mobile-open]="mobileSearchOpen()"
+                    [attr.role]="mobileSearchOpen() ? 'dialog' : null"
+                    [attr.aria-modal]="mobileSearchOpen() ? 'true' : null" aria-labelledby="mobile-search-title">
+                    <div class="mobile-search-header">
+                        <div><span>Find your next car</span><h2 id="mobile-search-title">Search filters</h2></div>
+                        <button type="button" aria-label="Close search" (click)="closeMobileSearch()">
+                            <i class="far fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
                     <h4 class="find-car-title">Let's Find Your Perfect Car</h4>
                     <form (submit)="submitSearch($event)">
                         <div class="row">
@@ -504,7 +521,7 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="dealer-item wow fadeInUp" data-wow-delay=".25s">
                             <div class="dealer-img">
-                                <span class="dealer-listing">25 Listing</span>
+                                <span class="dealer-listing">25 Cars</span>
                                 <img src="assets/img/dealer/01.png" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="dealer-content">
@@ -519,7 +536,7 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="dealer-item wow fadeInUp" data-wow-delay=".50s">
                             <div class="dealer-img">
-                                <span class="dealer-listing">35 Listing</span>
+                                <span class="dealer-listing">35 Cars</span>
                                 <img src="assets/img/dealer/02.png" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="dealer-content">
@@ -534,7 +551,7 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="dealer-item wow fadeInUp" data-wow-delay=".75s">
                             <div class="dealer-img">
-                                <span class="dealer-listing">15 Listing</span>
+                                <span class="dealer-listing">15 Cars</span>
                                 <img src="assets/img/dealer/03.png" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="dealer-content">
@@ -549,7 +566,7 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="dealer-item wow fadeInUp" data-wow-delay="1s">
                             <div class="dealer-img">
-                                <span class="dealer-listing">20 Listing</span>
+                                <span class="dealer-listing">20 Cars</span>
                                 <img src="assets/img/dealer/04.png" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="dealer-content">
@@ -564,7 +581,7 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="dealer-item wow fadeInUp" data-wow-delay=".25s">
                             <div class="dealer-img">
-                                <span class="dealer-listing">19 Listing</span>
+                                <span class="dealer-listing">19 Cars</span>
                                 <img src="assets/img/dealer/05.png" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="dealer-content">
@@ -579,7 +596,7 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="dealer-item wow fadeInUp" data-wow-delay=".50s">
                             <div class="dealer-img">
-                                <span class="dealer-listing">40 Listing</span>
+                                <span class="dealer-listing">40 Cars</span>
                                 <img src="assets/img/dealer/06.png" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="dealer-content">
@@ -594,7 +611,7 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="dealer-item wow fadeInUp" data-wow-delay=".75s">
                             <div class="dealer-img">
-                                <span class="dealer-listing">59 Listing</span>
+                                <span class="dealer-listing">59 Cars</span>
                                 <img src="assets/img/dealer/07.png" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="dealer-content">
@@ -609,7 +626,7 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="dealer-item wow fadeInUp" data-wow-delay="1s">
                             <div class="dealer-img">
-                                <span class="dealer-listing">28 Listing</span>
+                                <span class="dealer-listing">28 Cars</span>
                                 <img src="assets/img/dealer/08.png" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="dealer-content">

@@ -56,3 +56,173 @@
   margin-bottom: 1rem;
   width: 80px;
 }
+
+.mobile-home-search-trigger,
+.mobile-search-header,
+.mobile-search-backdrop {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .hero-single {
+    min-height: 390px;
+  }
+
+  .hero-single .hero-content {
+    padding: 54px 0 88px;
+  }
+
+  .hero-content .hero-sub-title,
+  .hero-content p,
+  .hero-content .hero-btn {
+    display: none;
+  }
+
+  .hero-content .hero-title {
+    font-size: clamp(34px, 10vw, 46px);
+    line-height: 1.12;
+    margin: 0;
+    max-width: 330px;
+  }
+
+  .find-car {
+    margin-top: -42px;
+    position: relative;
+    z-index: 4;
+  }
+
+  .find-car.mobile-dialog-open {
+    z-index: 1090;
+  }
+
+  .mobile-home-search-trigger {
+    align-items: center;
+    background: #fff;
+    border: 0;
+    border-radius: 14px;
+    box-shadow: 0 12px 34px rgb(20 32 50 / 18%);
+    color: #657080;
+    display: flex;
+    justify-content: space-between;
+    min-height: 62px;
+    padding: 0 18px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .mobile-home-search-trigger span {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+  }
+
+  .mobile-home-search-trigger i {
+    color: var(--theme-color);
+  }
+
+  .mobile-search-backdrop {
+    background: rgb(10 18 28 / 55%);
+    border: 0;
+    display: block;
+    inset: 0;
+    position: fixed;
+    z-index: 1088;
+  }
+
+  .find-car-form {
+    background: #f6f7f9;
+    border-radius: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    overflow-y: auto;
+    padding: 22px 16px calc(28px + env(safe-area-inset-bottom));
+    position: fixed;
+    top: 0;
+    transform: translateY(105%);
+    transition: transform 240ms ease;
+    width: 100%;
+    z-index: 1089;
+  }
+
+  .find-car-form.mobile-open {
+    transform: none;
+  }
+
+  .mobile-search-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .mobile-search-header span {
+    color: var(--theme-color);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .mobile-search-header h2 {
+    font-size: 26px;
+    margin: 2px 0 0;
+  }
+
+  .mobile-search-header button {
+    background: #fff;
+    border: 1px solid #e5e8ed;
+    border-radius: 50%;
+    height: 42px;
+    width: 42px;
+  }
+
+  .find-car-title {
+    display: none;
+  }
+
+  .find-car-form .form-group {
+    margin-bottom: 14px;
+  }
+
+  .find-car-actions {
+    background: #fff;
+    border-top: 1px solid #e5e8ed;
+    bottom: 0;
+    left: 0;
+    margin-top: 6px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    position: fixed;
+    right: 0;
+    z-index: 2;
+  }
+
+  .find-car-form form {
+    padding-bottom: 86px;
+  }
+
+  .find-car-actions .theme-btn {
+    min-height: 48px;
+  }
+
+  .about-area,
+  .counter-area,
+  .video-area,
+  .car-dealer,
+  .choose-area,
+  .testimonial-area,
+  .blog-area,
+  .download-area {
+    display: none;
+  }
+
+  .car-area {
+    margin-top: 28px;
+  }
+
+  .car-category,
+  .car-brand {
+    padding-bottom: 42px !important;
+    padding-top: 42px !important;
+  }
+}

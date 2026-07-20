@@ -42,8 +42,8 @@ export class ListingDetailsStore {
         this.historyState.set(history.data ?? []);
       },
       error: (error: unknown) => this.errorState.set(error instanceof HttpErrorResponse
-        ? (error.error as Partial<ApiResponse<unknown>> | null)?.message || 'Unable to load the listing.'
-        : 'Unable to load the listing.'),
+        ? (error.error as Partial<ApiResponse<unknown>> | null)?.message || 'Unable to load the car.'
+        : 'Unable to load the car.'),
     });
   }
 

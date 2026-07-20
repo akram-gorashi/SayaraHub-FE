@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Breadcrumb } from '../../../shared/ui/breadcrumb/breadcrumb';
@@ -12,9 +12,13 @@ import { CarSortOption, CarListingStore, MultiSelectFilter } from './car-listing
   styleUrl: './car-listing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CarListingStore],
+  host: {
+    '(document:keydown.escape)': 'closeFilters()',
+  },
 })
 export class CarListing {
   protected readonly store = inject(CarListingStore);
+  protected readonly filtersOpen = signal(false);
   private readonly route = inject(ActivatedRoute);
 
   constructor() {
@@ -45,5 +49,14 @@ export class CarListing {
   protected submitFilters(event: Event): void {
     event.preventDefault();
     this.store.applyFilters();
+    this.closeFilters();
+  }
+
+  protected openFilters(): void {
+    this.filtersOpen.set(true);
+  }
+
+  protected closeFilters(): void {
+    this.filtersOpen.set(false);
   }
 }

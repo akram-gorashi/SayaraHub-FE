@@ -7,17 +7,19 @@
       loading="lazy"
       decoding="async"
       (error)="useFallbackImage($event)">
-    <div class="car-btns">
-      <a href="/cars" [class.active]="isFavorite()" [attr.aria-pressed]="isFavorite()"
-        [attr.aria-label]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'"
-        [attr.title]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'"
-        (click)="toggleFavorite($event)">
-        <i [class]="isFavorite() ? 'fas fa-heart' : 'far fa-heart'" aria-hidden="true"></i>
-      </a>
-      <a href="/cars" aria-label="Share car" title="Share car" (click)="shareCar($event)">
-        <i class="far fa-arrows-repeat" aria-hidden="true"></i>
-      </a>
-    </div>
+    @if (showActions()) {
+      <div class="car-btns">
+        <a href="/cars" [class.active]="isFavorite()" [attr.aria-pressed]="isFavorite()"
+          [attr.aria-label]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'"
+          [attr.title]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'"
+          (click)="toggleFavorite($event)">
+          <i [class]="isFavorite() ? 'fas fa-heart' : 'far fa-heart'" aria-hidden="true"></i>
+        </a>
+        <a href="/cars" aria-label="Share car" title="Share car" (click)="shareCar($event)">
+          <i class="far fa-arrows-repeat" aria-hidden="true"></i>
+        </a>
+      </div>
+    }
     @if (actionMessage(); as message) {
       <span class="car-action-message" role="status">{{ message }}</span>
     }
