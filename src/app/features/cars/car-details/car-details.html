@@ -23,6 +23,7 @@
                   <div class="car-single-top">
                     <span class="car-status status-1">{{ car.status }}</span>
                     <h3 class="car-single-title">{{ car.title }}</h3>
+                    <strong class="mobile-car-price">{{ car.price | currency:'SAR':'symbol':'1.0-0' }}</strong>
                     <ul class="car-single-meta">
                       <li><i class="far fa-clock"></i> Listed On: {{ car.listedDate | date:'EEE, MMM d, y' }}</li>
                       <li><i class="far fa-eye"></i> Views: {{ car.views | number }}</li>
@@ -30,7 +31,7 @@
                   </div>
 
                   <div class="car-single-slider car-details-gallery">
-                    <div class="item-gallery gallery-stage">
+                    <div class="item-gallery gallery-stage" (touchstart)="startSwipe($event)" (touchend)="endSwipe($event)">
                       <img class="gallery-main" [src]="store.selectedImage()" [alt]="car.title"
                         (error)="useFallbackImage($event)">
                       @if (car.images.length > 1) {
@@ -51,11 +52,21 @@
                       </div>
                     }
                   </div>
+
+                  <div class="mobile-seller-summary">
+                    <img [src]="car.seller.imageUrl || 'assets/img/car/author-v2.jpg'" [alt]="car.seller.fullName"
+                      (error)="useAvatarFallback($event)">
+                    <div><span>Listed by</span><h4>{{ car.seller.fullName }}</h4></div>
+                    <a [routerLink]="['/sellers', car.seller.id]" aria-label="View seller profile"><i class="far fa-chevron-right"></i></a>
+                  </div>
                 </div>
 
-                <div class="car-single-widget">
-                  <h4 class="mb-4">Key Information</h4>
-                  <div class="car-key-info row">
+                <div class="car-single-widget details-collapsible" [class.mobile-open]="specsOpen()">
+                  <button class="mobile-section-toggle" type="button" [attr.aria-expanded]="specsOpen()" (click)="specsOpen.set(!specsOpen())">
+                    <span>Key Information</span><i class="far fa-chevron-down"></i>
+                  </button>
+                  <h4 class="desktop-section-title mb-4">Key Information</h4>
+                  <div class="car-key-info row collapsible-content">
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-car"></i></div><div class="car-key-content"><span>Body Type</span><h6>{{ car.bodyType }}</h6></div></div></div>
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>Condition</span><h6>{{ car.condition }}</h6></div></div></div>
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-speedometer"></i></div><div class="car-key-content"><span>Mileage</span><h6>{{ car.mileage | number }} km</h6></div></div></div>
@@ -70,8 +81,11 @@
                   </div>
                 </div>
 
-                <div class="car-single-widget">
-                  <div class="car-single-overview">
+                <div class="car-single-widget details-collapsible" [class.mobile-open]="overviewOpen()">
+                  <button class="mobile-section-toggle" type="button" [attr.aria-expanded]="overviewOpen()" (click)="overviewOpen.set(!overviewOpen())">
+                    <span>Description & Features</span><i class="far fa-chevron-down"></i>
+                  </button>
+                  <div class="car-single-overview collapsible-content">
                     <h4 class="mb-3">Description</h4>
                     <p class="mb-4">{{ car.description || 'No description has been provided for this vehicle.' }}</p>
 
@@ -142,7 +156,7 @@
             </div>
 
             <aside class="col-lg-4">
-              <div class="car-single-widget">
+              <div class="car-single-widget desktop-summary">
                 <h4 class="car-single-price">{{ car.price | currency:'SAR':'symbol':'1.0-0' }}</h4>
                 <ul class="car-single-meta">
                   <li><i class="fa-regular fa-gauge-high"></i>{{ car.mileage | number }} km</li>
@@ -151,7 +165,7 @@
                 </ul>
               </div>
 
-              <div class="car-single-widget">
+              <div class="car-single-widget desktop-seller">
                 <div class="car-single-author">
                   <img [src]="car.seller.imageUrl || 'assets/img/car/author-v2.jpg'" [alt]="car.seller.fullName"
                     (error)="useAvatarFallback($event)">
@@ -163,7 +177,7 @@
                 <a [routerLink]="['/sellers', car.seller.id]" class="btn btn-outline-secondary w-100 mt-3">View Seller Profile</a>
               </div>
 
-              <div class="car-single-widget">
+              <div id="seller-contact-form" class="car-single-widget seller-contact-widget">
                 <h5 class="mb-3">Contact Details</h5>
                 <div class="car-single-form">
                   <form (submit)="submitContact($event)">
@@ -209,6 +223,19 @@
               </div>
             </div>
           }
+
+          <div class="mobile-buyer-actions" aria-label="Car actions">
+            <button type="button" (click)="messageSeller()" [disabled]="messageLoading()">
+              <i class="far fa-message" aria-hidden="true"></i><span>{{ messageLoading() ? 'Opening...' : 'Message' }}</span>
+            </button>
+            <button type="button" (click)="scrollToContact()">
+              <i class="far fa-envelope" aria-hidden="true"></i><span>Inquire</span>
+            </button>
+            <button type="button" (click)="addFavorite()" [disabled]="favoriteLoading()">
+              <i class="far fa-heart" aria-hidden="true"></i><span>Favorite</span>
+            </button>
+          </div>
+          @if (actionMessage(); as message) { <div class="mobile-action-message" role="status">{{ message }}</div> }
         </div>
       }
     </div>

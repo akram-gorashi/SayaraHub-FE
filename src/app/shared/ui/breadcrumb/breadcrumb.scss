@@ -1,6 +1,19 @@
 .site-breadcrumb {
   background: linear-gradient(rgb(0 0 0 / 55%), rgb(0 0 0 / 55%)),
     url('/assets/img/breadcrumb/01-v2.jpg') center / cover;
+  padding-top: 105px;
+  padding-bottom: 105px;
+}
+
+.site-breadcrumb .breadcrumb-title {
+  font-size: 36px;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .site-breadcrumb {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
 }
 
 @media (max-width: 767px) {

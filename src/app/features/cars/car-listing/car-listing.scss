@@ -61,6 +61,8 @@
   display: none;
 }
 
+.mobile-filter-chips { display: none; }
+
 @media (max-width: 767px) {
   .car-area {
     padding-top: 24px !important;
@@ -116,6 +118,10 @@
     letter-spacing: normal;
     min-width: 20px;
   }
+
+  .mobile-filter-chips { display: flex; gap: 7px; margin: -8px 0 16px; overflow-x: auto; padding-bottom: 3px; scrollbar-width: none; }
+  .mobile-filter-chips span, .mobile-filter-chips button { flex: 0 0 auto; padding: 7px 10px; border: 1px solid #e3e7ec; border-radius: 18px; background: #fff; color: #596274; font-size: 12px; }
+  .mobile-filter-chips button { color: var(--theme-color); border-color: rgb(245 30 48 / 30%); font-weight: 700; }
 
   .filter-backdrop {
     background: rgb(10 18 28 / 55%);

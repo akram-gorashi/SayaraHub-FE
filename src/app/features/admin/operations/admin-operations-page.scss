@@ -24,4 +24,31 @@
 .operation-modal label { display: block; margin: 18px 0 7px; font-weight: 600; }
 .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
 @media (max-width: 991px) { .operation-filters { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 767px) { .admin-heading { align-items: flex-start; flex-direction: column; } .operation-filters { grid-template-columns: 1fr; } }
+@media (max-width: 767px) {
+  .admin-operations { padding: 25px 0 100px; }
+  .admin-heading { align-items: flex-start; flex-direction: column; }
+  .admin-heading h1 { font-size: 28px; }
+  .admin-heading .theme-btn { width: 100%; text-align: center; }
+  .operation-tabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+  .operation-tabs .btn { flex: 0 0 auto; }
+  .operation-filters { grid-template-columns: 1fr; }
+  .operation-card { padding: 0; background: transparent; box-shadow: none; }
+  .operation-card .table-responsive { overflow: visible; }
+  .operation-card table, .operation-card tbody { display: block; width: 100%; }
+  .operation-card thead { display: none; }
+  .operation-card tr { display: grid; gap: 9px; margin-bottom: 12px; padding: 15px; border: 0; border-radius: 12px; background: #fff; box-shadow: 0 4px 18px rgb(22 34 51 / 7%); }
+  .operation-card td { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 10px; padding: 0; border: 0; white-space: normal; overflow-wrap: anywhere; }
+  .operation-card td::before { color: #77808f; font-size: 12px; font-weight: 600; }
+  .operation-card td:nth-child(1)::before { content: 'Item'; }
+  .operation-card td:nth-child(2)::before { content: 'Target'; }
+  .operation-card td:nth-child(3)::before { content: 'Details'; }
+  .operation-card td:nth-child(4)::before { content: 'Date'; }
+  .operation-card td:nth-child(5)::before { content: 'Status'; }
+  .operation-card td:nth-child(6)::before { content: 'Actions'; }
+  .operation-card td[colspan] { display: block; }
+  .operation-card td[colspan]::before { content: none; }
+  .table-actions { flex-wrap: wrap; }
+  .operation-modal-backdrop { align-items: end; padding: 0; }
+  .operation-modal { width: 100%; max-height: 90dvh; overflow-y: auto; padding: 25px 20px calc(25px + env(safe-area-inset-bottom)); border-radius: 20px 20px 0 0; }
+  .modal-actions { position: sticky; bottom: 0; padding-top: 12px; background: #fff; }
+}

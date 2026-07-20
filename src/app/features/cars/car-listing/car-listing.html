@@ -20,6 +20,12 @@
           }
         </button>
       </div>
+      @if (store.activeFilterLabels().length) {
+        <div class="mobile-filter-chips" aria-label="Active filters">
+          @for (label of store.activeFilterLabels(); track $index) { <span>{{ label }}</span> }
+          <button type="button" (click)="store.resetFilters()">Clear all</button>
+        </div>
+      }
 
       @if (filtersOpen()) {
         <button class="filter-backdrop" type="button" aria-label="Close filters" (click)="closeFilters()"></button>

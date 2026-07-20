@@ -1,14 +1,12 @@
 <main class="main">
-  <app-breadcrumb title="Login" parentLabel="Login" parentLink="/login" />
-
   <section class="login-area py-120" aria-labelledby="login-heading">
     <div class="container">
       <div class="col-md-7 col-lg-5 mx-auto">
         <div class="login-form">
           <div class="login-header">
-            <img src="assets/img/logo/logo.png" alt="SayaraHub" />
-            <h2 id="login-heading" class="visually-hidden">Login to SayaraHub</h2>
-            <p>Login with your SayaraHub account</p>
+            <div class="auth-brand" aria-label="SayaraMatch">SAYARA<span>MATCH</span></div>
+            <h2 id="login-heading" class="visually-hidden">Login to SayaraMatch</h2>
+            <p>Login with your SayaraMatch account</p>
           </div>
 
           @if (store.error(); as error) {

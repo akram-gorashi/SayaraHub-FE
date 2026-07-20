@@ -33,6 +33,9 @@ export class AccountAddListing {
   protected readonly imageError = signal<string | null>(null);
   protected readonly validationErrors = signal<string[]>([]);
   protected readonly submitAttempted = signal(false);
+  protected readonly currentStep = signal(1);
+  protected readonly stepError = signal<string | null>(null);
+  protected readonly mobileSteps = ['Basics', 'Details', 'Photos', 'Finish'];
   protected readonly mainExistingImageId = signal<number | null>(null);
   protected readonly mainNewImage = signal<File | null>(null);
   private readonly initialized = signal(false);
@@ -97,6 +100,31 @@ export class AccountAddListing {
   protected brandChanged(): void {
     this.form.controls.carModelId.setValue(0);
     this.store.loadModels(Number(this.form.controls.carBrandId.value));
+  }
+
+  protected nextStep(): void {
+    const controls = this.stepControls(this.currentStep());
+    controls.forEach(name => this.form.controls[name].markAsTouched());
+    if (controls.some(name => this.form.controls[name].invalid)) {
+      this.stepError.set('Please complete the required fields before continuing.');
+      this.focusFirstInvalid();
+      return;
+    }
+    if (this.currentStep() === 3 && this.existingImages().length + this.selectedImages().length === 0) {
+      this.imageError.set('Add at least one car photo.');
+      this.stepError.set('Add at least one photo before continuing.');
+      this.elementRef.nativeElement.querySelector<HTMLElement>('#listing-images')?.focus();
+      return;
+    }
+    this.stepError.set(null);
+    this.currentStep.update(step => Math.min(4, step + 1));
+    this.scrollToWizardTop();
+  }
+
+  protected previousStep(): void {
+    this.stepError.set(null);
+    this.currentStep.update(step => Math.max(1, step - 1));
+    this.scrollToWizardTop();
   }
 
   protected toggleFeature(featureId: number, selected: boolean): void {
@@ -223,5 +251,24 @@ export class AccountAddListing {
       errors.push('At least one car photo is required.');
     }
     this.validationErrors.set(errors);
+  }
+
+  private stepControls(step: number): Array<keyof typeof this.form.controls> {
+    if (step === 1) return ['title', 'carConditionId', 'bodyTypeId', 'carBrandId', 'carModelId', 'price', 'year', 'transmissionId', 'fuelTypeId'];
+    if (step === 2) return ['mileage', 'engineSize', 'cylinders', 'color', 'doors', 'vin'];
+    if (step === 4) return ['address', 'city', 'description'];
+    return [];
+  }
+
+  private focusFirstInvalid(): void {
+    queueMicrotask(() => {
+      const firstInvalid = this.elementRef.nativeElement.querySelector<HTMLElement>(`.mobile-step-${this.currentStep()} .form-control.ng-invalid`);
+      firstInvalid?.focus();
+      firstInvalid?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
+
+  private scrollToWizardTop(): void {
+    queueMicrotask(() => this.elementRef.nativeElement.querySelector<HTMLElement>('.mobile-listing-stepper')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   }
 }

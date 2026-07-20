@@ -22,6 +22,7 @@ export class MainLayout {
   protected readonly mobileSearchOpen = signal(false);
   private readonly templatePlugins = inject(TemplatePluginsService);
   private readonly router = inject(Router);
+  private searchTrigger: HTMLElement | null = null;
 
   constructor() {
     this.store.load();
@@ -52,11 +53,15 @@ export class MainLayout {
   }
 
   protected openMobileSearch(): void {
+    this.searchTrigger = document.activeElement as HTMLElement | null;
     this.mobileSearchOpen.set(true);
+    setTimeout(() => document.querySelector<HTMLInputElement>('#landing-search-panel input')?.focus());
   }
 
   protected closeMobileSearch(): void {
+    if (!this.mobileSearchOpen()) return;
     this.mobileSearchOpen.set(false);
+    setTimeout(() => this.searchTrigger?.focus());
   }
 
   protected browseBrand(brandId: number): void {

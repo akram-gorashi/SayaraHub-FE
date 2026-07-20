@@ -20,6 +20,7 @@ export class CarListing {
   protected readonly store = inject(CarListingStore);
   protected readonly filtersOpen = signal(false);
   private readonly route = inject(ActivatedRoute);
+  private filterTrigger: HTMLElement | null = null;
 
   constructor() {
     this.store.initialize(this.route.snapshot.queryParamMap);
@@ -53,10 +54,14 @@ export class CarListing {
   }
 
   protected openFilters(): void {
+    this.filterTrigger = document.activeElement as HTMLElement | null;
     this.filtersOpen.set(true);
+    setTimeout(() => document.querySelector<HTMLInputElement>('#car-filters input')?.focus());
   }
 
   protected closeFilters(): void {
+    if (!this.filtersOpen()) return;
     this.filtersOpen.set(false);
+    setTimeout(() => this.filterTrigger?.focus());
   }
 }

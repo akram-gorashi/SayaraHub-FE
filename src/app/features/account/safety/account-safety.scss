@@ -7,3 +7,17 @@
 .blocked-list article > div { flex: 1; min-width: 0; }
 .blocked-list small, td small { display: block; color: #77808f; }
 .empty-state { padding: 30px; color: #77808f; text-align: center; }
+.report-cards { display: none; }
+
+@media (max-width: 767px) {
+  .safety-page { padding: 18px 15px; }
+  .safety-section + .safety-section { margin-top: 22px; padding-top: 20px; }
+  .blocked-list article { align-items: flex-start; flex-wrap: wrap; }
+  .blocked-list article button { margin-left: 60px; }
+  .table-responsive { display: none; }
+  .report-cards { display: grid; gap: 12px; }
+  .report-cards article { padding: 14px; border: 1px solid #edf0f4; border-radius: 12px; }
+  .report-cards header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .report-cards p { margin: 7px 0 0; color: #596274; font-size: 13px; }
+  .report-cards footer { display: grid; gap: 4px; margin-top: 12px; padding-top: 10px; border-top: 1px solid #edf0f4; color: #77808f; font-size: 12px; }
+}

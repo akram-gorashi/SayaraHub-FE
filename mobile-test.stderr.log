@@ -234,3 +234,133 @@ AggregateError [ECONNREFUSED]:
 AggregateError [ECONNREFUSED]: 
     at internalConnectMultiple (node:net:1193:18)
     at afterConnectMultiple (node:net:1783:7)
+[2m05:00:20[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+Error: socket hang up
+    at Socket.socketOnEnd (node:_http_client:631:25)
+    at Socket.emit (node:events:521:24)
+    at endReadableNT (node:internal/streams/readable:1744:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2m05:00:23[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:00:34[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:01:05[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:04:00[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications?pageNumber=1&pageSize=8[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:04:00[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications/unread-count[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:04:02[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:04:03[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=9[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:04:03[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/MasterData?pageNumber=1&pageSize=50[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:07:13[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications?pageNumber=1&pageSize=8[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:07:13[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications/unread-count[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:07:16[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:07:22[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=9[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:07:22[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/MasterData?pageNumber=1&pageSize=50[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:08:59[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications?pageNumber=1&pageSize=8[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:08:59[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications/unread-count[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:09:13[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:09:14[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:09:14[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications?pageNumber=1&pageSize=8[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:09:14[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications/unread-count[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:09:18[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=9[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:09:18[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/MasterData?pageNumber=1&pageSize=50[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:10:23[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications?pageNumber=1&pageSize=8[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:10:23[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications/unread-count[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:10:24[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:10:25[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=9[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:10:25[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/MasterData?pageNumber=1&pageSize=50[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:10:54[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications?pageNumber=1&pageSize=8[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:10:54[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications/unread-count[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:10:56[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:10:56[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=9[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m05:10:56[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/MasterData?pageNumber=1&pageSize=50[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
