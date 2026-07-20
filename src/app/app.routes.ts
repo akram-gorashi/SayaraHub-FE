@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { authGuard } from './core/guards/auth.guard';
 import { adminGuard } from './core/guards/admin.guard';
+import { unsavedListingGuard } from './core/guards/unsaved-listing.guard';
 
 export const routes: Routes = [
   {
@@ -139,6 +140,7 @@ export const routes: Routes = [
       },
       {
         path: 'listings/:id/edit', title: 'Edit Car | SayaraMatch', data: { accountTitle: 'Edit Car' },
+        canDeactivate: [unsavedListingGuard],
         loadComponent: () =>
           import('./features/account/add-listing/account-add-listing').then(({ AccountAddListing }) => AccountAddListing),
       },
@@ -189,6 +191,7 @@ export const routes: Routes = [
       },
       {
         path: 'add-listing', title: 'Sell a Car | SayaraMatch', data: { accountTitle: 'Sell a Car' },
+        canDeactivate: [unsavedListingGuard],
         loadComponent: () =>
           import('./features/account/add-listing/account-add-listing').then(({ AccountAddListing }) => AccountAddListing),
       },

@@ -12,6 +12,8 @@ export interface PublicUserProfile {
   fullName: string;
   phoneNumber: string | null;
   imageUrl: string | null;
+  isVerified?: boolean;
+  isPhoneVerified?: boolean;
 }
 
 export interface UpdateUserProfileRequest {

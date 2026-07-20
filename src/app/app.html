@@ -4,24 +4,24 @@
 
 <nav class="mobile-bottom-nav" aria-label="Primary mobile navigation">
   <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-    <i class="far fa-house" aria-hidden="true"></i><span>Home</span>
+    <i class="far fa-house" aria-hidden="true"></i><span>{{ 'nav.home' | translate }}</span>
   </a>
   <a routerLink="/cars" routerLinkActive="active">
-    <i class="far fa-car" aria-hidden="true"></i><span>Browse</span>
+    <i class="far fa-car" aria-hidden="true"></i><span>{{ 'nav.browse' | translate }}</span>
   </a>
   <a class="mobile-bottom-nav__primary" routerLink="/account/add-listing" routerLinkActive="active">
-    <i class="far fa-plus" aria-hidden="true"></i><span>Sell</span>
+    <i class="far fa-plus" aria-hidden="true"></i><span>{{ 'nav.sell' | translate }}</span>
   </a>
   <a routerLink="/account/favorites" routerLinkActive="active">
-    <i class="far fa-heart" aria-hidden="true"></i><span>Favorites</span>
+    <i class="far fa-heart" aria-hidden="true"></i><span>{{ 'nav.favorites' | translate }}</span>
   </a>
   @if (session.isAuthenticated()) {
     <a routerLink="/account/dashboard" routerLinkActive="active">
-      <span class="mobile-nav-icon"><i class="far fa-user" aria-hidden="true"></i>@if (notifications.unread() > 0) { <b>{{ notifications.unread() > 9 ? '9+' : notifications.unread() }}</b> }</span><span>Account</span>
+      <span class="mobile-nav-icon"><i class="far fa-user" aria-hidden="true"></i>@if (notifications.unread() > 0) { <b>{{ notifications.unread() > 9 ? '9+' : notifications.unread() }}</b> }</span><span>{{ 'nav.account' | translate }}</span>
     </a>
   } @else {
     <a routerLink="/login" routerLinkActive="active">
-      <i class="far fa-user" aria-hidden="true"></i><span>Sign in</span>
+      <i class="far fa-user" aria-hidden="true"></i><span>{{ 'nav.signIn' | translate }}</span>
     </a>
   }
 </nav>

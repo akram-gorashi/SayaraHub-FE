@@ -34,17 +34,17 @@
     </div>
     <ul class="car-list">
       <li><i class="far fa-steering-wheel"></i>{{ car().transmission }}</li>
-      <li><i class="far fa-road"></i>{{ car().mileage | number }} km</li>
-      <li><i class="far fa-car"></i>Model: {{ car().year }}</li>
+      <li><i class="far fa-road"></i>{{ car().mileage | smNumber }} km</li>
+      <li><i class="far fa-car"></i>{{ 'listing.model' | translate }}: {{ car().year | smNumber }}</li>
       <li><i class="far fa-gas-pump"></i>{{ car().fuelType }}</li>
     </ul>
     @if (viewMode() === 'list') {
-      <p>{{ car().city }} | Listed {{ car().listedDate | date:'mediumDate' }}</p>
+      <p>{{ car().city }} | {{ 'details.listedOn' | translate }} {{ car().listedDate | smDate }}</p>
     }
     <div class="car-footer">
-      <span class="car-price">{{ car().price | currency:'SAR':'symbol':'1.0-0' }}</span>
+      <span class="car-price">{{ car().price | smCurrency }}</span>
       <a [routerLink]="['/cars', car().id]" class="theme-btn">
-        <span class="far fa-eye"></span>Details
+        <span class="far fa-eye"></span>{{ 'details.viewDetails' | translate }}
       </a>
     </div>
   </div>

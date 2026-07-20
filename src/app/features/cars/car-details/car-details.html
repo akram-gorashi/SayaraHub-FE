@@ -23,10 +23,10 @@
                   <div class="car-single-top">
                     <span class="car-status status-1">{{ car.status }}</span>
                     <h3 class="car-single-title">{{ car.title }}</h3>
-                    <strong class="mobile-car-price">{{ car.price | currency:'SAR':'symbol':'1.0-0' }}</strong>
+                    <strong class="mobile-car-price">{{ car.price | smCurrency }}</strong>
                     <ul class="car-single-meta">
-                      <li><i class="far fa-clock"></i> Listed On: {{ car.listedDate | date:'EEE, MMM d, y' }}</li>
-                      <li><i class="far fa-eye"></i> Views: {{ car.views | number }}</li>
+                      <li><i class="far fa-clock"></i>{{ 'details.listedOn' | translate }}: {{ car.listedDate | smDate }}</li>
+                      <li><i class="far fa-eye"></i>{{ 'details.views' | translate }}: {{ car.views | smNumber }}</li>
                     </ul>
                   </div>
 
@@ -56,20 +56,20 @@
                   <div class="mobile-seller-summary">
                     <img [src]="car.seller.imageUrl || 'assets/img/car/author-v2.jpg'" [alt]="car.seller.fullName"
                       (error)="useAvatarFallback($event)">
-                    <div><span>Listed by</span><h4>{{ car.seller.fullName }}</h4></div>
+                    <div><span>{{ 'details.listedBy' | translate }}</span><h4>{{ car.seller.fullName }}</h4><div class="seller-trust-badges">@if (car.seller.isVerified) { <span><i class="far fa-badge-check"></i>{{ 'trust.verifiedSeller' | translate }}</span> } @if (car.seller.isPhoneVerified) { <span><i class="far fa-phone-check"></i>{{ 'trust.verifiedPhone' | translate }}</span> }</div></div>
                     <a [routerLink]="['/sellers', car.seller.id]" aria-label="View seller profile"><i class="far fa-chevron-right"></i></a>
                   </div>
                 </div>
 
                 <div class="car-single-widget details-collapsible" [class.mobile-open]="specsOpen()">
                   <button class="mobile-section-toggle" type="button" [attr.aria-expanded]="specsOpen()" (click)="specsOpen.set(!specsOpen())">
-                    <span>Key Information</span><i class="far fa-chevron-down"></i>
+                    <span>{{ 'details.keyInfo' | translate }}</span><i class="far fa-chevron-down"></i>
                   </button>
-                  <h4 class="desktop-section-title mb-4">Key Information</h4>
+                  <h4 class="desktop-section-title mb-4">{{ 'details.keyInfo' | translate }}</h4>
                   <div class="car-key-info row collapsible-content">
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-car"></i></div><div class="car-key-content"><span>Body Type</span><h6>{{ car.bodyType }}</h6></div></div></div>
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>Condition</span><h6>{{ car.condition }}</h6></div></div></div>
-                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-speedometer"></i></div><div class="car-key-content"><span>Mileage</span><h6>{{ car.mileage | number }} km</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-speedometer"></i></div><div class="car-key-content"><span>{{ 'listing.mileage' | translate }}</span><h6>{{ car.mileage | smNumber }} km</h6></div></div></div>
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-gear"></i></div><div class="car-key-content"><span>Transmission</span><h6>{{ car.transmission }}</h6></div></div></div>
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-calendar"></i></div><div class="car-key-content"><span>Year</span><h6>{{ car.year }}</h6></div></div></div>
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-gas-station"></i></div><div class="car-key-content"><span>Fuel Type</span><h6>{{ car.fuelType }}</h6></div></div></div>
@@ -83,13 +83,13 @@
 
                 <div class="car-single-widget details-collapsible" [class.mobile-open]="overviewOpen()">
                   <button class="mobile-section-toggle" type="button" [attr.aria-expanded]="overviewOpen()" (click)="overviewOpen.set(!overviewOpen())">
-                    <span>Description & Features</span><i class="far fa-chevron-down"></i>
+                    <span>{{ 'details.descriptionFeatures' | translate }}</span><i class="far fa-chevron-down"></i>
                   </button>
                   <div class="car-single-overview collapsible-content">
-                    <h4 class="mb-3">Description</h4>
+                    <h4 class="mb-3">{{ 'details.description' | translate }}</h4>
                     <p class="mb-4">{{ car.description || 'No description has been provided for this vehicle.' }}</p>
 
-                    <h4 class="mb-3">Car Features</h4>
+                    <h4 class="mb-3">{{ 'details.features' | translate }}</h4>
                     @if (car.features.length) {
                       <div class="row mb-4">
                         @for (feature of car.features; track feature) {
@@ -102,7 +102,7 @@
                       <p class="mb-4">No features have been listed.</p>
                     }
 
-                    <h4 class="mb-4">Vehicle History</h4>
+                    <h4 class="mb-4">{{ 'details.history' | translate }}</h4>
                     @if (car.vehicleHistories.length) {
                       <ul class="car-single-list">
                         @for (history of car.vehicleHistories; track $index) {
@@ -113,7 +113,7 @@
                       <p>No vehicle history has been provided.</p>
                     }
 
-                    <h4 class="mb-4 mt-4">Location</h4>
+                    <h4 class="mb-4 mt-4">{{ 'details.location' | translate }}</h4>
                     <div class="car-single-map">
                       <div class="contact-map details-location">
                         <i class="far fa-location-dot"></i>
@@ -121,6 +121,17 @@
                       </div>
                     </div>
                   </div>
+                </div>
+
+                <div class="car-single-widget buyer-safety-card">
+                  <div class="buyer-safety-heading"><i class="far fa-shield-check"></i><div><h4>{{ 'trust.buyerChecklist' | translate }}</h4><p>{{ 'trust.safetyTitle' | translate }}</p></div></div>
+                  <ul class="buyer-checklist">
+                    <li><i class="far fa-square-check"></i>{{ 'trust.checkVin' | translate }}</li>
+                    <li><i class="far fa-square-check"></i>{{ 'trust.inspect' | translate }}</li>
+                    <li><i class="far fa-square-check"></i>{{ 'trust.testDrive' | translate }}</li>
+                    <li><i class="far fa-square-check"></i>{{ 'trust.securePayment' | translate }}</li>
+                  </ul>
+                  <div class="safety-advice"><i class="far fa-circle-info"></i><p>{{ 'trust.safetyBody' | translate }}</p></div>
                 </div>
 
                 <div class="car-single-widget">
@@ -135,7 +146,7 @@
                                 [alt]="review.reviewerName" (error)="useAvatarFallback($event)">
                               <div class="blog-comments-content">
                                 <h5>{{ review.reviewerName }}</h5>
-                                <span><i class="far fa-clock"></i>{{ review.createdAt | date:'mediumDate' }}</span>
+                                <span><i class="far fa-clock"></i>{{ review.createdAt | smDate }}</span>
                                 <p>{{ review.comment }}</p>
                                 <div class="review-stars" [attr.aria-label]="review.rating + ' out of 5 stars'">
                                   @for (star of [1, 2, 3, 4, 5]; track star) {
@@ -157,11 +168,11 @@
 
             <aside class="col-lg-4">
               <div class="car-single-widget desktop-summary">
-                <h4 class="car-single-price">{{ car.price | currency:'SAR':'symbol':'1.0-0' }}</h4>
+                <h4 class="car-single-price">{{ car.price | smCurrency }}</h4>
                 <ul class="car-single-meta">
-                  <li><i class="fa-regular fa-gauge-high"></i>{{ car.mileage | number }} km</li>
+                  <li><i class="fa-regular fa-gauge-high"></i>{{ car.mileage | smNumber }} km</li>
                   <li><i class="far fa-location-dot"></i>{{ car.address || car.city }}</li>
-                  <li><i class="far fa-star"></i>{{ car.rating | number:'1.1-1' }} ({{ car.reviewCount }} reviews)</li>
+                  <li><i class="far fa-star"></i>{{ car.rating | smNumber:1 }} ({{ car.reviewCount | smNumber }} reviews)</li>
                 </ul>
               </div>
 
@@ -171,10 +182,11 @@
                     (error)="useAvatarFallback($event)">
                   <div class="car-single-author-content">
                     <h5><a [routerLink]="['/sellers', car.seller.id]">{{ car.seller.fullName }}</a></h5>
-                    <span>Seller</span>
+                    <span>{{ 'details.seller' | translate }}</span>
+                    <div class="seller-trust-badges">@if (car.seller.isVerified) { <span><i class="far fa-badge-check"></i>{{ 'trust.verifiedSeller' | translate }}</span> } @if (car.seller.isPhoneVerified) { <span><i class="far fa-phone-check"></i>{{ 'trust.verifiedPhone' | translate }}</span> }</div>
                   </div>
                 </div>
-                <a [routerLink]="['/sellers', car.seller.id]" class="btn btn-outline-secondary w-100 mt-3">View Seller Profile</a>
+                <a [routerLink]="['/sellers', car.seller.id]" class="btn btn-outline-secondary w-100 mt-3">{{ 'details.viewSeller' | translate }}</a>
               </div>
 
               <div id="seller-contact-form" class="car-single-widget seller-contact-widget">
@@ -215,7 +227,7 @@
 
           @if (store.relatedCars().length) {
             <div class="car-single-related mt-5">
-              <h3 class="mb-30">Similar Cars</h3>
+              <h3 class="mb-30">{{ 'details.similar' | translate }}</h3>
               <div class="row">
                 @for (relatedCar of store.relatedCars(); track relatedCar.id) {
                   <div class="col-md-6 col-lg-4 col-xl-3"><app-car-card [car]="relatedCar" /></div>
@@ -226,13 +238,13 @@
 
           <div class="mobile-buyer-actions" aria-label="Car actions">
             <button type="button" (click)="messageSeller()" [disabled]="messageLoading()">
-              <i class="far fa-message" aria-hidden="true"></i><span>{{ messageLoading() ? 'Opening...' : 'Message' }}</span>
+              <i class="far fa-message" aria-hidden="true"></i><span>{{ messageLoading() ? ('common.loading' | translate) : ('details.message' | translate) }}</span>
             </button>
             <button type="button" (click)="scrollToContact()">
-              <i class="far fa-envelope" aria-hidden="true"></i><span>Inquire</span>
+              <i class="far fa-envelope" aria-hidden="true"></i><span>{{ 'details.inquire' | translate }}</span>
             </button>
             <button type="button" (click)="addFavorite()" [disabled]="favoriteLoading()">
-              <i class="far fa-heart" aria-hidden="true"></i><span>Favorite</span>
+              <i class="far fa-heart" aria-hidden="true"></i><span>{{ 'details.favorite' | translate }}</span>
             </button>
           </div>
           @if (actionMessage(); as message) { <div class="mobile-action-message" role="status">{{ message }}</div> }

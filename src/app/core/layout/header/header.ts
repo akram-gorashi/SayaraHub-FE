@@ -6,10 +6,12 @@ import { AuthService } from '../../services/auth.service';
 import { AuthSessionService } from '../../services/auth-session.service';
 import { Notification } from '../../models/notification.models';
 import { NotificationCenterService } from '../../services/notification-center.service';
+import { LanguageService } from '../../services/language.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, TranslatePipe],
   templateUrl: './header.html',
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +29,7 @@ export class Header {
   protected readonly notificationOpen = signal(false);
   protected readonly pagesOpen = signal(false);
   protected readonly mobileNavigationOpen = signal(false);
+  protected readonly language = inject(LanguageService);
 
   protected toggleNotifications(event: Event): void {
     event.stopPropagation();

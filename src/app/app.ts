@@ -4,10 +4,12 @@ import { Header } from "./core/layout/header/header";
 import { Footer } from "./core/layout/footer/footer";
 import { AuthSessionService } from './core/services/auth-session.service';
 import { NotificationCenterService } from './core/services/notification-center.service';
+import { LanguageService } from './core/services/language.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, RouterLink, RouterLinkActive, RouterOutlet, Footer],
+  imports: [Header, RouterLink, RouterLinkActive, RouterOutlet, Footer, TranslatePipe],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -15,6 +17,7 @@ export class App {
   protected readonly title = signal('sayara-hub-FE');
   protected readonly session = inject(AuthSessionService);
   protected readonly notifications = inject(NotificationCenterService);
+  protected readonly language = inject(LanguageService);
   private readonly destroyRef = inject(DestroyRef);
 
   constructor() {

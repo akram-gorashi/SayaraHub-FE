@@ -4,14 +4,26 @@ select.form-control { appearance: auto; }
 .listing-validation-summary { scroll-margin-top: 120px; }
 .add-listing-form .form-control.ng-invalid.ng-touched { border-color: var(--bs-danger); }
 .add-listing-form .form-control.ng-invalid.ng-touched:focus { box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .15); }
-.listing-image-previews { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px; }
+.listing-image-previews { display: grid; gap: 14px; }
+.photo-drop-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px; min-height: 1px; }
 .listing-image-preview { position: relative; overflow: hidden; height: 105px; border-radius: 8px; background: #f5f5f5; }
 .listing-image-preview img { width: 100%; height: 100%; object-fit: cover; }
 .listing-image-preview.is-main { outline: 3px solid #29bf6c; }
 .image-actions { position: absolute; top: 5px; right: 5px; left: 5px; display: flex; justify-content: flex-end; gap: 3px; }
 .image-actions button { width: 26px; height: 26px; padding: 0; color: #fff; background: rgba(20, 26, 36, .82); border: 0; border-radius: 50%; font-size: 11px; }
 .image-actions button:disabled { opacity: .35; }
-.listing-image-preview span { position: absolute; left: 6px; bottom: 6px; padding: 2px 7px; color: #fff; background: #29bf6c; border-radius: 4px; font-size: 11px; }
+.listing-image-preview .main-label { position: absolute; inset-inline-start: 6px; bottom: 6px; padding: 2px 7px; color: #fff; background: #29bf6c; border-radius: 4px; font-size: 11px; }
+.drag-handle { position: absolute; inset-inline-start: 6px; top: 6px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #fff; background: rgb(20 26 36 / 82%); cursor: grab; }
+.mobile-photo-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.mobile-photo-actions .list-img-upload { display: grid; place-items: center; min-height: 72px; margin: 0; text-align: center; }
+.camera-upload { background: rgb(245 30 48 / 8%); }
+.photo-optimization, .photo-drag-hint { display: flex; align-items: center; gap: 8px; margin: 12px 0 0; color: #667080; font-size: 12px; }
+.draft-banner { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; padding: 12px 14px; border-radius: 10px; color: #6c5200; background: #fff6d8; }
+.draft-banner span { display: flex; align-items: center; gap: 8px; }
+.draft-banner button { flex: 0 0 auto; padding: 5px 8px; border: 0; color: #a21120; background: transparent; font-size: 12px; font-weight: 700; }
+.draft-saved { position: fixed; z-index: 1090; right: 18px; bottom: 92px; display: flex; align-items: center; gap: 7px; padding: 9px 12px; border-radius: 18px; color: #fff; background: #1f9d5a; box-shadow: 0 6px 20px rgb(0 0 0 / 18%); font-size: 12px; }
+.cdk-drag-preview { overflow: hidden; border-radius: 8px; box-shadow: 0 12px 30px rgb(0 0 0 / 25%); }
+.cdk-drag-placeholder { opacity: .25; }
 .upload-progress { position: relative; height: 28px; overflow: hidden; background: #edf0f4; border-radius: 20px; }
 .upload-progress > div { height: 100%; background: #29bf6c; transition: width .2s ease; }
 .upload-progress span { position: absolute; inset: 0; display: grid; place-items: center; color: #172133; font-weight: 600; font-size: 12px; }
@@ -42,7 +54,8 @@ select.form-control { appearance: auto; }
   .add-listing-form .form-group { margin-bottom: 16px; }
   .add-listing-form label { margin-bottom: 6px; font-size: 13px; font-weight: 600; }
   .add-listing-form .form-control { min-height: 48px; }
-  .listing-image-previews { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .listing-image-previews, .photo-drop-list { gap: 10px; }
+  .photo-drop-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .listing-image-preview { height: 110px; }
   .mobile-wizard-actions { position: sticky; z-index: 4; bottom: 72px; display: flex; gap: 10px; margin: 22px -15px -75px; padding: 12px 15px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid #e6e9ee; background: #fff; box-shadow: 0 -8px 24px rgb(20 32 50 / 8%); }
   .mobile-wizard-back { min-width: 96px; min-height: 48px; border: 1px solid #dfe3e8; border-radius: 8px; color: #596274; background: #fff; font-weight: 700; }

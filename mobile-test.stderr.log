@@ -364,3 +364,45 @@ AggregateError [ECONNREFUSED]:
 AggregateError [ECONNREFUSED]: 
     at internalConnectMultiple (node:net:1193:18)
     at afterConnectMultiple (node:net:1783:7)
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: Breadcrumb is not used within the template of LoginPage[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/auth/login/login.ts:10:12:
+[37m      10 │   imports: [[32mBreadcrumb[37m, ReactiveFormsModule, RouterLink],
+         ╵             [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module '@angular/common/locales/en-SA' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/main.ts:4:23:
+[37m      4 │ import localeEnSa from [32m'@angular/common/locales/en-SA'[37m;
+        ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module '@angular/common/locales/en-SA' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/main.ts:4:23:
+[37m      4 │ import localeEnSa from [32m'@angular/common/locales/en-SA'[37m;
+        ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module '@angular/common/locales/en-SA' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/main.ts:4:23:
+[37m      4 │ import localeEnSa from [32m'@angular/common/locales/en-SA'[37m;
+        ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module '@angular/common/locales/en-SA' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/main.ts:4:23:
+[37m      4 │ import localeEnSa from [32m'@angular/common/locales/en-SA'[37m;
+        ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module '@angular/common/locales/en-SA' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/main.ts:4:23:
+[37m      4 │ import localeEnSa from [32m'@angular/common/locales/en-SA'[37m;
+        ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+

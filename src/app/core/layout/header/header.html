@@ -19,23 +19,24 @@
 
   <div class="main-navigation"><nav class="navbar navbar-expand-lg"><div class="container position-relative">
     <a class="navbar-brand sayaramatch-brand" routerLink="/" aria-label="SayaraMatch home"><span class="sayaramatch-brand__mark"><i class="far fa-car-side"></i></span><span class="sayaramatch-brand__name">SAYARA<span>MATCH</span></span></a>
+    <button type="button" class="language-switch" (click)="language.toggle()" [attr.aria-label]="'language.switch' | translate"><i class="far fa-globe"></i><span>{{ 'language.switch' | translate }}</span></button>
     <div class="mobile-menu-right"><button class="navbar-toggler" type="button" aria-controls="main_nav" [attr.aria-expanded]="mobileNavigationOpen()" aria-label="Toggle navigation" (click)="toggleMobileNavigation($event)"><span class="navbar-toggler-mobile-icon"><i class="far fa-bars"></i></span></button></div>
     <div class="collapse navbar-collapse" id="main_nav" [class.show]="mobileNavigationOpen()">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeNavigation()">Home</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/about" routerLinkActive="active" (click)="closeNavigation()">About</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/cars" routerLinkActive="active" (click)="closeNavigation()">Browse Cars</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeNavigation()">{{ 'nav.home' | translate }}</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/about" routerLinkActive="active" (click)="closeNavigation()">{{ 'nav.about' | translate }}</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/cars" routerLinkActive="active" (click)="closeNavigation()">{{ 'nav.browse' | translate }}</a></li>
         <li class="nav-item dropdown" routerLinkActive="active" [class.show]="pagesOpen()">
-          <button type="button" class="nav-link dropdown-toggle" [attr.aria-expanded]="pagesOpen()" (click)="togglePages($event)">Pages</button>
+          <button type="button" class="nav-link dropdown-toggle" [attr.aria-expanded]="pagesOpen()" (click)="togglePages($event)">{{ 'nav.pages' | translate }}</button>
           <ul class="dropdown-menu fade-down" [class.show]="pagesOpen()">
             <li><a class="dropdown-item" routerLink="/team" routerLinkActive="active" (click)="closeNavigation()">Our Team</a></li>
             <li><a class="dropdown-item" routerLink="/faq" routerLinkActive="active" (click)="closeNavigation()">FAQ</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" routerLink="/blog" routerLinkActive="active" (click)="closeNavigation()">Blog</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/contact" routerLinkActive="active" (click)="closeNavigation()">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/blog" routerLinkActive="active" (click)="closeNavigation()">{{ 'nav.blog' | translate }}</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/contact" routerLinkActive="active" (click)="closeNavigation()">{{ 'nav.contact' | translate }}</a></li>
       </ul>
-      <div class="nav-right"><div class="nav-right-btn mt-2"><a routerLink="/account/add-listing" class="theme-btn"><span class="far fa-plus-circle"></span>Sell a Car</a></div></div>
+      <div class="nav-right"><div class="nav-right-btn mt-2"><a routerLink="/account/add-listing" class="theme-btn"><span class="far fa-plus-circle"></span>{{ 'nav.sellCar' | translate }}</a></div></div>
     </div>
   </div></nav></div>
 </header>

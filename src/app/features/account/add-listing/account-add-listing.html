@@ -1,69 +1,73 @@
 <section class="user-profile-card" aria-labelledby="add-listing-title">
-  <h2 id="add-listing-title" class="user-profile-card-title">{{ isEditing ? 'Edit Car' : 'Sell Your Car' }}</h2>
+  <h2 id="add-listing-title" class="user-profile-card-title">{{ (isEditing ? 'listing.editTitle' : 'listing.sellTitle') | translate }}</h2>
   @if (store.error(); as error) { <div class="alert alert-danger" role="alert">{{ error }}</div> }
   @if (store.loading()) {
     <div class="text-center py-5"><span class="spinner-border text-primary" aria-label="Loading"></span></div>
   } @else {
     <div class="add-listing-form">
+      @if (draftRestored()) { <div class="draft-banner" role="status"><span><i class="far fa-clock-rotate-left"></i>{{ 'listing.draftRestored' | translate }}</span><button type="button" (click)="discardDraft()">{{ 'listing.discardDraft' | translate }}</button></div> }
+      @if (draftSaved()) { <div class="draft-saved" role="status"><i class="far fa-check"></i>{{ 'listing.draftSaved' | translate }}</div> }
       <div class="mobile-listing-stepper" aria-label="Car advert progress">
-        <div class="mobile-listing-stepper__summary"><span>Step {{ currentStep() }} of {{ mobileSteps.length }}</span><strong>{{ mobileSteps[currentStep() - 1] }}</strong></div>
-        <ol>@for (step of mobileSteps; track step; let number = $index) { <li [class.active]="number + 1 === currentStep()" [class.complete]="number + 1 < currentStep()"><span>{{ number + 1 }}</span><small>{{ step }}</small></li> }</ol>
+        <div class="mobile-listing-stepper__summary"><span>{{ 'listing.steps.count' | translate:{ current: currentStep(), total: mobileSteps.length } }}</span><strong>{{ mobileSteps[currentStep() - 1] | translate }}</strong></div>
+        <ol>@for (step of mobileSteps; track step; let number = $index) { <li [class.active]="number + 1 === currentStep()" [class.complete]="number + 1 < currentStep()"><span>{{ number + 1 }}</span><small>{{ step | translate }}</small></li> }</ol>
       </div>
-      <h6 class="mb-1 desktop-basic-heading">Basic Information</h6>
+      <h6 class="mb-1 desktop-basic-heading">{{ 'listing.basicInfo' | translate }}</h6>
       <form [formGroup]="form" [class]="'mobile-step-' + currentStep()" (ngSubmit)="submit()" novalidate>
         @if (stepError(); as error) { <div class="mobile-step-error" role="alert"><i class="far fa-circle-exclamation"></i>{{ error }}</div> }
         @if (validationErrors().length) {
           <div class="alert alert-danger listing-validation-summary" role="alert" aria-live="polite">
-            <strong>Please correct the following before saving:</strong>
+            <strong>{{ 'validation.fix' | translate }}</strong>
             <ul class="mb-0 mt-2">@for (error of validationErrors(); track error) { <li>{{ error }}</li> }</ul>
           </div>
         }
         <div class="row align-items-center">
-          <div class="col-lg-12"><div class="form-group"><label for="listing-title">Car Ad Title</label><input id="listing-title" type="text" class="form-control" formControlName="title" placeholder="Enter a clear title" /></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="condition">Condition</label><select id="condition" class="form-control" formControlName="carConditionId"><option [ngValue]="0">Choose</option>@for (item of store.conditions(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="body-type">Body Type</label><select id="body-type" class="form-control" formControlName="bodyTypeId"><option [ngValue]="0">Choose</option>@for (item of store.bodyTypes(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="brand">Make/Brand</label><select id="brand" class="form-control" formControlName="carBrandId" (change)="brandChanged()"><option [ngValue]="0">Choose</option>@for (item of store.brands(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="model">Model</label><select id="model" class="form-control" formControlName="carModelId"><option [ngValue]="0">{{ store.loadingModels() ? 'Loading...' : 'Choose' }}</option>@for (item of store.models(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="price">Price</label><input id="price" type="number" class="form-control" formControlName="price" placeholder="Enter price" /></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="year">Year</label><select id="year" class="form-control" formControlName="year">@for (year of years; track year) { <option [ngValue]="year">{{ year }}</option> }</select></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="transmission">Transmission</label><select id="transmission" class="form-control" formControlName="transmissionId"><option [ngValue]="0">Choose</option>@for (item of store.transmissions(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="fuel-type">Fuel Type</label><select id="fuel-type" class="form-control" formControlName="fuelTypeId"><option [ngValue]="0">Choose</option>@for (item of store.fuelTypes(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="mileage">Mileage</label><input id="mileage" type="number" class="form-control" formControlName="mileage" placeholder="Enter mileage" /></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="engine-size">Engine Size</label><input id="engine-size" type="text" class="form-control" formControlName="engineSize" placeholder="Enter engine size" /></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="cylinders">Cylinders</label><input id="cylinders" type="number" class="form-control" formControlName="cylinders" /></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="color">Color</label><input id="color" type="text" class="form-control" formControlName="color" placeholder="Enter color" /></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="doors">Doors</label><input id="doors" type="number" class="form-control" formControlName="doors" /></div></div>
-          <div class="col-lg-4"><div class="form-group"><label for="vin">VIN</label><input id="vin" type="text" class="form-control" formControlName="vin" placeholder="Enter 17-character VIN" /></div></div>
+          <div class="col-lg-12"><div class="form-group"><label for="listing-title">{{ 'listing.title' | translate }}</label><input id="listing-title" type="text" class="form-control" formControlName="title" placeholder="Enter a clear title" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="condition">{{ 'listing.condition' | translate }}</label><select id="condition" class="form-control" formControlName="carConditionId"><option [ngValue]="0">{{ 'listing.choose' | translate }}</option>@for (item of store.conditions(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="body-type">{{ 'listing.bodyType' | translate }}</label><select id="body-type" class="form-control" formControlName="bodyTypeId"><option [ngValue]="0">{{ 'listing.choose' | translate }}</option>@for (item of store.bodyTypes(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="brand">{{ 'listing.brand' | translate }}</label><select id="brand" class="form-control" formControlName="carBrandId" (change)="brandChanged()"><option [ngValue]="0">{{ 'listing.choose' | translate }}</option>@for (item of store.brands(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="model">{{ 'listing.model' | translate }}</label><select id="model" class="form-control" formControlName="carModelId"><option [ngValue]="0">{{ (store.loadingModels() ? 'common.loading' : 'listing.choose') | translate }}</option>@for (item of store.models(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="price">{{ 'listing.price' | translate }}</label><input id="price" type="number" inputmode="decimal" class="form-control" formControlName="price" placeholder="Enter price" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="year">{{ 'listing.year' | translate }}</label><select id="year" class="form-control" formControlName="year">@for (year of years; track year) { <option [ngValue]="year">{{ year }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="transmission">{{ 'listing.transmission' | translate }}</label><select id="transmission" class="form-control" formControlName="transmissionId"><option [ngValue]="0">{{ 'listing.choose' | translate }}</option>@for (item of store.transmissions(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="fuel-type">{{ 'listing.fuelType' | translate }}</label><select id="fuel-type" class="form-control" formControlName="fuelTypeId"><option [ngValue]="0">{{ 'listing.choose' | translate }}</option>@for (item of store.fuelTypes(); track item.id) { <option [ngValue]="item.id">{{ item.name }}</option> }</select></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="mileage">{{ 'listing.mileage' | translate }}</label><input id="mileage" type="number" inputmode="numeric" class="form-control" formControlName="mileage" placeholder="Enter mileage" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="engine-size">{{ 'listing.engineSize' | translate }}</label><input id="engine-size" type="text" class="form-control" formControlName="engineSize" placeholder="Enter engine size" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="cylinders">{{ 'listing.cylinders' | translate }}</label><input id="cylinders" type="number" inputmode="numeric" class="form-control" formControlName="cylinders" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="color">{{ 'listing.color' | translate }}</label><input id="color" type="text" class="form-control" formControlName="color" placeholder="Enter color" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="doors">{{ 'listing.doors' | translate }}</label><input id="doors" type="number" inputmode="numeric" class="form-control" formControlName="doors" /></div></div>
+          <div class="col-lg-4"><div class="form-group"><label for="vin">{{ 'listing.vin' | translate }}</label><input id="vin" type="text" class="form-control" formControlName="vin" placeholder="Enter 17-character VIN" /></div></div>
 
-          <h6 class="fw-bold mt-4 mb-1">Upload Images</h6>
-          <div class="col-lg-12"><div class="form-group"><div class="list-upload-wrapper"><label class="list-img-upload" for="listing-images"><span><i class="far fa-images"></i> Upload Car Photos</span></label><input id="listing-images" type="file" class="list-img-file" accept="image/jpeg,image/png,image/webp" multiple (change)="chooseImages($event)" /></div>
+          <h6 class="fw-bold mt-4 mb-1">{{ 'listing.upload' | translate }}</h6>
+          <div class="col-lg-12"><div class="form-group"><div class="mobile-photo-actions"><label class="list-img-upload camera-upload" for="listing-camera"><span><i class="far fa-camera"></i>{{ 'listing.takePhoto' | translate }}</span></label><input id="listing-camera" type="file" class="list-img-file" accept="image/*" capture="environment" (change)="chooseImages($event)" /><label class="list-img-upload" for="listing-images"><span><i class="far fa-images"></i>{{ 'listing.choosePhotos' | translate }}</span></label><input id="listing-images" type="file" class="list-img-file" accept="image/jpeg,image/png,image/webp" multiple (change)="chooseImages($event)" /></div>
+            @if (optimizingImages()) { <div class="photo-optimization" role="status"><span class="spinner-border spinner-border-sm"></span>{{ 'listing.optimizing' | translate }}</div> }
             @if (existingImages().length || imagePreviews().length) {
+              <p class="photo-drag-hint"><i class="far fa-arrows-up-down-left-right"></i>{{ 'listing.dragHint' | translate }}</p>
               <div class="listing-image-previews mt-3">
-                @for (image of existingImages(); track image.id; let index = $index) { <div class="listing-image-preview" [class.is-main]="mainExistingImageId() === image.id"><img [src]="image.thumbnailUrl || image.imageUrl" alt="Existing listing" /><div class="image-actions"><button type="button" title="Move left" [disabled]="$first" (click)="moveExisting(index, -1)"><i class="far fa-arrow-left"></i></button><button type="button" title="Move right" [disabled]="$last && !imagePreviews().length" (click)="moveExisting(index, 1)"><i class="far fa-arrow-right"></i></button><button type="button" title="Set as main image" (click)="setMainExisting(image.id)"><i class="far fa-star"></i></button><button type="button" title="Remove image" (click)="removeExistingImage(image.id)"><i class="far fa-trash-can"></i></button></div>@if (mainExistingImageId() === image.id) { <span>Main</span> }</div> }
-                @for (preview of imagePreviews(); track preview.url; let index = $index) { <div class="listing-image-preview" [class.is-main]="mainNewImage() === preview.file"><img [src]="preview.url" [alt]="preview.file.name" /><div class="image-actions"><button type="button" title="Move left" [disabled]="$first" (click)="moveNew(index, -1)"><i class="far fa-arrow-left"></i></button><button type="button" title="Move right" [disabled]="$last" (click)="moveNew(index, 1)"><i class="far fa-arrow-right"></i></button><button type="button" title="Set as main image" (click)="setMainNew(preview.file)"><i class="far fa-star"></i></button><button type="button" title="Remove image" (click)="removeNewImage(preview.file)"><i class="far fa-trash-can"></i></button></div>@if (mainNewImage() === preview.file) { <span>Main</span> }</div> }
+                <div class="photo-drop-list" cdkDropList [cdkDropListData]="existingImages()" cdkDropListOrientation="mixed" (cdkDropListDropped)="dropExisting($event)">@for (image of existingImages(); track image.id) { <div cdkDrag class="listing-image-preview" [class.is-main]="mainExistingImageId() === image.id"><img [src]="image.thumbnailUrl || image.imageUrl" alt="Existing listing" /><span class="drag-handle" cdkDragHandle><i class="far fa-grip-dots"></i></span><div class="image-actions"><button type="button" [title]="'listing.makeCover' | translate" (click)="setMainExisting(image.id)"><i class="far fa-star"></i></button><button type="button" title="Remove image" (click)="removeExistingImage(image.id)"><i class="far fa-trash-can"></i></button></div>@if (mainExistingImageId() === image.id) { <span class="main-label">{{ 'listing.cover' | translate }}</span> }</div> }</div>
+                <div class="photo-drop-list" cdkDropList [cdkDropListData]="imagePreviews()" cdkDropListOrientation="mixed" (cdkDropListDropped)="dropNew($event)">@for (preview of imagePreviews(); track preview.url) { <div cdkDrag class="listing-image-preview" [class.is-main]="mainNewImage() === preview.file"><img [src]="preview.url" [alt]="preview.file.name" /><span class="drag-handle" cdkDragHandle><i class="far fa-grip-dots"></i></span><div class="image-actions"><button type="button" [title]="'listing.makeCover' | translate" (click)="setMainNew(preview.file)"><i class="far fa-star"></i></button><button type="button" title="Remove image" (click)="removeNewImage(preview.file)"><i class="far fa-trash-can"></i></button></div>@if (mainNewImage() === preview.file) { <span class="main-label">{{ 'listing.cover' | translate }}</span> }</div> }</div>
               </div>
             }
             @if (imageError(); as error) { <small class="text-danger d-block mt-2">{{ error }}</small> }
           </div></div>
 
-          <h6 class="fw-bold mt-4 mb-1">Location</h6>
-          <div class="col-lg-6"><div class="form-group"><label for="address">Address</label><input id="address" type="text" class="form-control" formControlName="address" placeholder="Enter address" /></div></div>
-          <div class="col-lg-6"><div class="form-group"><label for="city">City</label><input id="city" type="text" class="form-control" formControlName="city" placeholder="Enter city" /></div></div>
-          <h6 class="fw-bold mt-4 mb-1">Detailed Information</h6>
-          <div class="col-lg-12"><div class="form-group"><label for="description">Description</label><textarea id="description" class="form-control" formControlName="description" placeholder="Write description" cols="30" rows="5"></textarea></div></div>
+          <h6 class="fw-bold mt-4 mb-1">{{ 'listing.location' | translate }}</h6>
+          <div class="col-lg-6"><div class="form-group"><label for="address">{{ 'listing.address' | translate }}</label><input id="address" type="text" class="form-control" formControlName="address" placeholder="Enter address" /></div></div>
+          <div class="col-lg-6"><div class="form-group"><label for="city">{{ 'listing.city' | translate }}</label><input id="city" type="text" class="form-control" formControlName="city" placeholder="Enter city" /></div></div>
+          <h6 class="fw-bold mt-4 mb-1">{{ 'listing.description' | translate }}</h6>
+          <div class="col-lg-12"><div class="form-group"><label for="description">{{ 'listing.description' | translate }}</label><textarea id="description" class="form-control" formControlName="description" placeholder="Write description" cols="30" rows="5"></textarea></div></div>
 
-          <h6 class="fw-bold my-4">Features</h6>
+          <h6 class="fw-bold my-4">{{ 'listing.features' | translate }}</h6>
           @for (feature of store.features(); track feature.id) {
             <div class="col-6 col-md-4"><div class="form-check"><input class="form-check-input" type="checkbox" [id]="'feature-' + feature.id" [checked]="selectedFeatureIds().includes(feature.id)" (change)="toggleFeature(feature.id, $any($event.target).checked)" /><label class="form-check-label" [for]="'feature-' + feature.id">{{ feature.name }}</label></div></div>
           }
           <div class="col-lg-12">@if (store.submitting()) { <div class="upload-progress mt-4" role="progressbar" [attr.aria-valuenow]="store.uploadProgress()" aria-valuemin="0" aria-valuemax="100"><div [style.width.%]="store.uploadProgress()"></div><span>Uploading {{ store.uploadProgress() }}%</span></div> }<button type="submit" class="theme-btn mt-4" [disabled]="store.submitting()"><i [class]="isEditing ? 'far fa-pen' : 'far fa-plus-circle'"></i> {{ store.submitting() ? 'Saving...' : isEditing ? 'Save Changes' : 'Submit Car for Review' }}</button></div>
         </div>
         <div class="mobile-wizard-actions">
-          @if (currentStep() > 1) { <button type="button" class="mobile-wizard-back" (click)="previousStep()"><i class="far fa-arrow-left"></i> Back</button> }
+          @if (currentStep() > 1) { <button type="button" class="mobile-wizard-back" (click)="previousStep()"><i class="far fa-arrow-left"></i>{{ 'common.back' | translate }}</button> }
           @if (currentStep() < 4) {
-            <button type="button" class="theme-btn mobile-wizard-next" (click)="nextStep()">Next <i class="far fa-arrow-right"></i></button>
+            <button type="button" class="theme-btn mobile-wizard-next" (click)="nextStep()">{{ 'common.next' | translate }}<i class="far fa-arrow-right"></i></button>
           } @else {
-            <button type="submit" class="theme-btn mobile-wizard-next" [disabled]="store.submitting()"><i [class]="isEditing ? 'far fa-pen' : 'far fa-check-circle'"></i> {{ store.submitting() ? 'Saving...' : isEditing ? 'Save Changes' : 'Submit for Review' }}</button>
+            <button type="submit" class="theme-btn mobile-wizard-next" [disabled]="store.submitting()"><i [class]="isEditing ? 'far fa-pen' : 'far fa-check-circle'"></i>{{ (store.submitting() ? 'listing.saving' : isEditing ? 'listing.saveChanges' : 'listing.submit') | translate }}</button>
           }
         </div>
       </form>
