@@ -100,7 +100,7 @@ export const routes: Routes = [
   {
     path: 'admin/moderation',
     canActivate: [adminGuard],
-    title: 'Listing Moderation | SayaraHub',
+    title: 'Car Moderation | SayaraHub',
     loadComponent: () =>
       import('./features/admin/moderation/admin-moderation-page').then(({ AdminModerationPage }) => AdminModerationPage),
   },
@@ -133,17 +133,17 @@ export const routes: Routes = [
           import('./features/account/profile/account-profile').then(({ AccountProfile }) => AccountProfile),
       },
       {
-        path: 'listings', title: 'My Listing | SayaraHub', data: { accountTitle: 'My Listing' },
+        path: 'listings', title: 'My Cars | SayaraHub', data: { accountTitle: 'My Cars' },
         loadComponent: () =>
           import('./features/account/listings/account-listings').then(({ AccountListings }) => AccountListings),
       },
       {
-        path: 'listings/:id/edit', title: 'Edit Listing | SayaraHub', data: { accountTitle: 'Edit Listing' },
+        path: 'listings/:id/edit', title: 'Edit Car | SayaraHub', data: { accountTitle: 'Edit Car' },
         loadComponent: () =>
           import('./features/account/add-listing/account-add-listing').then(({ AccountAddListing }) => AccountAddListing),
       },
       {
-        path: 'listings/:id', title: 'Listing Details | SayaraHub', data: { accountTitle: 'Listing Details' },
+        path: 'listings/:id', title: 'Car Details | SayaraHub', data: { accountTitle: 'Car Details' },
         loadComponent: () =>
           import('./features/account/listing-details/account-listing-details').then(({ AccountListingDetails }) => AccountListingDetails),
       },
@@ -188,7 +188,7 @@ export const routes: Routes = [
           import('./features/account/notifications/account-notifications').then(({ AccountNotifications }) => AccountNotifications),
       },
       {
-        path: 'add-listing', title: 'Add Listing | SayaraHub', data: { accountTitle: 'Add Listing' },
+        path: 'add-listing', title: 'Sell a Car | SayaraHub', data: { accountTitle: 'Sell a Car' },
         loadComponent: () =>
           import('./features/account/add-listing/account-add-listing').then(({ AccountAddListing }) => AccountAddListing),
       },

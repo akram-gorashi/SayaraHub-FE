@@ -1,4 +1,17 @@
-<aside class="user-profile-sidebar">
+<button class="account-mobile-menu-trigger" type="button" aria-controls="account-navigation"
+  [attr.aria-expanded]="mobileMenuOpen()" (click)="openMenu()">
+  <span><i class="far fa-grid-2" aria-hidden="true"></i> Account menu</span>
+  <i class="far fa-chevron-right" aria-hidden="true"></i>
+</button>
+
+@if (mobileMenuOpen()) {
+  <button class="account-menu-backdrop" type="button" aria-label="Close account menu" (click)="closeMenu()"></button>
+}
+
+<aside id="account-navigation" class="user-profile-sidebar" [class.mobile-open]="mobileMenuOpen()">
+  <button class="account-menu-close" type="button" aria-label="Close account menu" (click)="closeMenu()">
+    <i class="far fa-times" aria-hidden="true"></i>
+  </button>
   <div class="user-profile-sidebar-top">
     <div class="user-profile-img">
       <img [src]="store.imageUrl()" [alt]="store.profile()?.fullName || 'Profile image'" />
@@ -17,12 +30,12 @@
     }
   </div>
 
-  <nav aria-label="Account navigation">
+  <nav aria-label="Account navigation" (click)="closeMenu()">
     <ul class="user-profile-sidebar-list">
       <li><a routerLink="/account/dashboard" routerLinkActive="active"><i class="far fa-gauge-high"></i> Dashboard</a></li>
       <li><a routerLink="/account/profile" routerLinkActive="active"><i class="far fa-user"></i> My Profile</a></li>
-      <li><a routerLink="/account/listings" routerLinkActive="active"><i class="far fa-layer-group"></i> My Listing</a></li>
-      <li><a routerLink="/account/add-listing" routerLinkActive="active"><i class="far fa-plus-circle"></i> Add Listing</a></li>
+      <li><a routerLink="/account/listings" routerLinkActive="active"><i class="far fa-layer-group"></i> My Cars</a></li>
+      <li><a routerLink="/account/add-listing" routerLinkActive="active"><i class="far fa-plus-circle"></i> Sell a Car</a></li>
       <li><a routerLink="/account/favorites" routerLinkActive="active"><i class="far fa-heart"></i> My Favorites</a></li>
       <li><a routerLink="/account/saved-searches" routerLinkActive="active"><i class="far fa-magnifying-glass-location"></i> Saved Searches</a></li>
       <li><a routerLink="/account/messages" routerLinkActive="active"><i class="far fa-envelope"></i> Messages</a></li>

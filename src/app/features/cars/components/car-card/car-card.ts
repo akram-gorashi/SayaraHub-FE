@@ -24,6 +24,7 @@ export class CarCard {
 
   readonly car = input.required<CarSummary>();
   readonly viewMode = input<CarViewMode>('grid');
+  readonly showActions = input(true);
   protected readonly isFavorite = signal(false);
   protected readonly favoriteLoading = signal(false);
   protected readonly actionMessage = signal<string | null>(null);

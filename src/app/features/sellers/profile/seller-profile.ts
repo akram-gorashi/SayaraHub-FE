@@ -19,7 +19,7 @@ export class SellerProfilePage {
   protected readonly store = inject(SellerProfileStore);
   protected readonly rating = signal(5);
   protected readonly comment = signal('');
-  protected readonly reportReason = signal('Misleading profile or listings');
+  protected readonly reportReason = signal('Misleading profile or car ads');
   protected readonly reportDetails = signal('');
   protected readonly reportOpen = signal(false);
 

@@ -1,0 +1,236 @@
+
+Warning: This is a simple server for use in testing or debugging Angular applications
+locally. It hasn't been reviewed for security issues.
+
+Binding this server to an open connection can result in compromising your application or
+computer. Using a different host than the one passed to the "--host" flag might result in
+websocket connection issues.
+    
+[2m03:52:21[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+Error: socket hang up
+    at Socket.socketOnEnd (node:_http_client:631:25)
+    at Socket.emit (node:events:521:24)
+    at endReadableNT (node:internal/streams/readable:1744:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2m03:52:35[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+Error: socket hang up
+    at Socket.socketOnEnd (node:_http_client:631:25)
+    at Socket.emit (node:events:521:24)
+    at endReadableNT (node:internal/streams/readable:1744:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2m03:52:46[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:00[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=9[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:02[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=9[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:03[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=9[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:04[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=9[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:16[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:18[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=9[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:19[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=9[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:23[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/users/me[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:23[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/contact-messages?pageNumber=1&pageSize=1&isRead=false[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:23[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:23[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:26[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:26[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:26[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:26[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:27[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:27[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:27[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:27[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:27[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:27[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:28[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:28[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:28[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:28[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:28[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:28[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:28[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:28[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:28[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:53:28[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:13[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:13[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:13[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:13[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:14[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:14[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:15[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/statistics[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:15[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=5[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:17[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars/favorites?pageNumber=1&pageSize=50[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:19[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=9[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:21[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=8[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:30[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications?pageNumber=1&pageSize=8[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:30[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications/unread-count[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:30[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /hubs/notifications/negotiate?negotiateVersion=1[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:30[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=8[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:30[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/MasterData?pageNumber=1&pageSize=50[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:59[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/users/me[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:59[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/seller/contact-messages?pageNumber=1&pageSize=1&isRead=false[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:54:59[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/MasterData?pageNumber=1&pageSize=50[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:55:34[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/Cars?sortBy=listedDate&sortDirection=desc&pageNumber=1&pageSize=8[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:55:34[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/MasterData?pageNumber=1&pageSize=50[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m03:57:07[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/cars?pageNumber=1&pageSize=3[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)

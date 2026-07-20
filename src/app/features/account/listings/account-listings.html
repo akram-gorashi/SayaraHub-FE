@@ -1,6 +1,6 @@
 <section class="user-profile-card profile-ad" aria-labelledby="my-listing-title">
   <div class="user-profile-card-header">
-    <h2 id="my-listing-title" class="user-profile-card-title">My Listing</h2>
+    <h2 id="my-listing-title" class="user-profile-card-title">My Cars</h2>
     <div class="user-profile-card-header-right">
       <form class="user-profile-search" (submit)="submitSearch($event)">
         <div class="form-group">
@@ -8,15 +8,15 @@
           <i class="far fa-search"></i>
         </div>
       </form>
-      <a routerLink="/account/add-listing" class="theme-btn"><i class="far fa-plus-circle"></i>Add Listing</a>
+      <a routerLink="/account/add-listing" class="theme-btn"><i class="far fa-plus-circle"></i>Sell a Car</a>
     </div>
   </div>
   @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
   @if (store.success(); as success) { <div class="alert alert-success">{{ success }}</div> }
   @if (store.loading()) {
-    <div class="account-state"><span class="spinner-border text-primary"></span> Loading listings...</div>
+    <div class="account-state"><span class="spinner-border text-primary"></span> Loading your cars...</div>
   } @else {
-    <div class="table-responsive">
+    <div class="table-responsive desktop-cars-table">
       <table class="table text-nowrap">
         <thead><tr><th>Car Info</th><th>Brand</th><th>Publish</th><th>Price</th><th>Status</th><th>Action</th></tr></thead>
         <tbody>
@@ -31,17 +31,66 @@
               <td><span class="badge" [class]="statusClass(car.status)">{{ car.status | titlecase }}</span>@if (car.moderationReason) { <small class="rejection-reason" [title]="car.moderationReason"><i class="far fa-circle-exclamation"></i> {{ car.moderationReason }}</small> }</td>
               <td><div class="listing-actions">
                 <a [routerLink]="['/account/listings', car.id]" class="btn btn-outline-secondary btn-sm rounded-2" title="View seller details"><i class="far fa-eye"></i></a>
-                <a [routerLink]="['/account/listings', car.id, 'edit']" class="btn btn-outline-secondary btn-sm rounded-2" title="Edit listing"><i class="far fa-pen"></i></a>
+                <a [routerLink]="['/account/listings', car.id, 'edit']" class="btn btn-outline-secondary btn-sm rounded-2" title="Edit car"><i class="far fa-pen"></i></a>
                 @if (car.status.toLowerCase() === 'available') { <button type="button" class="btn btn-outline-success btn-sm rounded-2" title="Mark as sold" [disabled]="store.updatingStatusId() === car.id" (click)="ask('sold', car)"><i class="far fa-badge-check"></i></button> }
-                <button type="button" class="btn btn-outline-danger btn-sm rounded-2" title="Delete listing" [disabled]="store.removingId() === car.id" (click)="ask('delete', car)"><i class="far fa-trash-can"></i></button>
+                <button type="button" class="btn btn-outline-danger btn-sm rounded-2" title="Delete car ad" [disabled]="store.removingId() === car.id" (click)="ask('delete', car)"><i class="far fa-trash-can"></i></button>
               </div></td>
             </tr>
-          } @empty { <tr><td colspan="6" class="text-center py-4">No listings found.</td></tr> }
+          } @empty { <tr><td colspan="6" class="text-center py-4">No cars found.</td></tr> }
         </tbody>
       </table>
     </div>
+
+    <div class="mobile-car-list" aria-label="Your cars">
+      @for (car of store.cars(); track car.id) {
+        <article class="mobile-car-card">
+          <a class="mobile-car-card__image" [routerLink]="['/cars', car.id]">
+            <img [src]="car.mainImageUrl || 'assets/img/car/01-v2.jpg'" [alt]="car.title" />
+          </a>
+          <div class="mobile-car-card__content">
+            <div class="mobile-car-card__heading">
+              <div>
+                <span class="mobile-car-card__id">Car #{{ car.id }}</span>
+                <h3><a [routerLink]="['/cars', car.id]">{{ car.title }}</a></h3>
+                <p>{{ car.brand }} {{ car.model }} · {{ car.year }}</p>
+              </div>
+              <span class="badge" [class]="statusClass(car.status)">{{ car.status | titlecase }}</span>
+            </div>
+
+            <div class="mobile-car-card__meta">
+              <span><i class="far fa-tag" aria-hidden="true"></i>{{ car.price | currency:'SAR':'symbol-narrow':'1.0-0' }}</span>
+              <span><i class="far fa-calendar" aria-hidden="true"></i>{{ car.listedDate | date:'mediumDate' }}</span>
+              <span><i class="far fa-location-dot" aria-hidden="true"></i>{{ car.city }}</span>
+            </div>
+
+            @if (car.moderationReason) {
+              <p class="mobile-car-card__warning"><i class="far fa-circle-exclamation"></i>{{ car.moderationReason }}</p>
+            }
+
+            <div class="mobile-car-card__actions">
+              <a [routerLink]="['/account/listings', car.id]" class="btn btn-outline-secondary">
+                <i class="far fa-eye" aria-hidden="true"></i> View
+              </a>
+              <a [routerLink]="['/account/listings', car.id, 'edit']" class="btn btn-outline-secondary">
+                <i class="far fa-pen" aria-hidden="true"></i> Edit
+              </a>
+              @if (car.status.toLowerCase() === 'available') {
+                <button type="button" class="btn btn-outline-success" [disabled]="store.updatingStatusId() === car.id"
+                  (click)="ask('sold', car)"><i class="far fa-badge-check" aria-hidden="true"></i> Sold</button>
+              }
+              <button type="button" class="btn btn-outline-danger mobile-car-card__delete"
+                [disabled]="store.removingId() === car.id" (click)="ask('delete', car)" aria-label="Delete car ad">
+                <i class="far fa-trash-can" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+      } @empty {
+        <div class="mobile-cars-empty"><i class="far fa-car" aria-hidden="true"></i><p>No cars found.</p></div>
+      }
+    </div>
   }
   @if (confirmation(); as action) {
-    <div class="confirmation-backdrop" role="presentation" (click)="cancel()"><div class="confirmation-dialog" role="alertdialog" aria-modal="true" aria-labelledby="confirmation-title" (click)="$event.stopPropagation()"><div class="confirmation-icon"><i [class]="action.kind === 'delete' ? 'far fa-trash-can' : 'far fa-badge-check'"></i></div><h3 id="confirmation-title">{{ action.kind === 'delete' ? 'Delete this listing?' : 'Mark this vehicle as sold?' }}</h3><p>{{ action.kind === 'delete' ? 'This permanently removes “' + action.car.title + '” and cannot be undone.' : 'The vehicle will no longer appear in public search results.' }}</p><div class="confirmation-actions"><button type="button" class="btn btn-outline-secondary" (click)="cancel()">Cancel</button><button type="button" class="theme-btn" (click)="confirm()">Confirm</button></div></div></div>
+    <div class="confirmation-backdrop" role="presentation" (click)="cancel()"><div class="confirmation-dialog" role="alertdialog" aria-modal="true" aria-labelledby="confirmation-title" (click)="$event.stopPropagation()"><div class="confirmation-icon"><i [class]="action.kind === 'delete' ? 'far fa-trash-can' : 'far fa-badge-check'"></i></div><h3 id="confirmation-title">{{ action.kind === 'delete' ? 'Delete this car ad?' : 'Mark this vehicle as sold?' }}</h3><p>{{ action.kind === 'delete' ? 'This permanently removes “' + action.car.title + '” and cannot be undone.' : 'The vehicle will no longer appear in public search results.' }}</p><div class="confirmation-actions"><button type="button" class="btn btn-outline-secondary" (click)="cancel()">Cancel</button><button type="button" class="theme-btn" (click)="confirm()">Confirm</button></div></div></div>
   }
 </section>

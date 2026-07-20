@@ -9,7 +9,7 @@
         <div class="col-md-6 col-lg-4 favorite-item">
           <button type="button" class="favorite-remove" title="Remove favorite" [disabled]="store.removingId() === car.id"
             (click)="store.removeFavorite(car.id)"><i class="far fa-xmark"></i></button>
-          <app-car-card [car]="car" viewMode="grid" />
+          <app-car-card [car]="car" viewMode="grid" [showActions]="false" />
         </div>
       } @empty { <div class="col-12 text-center py-4">You have no favorite cars yet.</div> }
     </div>

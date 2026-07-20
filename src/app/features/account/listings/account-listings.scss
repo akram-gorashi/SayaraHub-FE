@@ -8,3 +8,182 @@
 .confirmation-icon { margin-bottom: 15px; color: var(--theme-color); font-size: 38px; }
 .confirmation-dialog h3 { margin-bottom: 10px; font-size: 24px; }
 .confirmation-actions { display: flex; justify-content: center; gap: 12px; margin-top: 24px; }
+
+.mobile-car-list {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .profile-ad {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .user-profile-card-header {
+    background: #fff;
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgb(20 32 50 / 6%);
+    gap: 15px;
+    margin-bottom: 16px;
+    padding: 18px;
+  }
+
+  .user-profile-card-header-right {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .user-profile-search,
+  .user-profile-search .form-control,
+  .user-profile-card-header .theme-btn {
+    width: 100%;
+  }
+
+  .user-profile-card-header .theme-btn {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 46px;
+  }
+
+  .desktop-cars-table {
+    display: none;
+  }
+
+  .mobile-car-list {
+    display: grid;
+    gap: 14px;
+  }
+
+  .mobile-car-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 26px rgb(20 32 50 / 7%);
+    overflow: hidden;
+  }
+
+  .mobile-car-card__image {
+    display: block;
+  }
+
+  .mobile-car-card__image img {
+    aspect-ratio: 16 / 9;
+    display: block;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .mobile-car-card__content {
+    padding: 16px;
+  }
+
+  .mobile-car-card__heading {
+    align-items: flex-start;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
+  .mobile-car-card__heading h3 {
+    font-size: 19px;
+    margin: 2px 0 3px;
+  }
+
+  .mobile-car-card__heading h3 a {
+    color: var(--color-dark);
+  }
+
+  .mobile-car-card__heading p,
+  .mobile-car-card__id {
+    color: #6b7482;
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .mobile-car-card__id {
+    color: var(--theme-color);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .mobile-car-card__meta {
+    border-bottom: 1px solid #edf0f4;
+    border-top: 1px solid #edf0f4;
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 1fr 1fr;
+    margin: 14px 0;
+    padding: 12px 0;
+  }
+
+  .mobile-car-card__meta span {
+    align-items: center;
+    color: #505a68;
+    display: flex;
+    font-size: 12px;
+    gap: 7px;
+    min-width: 0;
+  }
+
+  .mobile-car-card__meta i {
+    color: var(--theme-color);
+  }
+
+  .mobile-car-card__warning {
+    background: #fff1f1;
+    border-radius: 8px;
+    color: #b4232d;
+    display: flex;
+    font-size: 12px;
+    gap: 7px;
+    margin: 0 0 12px;
+    padding: 10px;
+  }
+
+  .mobile-car-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .mobile-car-card__actions .btn {
+    align-items: center;
+    display: flex;
+    font-size: 12px;
+    gap: 5px;
+    justify-content: center;
+    min-height: 42px;
+    padding: 7px;
+  }
+
+  .mobile-car-card__actions .btn:not(.mobile-car-card__delete) {
+    flex: 1 1 68px;
+  }
+
+  .mobile-car-card__delete {
+    flex: 0 0 44px;
+    width: 44px;
+  }
+
+  .mobile-cars-empty {
+    background: #fff;
+    border-radius: 12px;
+    color: #697386;
+    padding: 42px 20px;
+    text-align: center;
+  }
+
+  .mobile-cars-empty i {
+    color: var(--theme-color);
+    font-size: 34px;
+    margin-bottom: 10px;
+  }
+
+  .confirmation-dialog {
+    padding: 24px 18px;
+  }
+}

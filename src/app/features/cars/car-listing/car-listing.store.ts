@@ -75,6 +75,16 @@ export class CarListingStore {
   readonly features = computed(() => this.masterDataState()?.features.items ?? []);
   readonly showingFrom = computed(() => (this.totalCount() === 0 ? 0 : (this.page() - 1) * this.pageSize + 1));
   readonly showingTo = computed(() => Math.min(this.page() * this.pageSize, this.totalCount()));
+  readonly activeFilterCount = computed(() => {
+    const filters = this.filtersState();
+    return Number(Boolean(filters.search))
+      + filters.brandIds.length
+      + filters.transmissionIds.length
+      + filters.fuelTypeIds.length
+      + filters.featureIds.length
+      + Number(filters.minPrice !== null)
+      + Number(filters.maxPrice !== null);
+  });
   readonly visiblePages = computed(() => {
     const totalPages = this.totalPages();
     const current = this.page();

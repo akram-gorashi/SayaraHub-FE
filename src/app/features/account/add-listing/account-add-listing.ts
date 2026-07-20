@@ -109,7 +109,7 @@ export class AccountAddListing {
     if (files.some((file) => !file.type.startsWith('image/') || file.size > 5 * 1024 * 1024)) {
       this.imageError.set('Each file must be an image no larger than 5 MB.'); return;
     }
-    this.imageError.set(files.length ? null : 'Add at least one listing image.');
+    this.imageError.set(files.length ? null : 'Add at least one car photo.');
     this.imagePreviews().forEach(({ url }) => URL.revokeObjectURL(url));
     this.selectedImages.set(files);
     this.imagePreviews.set(files.map((file) => ({ file, url: URL.createObjectURL(file) })));
@@ -161,7 +161,7 @@ export class AccountAddListing {
     this.submitAttempted.set(true);
     if (this.form.invalid || this.existingImages().length + this.selectedImages().length === 0) {
       this.form.markAllAsTouched();
-      if (this.existingImages().length + this.selectedImages().length === 0) this.imageError.set('Add at least one listing image.');
+      if (this.existingImages().length + this.selectedImages().length === 0) this.imageError.set('Add at least one car photo.');
       this.updateValidationErrors();
       queueMicrotask(() => {
         const firstInvalid = this.elementRef.nativeElement.querySelector<HTMLElement>('.form-control.ng-invalid, #listing-images');
@@ -203,7 +203,7 @@ export class AccountAddListing {
 
   private updateValidationErrors(): void {
     const labels: Record<string, string> = {
-      title: 'Listing title', carConditionId: 'Condition', bodyTypeId: 'Body type',
+      title: 'Car ad title', carConditionId: 'Condition', bodyTypeId: 'Body type',
       carBrandId: 'Make/brand', carModelId: 'Model', price: 'Price', year: 'Year',
       transmissionId: 'Transmission', fuelTypeId: 'Fuel type', mileage: 'Mileage',
       engineSize: 'Engine size', cylinders: 'Cylinders', color: 'Color', doors: 'Doors',
@@ -220,7 +220,7 @@ export class AccountAddListing {
         return `${label} is invalid.`;
       });
     if (this.existingImages().length + this.selectedImages().length === 0) {
-      errors.push('At least one listing image is required.');
+      errors.push('At least one car photo is required.');
     }
     this.validationErrors.set(errors);
   }

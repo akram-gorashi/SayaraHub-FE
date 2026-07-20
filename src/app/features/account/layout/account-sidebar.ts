@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
@@ -19,6 +19,7 @@ export class AccountSidebar {
 
   protected readonly store = inject(AccountStore);
   protected readonly inquiries = inject(InquiryCenterService);
+  protected readonly mobileMenuOpen = signal(false);
 
   constructor() {
     this.store.load();
@@ -26,6 +27,14 @@ export class AccountSidebar {
 
   protected chooseImage(): void {
     this.imageInput()?.nativeElement.click();
+  }
+
+  protected openMenu(): void {
+    this.mobileMenuOpen.set(true);
+  }
+
+  protected closeMenu(): void {
+    this.mobileMenuOpen.set(false);
   }
 
   protected imageSelected(event: Event): void {

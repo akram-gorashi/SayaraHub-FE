@@ -52,7 +52,7 @@ export class AddListingStore {
           if (response.success && response.data) this.masterDataState.set(response.data);
           else this.errorState.set(response.message);
         },
-        error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to load listing options.')),
+        error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to load car options.')),
       });
     if (carId) {
       this.sellerDashboard.getCar(carId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
@@ -60,7 +60,7 @@ export class AddListingStore {
           if (response.success && response.data) this.carState.set(response.data);
           else this.errorState.set(response.message);
         },
-        error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to load the listing.')),
+        error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to load the car.')),
       });
     }
   }
@@ -91,7 +91,7 @@ export class AddListingStore {
           if (response.success && response.data) void this.router.navigate(['/account/listings']);
           else this.errorState.set(response.message);
         },
-        error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to create the listing.')),
+        error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to submit the car.')),
       });
   }
 
@@ -106,7 +106,7 @@ export class AddListingStore {
           if (response.success && response.data) void this.router.navigate(['/account/listings', carId]);
           else this.errorState.set(response.message);
         },
-        error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to update the listing.')),
+        error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to update the car.')),
       });
   }
 

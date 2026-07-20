@@ -154,7 +154,7 @@ export class CarDetailsStore {
     this.safetyService.report({ targetType: 'Car', targetId: car.id, reason: reason.trim(), details: details.trim() || null })
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.reportSendingState.set(false)))
       .subscribe({
-        next: response => this.reportSuccessState.set(response.message || 'The listing was reported for review.'),
+        next: response => this.reportSuccessState.set(response.message || 'The car ad was reported for review.'),
         error: (error: unknown) => this.reportErrorState.set(this.errorMessage(error)),
       });
   }

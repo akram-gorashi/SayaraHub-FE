@@ -1,6 +1,6 @@
 <section class="user-profile-card saved-search-page" aria-labelledby="saved-searches-title">
   <div class="user-profile-card-header">
-    <div><h2 id="saved-searches-title" class="user-profile-card-title">Saved Searches</h2><p>Save vehicle filters and receive live alerts when matching listings change.</p></div>
+    <div><h2 id="saved-searches-title" class="user-profile-card-title">Saved Searches</h2><p>Save vehicle filters and receive live alerts when matching cars change.</p></div>
   </div>
 
   @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
@@ -17,9 +17,9 @@
       <div class="col-md-6"><div class="form-group"><label for="search-city">Location</label><input id="search-city" class="form-control" formControlName="city" placeholder="City, for example Riyadh" /></div></div>
     </div>
     <div class="alert-options">
-      <div class="form-check form-switch"><input id="alert-new" class="form-check-input" type="checkbox" formControlName="notifyNewListings" /><label for="alert-new" class="form-check-label">New matching listings</label></div>
+      <div class="form-check form-switch"><input id="alert-new" class="form-check-input" type="checkbox" formControlName="notifyNewListings" /><label for="alert-new" class="form-check-label">New matching cars</label></div>
       <div class="form-check form-switch"><input id="alert-price" class="form-check-input" type="checkbox" formControlName="notifyPriceDrops" /><label for="alert-price" class="form-check-label">Price drops</label></div>
-      <div class="form-check form-switch"><input id="alert-sold" class="form-check-input" type="checkbox" formControlName="notifySold" /><label for="alert-sold" class="form-check-label">Sold listings</label></div>
+      <div class="form-check form-switch"><input id="alert-sold" class="form-check-input" type="checkbox" formControlName="notifySold" /><label for="alert-sold" class="form-check-label">Sold cars</label></div>
       <div class="form-check form-switch"><input id="search-enabled" class="form-check-input" type="checkbox" formControlName="isEnabled" /><label for="search-enabled" class="form-check-label">Alerts enabled</label></div>
     </div>
     <div class="saved-search-actions"><button type="submit" class="theme-btn" [disabled]="store.saving()"><i class="far fa-bell"></i> {{ store.saving() ? 'Saving...' : editingId() ? 'Update Search' : 'Save Search' }}</button>@if (editingId()) { <button type="button" class="btn btn-outline-secondary" (click)="reset()">Cancel</button> }</div>
