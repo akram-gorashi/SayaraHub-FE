@@ -3,6 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 
 import { Header } from './header';
+import { provideTranslateService } from '@ngx-translate/core';
 
 describe('Header', () => {
   let component: Header;
@@ -11,7 +12,7 @@ describe('Header', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Header],
-      providers: [provideRouter([]), provideHttpClient()],
+      providers: [provideRouter([]), provideHttpClient(), provideTranslateService({ fallbackLang: 'en', lang: 'en' })],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Header);

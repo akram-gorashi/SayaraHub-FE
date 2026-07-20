@@ -53,6 +53,7 @@ button.nav-link {
 .sayaramatch-brand__mark i { transform: skewX(8deg); }
 .sayaramatch-brand__name { color: #111; font-size: clamp(22px, 2vw, 30px); font-weight: 900; letter-spacing: -.05em; line-height: 1; }
 .sayaramatch-brand__name span { color: var(--theme-color); }
+.language-switch { display: inline-flex; align-items: center; gap: 6px; margin-inline-start: auto; padding: 7px 11px; border: 1px solid #e3e7ec; border-radius: 18px; color: #172133; background: #fff; font-size: 12px; font-weight: 700; }
 :host { position: relative; z-index: 1050; display: block; }
 .header, .header-top { position: relative; overflow: visible; }
 .header-top { z-index: 1051; }
@@ -99,4 +100,5 @@ button.nav-link {
 
   .sayaramatch-brand__mark { width: 38px; height: 34px; font-size: 18px; }
   .sayaramatch-brand__name { font-size: 23px; }
+  .language-switch { margin-inline-start: auto; }
 }

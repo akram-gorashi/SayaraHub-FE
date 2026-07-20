@@ -1,18 +1,18 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { DestroyRef, Injectable, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 
-import { ApiResponse } from '../../../core/models/api.models';
 import { LoginRequest, RegisterRequest } from '../../../core/models/auth.models';
 import { AuthService } from '../../../core/services/auth.service';
+import { LocalizedApiErrorService } from '../../../core/services/localized-api-error.service';
 
 @Injectable()
 export class AuthStore {
   private readonly auth = inject(AuthService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
+  private readonly localizedError = inject(LocalizedApiErrorService);
   private readonly submittingState = signal(false);
   private readonly errorState = signal<string | null>(null);
 
@@ -56,11 +56,6 @@ export class AuthStore {
   }
 
   private errorMessage(error: unknown): string {
-    if (error instanceof HttpErrorResponse) {
-      const response = error.error as Partial<ApiResponse<unknown>> | null;
-      return response?.message || 'We could not authenticate you. Please try again.';
-    }
-
-    return error instanceof Error ? error.message : 'Something went wrong. Please try again.';
+    return this.localizedError.message(error, 'We could not authenticate you. Please try again.');
   }
 }

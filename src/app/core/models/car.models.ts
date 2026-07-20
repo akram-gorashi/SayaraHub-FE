@@ -22,6 +22,8 @@ export interface SellerSummary {
   id: number;
   fullName: string;
   imageUrl: string | null;
+  isVerified?: boolean;
+  isPhoneVerified?: boolean;
 }
 
 export interface CarDetails {

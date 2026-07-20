@@ -4,12 +4,13 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
 import { App } from './app';
 import { routes } from './app.routes';
+import { provideTranslateService } from '@ngx-translate/core';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideRouter(routes), provideHttpClient(), provideHttpClientTesting()],
+      providers: [provideRouter(routes), provideHttpClient(), provideHttpClientTesting(), provideTranslateService({ fallbackLang: 'en', lang: 'en' })],
     }).compileComponents();
   });
 

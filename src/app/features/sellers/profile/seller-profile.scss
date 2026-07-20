@@ -21,3 +21,5 @@
 @media (max-width: 575px) { .seller-hero { align-items: flex-start; flex-wrap: wrap; } .seller-actions { width: 100%; margin-left: 0; } }
 .review-rule { color: #757f95; font-size: 14px; }
 .review-report { padding: 0; border: 0; color: #d33; background: transparent; font-size: 13px; }
+.seller-verification { display: flex; flex-wrap: wrap; gap: 7px; }
+.seller-verification span { display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border-radius: 14px; color: #137646; background: #eaf8f0; font-size: 11px; font-weight: 700; }

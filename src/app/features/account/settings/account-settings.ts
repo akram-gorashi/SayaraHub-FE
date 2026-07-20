@@ -2,12 +2,14 @@ import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@ang
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AccountDeletionReason } from '../../../core/models/settings.models';
 import { AccountSettingsStore } from './settings.store';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({ selector: 'app-account-settings', imports: [ReactiveFormsModule], templateUrl: './account-settings.html', changeDetection: ChangeDetectionStrategy.OnPush, providers: [AccountSettingsStore] })
 export class AccountSettings {
   private readonly fb = inject(FormBuilder);
   private readonly initialized = signal(false);
   protected readonly store = inject(AccountSettingsStore);
+  protected readonly language = inject(LanguageService);
   protected readonly form = this.fb.nonNullable.group({ enableMessages: false, receiveEmailNotifications: false, hidePhoneNumber: false, receiveMessageNotifications: false, isProfilePrivate: false });
   protected readonly deletionReasons = [
     { value: AccountDeletionReason.NoLongerNeeded, label: 'I no longer need my account' },

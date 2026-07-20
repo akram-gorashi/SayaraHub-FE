@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { DestroyRef, Injectable, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subscription, finalize } from 'rxjs';
@@ -10,6 +9,7 @@ import { ContactMessagesService } from '../../../core/services/contact-messages.
 import { ReviewsService } from '../../../core/services/reviews.service';
 import { AuthSessionService } from '../../../core/services/auth-session.service';
 import { UserSafetyService } from '../../../core/services/user-safety.service';
+import { LocalizedApiErrorService } from '../../../core/services/localized-api-error.service';
 
 interface ContactFormState {
   name: string;
@@ -25,6 +25,7 @@ export class CarDetailsStore {
   private readonly safetyService = inject(UserSafetyService);
   private readonly session = inject(AuthSessionService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly localizedError = inject(LocalizedApiErrorService);
   private readonly carState = signal<CarDetails | null>(null);
   private readonly loadingState = signal(false);
   private readonly errorState = signal<string | null>(null);
@@ -192,12 +193,6 @@ export class CarDetailsStore {
   }
 
   private errorMessage(error: unknown): string {
-    if (error instanceof HttpErrorResponse) {
-      if (error.status === 404) {
-        return 'This car is no longer available.';
-      }
-      return (error.error as { message?: string } | null)?.message || 'Unable to load this car.';
-    }
-    return 'Something went wrong while loading the car.';
+    return this.localizedError.message(error, 'Unable to load this car.');
   }
 }

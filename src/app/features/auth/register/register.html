@@ -5,8 +5,8 @@
         <div class="login-form">
           <div class="login-header">
             <div class="auth-brand" aria-label="SayaraMatch">SAYARA<span>MATCH</span></div>
-            <h2 id="register-heading" class="visually-hidden">Create a SayaraMatch account</h2>
-            <p>Create your SayaraMatch account</p>
+            <h2 id="register-heading" class="visually-hidden">{{ 'auth.registerTitle' | translate }}</h2>
+            <p>{{ 'auth.registerText' | translate }}</p>
           </div>
 
           @if (store.error(); as error) {
@@ -15,57 +15,57 @@
 
           <form [formGroup]="form" (ngSubmit)="submit()" (input)="store.clearError()" novalidate>
             <div class="form-group">
-              <label for="register-name">Full Name</label>
+              <label for="register-name">{{ 'auth.name' | translate }}</label>
               <input id="register-name" type="text" class="form-control" formControlName="fullName"
                 autocomplete="name" placeholder="Your Name" />
               @if (form.controls.fullName.touched && form.controls.fullName.invalid) {
-                <small class="field-error">Enter a name between 2 and 100 characters.</small>
+                <small class="field-error">{{ 'auth.nameInvalid' | translate }}</small>
               }
             </div>
 
             <div class="form-group">
-              <label for="register-email">Email Address</label>
+              <label for="register-email">{{ 'auth.email' | translate }}</label>
               <input id="register-email" type="email" class="form-control" formControlName="email"
                 autocomplete="email" placeholder="Your Email" />
               @if (form.controls.email.touched && form.controls.email.hasError('required')) {
-                <small class="field-error">Email address is required.</small>
+                <small class="field-error">{{ 'auth.emailRequired' | translate }}</small>
               } @else if (form.controls.email.touched && form.controls.email.hasError('email')) {
-                <small class="field-error">Enter a valid email address.</small>
+                <small class="field-error">{{ 'auth.emailInvalid' | translate }}</small>
               }
             </div>
 
             <div class="form-group">
-              <label for="register-password">Password</label>
+              <label for="register-password">{{ 'auth.password' | translate }}</label>
               <div class="password-control">
                 <input id="register-password" [type]="passwordType()" class="form-control"
                   formControlName="password" autocomplete="new-password" placeholder="Your Password" />
                 <button type="button" class="password-toggle" (click)="togglePasswordVisibility()"
-                  [attr.aria-label]="passwordVisible() ? 'Hide password' : 'Show password'">
+                  [attr.aria-label]="(passwordVisible() ? 'auth.hidePassword' : 'auth.showPassword') | translate">
                   <i class="far" [class.fa-eye]="!passwordVisible()" [class.fa-eye-slash]="passwordVisible()"></i>
                 </button>
               </div>
               @if (form.controls.password.touched && form.controls.password.invalid) {
-                <small class="field-error">Use at least 6 characters.</small>
+                <small class="field-error">{{ 'auth.passwordLength' | translate }}</small>
               }
             </div>
 
             <div class="form-check form-group">
               <input id="accepted-terms" class="form-check-input" type="checkbox" formControlName="acceptedTerms" />
-              <label class="form-check-label" for="accepted-terms">I agree to the Terms of Service.</label>
+              <label class="form-check-label" for="accepted-terms">{{ 'auth.terms' | translate }}</label>
               @if (form.controls.acceptedTerms.touched && form.controls.acceptedTerms.invalid) {
-                <small class="field-error">You must accept the terms to register.</small>
+                <small class="field-error">{{ 'auth.termsRequired' | translate }}</small>
               }
             </div>
 
             <button type="submit" class="theme-btn" [disabled]="store.submitting()">
               <i class="far" [class.fa-paper-plane]="!store.submitting()" [class.fa-spinner]="store.submitting()"
                 [class.fa-spin]="store.submitting()"></i>
-              {{ store.submitting() ? 'Creating account...' : 'Register' }}
+              {{ (store.submitting() ? 'auth.creating' : 'auth.register') | translate }}
             </button>
           </form>
 
           <div class="login-footer">
-            <p>Already have an account? <a routerLink="/login">Login.</a></p>
+            <p>{{ 'auth.hasAccount' | translate }} <a routerLink="/login">{{ 'auth.login' | translate }}</a></p>
           </div>
         </div>
       </div>

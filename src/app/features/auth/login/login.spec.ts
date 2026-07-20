@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
 import { LoginPage } from './login';
+import { provideTranslateService } from '@ngx-translate/core';
 
 describe('LoginPage', () => {
   let fixture: ComponentFixture<LoginPage>;
@@ -10,7 +11,7 @@ describe('LoginPage', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [LoginPage],
-      providers: [provideHttpClient(), provideRouter([])],
+      providers: [provideHttpClient(), provideRouter([]), provideTranslateService({ fallbackLang: 'en', lang: 'en' })],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginPage);

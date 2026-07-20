@@ -1,4 +1,3 @@
-import { CurrencyPipe, DatePipe, DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, input, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
@@ -8,10 +7,12 @@ import { CarSummary } from '../../../../core/models/car.models';
 import { AuthSessionService } from '../../../../core/services/auth-session.service';
 import { CarsService } from '../../../../core/services/cars.service';
 import { CarViewMode } from '../../models/car-view-mode';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LocalizedCurrencyPipe, LocalizedDatePipe, LocalizedNumberPipe } from '../../../../shared/i18n/localized-value.pipe';
 
 @Component({
   selector: 'app-car-card',
-  imports: [CurrencyPipe, DatePipe, DecimalPipe, RouterLink],
+  imports: [RouterLink, TranslatePipe, LocalizedCurrencyPipe, LocalizedDatePipe, LocalizedNumberPipe],
   templateUrl: './car-card.html',
   styleUrl: './car-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

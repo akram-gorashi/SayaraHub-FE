@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { DestroyRef, Injectable, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ParamMap } from '@angular/router';
@@ -8,6 +7,7 @@ import { CarQuery, CarSummary } from '../../../core/models/car.models';
 import { MasterData } from '../../../core/models/master-data.models';
 import { CarsService } from '../../../core/services/cars.service';
 import { MasterDataService } from '../../../core/services/master-data.service';
+import { LocalizedApiErrorService } from '../../../core/services/localized-api-error.service';
 import { CarViewMode } from '../models/car-view-mode';
 
 export type MultiSelectFilter = 'brandIds' | 'transmissionIds' | 'fuelTypeIds' | 'featureIds';
@@ -48,6 +48,7 @@ export class CarListingStore {
   private readonly carsService = inject(CarsService);
   private readonly masterDataService = inject(MasterDataService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly localizedError = inject(LocalizedApiErrorService);
 
   private readonly carsState = signal<CarSummary[]>([]);
   private readonly masterDataState = signal<MasterData | null>(null);
@@ -275,10 +276,7 @@ export class CarListingStore {
   }
 
   private errorMessage(error: unknown): string {
-    if (error instanceof HttpErrorResponse) {
-      return (error.error as { message?: string } | null)?.message || 'Unable to reach the cars API.';
-    }
-    return 'Something went wrong while loading cars.';
+    return this.localizedError.message(error, 'Unable to load cars.');
   }
 
   private readViewMode(): CarViewMode {

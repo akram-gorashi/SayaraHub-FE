@@ -1,16 +1,15 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { DestroyRef, Injectable, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 
-import { ApiResponse } from '../../../core/models/api.models';
 import { CreateCarRequest, UpdateCarRequest } from '../../../core/models/car.models';
 import { CarModelMasterData, MasterData } from '../../../core/models/master-data.models';
 import { SellerCarDetails } from '../../../core/models/seller-dashboard.models';
 import { CarsService } from '../../../core/services/cars.service';
 import { MasterDataService } from '../../../core/services/master-data.service';
 import { SellerDashboardService } from '../../../core/services/seller-dashboard.service';
+import { LocalizedApiErrorService } from '../../../core/services/localized-api-error.service';
 
 @Injectable()
 export class AddListingStore {
@@ -19,6 +18,7 @@ export class AddListingStore {
   private readonly sellerDashboard = inject(SellerDashboardService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly localizedError = inject(LocalizedApiErrorService);
   private readonly masterDataState = signal<MasterData | null>(null);
   private readonly modelsState = signal<CarModelMasterData[]>([]);
   private readonly loadingState = signal(false);
@@ -80,7 +80,7 @@ export class AddListingStore {
       });
   }
 
-  create(request: CreateCarRequest): void {
+  create(request: CreateCarRequest, onSuccess?: () => void): void {
     this.submittingState.set(true);
     this.uploadProgressState.set(0);
     this.errorState.set(null);
@@ -88,7 +88,7 @@ export class AddListingStore {
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.submittingState.set(false)))
       .subscribe({
         next: (response) => {
-          if (response.success && response.data) void this.router.navigate(['/account/listings']);
+          if (response.success && response.data) { onSuccess?.(); void this.router.navigate(['/account/listings']); }
           else this.errorState.set(response.message);
         },
         error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to submit the car.')),
@@ -111,14 +111,6 @@ export class AddListingStore {
   }
 
   private errorMessage(error: unknown, fallback: string): string {
-    if (!(error instanceof HttpErrorResponse)) return fallback;
-    const response = error.error as (Partial<ApiResponse<unknown>> & {
-      title?: string;
-      errors?: Record<string, string[]>;
-    }) | null;
-    const validationErrors = response?.errors
-      ? Object.values(response.errors).flat().filter(Boolean)
-      : [];
-    return response?.message || validationErrors.join(' ') || response?.title || fallback;
+    return this.localizedError.message(error, fallback);
   }
 }

@@ -52,3 +52,35 @@
     bottom: calc(84px + env(safe-area-inset-bottom));
   }
 }
+
+.language-preference { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 24px; padding: 14px; border: 1px solid #e8ebef; border-radius: 10px; }
+.language-preference h3, .language-preference p { margin: 0; }
+.language-preference h3 { font-size: 16px; }
+.language-preference p { margin-top: 3px; color: #77808f; font-size: 12px; }
+.language-preference [role="group"] { display: flex; padding: 3px; border-radius: 20px; background: #f1f3f5; }
+.language-preference button { padding: 6px 11px; border: 0; border-radius: 17px; color: #596274; background: transparent; font-size: 12px; font-weight: 700; }
+.language-preference button.active { color: #fff; background: var(--theme-color); }
+
+/* Runtime Arabic layout. Component rules continue to own sizing; these rules only
+   switch writing direction and the few legacy physical offsets from the theme. */
+html[dir="rtl"] body { direction: rtl; text-align: right; font-family: "Tahoma", "Arial", sans-serif; }
+html[dir="rtl"] input, html[dir="rtl"] textarea, html[dir="rtl"] select { direction: rtl; text-align: right; }
+html[dir="rtl"] .navbar-nav, html[dir="rtl"] .header-top-wrapper, html[dir="rtl"] .header-top-link,
+html[dir="rtl"] .breadcrumb-menu, html[dir="rtl"] .car-single-meta { direction: rtl; }
+html[dir="rtl"] .dropdown-menu { text-align: right; }
+html[dir="rtl"] .notification-dropdown { right: auto !important; left: 0 !important; }
+html[dir="rtl"] .form-check { padding-left: 0; padding-right: 1.5em; }
+html[dir="rtl"] .form-check .form-check-input { float: right; margin-right: -1.5em; margin-left: 0; }
+html[dir="rtl"] .site-breadcrumb .breadcrumb-menu li { margin-right: 25px; margin-left: 0; }
+html[dir="rtl"] .site-breadcrumb .breadcrumb-menu li:first-child { margin-right: 0; }
+html[dir="rtl"] .site-breadcrumb .breadcrumb-menu li::before { right: auto; left: -21px; transform: scaleX(-1); }
+html[dir="rtl"] .fa-arrow-right, html[dir="rtl"] .fa-arrow-left,
+html[dir="rtl"] .fa-chevron-right, html[dir="rtl"] .fa-chevron-left,
+html[dir="rtl"] .fa-arrow-right-long { transform: scaleX(-1); }
+html[dir="rtl"] .mobile-bottom-nav { direction: rtl; }
+
+@media (max-width: 767px) {
+  html[dir="rtl"] .mobile-listing-stepper ol,
+  html[dir="rtl"] .mobile-filter-chips,
+  html[dir="rtl"] .gallery-thumbnails { direction: rtl; }
+}

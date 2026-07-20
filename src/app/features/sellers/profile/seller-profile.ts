@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { Breadcrumb } from '../../../shared/ui/breadcrumb/breadcrumb';
 import { CarCard } from '../../cars/components/car-card/car-card';
 import { SellerProfileStore } from './seller-profile.store';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-seller-profile',
-  imports: [Breadcrumb, CarCard, DatePipe, FormsModule],
+  imports: [Breadcrumb, CarCard, DatePipe, FormsModule, TranslatePipe],
   templateUrl: './seller-profile.html',
   styleUrl: './seller-profile.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

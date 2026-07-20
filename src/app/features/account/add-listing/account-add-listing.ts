@@ -2,24 +2,32 @@ import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, effect, inj
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import imageCompression from 'browser-image-compression';
+import { debounceTime } from 'rxjs';
 
 import { CreateCarRequest, UpdateCarRequest } from '../../../core/models/car.models';
 import { SellerCarImage } from '../../../core/models/seller-dashboard.models';
 import { AddListingStore } from './add-listing.store';
+import { AuthSessionService } from '../../../core/services/auth-session.service';
 
 @Component({
   selector: 'app-account-add-listing',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CdkDropList, CdkDrag, TranslatePipe],
   templateUrl: './account-add-listing.html',
   styleUrl: './account-add-listing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [AddListingStore],
+  host: { '(window:beforeunload)': 'preventUnsavedExit($event)' },
 })
 export class AccountAddListing {
   private readonly fb = inject(FormBuilder);
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly translate = inject(TranslateService);
+  private readonly session = inject(AuthSessionService);
   protected readonly store = inject(AddListingStore);
   protected readonly listingId = Number(this.route.snapshot.paramMap.get('id')) || null;
   protected readonly isEditing = this.listingId !== null;
@@ -31,11 +39,14 @@ export class AccountAddListing {
   protected readonly imagePreviews = signal<{ file: File; url: string }[]>([]);
   protected readonly existingImages = signal<SellerCarImage[]>([]);
   protected readonly imageError = signal<string | null>(null);
+  protected readonly optimizingImages = signal(false);
   protected readonly validationErrors = signal<string[]>([]);
   protected readonly submitAttempted = signal(false);
   protected readonly currentStep = signal(1);
   protected readonly stepError = signal<string | null>(null);
-  protected readonly mobileSteps = ['Basics', 'Details', 'Photos', 'Finish'];
+  protected readonly mobileSteps = ['listing.steps.basics', 'listing.steps.details', 'listing.steps.photos', 'listing.steps.finish'];
+  protected readonly draftRestored = signal(false);
+  protected readonly draftSaved = signal(false);
   protected readonly mainExistingImageId = signal<number | null>(null);
   protected readonly mainNewImage = signal<File | null>(null);
   private readonly initialized = signal(false);
@@ -62,6 +73,7 @@ export class AccountAddListing {
 
   constructor() {
     this.store.load(this.listingId ?? undefined);
+    if (!this.isEditing) this.restoreDraft();
     effect(() => {
       const car = this.store.car();
       if (!car || this.initialized()) return;
@@ -94,6 +106,7 @@ export class AccountAddListing {
     this.form.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       if (this.submitAttempted()) this.updateValidationErrors();
     });
+    this.form.valueChanges.pipe(debounceTime(500), takeUntilDestroyed(this.destroyRef)).subscribe(() => this.saveDraft());
     this.destroyRef.onDestroy(() => this.imagePreviews().forEach(({ url }) => URL.revokeObjectURL(url)));
   }
 
@@ -106,43 +119,75 @@ export class AccountAddListing {
     const controls = this.stepControls(this.currentStep());
     controls.forEach(name => this.form.controls[name].markAsTouched());
     if (controls.some(name => this.form.controls[name].invalid)) {
-      this.stepError.set('Please complete the required fields before continuing.');
+      this.stepError.set(this.translate.instant('validation.completeStep'));
       this.focusFirstInvalid();
       return;
     }
     if (this.currentStep() === 3 && this.existingImages().length + this.selectedImages().length === 0) {
-      this.imageError.set('Add at least one car photo.');
-      this.stepError.set('Add at least one photo before continuing.');
+      this.imageError.set(this.translate.instant('validation.photoRequired'));
+      this.stepError.set(this.translate.instant('validation.photoRequired'));
       this.elementRef.nativeElement.querySelector<HTMLElement>('#listing-images')?.focus();
       return;
     }
     this.stepError.set(null);
     this.currentStep.update(step => Math.min(4, step + 1));
+    this.form.markAsDirty();
+    this.saveDraft();
     this.scrollToWizardTop();
   }
 
   protected previousStep(): void {
     this.stepError.set(null);
     this.currentStep.update(step => Math.max(1, step - 1));
+    this.form.markAsDirty();
+    this.saveDraft();
     this.scrollToWizardTop();
   }
 
   protected toggleFeature(featureId: number, selected: boolean): void {
     this.selectedFeatureIds.update((ids) => selected ? [...ids, featureId] : ids.filter((id) => id !== featureId));
+    this.form.markAsDirty();
+    this.saveDraft();
   }
 
-  protected chooseImages(event: Event): void {
-    const files = Array.from((event.target as HTMLInputElement).files ?? []);
-    if (this.existingImages().length + files.length > 10) { this.imageError.set('Choose no more than 10 images in total.'); return; }
-    if (files.some((file) => !file.type.startsWith('image/') || file.size > 5 * 1024 * 1024)) {
-      this.imageError.set('Each file must be an image no larger than 5 MB.'); return;
+  protected async chooseImages(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    const files = Array.from(input.files ?? []);
+    const remaining = 10 - this.existingImages().length - this.selectedImages().length;
+    if (files.length > remaining) { this.imageError.set(`Choose no more than ${remaining} additional images.`); input.value = ''; return; }
+    if (files.some(file => !file.type.startsWith('image/'))) { this.imageError.set('Only image files can be uploaded.'); input.value = ''; return; }
+    if (!files.length) return;
+    this.optimizingImages.set(true);
+    this.imageError.set(null);
+    try {
+      const optimized = await Promise.all(files.map(file => imageCompression(file, {
+        maxSizeMB: 1.5, maxWidthOrHeight: 1920, useWebWorker: true,
+        fileType: file.type === 'image/png' ? 'image/png' : 'image/jpeg',
+      })));
+      this.selectedImages.update(images => [...images, ...optimized]);
+      this.imagePreviews.update(previews => [...previews, ...optimized.map(file => ({ file, url: URL.createObjectURL(file) }))]);
+      if (!this.mainExistingImageId() && !this.mainNewImage()) this.mainNewImage.set(optimized[0]);
+      this.form.markAsDirty();
+      if (this.submitAttempted()) this.updateValidationErrors();
+    } catch {
+      this.imageError.set('One or more photos could not be processed. Please try different images.');
+    } finally {
+      this.optimizingImages.set(false);
+      input.value = '';
     }
-    this.imageError.set(files.length ? null : 'Add at least one car photo.');
-    this.imagePreviews().forEach(({ url }) => URL.revokeObjectURL(url));
-    this.selectedImages.set(files);
-    this.imagePreviews.set(files.map((file) => ({ file, url: URL.createObjectURL(file) })));
-    if (!this.mainExistingImageId() && files.length) this.mainNewImage.set(files[0]);
-    if (this.submitAttempted()) this.updateValidationErrors();
+  }
+
+  protected dropExisting(event: CdkDragDrop<SellerCarImage[]>): void {
+    if (event.previousIndex === event.currentIndex) return;
+    this.existingImages.update(images => { const reordered = [...images]; moveItemInArray(reordered, event.previousIndex, event.currentIndex); return reordered; });
+    this.form.markAsDirty();
+  }
+
+  protected dropNew(event: CdkDragDrop<{ file: File; url: string }[]>): void {
+    if (event.previousIndex === event.currentIndex) return;
+    this.imagePreviews.update(previews => { const reordered = [...previews]; moveItemInArray(reordered, event.previousIndex, event.currentIndex); return reordered; });
+    this.selectedImages.set(this.imagePreviews().map(preview => preview.file));
+    this.form.markAsDirty();
   }
 
   protected removeExistingImage(imageId: number): void {
@@ -217,8 +262,27 @@ export class AccountAddListing {
       };
       this.store.update(this.listingId, updateRequest);
     } else {
-      this.store.create(request);
+      this.store.create(request, () => this.clearDraft());
     }
+  }
+
+  protected discardDraft(): void {
+    this.clearDraft();
+    this.form.reset();
+    this.selectedFeatureIds.set([]);
+    this.currentStep.set(1);
+    this.draftRestored.set(false);
+    this.form.markAsPristine();
+  }
+
+  canDeactivate(): boolean {
+    return !this.hasUnsavedChanges() || globalThis.confirm(this.translate.instant('listing.unsavedWarning'));
+  }
+
+  protected preventUnsavedExit(event: BeforeUnloadEvent): void {
+    if (!this.hasUnsavedChanges()) return;
+    event.preventDefault();
+    event.returnValue = '';
   }
 
   private move<T>(items: T[], index: number, offset: -1 | 1): T[] {
@@ -241,8 +305,8 @@ export class AccountAddListing {
       .filter(([, control]) => control.invalid)
       .map(([name, control]) => {
         const label = labels[name] ?? name;
-        if (control.hasError('required')) return `${label} is required.`;
-        if (name === 'vin') return 'VIN must contain exactly 17 characters.';
+        if (control.hasError('required')) return this.translate.instant('validation.required', { field: label });
+        if (name === 'vin') return this.translate.instant('validation.vin');
         if (control.hasError('min')) return `${label} must be greater than the minimum allowed value.`;
         if (control.hasError('max')) return `${label} exceeds the maximum allowed value.`;
         return `${label} is invalid.`;
@@ -270,5 +334,49 @@ export class AccountAddListing {
 
   private scrollToWizardTop(): void {
     queueMicrotask(() => this.elementRef.nativeElement.querySelector<HTMLElement>('.mobile-listing-stepper')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  }
+
+  private saveDraft(): void {
+    if (this.isEditing || !this.form.dirty) return;
+    const draft = {
+      form: this.form.getRawValue(),
+      featureIds: this.selectedFeatureIds(),
+      step: this.currentStep(),
+      updatedAt: new Date().toISOString(),
+    };
+    try {
+      localStorage.setItem(this.draftKey(), JSON.stringify(draft));
+      this.draftSaved.set(true);
+      this.form.markAsPristine();
+      setTimeout(() => this.draftSaved.set(false), 1800);
+    } catch { /* Draft saving is a convenience; form submission still works. */ }
+  }
+
+  private restoreDraft(): void {
+    try {
+      const raw = localStorage.getItem(this.draftKey());
+      if (!raw) return;
+      const draft = JSON.parse(raw) as { form?: Partial<Omit<CreateCarRequest, 'images' | 'featureIds' | 'mainImageIndex'>>; featureIds?: number[]; step?: number };
+      if (!draft.form) return;
+      this.form.patchValue(draft.form);
+      this.selectedFeatureIds.set(draft.featureIds ?? []);
+      this.currentStep.set(Math.min(4, Math.max(1, draft.step ?? 1)));
+      if (draft.form.carBrandId) this.store.loadModels(Number(draft.form.carBrandId));
+      this.draftRestored.set(true);
+      this.form.markAsPristine();
+    } catch { this.clearDraft(); }
+  }
+
+  private clearDraft(): void {
+    try { localStorage.removeItem(this.draftKey()); } catch { /* Ignore unavailable storage. */ }
+  }
+
+  private draftKey(): string {
+    const user = this.session.session()?.email?.trim().toLowerCase() || 'guest';
+    return `sayaraMatch.carDraft.${user}`;
+  }
+
+  private hasUnsavedChanges(): boolean {
+    return this.form.dirty || this.selectedImages().length > 0 || this.optimizingImages();
   }
 }
