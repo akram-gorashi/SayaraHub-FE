@@ -33,6 +33,9 @@ export class MessagesStore {
     this.realtime.messages$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((message) => {
       this.receive(message);
     });
+    this.realtime.presence$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((presence) => {
+      this.updatePresence(presence.userId, presence.isOnline, presence.lastSeenAt);
+    });
   }
 
   load(): void {
@@ -99,6 +102,26 @@ export class MessagesStore {
     return message.senderId === this.account.profile()?.id;
   }
 
+  presenceLabel(chat: Chat): string {
+    if (chat.otherUserIsOnline) return 'Online now';
+    return chat.otherUserLastSeenAt ? 'Last seen ' : 'Offline';
+  }
+
+  presenceState(chat: Chat): 'online' | 'recent' | 'offline' {
+    if (chat.otherUserIsOnline) return 'online';
+    if (!chat.otherUserLastSeenAt) return 'offline';
+    const lastSeen = new Date(chat.otherUserLastSeenAt).getTime();
+    if (!Number.isFinite(lastSeen)) return 'offline';
+    return Date.now() - lastSeen <= 15 * 60 * 1000 ? 'recent' : 'offline';
+  }
+
+  presenceIconLabel(chat: Chat): string {
+    const state = this.presenceState(chat);
+    if (state === 'online') return 'Online';
+    if (state === 'recent') return 'Recently online';
+    return 'Offline';
+  }
+
   private receive(message: ChatMessage): void {
     const activeChat = this.activeChatState();
     if (activeChat?.id === message.chatId) {
@@ -126,6 +149,22 @@ export class MessagesStore {
         unreadCount: isIncoming && !isActive ? chat.unreadCount + 1 : chat.unreadCount,
       } : chat)
       .sort((left, right) => this.timestamp(right.lastMessageAt) - this.timestamp(left.lastMessageAt)));
+  }
+
+  private updatePresence(userId: number, isOnline: boolean, lastSeenAt: string | null): void {
+    this.chatsState.update((chats) => chats.map((chat) => chat.otherUserId === userId ? {
+      ...chat,
+      otherUserIsOnline: isOnline,
+      otherUserLastSeenAt: lastSeenAt,
+    } : chat));
+    const activeChat = this.activeChatState();
+    if (activeChat?.otherUserId === userId) {
+      this.activeChatState.set({
+        ...activeChat,
+        otherUserIsOnline: isOnline,
+        otherUserLastSeenAt: lastSeenAt,
+      });
+    }
   }
 
   private chronological(messages: ChatMessage[]): ChatMessage[] {

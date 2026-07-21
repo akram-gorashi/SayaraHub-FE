@@ -7,7 +7,13 @@
         @for (chat of store.chats(); track chat.id) {
           <li [class.message-active]="store.activeChat()?.id === chat.id">
             <button type="button" class="chat-select" (click)="store.select(chat)">
-              <div class="message-avatar"><img [src]="chat.otherUserImageUrl || 'assets/img/account/user-v2.jpg'" [alt]="chat.otherUserName" /></div>
+              <div class="message-avatar" [class.online]="chat.otherUserIsOnline"><img [src]="chat.otherUserImageUrl || 'assets/img/account/user-v2.jpg'" [alt]="chat.otherUserName" />
+                <span class="presence-indicator"
+                  [class.online]="store.presenceState(chat) === 'online'"
+                  [class.recent]="store.presenceState(chat) === 'recent'"
+                  [class.offline]="store.presenceState(chat) === 'offline'"
+                  [attr.aria-label]="store.presenceIconLabel(chat)" [attr.title]="store.presenceIconLabel(chat)"></span>
+              </div>
               <div class="message-by"><div class="message-by-content"><h3>{{ chat.otherUserName }}</h3>
                 <span>{{ chat.lastMessageAt | date:'short' }}</span></div><p>{{ chat.lastMessage || chat.carTitle }}</p></div>
               @if (chat.unreadCount) { <span class="badge badge-danger unread-badge">{{ chat.unreadCount }}</span> }
@@ -18,6 +24,16 @@
     </aside>
     <div class="message-content">
       @if (store.activeChat(); as chat) {
+        <div class="mobile-chat-header">
+          <div class="message-avatar" [class.online]="chat.otherUserIsOnline"><img [src]="chat.otherUserImageUrl || 'assets/img/account/user-v2.jpg'" [alt]="chat.otherUserName" /></div>
+          <div>
+            <h3>{{ chat.otherUserName }}</h3>
+            <p class="mobile-chat-status" [class.online]="chat.otherUserIsOnline">
+              {{ store.presenceLabel(chat) }}@if (!chat.otherUserIsOnline && chat.otherUserLastSeenAt) { {{ chat.otherUserLastSeenAt | date:'short' }} }
+            </p>
+            <p>{{ chat.carTitle }}</p>
+          </div>
+        </div>
         <div #messageList class="message-content-info">
           @for (message of store.messages(); track message.id) {
             <div class="message-item" [class.me]="store.isMine(message)">

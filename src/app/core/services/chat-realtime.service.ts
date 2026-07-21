@@ -7,7 +7,7 @@ import {
 } from '@microsoft/signalr';
 import { Subject } from 'rxjs';
 
-import { ChatMessage } from '../models/chat.models';
+import { ChatMessage, ChatPresence } from '../models/chat.models';
 import { AuthSessionService } from './auth-session.service';
 
 @Injectable({ providedIn: 'root' })
@@ -16,6 +16,7 @@ export class ChatRealtimeService {
   private readonly zone = inject(NgZone);
   private readonly joinedChatIds = new Set<number>();
   private readonly messageSubject = new Subject<ChatMessage>();
+  private readonly presenceSubject = new Subject<ChatPresence>();
   private startPromise: Promise<void> | null = null;
   private readonly connectedState = signal(false);
 
@@ -29,10 +30,14 @@ export class ChatRealtimeService {
 
   readonly connected = this.connectedState.asReadonly();
   readonly messages$ = this.messageSubject.asObservable();
+  readonly presence$ = this.presenceSubject.asObservable();
 
   constructor() {
     this.connection.on('MessageReceived', (message: ChatMessage) => {
       this.zone.run(() => this.messageSubject.next(message));
+    });
+    this.connection.on('PresenceChanged', (presence: ChatPresence) => {
+      this.zone.run(() => this.presenceSubject.next(presence));
     });
     this.connection.onreconnecting(() => this.zone.run(() => this.connectedState.set(false)));
     this.connection.onclose(() => this.zone.run(() => this.connectedState.set(false)));
