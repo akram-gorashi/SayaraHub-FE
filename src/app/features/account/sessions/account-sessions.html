@@ -1,13 +1,13 @@
 <section class="user-profile-card" aria-labelledby="sessions-title">
   <div class="sessions-header">
     <div>
-      <h2 id="sessions-title" class="user-profile-card-title">Login Sessions</h2>
-      <p>Review devices signed in to your account and remove any you do not recognize.</p>
+      <h2 id="sessions-title" class="user-profile-card-title">{{ 'account.loginSessions' | translate }}</h2>
+      <p>{{ 'account.sessionsIntro' | translate }}</p>
     </div>
     @if (store.sessions().length > 1) {
       <button type="button" class="theme-btn" [disabled]="store.processing() !== null"
         (click)="confirmation.set({ kind: 'others' })">
-        <i class="far fa-sign-out"></i> Log Out Other Devices
+        <i class="far fa-sign-out"></i> {{ 'account.logoutOtherDevices' | translate }}
       </button>
     }
   </div>
@@ -18,7 +18,7 @@
   @if (store.loading()) {
     <div class="text-center py-5"><span class="spinner-border text-primary"></span></div>
   } @else if (store.sessions().length === 0) {
-    <div class="sessions-empty"><i class="far fa-laptop-mobile"></i><p>No active sessions were found.</p></div>
+    <div class="sessions-empty"><i class="far fa-laptop-mobile"></i><p>{{ 'account.noActiveSessions' | translate }}</p></div>
   } @else {
     <div class="sessions-list">
       @for (session of store.sessions(); track session.id) {
@@ -27,21 +27,21 @@
           <div class="session-details">
             <div class="session-title">
               <h3>{{ session.deviceName }}</h3>
-              @if (session.isCurrent) { <span class="session-badge">Current session</span> }
+              @if (session.isCurrent) { <span class="session-badge">{{ 'account.currentSession' | translate }}</span> }
             </div>
             <p><i class="far fa-browser"></i> {{ session.browser }}</p>
             <div class="session-meta">
-              <span><strong>IP:</strong> {{ session.ipAddress || 'Unavailable' }}</span>
-              <span><strong>Signed in:</strong> {{ session.createdAt | date:'medium' }}</span>
-              <span><strong>Last active:</strong> {{ session.lastActivityAt | date:'medium' }}</span>
+              <span><strong>{{ 'account.ip' | translate }}:</strong> {{ session.ipAddress || ('account.unavailable' | translate) }}</span>
+              <span><strong>{{ 'account.signedIn' | translate }}:</strong> {{ session.createdAt | date:'medium' }}</span>
+              <span><strong>{{ 'account.lastActive' | translate }}:</strong> {{ session.lastActivityAt | date:'medium' }}</span>
             </div>
           </div>
           <button type="button" class="session-revoke" [disabled]="store.processing() !== null"
-            [attr.aria-label]="'Log out ' + session.deviceName"
+            [attr.aria-label]="'account.logoutDevice' | translate:{ device: session.deviceName }"
             (click)="confirmation.set({ kind: 'session', session })">
             @if (store.processing() === session.id) { <i class="far fa-spinner fa-spin"></i> }
             @else { <i class="far fa-sign-out"></i> }
-            {{ session.isCurrent ? 'Log Out' : 'Revoke' }}
+            {{ (session.isCurrent ? 'auth.logout' : 'account.revoke') | translate }}
           </button>
         </article>
       }
@@ -55,20 +55,20 @@
       (click)="$event.stopPropagation()">
       <div class="confirmation-icon"><i class="far fa-shield-check"></i></div>
       <h3 id="session-confirmation-title">
-        {{ action.kind === 'others' ? 'Log out other devices?' : 'Log out this session?' }}
+        {{ (action.kind === 'others' ? 'account.confirmLogoutOthersTitle' : 'account.confirmLogoutSessionTitle') | translate }}
       </h3>
       <p>
         @if (action.kind === 'others') {
-          Every device except this one will need to sign in again.
+          {{ 'account.confirmLogoutOthersBody' | translate }}
         } @else if (action.session.isCurrent) {
-          This is your current session. You will be returned to the login page.
+          {{ 'account.confirmLogoutCurrentBody' | translate }}
         } @else {
-          {{ action.session.deviceName }} using {{ action.session.browser }} will need to sign in again.
+          {{ 'account.confirmLogoutSessionBody' | translate:{ device: action.session.deviceName, browser: action.session.browser } }}
         }
       </p>
       <div class="confirmation-actions">
-        <button type="button" class="btn btn-outline-secondary" (click)="confirmation.set(null)">Cancel</button>
-        <button type="button" class="theme-btn" (click)="confirm()">Confirm</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="confirmation.set(null)">{{ 'common.cancel' | translate }}</button>
+        <button type="button" class="theme-btn" (click)="confirm()">{{ 'common.confirm' | translate }}</button>
       </div>
     </div>
   </div>

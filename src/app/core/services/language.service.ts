@@ -45,6 +45,7 @@ export class LanguageService {
     this.document.documentElement.lang = language;
     this.document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
     this.document.body?.classList.toggle('rtl', language === 'ar');
+    this.document.body?.classList.toggle('rtl-mode', language === 'ar');
   }
 
   private readPreference(): AppLanguage {

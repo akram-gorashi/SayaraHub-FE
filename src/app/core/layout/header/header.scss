@@ -173,6 +173,35 @@ button.nav-link {
 .notification-history-link { display: block; margin: 7px 0 0 !important; padding: 10px; color: var(--color-dark) !important; text-align: center; border-radius: 5px; font-weight: 600; }
 .notification-history-link:hover { color: var(--theme-color) !important; background: #fff3f3; }
 
+@media (min-width: 992px) {
+  .navbar .nav-item .nav-link,
+  .navbar .nav-item .dropdown-toggle {
+    white-space: nowrap;
+  }
+
+  :host-context(body.rtl-mode) .navbar-brand {
+    margin-left: 0;
+  }
+
+  :host-context(body.rtl-mode) .navbar .nav-item .nav-link {
+    margin-left: clamp(14px, 1.25vw, 24px);
+    margin-right: 0;
+  }
+
+  :host-context(body.rtl-mode) .navbar .nav-item:last-child .nav-link {
+    margin-left: 0;
+  }
+
+  :host-context(body.rtl-mode) .nav-right {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  :host-context(body.rtl-mode) .navbar .nav-right-btn {
+    margin-left: 0;
+  }
+}
+
 @media (max-width: 767px) {
   .header-top,
   .mobile-menu-right,

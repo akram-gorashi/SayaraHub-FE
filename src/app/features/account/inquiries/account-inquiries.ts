@@ -1,13 +1,14 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { ContactMessage } from '../../../core/models/contact-message.models';
 import { InquiriesStore } from './inquiries.store';
 
 @Component({
   selector: 'app-account-inquiries',
-  imports: [DatePipe, RouterLink],
+  imports: [DatePipe, RouterLink, TranslatePipe],
   templateUrl: './account-inquiries.html',
   styleUrl: './account-inquiries.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,6 +16,7 @@ import { InquiriesStore } from './inquiries.store';
 })
 export class AccountInquiries {
   protected readonly store = inject(InquiriesStore);
+  private readonly translate = inject(TranslateService);
 
   constructor() { this.store.load(); }
 
@@ -27,6 +29,6 @@ export class AccountInquiries {
   }
 
   protected remove(item: ContactMessage): void {
-    if (globalThis.confirm?.('Delete this inquiry permanently?')) this.store.delete(item);
+    if (globalThis.confirm?.(this.translate.instant('account.confirmDeleteInquiry'))) this.store.delete(item);
   }
 }

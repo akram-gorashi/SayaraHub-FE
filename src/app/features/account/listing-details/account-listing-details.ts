@@ -1,12 +1,12 @@
-import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ListingDetailsStore } from './listing-details.store';
 
 @Component({
   selector: 'app-account-listing-details',
-  imports: [CurrencyPipe, DatePipe, RouterLink, TitleCasePipe, TranslatePipe],
+  imports: [CurrencyPipe, DatePipe, RouterLink, TranslatePipe],
   templateUrl: './account-listing-details.html',
   styleUrl: './account-listing-details.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,6 +14,7 @@ import { ListingDetailsStore } from './listing-details.store';
 })
 export class AccountListingDetails {
   private readonly route = inject(ActivatedRoute);
+  private readonly translate = inject(TranslateService);
   protected readonly store = inject(ListingDetailsStore);
   protected readonly carId = Number(this.route.snapshot.paramMap.get('id'));
   protected readonly historyDescription = signal('');
@@ -51,6 +52,6 @@ export class AccountListingDetails {
   protected documentSelected(event: Event): void { this.historyDocument.set((event.target as HTMLInputElement).files?.[0] ?? null); }
 
   protected deleteHistory(id: number): void {
-    if (globalThis.confirm('Delete this vehicle-history record?')) this.store.deleteHistory(id);
+    if (globalThis.confirm(this.translate.instant('account.confirmDeleteHistory'))) this.store.deleteHistory(id);
   }
 }

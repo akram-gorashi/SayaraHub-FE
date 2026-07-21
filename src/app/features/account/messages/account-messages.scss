@@ -31,6 +31,17 @@
 @keyframes typing-bounce { 0%, 80%, 100% { transform: translateY(0); opacity: .45; } 40% { transform: translateY(-4px); opacity: 1; } }
 .empty-chat, .empty-message { padding: 30px; text-align: center; }
 .mobile-chat-header { display: none; }
+.chat-safety-notice { display: flex; align-items: center; gap: 9px; margin: 0 0 14px; padding: 10px 14px; color: #7a5200; background: #fff7df; border: 1px solid #ffe7a8; border-radius: 12px; font-size: 12px; font-weight: 700; }
+.chat-safety-notice i { color: #d97706; }
+.chat-trust-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.chat-trust-badges span { display: inline-flex; align-items: center; gap: 4px; padding: 3px 7px; color: #067647; background: #ecfdf3; border-radius: 999px; font-size: 10px; font-weight: 800; }
+.chat-safety-actions { display: flex; align-items: center; gap: 7px; margin-inline-start: auto; }
+.chat-icon-action { display: grid; width: 34px; height: 34px; place-items: center; color: #667085; background: #fff; border: 1px solid #e5e8ed; border-radius: 50%; }
+.chat-icon-action:hover { color: var(--theme-color); border-color: rgb(245 30 48 / 28%); background: #fff5f6; }
+.chat-icon-action.danger:hover { color: #dc2626; }
+.chat-report-panel { display: grid; gap: 10px; margin-bottom: 14px; padding: 14px; background: #fff; border: 1px solid #edf0f4; border-radius: 14px; box-shadow: 0 12px 30px rgb(16 24 40 / 7%); }
+.chat-report-panel h4 { margin: 0; font-size: 15px; }
+.chat-report-panel > div { display: flex; justify-content: flex-end; gap: 8px; }
 @media (max-width: 991px) { .profile-message-wrapper { flex-direction: column; } .profile-message-inbox { max-width: none; margin-bottom: 20px; } .profile-message-inbox ul { width: 100%; } .message-content { padding-left: 0; } }
 
 .message-content-info {
@@ -233,6 +244,11 @@
     backdrop-filter: blur(10px);
   }
 
+  .mobile-chat-identity {
+    min-width: 0;
+    flex: 1;
+  }
+
   .mobile-chat-header h3 {
     margin: 0;
     color: #101828;
@@ -248,6 +264,20 @@
     font-size: 12px;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .chat-safety-actions {
+    align-self: flex-start;
+  }
+
+  .chat-icon-action {
+    width: 32px;
+    height: 32px;
+  }
+
+  .chat-safety-notice,
+  .chat-report-panel {
+    margin-inline: 16px;
   }
 
   .mobile-chat-header .mobile-chat-status {

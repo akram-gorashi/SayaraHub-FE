@@ -1,17 +1,17 @@
 <section class="user-profile-card profile-favorite" aria-labelledby="favorites-title">
-  <h2 id="favorites-title" class="user-profile-card-title">My Favorites</h2>
+  <h2 id="favorites-title" class="user-profile-card-title">{{ 'account.myFavorites' | translate }}</h2>
   @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
   @if (store.loading()) {
-    <div class="account-state"><span class="spinner-border text-primary"></span> Loading favorites...</div>
+    <div class="account-state"><span class="spinner-border text-primary"></span> {{ 'account.loadingFavorites' | translate }}</div>
   } @else {
     <div class="row">
       @for (car of store.cars(); track car.id) {
         <div class="col-md-6 col-lg-4 favorite-item">
-          <button type="button" class="favorite-remove" title="Remove favorite" [disabled]="store.removingId() === car.id"
+          <button type="button" class="favorite-remove" [title]="'account.removeFavorite' | translate" [disabled]="store.removingId() === car.id"
             (click)="store.removeFavorite(car.id)"><i class="far fa-xmark"></i></button>
           <app-car-card [car]="car" viewMode="grid" [showActions]="false" />
         </div>
-      } @empty { <div class="col-12 text-center py-4">You have no favorite cars yet.</div> }
+      } @empty { <div class="col-12 text-center py-4">{{ 'account.noFavorites' | translate }}</div> }
     </div>
   }
 </section>

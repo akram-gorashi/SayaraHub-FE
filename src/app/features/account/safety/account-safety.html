@@ -1,6 +1,6 @@
 <section class="user-profile-card safety-page" aria-labelledby="safety-title">
   <div class="user-profile-card-header">
-    <div><h2 id="safety-title" class="user-profile-card-title">Safety Center</h2><p>Manage blocked users and follow reports you submitted.</p></div>
+    <div><h2 id="safety-title" class="user-profile-card-title">{{ 'account.safetyCenter' | translate }}</h2><p>{{ 'account.safetyCenterIntro' | translate }}</p></div>
   </div>
   @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
   @if (store.success(); as success) { <div class="alert alert-success">{{ success }}</div> }
@@ -8,25 +8,25 @@
     <div class="text-center py-5"><span class="spinner-border text-primary"></span></div>
   } @else {
     <section class="safety-section">
-      <h3>Blocked users</h3>
+      <h3>{{ 'account.blockedUsers' | translate }}</h3>
       <div class="blocked-list">
         @for (user of store.blocked(); track user.userId) {
-          <article><img [src]="user.imageUrl || 'assets/img/account/user-v2.jpg'" [alt]="user.fullName" /><div><a [routerLink]="['/sellers', user.userId]"><strong>{{ user.fullName }}</strong></a><small>Blocked {{ user.blockedAt | date:'mediumDate' }}</small></div><button type="button" class="btn btn-outline-secondary btn-sm" (click)="unblock(user)">Unblock</button></article>
-        } @empty { <p class="empty-state">You have not blocked anyone.</p> }
+          <article><img [src]="user.imageUrl || 'assets/img/account/user-v2.jpg'" [alt]="user.fullName" /><div><a [routerLink]="['/sellers', user.userId]"><strong>{{ user.fullName }}</strong></a><small>{{ 'account.blocked' | translate }} {{ user.blockedAt | date:'mediumDate' }}</small></div><button type="button" class="btn btn-outline-secondary btn-sm" (click)="unblock(user)">{{ 'account.unblock' | translate }}</button></article>
+        } @empty { <p class="empty-state">{{ 'account.noBlockedUsers' | translate }}</p> }
       </div>
     </section>
     <section class="safety-section">
-      <h3>My reports</h3>
+      <h3>{{ 'account.myReports' | translate }}</h3>
       <div class="table-responsive">
-        <table class="table align-middle"><thead><tr><th>Target</th><th>Reason</th><th>Submitted</th><th>Status</th><th>Resolution</th></tr></thead><tbody>
-          @for (report of store.reports(); track report.id) { <tr><td>{{ report.targetType | titlecase }} #{{ report.targetId }}</td><td><strong>{{ report.reason }}</strong>@if (report.details) { <small>{{ report.details }}</small> }</td><td>{{ report.createdAt | date:'mediumDate' }}</td><td><span class="badge" [class.badge-info]="report.status === 'Open'" [class.badge-success]="report.status === 'Resolved'" [class.badge-danger]="report.status === 'Dismissed'">{{ report.status }}</span></td><td>{{ report.resolutionNote || '—' }}</td></tr> }
-          @empty { <tr><td colspan="5" class="empty-state">You have not submitted any reports.</td></tr> }
+        <table class="table align-middle"><thead><tr><th>{{ 'account.target' | translate }}</th><th>{{ 'account.reason' | translate }}</th><th>{{ 'account.submitted' | translate }}</th><th>{{ 'account.status' | translate }}</th><th>{{ 'account.resolution' | translate }}</th></tr></thead><tbody>
+          @for (report of store.reports(); track report.id) { <tr><td>{{ report.targetType | titlecase }} #{{ report.targetId }}</td><td><strong>{{ report.reason }}</strong>@if (report.details) { <small>{{ report.details }}</small> }</td><td>{{ report.createdAt | date:'mediumDate' }}</td><td><span class="badge" [class.badge-info]="report.status === 'Open'" [class.badge-success]="report.status === 'Resolved'" [class.badge-danger]="report.status === 'Dismissed'">{{ 'account.reportStatuses.' + report.status.toLowerCase() | translate }}</span></td><td>{{ report.resolutionNote || '—' }}</td></tr> }
+          @empty { <tr><td colspan="5" class="empty-state">{{ 'account.noReports' | translate }}</td></tr> }
         </tbody></table>
       </div>
       <div class="report-cards">
         @for (report of store.reports(); track report.id) {
-          <article><header><strong>{{ report.reason }}</strong><span class="badge" [class.badge-info]="report.status === 'Open'" [class.badge-success]="report.status === 'Resolved'" [class.badge-danger]="report.status === 'Dismissed'">{{ report.status }}</span></header><p>{{ report.targetType | titlecase }} #{{ report.targetId }}</p>@if (report.details) { <p>{{ report.details }}</p> }<footer><time>{{ report.createdAt | date:'mediumDate' }}</time><span>{{ report.resolutionNote || 'No resolution yet' }}</span></footer></article>
-        } @empty { <p class="empty-state">You have not submitted any reports.</p> }
+          <article><header><strong>{{ report.reason }}</strong><span class="badge" [class.badge-info]="report.status === 'Open'" [class.badge-success]="report.status === 'Resolved'" [class.badge-danger]="report.status === 'Dismissed'">{{ 'account.reportStatuses.' + report.status.toLowerCase() | translate }}</span></header><p>{{ report.targetType | titlecase }} #{{ report.targetId }}</p>@if (report.details) { <p>{{ report.details }}</p> }<footer><time>{{ report.createdAt | date:'mediumDate' }}</time><span>{{ report.resolutionNote || ('account.noResolution' | translate) }}</span></footer></article>
+        } @empty { <p class="empty-state">{{ 'account.noReports' | translate }}</p> }
       </div>
     </section>
   }

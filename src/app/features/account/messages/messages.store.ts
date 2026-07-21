@@ -9,12 +9,14 @@ import { Chat, ChatMessage } from '../../../core/models/chat.models';
 import { ChatsService } from '../../../core/services/chats.service';
 import { ChatRealtimeService } from '../../../core/services/chat-realtime.service';
 import { AccountStore } from '../data-access/account.store';
+import { UserSafetyService } from '../../../core/services/user-safety.service';
 
 @Injectable()
 export class MessagesStore {
   private readonly chatsService = inject(ChatsService);
   private readonly realtime = inject(ChatRealtimeService);
   private readonly account = inject(AccountStore);
+  private readonly safety = inject(UserSafetyService);
   private readonly translate = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly chatsState = signal<Chat[]>([]);
@@ -23,6 +25,8 @@ export class MessagesStore {
   private readonly loadingState = signal(false);
   private readonly sendingState = signal(false);
   private readonly errorState = signal<string | null>(null);
+  private readonly successState = signal<string | null>(null);
+  private readonly safetyActionState = signal(false);
   private readonly typingChatIds = signal<Set<number>>(new Set<number>());
   private readonly typingTimers = new Map<number, ReturnType<typeof setTimeout>>();
 
@@ -32,6 +36,8 @@ export class MessagesStore {
   readonly loading = this.loadingState.asReadonly();
   readonly sending = this.sendingState.asReadonly();
   readonly error = this.errorState.asReadonly();
+  readonly success = this.successState.asReadonly();
+  readonly safetyAction = this.safetyActionState.asReadonly();
   readonly typingChats = this.typingChatIds.asReadonly();
 
   constructor() {
@@ -163,6 +169,49 @@ export class MessagesStore {
     const chatId = this.activeChatState()?.id;
     if (!chatId) return;
     void this.realtime.sendTyping(chatId, isTyping).catch(() => undefined);
+  }
+
+  reportActiveChat(reason: string, details: string, onSuccess: () => void): void {
+    const chat = this.activeChatState();
+    const trimmedReason = reason.trim();
+    if (!chat || !trimmedReason || this.safetyActionState()) return;
+    this.safetyActionState.set(true);
+    this.errorState.set(null);
+    this.successState.set(null);
+    this.safety.report({
+      targetType: 'User',
+      targetId: chat.otherUserId,
+      reason: trimmedReason,
+      details: details.trim() || `Reported from chat #${chat.id}`,
+    }).pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.safetyActionState.set(false)))
+      .subscribe({
+        next: () => {
+          this.successState.set(this.translate.instant('account.chatReportSuccess'));
+          onSuccess();
+        },
+        error: (error: unknown) => this.errorState.set(this.errorMessage(error)),
+      });
+  }
+
+  blockActiveChat(): void {
+    const chat = this.activeChatState();
+    if (!chat || this.safetyActionState()) return;
+    this.safetyActionState.set(true);
+    this.errorState.set(null);
+    this.successState.set(null);
+    this.safety.block(chat.otherUserId)
+      .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.safetyActionState.set(false)))
+      .subscribe({
+        next: () => {
+          this.successState.set(this.translate.instant('account.chatBlockSuccess', { name: chat.otherUserName }));
+          this.chatsState.update((chats) => chats.filter((item) => item.id !== chat.id));
+          const nextChat = this.chatsState()[0] ?? null;
+          this.activeChatState.set(nextChat);
+          if (nextChat) this.select(nextChat);
+          else this.messagesState.set([]);
+        },
+        error: (error: unknown) => this.errorState.set(this.errorMessage(error)),
+      });
   }
 
   private receive(message: ChatMessage): void {
