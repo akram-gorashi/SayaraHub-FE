@@ -18,6 +18,13 @@
     </aside>
     <div class="message-content">
       @if (store.activeChat(); as chat) {
+        <div class="mobile-chat-header">
+          <div class="message-avatar"><img [src]="chat.otherUserImageUrl || 'assets/img/account/user-v2.jpg'" [alt]="chat.otherUserName" /></div>
+          <div>
+            <h3>{{ chat.otherUserName }}</h3>
+            <p>{{ chat.carTitle }}</p>
+          </div>
+        </div>
         <div #messageList class="message-content-info">
           @for (message of store.messages(); track message.id) {
             <div class="message-item" [class.me]="store.isMine(message)">
