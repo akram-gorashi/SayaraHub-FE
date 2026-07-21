@@ -20,8 +20,20 @@ export class AccountListings {
   protected readonly store = inject(AccountCarsStore);
   protected readonly search = signal('');
   protected readonly confirmation = signal<ListingAction | null>(null);
+  protected readonly submitSuccess = signal<string | null>(null);
 
-  constructor() { this.store.loadListings(); }
+  constructor() {
+    this.store.loadListings();
+    try {
+      const submitted = sessionStorage.getItem('sayaraMatch.listingSubmitted');
+      if (submitted) {
+        sessionStorage.removeItem('sayaraMatch.listingSubmitted');
+        this.submitSuccess.set(submitted === 'updated'
+          ? 'Your car advert was updated successfully.'
+          : 'Your car advert was submitted for review.');
+      }
+    } catch { /* Ignore unavailable storage. */ }
+  }
 
   protected updateSearch(event: Event): void {
     this.search.set((event.target as HTMLInputElement).value);

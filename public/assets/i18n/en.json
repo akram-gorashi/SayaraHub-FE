@@ -133,7 +133,9 @@
       "interiorHint": "Seats and dashboard",
       "other": "Other",
       "otherHint": "Engine, tires, documents"
-    }
+    },
+    "photoProgress": "{{count}} of {{total}} recommended photos added",
+    "photoProgressHint": "Front, side, back, and interior help buyers trust the advert."
   },
   "validation": {
     "completeStep": "Please complete the required fields before continuing.",

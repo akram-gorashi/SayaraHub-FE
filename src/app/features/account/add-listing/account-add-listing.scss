@@ -5,6 +5,7 @@ select.form-control { appearance: auto; }
 .add-listing-form .form-control.ng-invalid.ng-touched { border-color: var(--bs-danger); }
 .add-listing-form .form-control.ng-invalid.ng-touched:focus { box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .15); }
 .field-error { display: block; margin-top: 6px; color: var(--bs-danger); font-size: 12px; line-height: 1.4; }
+.vin-input { text-transform: uppercase; letter-spacing: .08em; }
 .listing-image-previews { display: grid; gap: 14px; }
 .photo-drop-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px; min-height: 1px; }
 .listing-image-preview { position: relative; overflow: hidden; height: 105px; border-radius: 8px; background: #f5f5f5; }
@@ -31,6 +32,14 @@ select.form-control { appearance: auto; }
 .photo-slot-button__text small { color: #788394; font-size: 12px; line-height: 1.35; }
 .photo-slot-button__count { position: absolute; inset-inline-end: 10px; top: 10px; display: grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; color: #fff; background: var(--theme-color); font-size: 11px; font-weight: 800; }
 .photo-slot-label { position: absolute; inset-inline-start: 38px; top: 8px; max-width: calc(100% - 86px); overflow: hidden; padding: 3px 7px; border-radius: 999px; color: #fff; background: rgb(15 23 42 / 76%); font-size: 10px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.photo-checklist-progress { display: grid; gap: 8px; margin-top: 14px; padding: 12px 14px; border: 1px solid #edf0f4; border-radius: 12px; background: #fbfcfe; }
+.photo-checklist-progress div { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.photo-checklist-progress strong { color: #172133; font-size: 13px; }
+.photo-checklist-progress span { color: #77808f; font-size: 12px; }
+.photo-checklist-progress progress { width: 100%; height: 8px; overflow: hidden; border: 0; border-radius: 999px; background: #e9edf3; }
+.photo-checklist-progress progress::-webkit-progress-bar { background: #e9edf3; }
+.photo-checklist-progress progress::-webkit-progress-value { background: var(--theme-color); }
+.photo-checklist-progress progress::-moz-progress-bar { background: var(--theme-color); }
 .photo-optimization, .photo-drag-hint { display: flex; align-items: center; gap: 8px; margin: 12px 0 0; color: #667080; font-size: 12px; }
 .draft-banner { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; padding: 12px 14px; border-radius: 10px; color: #6c5200; background: #fff6d8; }
 .draft-banner span { display: flex; align-items: center; gap: 8px; }
@@ -49,6 +58,10 @@ select.form-control { appearance: auto; }
 .upload-progress > div { height: 100%; background: #29bf6c; transition: width .2s ease; }
 .upload-progress span { position: absolute; inset: 0; display: grid; place-items: center; color: #172133; font-weight: 600; font-size: 12px; }
 .mobile-listing-stepper, .mobile-wizard-actions, .mobile-step-error { display: none; }
+
+@media (min-width: 768px) {
+  .listing-submit-row { position: sticky; z-index: 3; bottom: 0; display: flex !important; align-items: center; justify-content: flex-end; margin-top: 22px; padding: 14px 0 0; background: linear-gradient(to top, #fff 75%, rgb(255 255 255 / 0)); }
+}
 
 @media (max-width: 767px) {
   .user-profile-card { padding: 18px 15px 95px; }

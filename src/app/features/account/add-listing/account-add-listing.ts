@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, computed, effect, inject, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -57,6 +57,8 @@ export class AccountAddListing {
     { key: 'interior', icon: 'assets/img/listing-upload/photo-slot-interior.png', label: 'listing.photoSlots.interior', hint: 'listing.photoSlots.interiorHint', multiple: true },
     { key: 'other', icon: 'assets/img/listing-upload/photo-slot-other.png', label: 'listing.photoSlots.other', hint: 'listing.photoSlots.otherHint', multiple: true },
   ];
+  protected readonly recommendedPhotoCount = computed(() =>
+    (['front', 'side', 'back', 'interior'] as PhotoSlot[]).filter(slot => this.slotCount(slot) > 0).length);
   protected readonly draftRestored = signal(false);
   protected readonly draftSaved = signal(false);
   protected readonly draftPromptOpen = signal(false);
@@ -194,6 +196,14 @@ export class AccountAddListing {
     } finally {
       this.optimizingImages.set(false);
       input.value = '';
+    }
+  }
+
+  protected normalizeVin(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const normalized = input.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 17);
+    if (input.value !== normalized) {
+      this.form.controls.vin.setValue(normalized);
     }
   }
 
@@ -414,6 +424,7 @@ export class AccountAddListing {
 
   private finishSuccessfulSubmit(): void {
     this.submissionCompleted = true;
+    try { sessionStorage.setItem('sayaraMatch.listingSubmitted', this.isEditing ? 'updated' : 'created'); } catch { /* Ignore storage. */ }
     this.clearDraft();
     this.form.markAsPristine();
     this.selectedImages.set([]);

@@ -4,5 +4,5 @@
   }
 }
 :host { display: block; }
-.footer-brand { display: inline-block; color: #fff; font-size: 29px; font-weight: 900; letter-spacing: -.05em; line-height: 1; }
-.footer-brand span { color: var(--theme-color); }
+.footer-brand { display: inline-flex; align-items: center; margin-bottom: 22px; line-height: 1; }
+.footer-brand img { display: block; width: min(240px, 100%); height: auto; }

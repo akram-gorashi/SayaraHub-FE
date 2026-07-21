@@ -1,12 +1,16 @@
 <article class="car-item">
   <div class="car-img">
     <span class="car-status status-1">{{ car().condition }}</span>
+    @if (!imageLoaded()) { <span class="car-image-skeleton" aria-hidden="true"></span> }
     <img
       [src]="car().mainImageUrl || 'assets/img/car/01-v2.jpg'"
       [alt]="car().title"
+      [class.is-loaded]="imageLoaded()"
       loading="lazy"
       decoding="async"
+      (load)="markImageLoaded()"
       (error)="useFallbackImage($event)">
+    @if (!car().mainImageUrl) { <span class="car-image-processing"><i class="far fa-image"></i> Image coming soon</span> }
     @if (showActions()) {
       <div class="car-btns">
         <a href="/cars" [class.active]="isFavorite()" [attr.aria-pressed]="isFavorite()"
