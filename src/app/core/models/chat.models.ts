@@ -18,6 +18,8 @@ export interface Chat {
   otherUserId: number;
   otherUserName: string;
   otherUserImageUrl: string | null;
+  otherUserIsOnline: boolean;
+  otherUserLastSeenAt: string | null;
   lastMessage: string | null;
   lastMessageAt: string | null;
   unreadCount: number;
@@ -35,4 +37,10 @@ export interface ChatMessage {
 
 export interface MarkMessagesReadResult {
   markedReadCount: number;
+}
+
+export interface ChatPresence {
+  userId: number;
+  isOnline: boolean;
+  lastSeenAt: string | null;
 }
