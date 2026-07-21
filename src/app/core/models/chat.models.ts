@@ -44,3 +44,9 @@ export interface ChatPresence {
   isOnline: boolean;
   lastSeenAt: string | null;
 }
+
+export interface ChatTyping {
+  chatId: number;
+  userId: number;
+  isTyping: boolean;
+}

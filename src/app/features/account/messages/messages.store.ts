@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DestroyRef, Injectable, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 import { ApiResponse } from '../../../core/models/api.models';
 import { Chat, ChatMessage } from '../../../core/models/chat.models';
@@ -14,6 +15,7 @@ export class MessagesStore {
   private readonly chatsService = inject(ChatsService);
   private readonly realtime = inject(ChatRealtimeService);
   private readonly account = inject(AccountStore);
+  private readonly translate = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly chatsState = signal<Chat[]>([]);
   private readonly messagesState = signal<ChatMessage[]>([]);
@@ -21,6 +23,8 @@ export class MessagesStore {
   private readonly loadingState = signal(false);
   private readonly sendingState = signal(false);
   private readonly errorState = signal<string | null>(null);
+  private readonly typingChatIds = signal<Set<number>>(new Set<number>());
+  private readonly typingTimers = new Map<number, ReturnType<typeof setTimeout>>();
 
   readonly chats = this.chatsState.asReadonly();
   readonly messages = this.messagesState.asReadonly();
@@ -28,6 +32,7 @@ export class MessagesStore {
   readonly loading = this.loadingState.asReadonly();
   readonly sending = this.sendingState.asReadonly();
   readonly error = this.errorState.asReadonly();
+  readonly typingChats = this.typingChatIds.asReadonly();
 
   constructor() {
     this.realtime.messages$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((message) => {
@@ -35,6 +40,11 @@ export class MessagesStore {
     });
     this.realtime.presence$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((presence) => {
       this.updatePresence(presence.userId, presence.isOnline, presence.lastSeenAt);
+    });
+    this.realtime.typing$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((typing) => {
+      const activeChat = this.activeChatState();
+      if (typing.userId === this.account.profile()?.id) return;
+      this.setTyping(typing.chatId, typing.isTyping && activeChat?.id === typing.chatId);
     });
   }
 
@@ -103,8 +113,8 @@ export class MessagesStore {
   }
 
   presenceLabel(chat: Chat): string {
-    if (chat.otherUserIsOnline) return 'Online now';
-    return chat.otherUserLastSeenAt ? 'Last seen ' : 'Offline';
+    if (chat.otherUserIsOnline) return this.translate.instant('account.chatOnlineNow');
+    return chat.otherUserLastSeenAt ? this.translate.instant('account.chatLastSeen') : this.translate.instant('account.chatOffline');
   }
 
   presenceState(chat: Chat): 'online' | 'recent' | 'offline' {
@@ -117,9 +127,42 @@ export class MessagesStore {
 
   presenceIconLabel(chat: Chat): string {
     const state = this.presenceState(chat);
-    if (state === 'online') return 'Online';
-    if (state === 'recent') return 'Recently online';
-    return 'Offline';
+    if (state === 'online') return this.translate.instant('account.chatOnline');
+    if (state === 'recent') return this.translate.instant('account.chatRecentlyOnline');
+    return this.translate.instant('account.chatOffline');
+  }
+
+  isTyping(chatId: number): boolean {
+    return this.typingChatIds().has(chatId);
+  }
+
+  showDateSeparator(index: number): boolean {
+    const messages = this.messagesState();
+    const current = messages[index];
+    if (!current) return false;
+    const previous = messages[index - 1];
+    return !previous || this.dayKey(previous.sentAt) !== this.dayKey(current.sentAt);
+  }
+
+  dateLabel(value: string): string {
+    const date = new Date(value);
+    const today = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(today.getDate() - 1);
+    if (this.dayKey(value) === this.dayKey(today.toISOString())) return this.translate.instant('account.chatToday');
+    if (this.dayKey(value) === this.dayKey(yesterday.toISOString())) return this.translate.instant('account.chatYesterday');
+    return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  deliveryLabel(message: ChatMessage): string {
+    if (!this.isMine(message)) return '';
+    return message.isRead ? this.translate.instant('account.chatRead') : this.translate.instant('account.chatDelivered');
+  }
+
+  notifyTyping(isTyping: boolean): void {
+    const chatId = this.activeChatState()?.id;
+    if (!chatId) return;
+    void this.realtime.sendTyping(chatId, isTyping).catch(() => undefined);
   }
 
   private receive(message: ChatMessage): void {
@@ -167,6 +210,23 @@ export class MessagesStore {
     }
   }
 
+  private setTyping(chatId: number, isTyping: boolean): void {
+    const existing = this.typingTimers.get(chatId);
+    if (existing) clearTimeout(existing);
+    this.typingTimers.delete(chatId);
+
+    this.typingChatIds.update((ids) => {
+      const next = new Set(ids);
+      if (isTyping) next.add(chatId);
+      else next.delete(chatId);
+      return next;
+    });
+
+    if (isTyping) {
+      this.typingTimers.set(chatId, setTimeout(() => this.setTyping(chatId, false), 3500));
+    }
+  }
+
   private chronological(messages: ChatMessage[]): ChatMessage[] {
     return [...messages].sort((left, right) =>
       this.timestamp(left.sentAt) - this.timestamp(right.sentAt) || left.id - right.id);
@@ -174,6 +234,11 @@ export class MessagesStore {
 
   private timestamp(value: string | null): number {
     return value ? new Date(value).getTime() : 0;
+  }
+
+  private dayKey(value: string): string {
+    const date = new Date(value);
+    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
   }
 
   private markRead(chatId: number): void {

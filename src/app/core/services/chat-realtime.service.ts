@@ -7,7 +7,7 @@ import {
 } from '@microsoft/signalr';
 import { Subject } from 'rxjs';
 
-import { ChatMessage, ChatPresence } from '../models/chat.models';
+import { ChatMessage, ChatPresence, ChatTyping } from '../models/chat.models';
 import { AuthSessionService } from './auth-session.service';
 
 @Injectable({ providedIn: 'root' })
@@ -17,6 +17,7 @@ export class ChatRealtimeService {
   private readonly joinedChatIds = new Set<number>();
   private readonly messageSubject = new Subject<ChatMessage>();
   private readonly presenceSubject = new Subject<ChatPresence>();
+  private readonly typingSubject = new Subject<ChatTyping>();
   private startPromise: Promise<void> | null = null;
   private readonly connectedState = signal(false);
 
@@ -31,6 +32,7 @@ export class ChatRealtimeService {
   readonly connected = this.connectedState.asReadonly();
   readonly messages$ = this.messageSubject.asObservable();
   readonly presence$ = this.presenceSubject.asObservable();
+  readonly typing$ = this.typingSubject.asObservable();
 
   constructor() {
     this.connection.on('MessageReceived', (message: ChatMessage) => {
@@ -38,6 +40,9 @@ export class ChatRealtimeService {
     });
     this.connection.on('PresenceChanged', (presence: ChatPresence) => {
       this.zone.run(() => this.presenceSubject.next(presence));
+    });
+    this.connection.on('UserTyping', (typing: ChatTyping) => {
+      this.zone.run(() => this.typingSubject.next(typing));
     });
     this.connection.onreconnecting(() => this.zone.run(() => this.connectedState.set(false)));
     this.connection.onclose(() => this.zone.run(() => this.connectedState.set(false)));
@@ -51,6 +56,11 @@ export class ChatRealtimeService {
     chatIds.forEach((chatId) => this.joinedChatIds.add(chatId));
     await this.ensureStarted();
     await Promise.all(chatIds.map((chatId) => this.connection.invoke('JoinChat', chatId)));
+  }
+
+  async sendTyping(chatId: number, isTyping: boolean): Promise<void> {
+    await this.ensureStarted();
+    await this.connection.invoke('Typing', chatId, isTyping);
   }
 
   private async ensureStarted(): Promise<void> {
