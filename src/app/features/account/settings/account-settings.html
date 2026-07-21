@@ -1,33 +1,33 @@
 <section class="user-profile-card profile-setting" aria-labelledby="settings-title">
-  <h2 id="settings-title" class="user-profile-card-title">Settings</h2>
+  <h2 id="settings-title" class="user-profile-card-title">{{ 'account.settings' | translate }}</h2>
   @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
   @if (store.success(); as success) { <div class="alert alert-success">{{ success }}</div> }
   @if (store.loading()) { <div class="text-center py-5"><span class="spinner-border text-primary"></span></div> }
   @else {
-    <div class="language-preference"><div><h3>Language / اللغة</h3><p>Your language preference is saved for this account.</p></div><div role="group" aria-label="Language preference"><button type="button" [class.active]="language.language() === 'en'" (click)="language.setLanguage('en')">English</button><button type="button" [class.active]="language.language() === 'ar'" (click)="language.setLanguage('ar')">العربية</button></div></div>
+    <div class="language-preference"><div><h3>{{ 'account.language' | translate }}</h3><p>{{ 'account.languageSaved' | translate }}</p></div><div role="group" aria-label="Language preference"><button type="button" [class.active]="language.language() === 'en'" (click)="language.setLanguage('en')">English</button><button type="button" [class.active]="language.language() === 'ar'" (click)="language.setLanguage('ar')">العربية</button></div></div>
     <div class="row"><div class="col-lg-6"><h3 class="settings-subtitle">Privacy Setting</h3>
       <form [formGroup]="form" (ngSubmit)="save()">
-        <div class="form-check form-switch"><input id="enable-messages" class="form-check-input" type="checkbox" role="switch" formControlName="enableMessages" /><label for="enable-messages" class="form-check-label">Enable Messages</label></div>
-        <div class="form-check form-switch"><input id="email-notifications" class="form-check-input" type="checkbox" role="switch" formControlName="receiveEmailNotifications" /><label for="email-notifications" class="form-check-label">I Want To Receive Email Notifications</label></div>
-        <div class="form-check form-switch"><input id="hide-phone" class="form-check-input" type="checkbox" role="switch" formControlName="hidePhoneNumber" /><label for="hide-phone" class="form-check-label">Hide My Phone Number From Public</label></div>
-        <div class="form-check form-switch"><input id="message-notifications" class="form-check-input" type="checkbox" role="switch" formControlName="receiveMessageNotifications" /><label for="message-notifications" class="form-check-label">I Want To Receive Message Notifications</label></div>
+        <div class="form-check form-switch"><input id="enable-messages" class="form-check-input" type="checkbox" role="switch" formControlName="enableMessages" /><label for="enable-messages" class="form-check-label">{{ 'account.enableMessages' | translate }}</label></div>
+        <div class="form-check form-switch"><input id="email-notifications" class="form-check-input" type="checkbox" role="switch" formControlName="receiveEmailNotifications" /><label for="email-notifications" class="form-check-label">{{ 'account.emailNotifications' | translate }}</label></div>
+        <div class="form-check form-switch"><input id="hide-phone" class="form-check-input" type="checkbox" role="switch" formControlName="hidePhoneNumber" /><label for="hide-phone" class="form-check-label">{{ 'account.hidePhone' | translate }}</label></div>
+        <div class="form-check form-switch"><input id="message-notifications" class="form-check-input" type="checkbox" role="switch" formControlName="receiveMessageNotifications" /><label for="message-notifications" class="form-check-label">{{ 'account.messageNotifications' | translate }}</label></div>
         <div class="form-check form-switch"><input id="private-profile" class="form-check-input" type="checkbox" role="switch" formControlName="isProfilePrivate" /><label for="private-profile" class="form-check-label">Make My Profile Private</label></div>
-        <button type="submit" class="theme-btn my-4" [disabled]="store.saving()"><i class="far fa-gear"></i> {{ store.saving() ? 'Updating...' : 'Update Settings' }}</button>
+        <button type="submit" class="theme-btn my-4" [disabled]="store.saving()"><i class="far fa-gear"></i>{{ (store.saving() ? 'account.updating' : 'account.updateSettings') | translate }}</button>
       </form>
     </div>
-    <div class="col-lg-6"><h3 class="settings-subtitle">Delete Account</h3>
+    <div class="col-lg-6"><h3 class="settings-subtitle">{{ 'account.deleteAccount' | translate }}</h3>
       <div class="user-profile-form">
         <form [formGroup]="deletionForm" (ngSubmit)="deleteAccount()" novalidate>
           <div class="form-group">
             <label for="deletion-reason" class="visually-hidden">Deletion reason</label>
             <select id="deletion-reason" class="form-control mb-4" formControlName="reason">
-              <option [ngValue]="null">Choose Reason</option>
+              <option [ngValue]="null">{{ 'account.chooseReason' | translate }}</option>
               @for (reason of deletionReasons; track reason.value) { <option [ngValue]="reason.value">{{ reason.label }}</option> }
             </select>
           </div>
-          <div class="form-group"><label for="deletion-details" class="visually-hidden">Describe your reason</label><textarea id="deletion-details" class="form-control" cols="30" rows="4" formControlName="details" placeholder="Describe Your Reason"></textarea></div>
+          <div class="form-group"><label for="deletion-details" class="visually-hidden">{{ 'account.describeReason' | translate }}</label><textarea id="deletion-details" class="form-control" cols="30" rows="4" formControlName="details" [placeholder]="'account.describeReason' | translate"></textarea></div>
           <div class="form-check mt-3"><input id="confirm-deletion" class="form-check-input" type="checkbox" formControlName="confirmed" /><label class="form-check-label" for="confirm-deletion">I understand that deleting my account will sign me out.</label></div>
-          <div class="my-4"><button type="submit" class="theme-btn" [disabled]="store.deleting()"><span class="far fa-trash-can"></span>{{ store.deleting() ? 'Deleting...' : 'Delete Account' }}</button></div>
+          <div class="my-4"><button type="submit" class="theme-btn" [disabled]="store.deleting()"><span class="far fa-trash-can"></span>{{ (store.deleting() ? 'account.deleting' : 'account.deleteAccount') | translate }}</button></div>
         </form>
       </div>
     </div></div>

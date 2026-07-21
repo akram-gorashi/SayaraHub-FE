@@ -1,13 +1,14 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { Notification } from '../../../core/models/notification.models';
 import { NotificationsStore } from './notifications.store';
 
 @Component({
   selector: 'app-account-notifications',
-  imports: [DatePipe],
+  imports: [DatePipe, TranslatePipe],
   templateUrl: './account-notifications.html',
   styleUrl: './account-notifications.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

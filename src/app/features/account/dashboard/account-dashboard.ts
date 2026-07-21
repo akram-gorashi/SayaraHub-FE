@@ -1,12 +1,13 @@
 import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { DashboardStore } from './dashboard.store';
 
 @Component({
   selector: 'app-account-dashboard',
-  imports: [CurrencyPipe, DatePipe, RouterLink, TitleCasePipe],
+  imports: [CurrencyPipe, DatePipe, RouterLink, TitleCasePipe, TranslatePipe],
   templateUrl: './account-dashboard.html',
   styleUrl: './account-dashboard.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

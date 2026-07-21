@@ -40,3 +40,14 @@ export interface SellerDashboardStatistics {
 export interface UpdateCarStatusRequest {
   status: string;
 }
+
+export interface CarListingDraft {
+  payload: string;
+  step: number;
+  updatedAt: string;
+}
+
+export interface SaveCarListingDraftRequest {
+  payload: string;
+  step: number;
+}

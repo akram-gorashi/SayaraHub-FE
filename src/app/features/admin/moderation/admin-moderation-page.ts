@@ -4,6 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { ModerationCar, ModerationDecision } from '../../../core/models/admin-moderation.models';
 import { AdminModerationService } from '../../../core/services/admin-moderation.service';
@@ -12,7 +13,7 @@ import { AdminModerationStore } from './admin-moderation.store';
 
 @Component({
   selector: 'app-admin-moderation-page',
-  imports: [CurrencyPipe, DatePipe, DecimalPipe, ReactiveFormsModule, TitleCasePipe],
+  imports: [CurrencyPipe, DatePipe, DecimalPipe, ReactiveFormsModule, TitleCasePipe, TranslatePipe],
   templateUrl: './admin-moderation-page.html',
   styleUrl: './admin-moderation-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

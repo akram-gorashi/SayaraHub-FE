@@ -1,16 +1,16 @@
 <main class="admin-moderation">
   <div class="container">
-    <div class="admin-heading"><div><span>Administration</span><h1>Car moderation</h1><p>Review cars submitted by sellers before they appear publicly.</p></div></div>
-    <div class="moderation-stats"><article class="user-profile-card"><span>Pending</span><strong>{{ store.statistics().pending | number }}</strong></article><article class="user-profile-card"><span>Approved</span><strong>{{ store.statistics().approved | number }}</strong></article><article class="user-profile-card"><span>Rejected</span><strong>{{ store.statistics().rejected | number }}</strong></article></div>
+    <div class="admin-heading"><div><span>{{ 'admin.administration' | translate }}</span><h1>{{ 'admin.carModeration' | translate }}</h1><p>{{ 'admin.carModerationIntro' | translate }}</p></div></div>
+    <div class="moderation-stats"><article class="user-profile-card"><span>{{ 'admin.pending' | translate }}</span><strong>{{ store.statistics().pending | number }}</strong></article><article class="user-profile-card"><span>{{ 'admin.approved' | translate }}</span><strong>{{ store.statistics().approved | number }}</strong></article><article class="user-profile-card"><span>{{ 'admin.rejected' | translate }}</span><strong>{{ store.statistics().rejected | number }}</strong></article></div>
     @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
     @if (store.success(); as success) { <div class="alert alert-success">{{ success }}</div> }
 
     <section class="moderation-filters user-profile-card" aria-label="Moderation filters">
-      <div class="form-group"><label for="moderation-search">Search</label><input id="moderation-search" class="form-control" type="search" [formControl]="search" placeholder="Title, seller, email, or VIN" /></div>
-      <div class="form-group"><label for="listed-from">Listed from</label><input id="listed-from" class="form-control" type="date" [formControl]="listedFrom" /></div>
-      <div class="form-group"><label for="listed-to">Listed to</label><input id="listed-to" class="form-control" type="date" [formControl]="listedTo" /></div>
-      <button type="button" class="theme-btn" (click)="applyFilters()"><i class="far fa-filter"></i> Apply</button>
-      <button type="button" class="btn btn-outline-secondary rounded-2" (click)="clearFilters()">Clear</button>
+      <div class="form-group"><label for="moderation-search">{{ 'cars.search' | translate }}</label><input id="moderation-search" class="form-control" type="search" [formControl]="search" [placeholder]="'admin.moderationSearch' | translate" /></div>
+      <div class="form-group"><label for="listed-from">{{ 'admin.listedFrom' | translate }}</label><input id="listed-from" class="form-control" type="date" [formControl]="listedFrom" /></div>
+      <div class="form-group"><label for="listed-to">{{ 'admin.listedTo' | translate }}</label><input id="listed-to" class="form-control" type="date" [formControl]="listedTo" /></div>
+      <button type="button" class="theme-btn" (click)="applyFilters()"><i class="far fa-filter"></i>{{ 'admin.apply' | translate }}</button>
+      <button type="button" class="btn btn-outline-secondary rounded-2" (click)="clearFilters()">{{ 'common.clear' | translate }}</button>
     </section>
 
     <div class="status-tabs" aria-label="Moderation status">
@@ -19,7 +19,7 @@
     <div class="moderation-layout">
       <div class="queue-column">
         <section class="queue user-profile-card" aria-label="Moderation listings">
-          @if (store.loading()) { <div class="queue-empty"><span class="spinner-border"></span> Loading cars...</div> }
+          @if (store.loading()) { <div class="queue-empty"><span class="spinner-border"></span>{{ 'cars.loadingCars' | translate }}</div> }
           @for (car of store.cars(); track car.id) {
             <button type="button" class="queue-item" [class.active]="selected()?.id === car.id" (click)="review(car)">
               <img [src]="car.images[0] || 'assets/img/car/01-v2.jpg'" [alt]="car.title" loading="lazy" decoding="async" />
@@ -48,8 +48,8 @@
           <dl><div><dt>Vehicle</dt><dd>{{ car.year }} {{ car.brand }} {{ car.model }}</dd></div><div><dt>Mileage</dt><dd>{{ car.mileage | number }} km</dd></div><div><dt>City</dt><dd>{{ car.city }}</dd></div><div><dt>VIN</dt><dd>{{ car.vin }}</dd></div></dl>
           <p class="description">{{ car.description }}</p>
           @if (car.status === 'Pending' || car.status === 'Inactive') {
-            <label for="rejection-reason">Rejection reason</label><textarea id="rejection-reason" class="form-control" rows="4" [value]="rejectionReason()" (input)="rejectionReason.set($any($event.target).value)" placeholder="Explain what the seller needs to correct (minimum 10 characters)"></textarea>
-            <div class="moderation-actions"><button type="button" class="theme-btn approve" [disabled]="store.moderating() === car.id" (click)="approve()"><i class="far fa-check"></i> Approve</button><button type="button" class="theme-btn reject" [disabled]="store.moderating() === car.id || rejectionReason().trim().length < 10" (click)="reject()"><i class="far fa-xmark"></i> Reject</button></div>
+            <label for="rejection-reason">{{ 'admin.rejectionReason' | translate }}</label><textarea id="rejection-reason" class="form-control" rows="4" [value]="rejectionReason()" (input)="rejectionReason.set($any($event.target).value)" [placeholder]="'admin.rejectionPlaceholder' | translate"></textarea>
+            <div class="moderation-actions"><button type="button" class="theme-btn approve" [disabled]="store.moderating() === car.id" (click)="approve()"><i class="far fa-check"></i>{{ 'admin.approve' | translate }}</button><button type="button" class="theme-btn reject" [disabled]="store.moderating() === car.id || rejectionReason().trim().length < 10" (click)="reject()"><i class="far fa-xmark"></i>{{ 'admin.reject' | translate }}</button></div>
           } @else if (car.moderationReason) { <div class="decision-reason"><strong>Decision reason</strong><p>{{ car.moderationReason }}</p></div> }
           <section class="moderation-history" aria-labelledby="history-title"><h3 id="history-title">Moderation history</h3>
             @if (store.historyLoading()) { <p>Loading history...</p> }

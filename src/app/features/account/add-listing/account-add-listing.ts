@@ -1,20 +1,23 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, effect, inject, signal } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import imageCompression from 'browser-image-compression';
-import { debounceTime } from 'rxjs';
 
 import { CreateCarRequest, UpdateCarRequest } from '../../../core/models/car.models';
 import { SellerCarImage } from '../../../core/models/seller-dashboard.models';
 import { AddListingStore } from './add-listing.store';
 import { AuthSessionService } from '../../../core/services/auth-session.service';
 
+type ImagePreviewStatus = 'processing' | 'ready' | 'failed';
+type ImagePreview = { file: File; url: string; status: ImagePreviewStatus; originalSize: number; optimizedSize: number; error?: string };
+
 @Component({
   selector: 'app-account-add-listing',
-  imports: [ReactiveFormsModule, CdkDropList, CdkDrag, TranslatePipe],
+  imports: [ReactiveFormsModule, CdkDropList, CdkDrag, TranslatePipe, DecimalPipe],
   templateUrl: './account-add-listing.html',
   styleUrl: './account-add-listing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,7 +39,7 @@ export class AccountAddListing {
   protected readonly years = Array.from({ length: 50 }, (_, index) => this.maxYear - index);
   protected readonly selectedFeatureIds = signal<number[]>([]);
   protected readonly selectedImages = signal<File[]>([]);
-  protected readonly imagePreviews = signal<{ file: File; url: string }[]>([]);
+  protected readonly imagePreviews = signal<ImagePreview[]>([]);
   protected readonly existingImages = signal<SellerCarImage[]>([]);
   protected readonly imageError = signal<string | null>(null);
   protected readonly optimizingImages = signal(false);
@@ -47,9 +50,13 @@ export class AccountAddListing {
   protected readonly mobileSteps = ['listing.steps.basics', 'listing.steps.details', 'listing.steps.photos', 'listing.steps.finish'];
   protected readonly draftRestored = signal(false);
   protected readonly draftSaved = signal(false);
+  protected readonly draftPromptOpen = signal(false);
   protected readonly mainExistingImageId = signal<number | null>(null);
   protected readonly mainNewImage = signal<File | null>(null);
   private readonly initialized = signal(false);
+  private submissionCompleted = false;
+  private lastSavedDraftPayload = '';
+  private pendingDraftDecision: ((allow: boolean) => void) | null = null;
   protected readonly form = this.fb.nonNullable.group({
     title: ['', [Validators.required, Validators.maxLength(150)]],
     carConditionId: [0, [Validators.required, Validators.min(1)]],
@@ -106,7 +113,6 @@ export class AccountAddListing {
     this.form.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       if (this.submitAttempted()) this.updateValidationErrors();
     });
-    this.form.valueChanges.pipe(debounceTime(500), takeUntilDestroyed(this.destroyRef)).subscribe(() => this.saveDraft());
     this.destroyRef.onDestroy(() => this.imagePreviews().forEach(({ url }) => URL.revokeObjectURL(url)));
   }
 
@@ -132,7 +138,6 @@ export class AccountAddListing {
     this.stepError.set(null);
     this.currentStep.update(step => Math.min(4, step + 1));
     this.form.markAsDirty();
-    this.saveDraft();
     this.scrollToWizardTop();
   }
 
@@ -140,14 +145,12 @@ export class AccountAddListing {
     this.stepError.set(null);
     this.currentStep.update(step => Math.max(1, step - 1));
     this.form.markAsDirty();
-    this.saveDraft();
     this.scrollToWizardTop();
   }
 
   protected toggleFeature(featureId: number, selected: boolean): void {
     this.selectedFeatureIds.update((ids) => selected ? [...ids, featureId] : ids.filter((id) => id !== featureId));
     this.form.markAsDirty();
-    this.saveDraft();
   }
 
   protected async chooseImages(event: Event): Promise<void> {
@@ -163,10 +166,17 @@ export class AccountAddListing {
       const optimized = await Promise.all(files.map(file => imageCompression(file, {
         maxSizeMB: 1.5, maxWidthOrHeight: 1920, useWebWorker: true,
         fileType: file.type === 'image/png' ? 'image/png' : 'image/jpeg',
-      })));
-      this.selectedImages.update(images => [...images, ...optimized]);
-      this.imagePreviews.update(previews => [...previews, ...optimized.map(file => ({ file, url: URL.createObjectURL(file) }))]);
-      if (!this.mainExistingImageId() && !this.mainNewImage()) this.mainNewImage.set(optimized[0]);
+      }).then(optimizedFile => ({ original: file, optimized: this.normalizeImageFile(file, optimizedFile) }))));
+      const optimizedFiles = optimized.map(item => item.optimized);
+      this.selectedImages.update(images => [...images, ...optimizedFiles]);
+      this.imagePreviews.update(previews => [...previews, ...optimized.map(item => ({
+        file: item.optimized,
+        url: URL.createObjectURL(item.optimized),
+        status: 'ready' as const,
+        originalSize: item.original.size,
+        optimizedSize: item.optimized.size,
+      }))]);
+      if (!this.mainExistingImageId() && !this.mainNewImage()) this.mainNewImage.set(optimizedFiles[0]);
       this.form.markAsDirty();
       if (this.submitAttempted()) this.updateValidationErrors();
     } catch {
@@ -183,7 +193,7 @@ export class AccountAddListing {
     this.form.markAsDirty();
   }
 
-  protected dropNew(event: CdkDragDrop<{ file: File; url: string }[]>): void {
+  protected dropNew(event: CdkDragDrop<ImagePreview[]>): void {
     if (event.previousIndex === event.currentIndex) return;
     this.imagePreviews.update(previews => { const reordered = [...previews]; moveItemInArray(reordered, event.previousIndex, event.currentIndex); return reordered; });
     this.selectedImages.set(this.imagePreviews().map(preview => preview.file));
@@ -260,9 +270,9 @@ export class AccountAddListing {
           ? `existing:${this.mainExistingImageId()}`
           : `new:${Math.max(0, this.selectedImages().indexOf(this.mainNewImage() ?? this.selectedImages()[0]))}`,
       };
-      this.store.update(this.listingId, updateRequest);
+      this.store.update(this.listingId, updateRequest, () => this.finishSuccessfulSubmit());
     } else {
-      this.store.create(request, () => this.clearDraft());
+      this.store.create(request, () => this.finishSuccessfulSubmit());
     }
   }
 
@@ -275,14 +285,32 @@ export class AccountAddListing {
     this.form.markAsPristine();
   }
 
-  canDeactivate(): boolean {
-    return !this.hasUnsavedChanges() || globalThis.confirm(this.translate.instant('listing.unsavedWarning'));
+  canDeactivate(): boolean | Promise<boolean> {
+    if (!this.hasUnsavedChanges()) return true;
+    this.draftPromptOpen.set(true);
+    return new Promise<boolean>(resolve => {
+      this.pendingDraftDecision = resolve;
+    });
   }
 
   protected preventUnsavedExit(event: BeforeUnloadEvent): void {
     if (!this.hasUnsavedChanges()) return;
     event.preventDefault();
     event.returnValue = '';
+  }
+
+  protected saveDraftAndLeave(): void {
+    this.persistDraft();
+    this.resolveDraftDecision(true);
+  }
+
+  protected discardAndLeave(): void {
+    this.clearDraft();
+    this.resolveDraftDecision(true);
+  }
+
+  protected keepEditing(): void {
+    this.resolveDraftDecision(false);
   }
 
   private move<T>(items: T[], index: number, offset: -1 | 1): T[] {
@@ -294,23 +322,9 @@ export class AccountAddListing {
   }
 
   private updateValidationErrors(): void {
-    const labels: Record<string, string> = {
-      title: 'listing.title', carConditionId: 'listing.condition', bodyTypeId: 'listing.bodyType',
-      carBrandId: 'listing.brand', carModelId: 'listing.model', price: 'listing.price', year: 'listing.year',
-      transmissionId: 'listing.transmission', fuelTypeId: 'listing.fuelType', mileage: 'listing.mileage',
-      engineSize: 'listing.engineSize', cylinders: 'listing.cylinders', color: 'listing.color', doors: 'listing.doors',
-      vin: 'listing.vin', address: 'listing.address', city: 'listing.city', description: 'listing.description',
-    };
     const errors = Object.entries(this.form.controls)
       .filter(([, control]) => control.invalid)
-      .map(([name, control]) => {
-        const label = labels[name] ? this.translate.instant(labels[name]) : name;
-        if (control.hasError('required')) return this.translate.instant('validation.required', { field: label });
-        if (name === 'vin') return this.translate.instant('validation.vin');
-        if (control.hasError('min')) return this.translate.instant('validation.min', { field: label });
-        if (control.hasError('max')) return this.translate.instant('validation.max', { field: label });
-        return this.translate.instant('validation.invalid', { field: label });
-      });
+      .map(([name, control]) => this.controlError(name, control));
     if (this.existingImages().length + this.selectedImages().length === 0) {
       errors.push(this.translate.instant('validation.photoRequired'));
     }
@@ -322,6 +336,12 @@ export class AccountAddListing {
     if (step === 2) return ['mileage', 'engineSize', 'cylinders', 'color', 'doors', 'vin'];
     if (step === 4) return ['address', 'city', 'description'];
     return [];
+  }
+
+  protected fieldError(name: keyof typeof this.form.controls): string | null {
+    const control = this.form.controls[name];
+    if (!control || !control.invalid || (!control.touched && !this.submitAttempted())) return null;
+    return this.controlError(name, control);
   }
 
   private focusFirstInvalid(): void {
@@ -336,7 +356,7 @@ export class AccountAddListing {
     queueMicrotask(() => this.elementRef.nativeElement.querySelector<HTMLElement>('.mobile-listing-stepper')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   }
 
-  private saveDraft(): void {
+  private persistDraft(): void {
     if (this.isEditing || !this.form.dirty) return;
     const draft = {
       form: this.form.getRawValue(),
@@ -344,31 +364,58 @@ export class AccountAddListing {
       step: this.currentStep(),
       updatedAt: new Date().toISOString(),
     };
+    const payload = JSON.stringify(draft);
+    if (payload === this.lastSavedDraftPayload) return;
     try {
-      localStorage.setItem(this.draftKey(), JSON.stringify(draft));
+      localStorage.setItem(this.draftKey(), payload);
+      this.lastSavedDraftPayload = payload;
       this.draftSaved.set(true);
       this.form.markAsPristine();
       setTimeout(() => this.draftSaved.set(false), 1800);
     } catch { /* Draft saving is a convenience; form submission still works. */ }
+    if (this.session.session()) {
+      this.store.saveDraft(payload, this.currentStep());
+    }
   }
 
   private restoreDraft(): void {
     try {
       const raw = localStorage.getItem(this.draftKey());
-      if (!raw) return;
-      const draft = JSON.parse(raw) as { form?: Partial<Omit<CreateCarRequest, 'images' | 'featureIds' | 'mainImageIndex'>>; featureIds?: number[]; step?: number };
-      if (!draft.form) return;
-      this.form.patchValue(draft.form);
-      this.selectedFeatureIds.set(draft.featureIds ?? []);
-      this.currentStep.set(Math.min(4, Math.max(1, draft.step ?? 1)));
-      if (draft.form.carBrandId) this.store.loadModels(Number(draft.form.carBrandId));
-      this.draftRestored.set(true);
-      this.form.markAsPristine();
+      if (raw) this.applyDraft(raw);
     } catch { this.clearDraft(); }
+    if (this.session.session()) {
+      this.store.loadDraft((payload) => this.applyDraft(payload));
+    }
   }
 
   private clearDraft(): void {
     try { localStorage.removeItem(this.draftKey()); } catch { /* Ignore unavailable storage. */ }
+    this.lastSavedDraftPayload = '';
+    if (this.session.session()) this.store.deleteDraft();
+  }
+
+  private finishSuccessfulSubmit(): void {
+    this.submissionCompleted = true;
+    this.clearDraft();
+    this.form.markAsPristine();
+    this.selectedImages.set([]);
+    this.imagePreviews().forEach(({ url }) => URL.revokeObjectURL(url));
+    this.imagePreviews.set([]);
+    this.mainNewImage.set(null);
+    this.optimizingImages.set(false);
+    this.draftPromptOpen.set(false);
+  }
+
+  private applyDraft(raw: string): void {
+    const draft = JSON.parse(raw) as { form?: Partial<Omit<CreateCarRequest, 'images' | 'featureIds' | 'mainImageIndex'>>; featureIds?: number[]; step?: number };
+    if (!draft.form) return;
+    this.form.patchValue(draft.form);
+    this.selectedFeatureIds.set(draft.featureIds ?? []);
+    this.currentStep.set(Math.min(4, Math.max(1, draft.step ?? 1)));
+    if (draft.form.carBrandId) this.store.loadModels(Number(draft.form.carBrandId));
+    this.draftRestored.set(true);
+    this.form.markAsPristine();
+    this.lastSavedDraftPayload = raw;
   }
 
   private draftKey(): string {
@@ -377,6 +424,38 @@ export class AccountAddListing {
   }
 
   private hasUnsavedChanges(): boolean {
+    if (this.submissionCompleted) return false;
     return this.form.dirty || this.selectedImages().length > 0 || this.optimizingImages();
+  }
+
+  private controlError(name: string, control: { hasError(errorCode: string): boolean }): string {
+    const labels: Record<string, string> = {
+      title: 'listing.title', carConditionId: 'listing.condition', bodyTypeId: 'listing.bodyType',
+      carBrandId: 'listing.brand', carModelId: 'listing.model', price: 'listing.price', year: 'listing.year',
+      transmissionId: 'listing.transmission', fuelTypeId: 'listing.fuelType', mileage: 'listing.mileage',
+      engineSize: 'listing.engineSize', cylinders: 'listing.cylinders', color: 'listing.color', doors: 'listing.doors',
+      vin: 'listing.vin', address: 'listing.address', city: 'listing.city', description: 'listing.description',
+    };
+    const label = labels[name] ? this.translate.instant(labels[name]) : name;
+    if (control.hasError('required')) return this.translate.instant('validation.required', { field: label });
+    if (name === 'vin') return this.translate.instant('validation.vin');
+    if (control.hasError('min')) return this.translate.instant('validation.min', { field: label });
+    if (control.hasError('max')) return this.translate.instant('validation.max', { field: label });
+    if (control.hasError('maxlength')) return this.translate.instant('validation.maxLength', { field: label });
+    return this.translate.instant('validation.invalid', { field: label });
+  }
+
+  private normalizeImageFile(original: File, optimized: File): File {
+    const type = optimized.type || original.type || 'image/jpeg';
+    const extension = type.includes('png') ? 'png' : type.includes('webp') ? 'webp' : 'jpg';
+    const base = (original.name || 'car-photo').replace(/\.[^.]+$/, '') || 'car-photo';
+    return new File([optimized], `${base}.${extension}`, { type, lastModified: Date.now() });
+  }
+
+  private resolveDraftDecision(allow: boolean): void {
+    const resolve = this.pendingDraftDecision;
+    this.pendingDraftDecision = null;
+    this.draftPromptOpen.set(false);
+    resolve?.(allow);
   }
 }

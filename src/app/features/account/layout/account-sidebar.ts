@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { AccountStore } from '../data-access/account.store';
@@ -7,7 +8,7 @@ import { InquiryCenterService } from '../../../core/services/inquiry-center.serv
 
 @Component({
   selector: 'app-account-sidebar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, TranslatePipe],
   templateUrl: './account-sidebar.html',
   styleUrl: './account-sidebar.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

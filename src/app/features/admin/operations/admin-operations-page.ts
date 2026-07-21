@@ -2,6 +2,7 @@ import { DatePipe, TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { UserReport, ReportDecision } from '../../../core/models/safety.models';
 import { Review } from '../../../core/models/review.models';
@@ -9,7 +10,7 @@ import { AdminOperationsStore, OperationsTab } from './admin-operations.store';
 
 @Component({
   selector: 'app-admin-operations-page',
-  imports: [DatePipe, FormsModule, RouterLink, TitleCasePipe],
+  imports: [DatePipe, FormsModule, RouterLink, TitleCasePipe, TranslatePipe],
   templateUrl: './admin-operations-page.html', styleUrl: './admin-operations-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush, providers: [AdminOperationsStore],
 })

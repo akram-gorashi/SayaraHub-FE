@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AccountDeletionReason } from '../../../core/models/settings.models';
 import { AccountSettingsStore } from './settings.store';
 import { LanguageService } from '../../../core/services/language.service';
 
-@Component({ selector: 'app-account-settings', imports: [ReactiveFormsModule], templateUrl: './account-settings.html', changeDetection: ChangeDetectionStrategy.OnPush, providers: [AccountSettingsStore] })
+@Component({ selector: 'app-account-settings', imports: [ReactiveFormsModule, TranslatePipe], templateUrl: './account-settings.html', changeDetection: ChangeDetectionStrategy.OnPush, providers: [AccountSettingsStore] })
 export class AccountSettings {
   private readonly fb = inject(FormBuilder);
   private readonly initialized = signal(false);
