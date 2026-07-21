@@ -13,11 +13,11 @@ export class AccountSettings {
   protected readonly language = inject(LanguageService);
   protected readonly form = this.fb.nonNullable.group({ enableMessages: false, receiveEmailNotifications: false, hidePhoneNumber: false, receiveMessageNotifications: false, isProfilePrivate: false });
   protected readonly deletionReasons = [
-    { value: AccountDeletionReason.NoLongerNeeded, label: 'I no longer need my account' },
-    { value: AccountDeletionReason.PrivacyConcerns, label: 'Privacy concerns' },
-    { value: AccountDeletionReason.TooManyNotifications, label: 'Too many notifications' },
-    { value: AccountDeletionReason.BadExperience, label: 'I had a bad experience' },
-    { value: AccountDeletionReason.Other, label: 'Other' },
+    { value: AccountDeletionReason.NoLongerNeeded, label: 'account.deletionReasons.noLongerNeeded' },
+    { value: AccountDeletionReason.PrivacyConcerns, label: 'account.deletionReasons.privacyConcerns' },
+    { value: AccountDeletionReason.TooManyNotifications, label: 'account.deletionReasons.tooManyNotifications' },
+    { value: AccountDeletionReason.BadExperience, label: 'account.deletionReasons.badExperience' },
+    { value: AccountDeletionReason.Other, label: 'account.deletionReasons.other' },
   ];
   protected readonly deletionForm = this.fb.group({
     reason: [null as AccountDeletionReason | null, Validators.required],

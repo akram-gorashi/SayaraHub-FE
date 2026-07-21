@@ -1,4 +1,4 @@
-import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -10,7 +10,7 @@ type ListingAction = { kind: 'delete' | 'sold'; car: CarSummary };
 
 @Component({
   selector: 'app-account-listings',
-  imports: [CurrencyPipe, DatePipe, RouterLink, TitleCasePipe, TranslatePipe],
+  imports: [CurrencyPipe, DatePipe, RouterLink, TranslatePipe],
   templateUrl: './account-listings.html',
   styleUrl: './account-listings.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

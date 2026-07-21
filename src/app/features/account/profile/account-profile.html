@@ -8,31 +8,31 @@
 <div class="row">
   <div class="col-lg-7">
     <section class="user-profile-card" aria-labelledby="profile-info-title">
-      <h2 id="profile-info-title" class="user-profile-card-title">Profile Info</h2>
+      <h2 id="profile-info-title" class="user-profile-card-title">{{ 'account.profileInfo' | translate }}</h2>
       <div class="user-profile-form">
         <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" (input)="store.clearFeedback()" novalidate>
           <div class="form-group">
-            <label for="profile-full-name">Full Name</label>
+            <label for="profile-full-name">{{ 'auth.name' | translate }}</label>
             <input id="profile-full-name" type="text" class="form-control" formControlName="fullName"
               autocomplete="name" [placeholder]="'auth.placeholders.name' | translate" />
             @if (profileForm.controls.fullName.touched && profileForm.controls.fullName.invalid) {
-              <small class="field-error">Enter a name between 2 and 100 characters.</small>
+              <small class="field-error">{{ 'auth.nameInvalid' | translate }}</small>
             }
           </div>
           <div class="form-group">
-            <label for="profile-email">Email</label>
+            <label for="profile-email">{{ 'auth.email' | translate }}</label>
             <input id="profile-email" type="email" class="form-control" formControlName="email" />
-            <small class="form-hint">Your login email cannot be changed here.</small>
+            <small class="form-hint">{{ 'account.emailCannotChange' | translate }}</small>
           </div>
           <div class="form-group">
-            <label for="profile-phone">Phone</label>
+            <label for="profile-phone">{{ 'contact.phone' | translate }}</label>
             <input id="profile-phone" type="tel" class="form-control" formControlName="phoneNumber"
               autocomplete="tel" [placeholder]="'account.phoneNumber' | translate" />
           </div>
           <button type="submit" class="theme-btn my-3" [disabled]="store.savingProfile()">
             <i class="far" [class.fa-user]="!store.savingProfile()" [class.fa-spinner]="store.savingProfile()"
               [class.fa-spin]="store.savingProfile()"></i>
-            {{ store.savingProfile() ? 'Saving...' : 'Save Changes' }}
+            {{ (store.savingProfile() ? 'account.saving' : 'listing.saveChanges') | translate }}
           </button>
         </form>
       </div>
@@ -41,34 +41,34 @@
 
   <div class="col-lg-5">
     <section class="user-profile-card" aria-labelledby="change-password-title">
-      <h2 id="change-password-title" class="user-profile-card-title">Change Password</h2>
+      <h2 id="change-password-title" class="user-profile-card-title">{{ 'account.changePassword' | translate }}</h2>
       <div class="user-profile-form">
         <form [formGroup]="passwordForm" (ngSubmit)="changePassword()" (input)="clearPasswordMismatch()" novalidate>
           <div class="form-group">
-            <label for="current-password">Old Password</label>
+            <label for="current-password">{{ 'account.oldPassword' | translate }}</label>
             <input id="current-password" type="password" class="form-control" formControlName="currentPassword"
               autocomplete="current-password" [placeholder]="'account.oldPassword' | translate" />
           </div>
           <div class="form-group">
-            <label for="new-password">New Password</label>
+            <label for="new-password">{{ 'account.newPassword' | translate }}</label>
             <input id="new-password" type="password" class="form-control" formControlName="newPassword"
               autocomplete="new-password" [placeholder]="'account.newPassword' | translate" />
             @if (passwordForm.controls.newPassword.touched && passwordForm.controls.newPassword.invalid) {
-              <small class="field-error">Use at least 6 characters.</small>
+              <small class="field-error">{{ 'auth.passwordLength' | translate }}</small>
             }
           </div>
           <div class="form-group">
-            <label for="confirm-password">Re-Type Password</label>
+            <label for="confirm-password">{{ 'account.confirmPassword' | translate }}</label>
             <input id="confirm-password" type="password" class="form-control" formControlName="confirmNewPassword"
               autocomplete="new-password" [placeholder]="'account.confirmPassword' | translate" />
             @if (passwordMismatch()) {
-              <small class="field-error">The new passwords do not match.</small>
+              <small class="field-error">{{ 'account.passwordMismatch' | translate }}</small>
             }
           </div>
           <button type="submit" class="theme-btn my-3" [disabled]="store.changingPassword()">
             <i class="far" [class.fa-key]="!store.changingPassword()" [class.fa-spinner]="store.changingPassword()"
               [class.fa-spin]="store.changingPassword()"></i>
-            {{ store.changingPassword() ? 'Changing...' : 'Change Password' }}
+            {{ (store.changingPassword() ? 'account.changing' : 'account.changePassword') | translate }}
           </button>
         </form>
       </div>

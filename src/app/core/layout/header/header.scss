@@ -30,37 +30,6 @@
   white-space: nowrap;
 }
 
-.header-top-wrapper,
-.header-top-contact ul,
-.main-navigation .navbar > .container,
-.navbar-nav,
-.nav-right-btn .theme-btn {
-  display: flex;
-  align-items: center;
-}
-
-.header-top-wrapper {
-  justify-content: space-between;
-}
-
-.header-top-contact ul {
-  gap: 28px;
-  margin: 0;
-  padding: 0;
-}
-
-.main-navigation .navbar > .container {
-  min-height: 104px;
-}
-
-.navbar-nav {
-  gap: clamp(18px, 2vw, 30px);
-}
-
-.nav-right-btn .theme-btn {
-  gap: 8px;
-}
-
 .header-top-link > a,
 .header-top-link > button {
   margin: 0;
@@ -204,30 +173,33 @@ button.nav-link {
 .notification-history-link { display: block; margin: 7px 0 0 !important; padding: 10px; color: var(--color-dark) !important; text-align: center; border-radius: 5px; font-weight: 600; }
 .notification-history-link:hover { color: var(--theme-color) !important; background: #fff3f3; }
 
-:host-context([dir='rtl']) .main-navigation .navbar > .container {
-  flex-direction: row-reverse;
-}
+@media (min-width: 992px) {
+  .navbar .nav-item .nav-link,
+  .navbar .nav-item .dropdown-toggle {
+    white-space: nowrap;
+  }
 
-:host-context([dir='rtl']) #main_nav {
-  flex-direction: row-reverse;
-}
+  :host-context(body.rtl-mode) .navbar-brand {
+    margin-left: 0;
+  }
 
-:host-context([dir='rtl']) .navbar-nav {
-  flex-direction: row-reverse;
-  margin-inline: auto;
-}
+  :host-context(body.rtl-mode) .navbar .nav-item .nav-link {
+    margin-left: clamp(14px, 1.25vw, 24px);
+    margin-right: 0;
+  }
 
-:host-context([dir='rtl']) .language-menu {
-  margin-inline-start: 0;
-  margin-inline-end: auto;
-}
+  :host-context(body.rtl-mode) .navbar .nav-item:last-child .nav-link {
+    margin-left: 0;
+  }
 
-:host-context([dir='rtl']) .nav-right {
-  margin-inline-start: 0;
-}
+  :host-context(body.rtl-mode) .nav-right {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 
-:host-context([dir='rtl']) .header-top-wrapper {
-  flex-direction: row-reverse;
+  :host-context(body.rtl-mode) .navbar .nav-right-btn {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 767px) {

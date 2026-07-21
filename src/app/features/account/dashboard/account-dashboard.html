@@ -1,14 +1,14 @@
 @if (store.error(); as error) {
   <div class="alert alert-danger account-state" role="alert">
     <span>{{ error }}</span>
-    <button type="button" class="btn btn-sm btn-outline-danger" (click)="store.load()">Try again</button>
+    <button type="button" class="btn btn-sm btn-outline-danger" (click)="store.load()">{{ 'common.retry' | translate }}</button>
   </div>
 }
 
 @if (store.loading()) {
   <div class="account-state" role="status">
     <span class="spinner-border text-primary" aria-hidden="true"></span>
-    <span>Loading dashboard...</span>
+    <span>{{ 'account.loadingDashboard' | translate }}</span>
   </div>
 } @else if (store.statistics(); as statistics) {
   <div class="row">
@@ -25,7 +25,7 @@
       <div class="dashboard-widget dashboard-widget-color-2">
         <div class="dashboard-widget-info">
           <h2>{{ statistics.totalViews }}</h2>
-          <span>Total Views</span>
+          <span>{{ 'account.totalViews' | translate }}</span>
         </div>
         <div class="dashboard-widget-icon"><i class="fal fa-eye"></i></div>
       </div>
@@ -49,11 +49,11 @@
           <table class="table text-nowrap">
             <thead>
               <tr>
-                <th>Car Info</th>
-                <th>Brand</th>
-                <th>Publish</th>
-                <th>Price</th>
-                <th>Status</th>
+                <th>{{ 'account.carInfo' | translate }}</th>
+                <th>{{ 'listing.brand' | translate }}</th>
+                <th>{{ 'account.publish' | translate }}</th>
+                <th>{{ 'listing.price' | translate }}</th>
+                <th>{{ 'account.status' | translate }}</th>
               </tr>
             </thead>
             <tbody>
@@ -65,7 +65,7 @@
                         <img [src]="car.mainImageUrl || 'assets/img/car/01-v2.jpg'" [alt]="car.title" />
                         <div class="table-ad-content">
                           <h3>{{ car.title }}</h3>
-                          <span>Car ID: #{{ car.id }}</span>
+                          <span>{{ 'account.carId' | translate }} #{{ car.id }}</span>
                         </div>
                       </a>
                     </div>
@@ -73,10 +73,10 @@
                   <td>{{ car.brand }}</td>
                   <td>{{ car.listedDate | date: 'mediumDate' }}</td>
                   <td>{{ car.price | currency: 'SAR':'symbol-narrow':'1.0-0' }}</td>
-                  <td><span class="badge" [class]="statusClass(car.status)">{{ car.status | titlecase }}</span></td>
+                  <td><span class="badge" [class]="statusClass(car.status)">{{ 'account.statuses.' + car.status.toLowerCase() | translate }}</span></td>
                 </tr>
               } @empty {
-                <tr><td colspan="5" class="text-center py-4">You have not added any cars yet.</td></tr>
+                <tr><td colspan="5" class="text-center py-4">{{ 'account.noCarsAdded' | translate }}</td></tr>
               }
             </tbody>
           </table>
@@ -86,19 +86,19 @@
             <article class="recent-car-card">
               <a class="recent-car-card__main" [routerLink]="['/cars', car.id]">
                 <img [src]="car.mainImageUrl || 'assets/img/car/01-v2.jpg'" [alt]="car.title" />
-                <span><strong>{{ car.title }}</strong><small>{{ car.brand }} · ID #{{ car.id }}</small></span>
+                <span><strong>{{ car.title }}</strong><small>{{ car.brand }} · {{ 'account.id' | translate }} #{{ car.id }}</small></span>
               </a>
               <dl>
-                <div><dt>Published</dt><dd>{{ car.listedDate | date: 'mediumDate' }}</dd></div>
-                <div><dt>Price</dt><dd>{{ car.price | currency: 'SAR':'symbol-narrow':'1.0-0' }}</dd></div>
+                <div><dt>{{ 'account.published' | translate }}</dt><dd>{{ car.listedDate | date: 'mediumDate' }}</dd></div>
+                <div><dt>{{ 'listing.price' | translate }}</dt><dd>{{ car.price | currency: 'SAR':'symbol-narrow':'1.0-0' }}</dd></div>
               </dl>
               <div class="recent-car-card__footer">
-                <span class="badge" [class]="statusClass(car.status)">{{ car.status | titlecase }}</span>
-                <a class="btn btn-outline-primary btn-sm" [routerLink]="['/cars', car.id]">View car</a>
+                <span class="badge" [class]="statusClass(car.status)">{{ 'account.statuses.' + car.status.toLowerCase() | translate }}</span>
+                <a class="btn btn-outline-primary btn-sm" [routerLink]="['/cars', car.id]">{{ 'account.viewCar' | translate }}</a>
               </div>
             </article>
           } @empty {
-            <p class="recent-car-cards__empty">You have not added any cars yet.</p>
+            <p class="recent-car-cards__empty">{{ 'account.noCarsAdded' | translate }}</p>
           }
         </div>
       </div>
