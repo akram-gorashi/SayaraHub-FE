@@ -67,13 +67,21 @@ button.nav-link {
   height: auto;
 }
 
+.sayaramatch-brand picture {
+  display: block;
+}
+
+.language-menu {
+  position: relative;
+  margin-inline-start: auto;
+}
+
 .language-switch {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
   min-height: 44px;
-  margin-inline-start: auto;
   padding: 8px 16px;
   border: 1px solid #e3e7ec;
   border-radius: 999px;
@@ -95,6 +103,61 @@ button.nav-link {
 .language-switch i {
   font-size: 16px;
 }
+
+.language-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  inset-inline-end: 0;
+  z-index: 1080;
+  min-width: 158px;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #e7eaf0;
+  border-radius: 16px;
+  box-shadow: 0 18px 45px rgb(16 24 40 / 14%);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.language-dropdown.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+.language-dropdown button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 12px;
+  color: #172133;
+  background: transparent;
+  border: 0;
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: start;
+}
+
+.language-dropdown button:hover,
+.language-dropdown button.active {
+  color: var(--theme-color);
+  background: #fff3f4;
+}
+
+.language-dropdown button.active::after {
+  color: var(--theme-color);
+  content: '✓';
+  font-weight: 900;
+}
+
+:host(.header-scrolled) .main-navigation {
+  box-shadow: 0 10px 30px rgb(16 24 40 / 10%);
+}
+
 :host { position: relative; z-index: 1050; display: block; }
 .header, .header-top { position: relative; overflow: visible; }
 .header-top { z-index: 1051; }
@@ -150,9 +213,12 @@ button.nav-link {
 
   .sayaramatch-brand img { width: 168px; }
 
+  .language-menu {
+    margin-inline-start: auto;
+  }
+
   .language-switch {
     min-height: 40px;
-    margin-inline-start: auto;
     padding: 7px 12px;
     gap: 7px;
     font-size: 12px;
@@ -160,6 +226,7 @@ button.nav-link {
 }
 
 @media (max-width: 380px) {
-  .sayaramatch-brand img { width: 150px; }
+  .sayaramatch-brand img { width: 138px; }
+  .language-switch { padding-inline: 10px; }
   .language-switch span { max-width: 52px; overflow: hidden; text-overflow: ellipsis; }
 }

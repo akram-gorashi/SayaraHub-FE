@@ -51,13 +51,14 @@
 }
 
 .listing-skeleton-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.listing-skeleton-card { overflow: hidden; border-radius: 12px; background: #fff; box-shadow: 0 8px 25px rgb(20 32 50 / 6%); }
-.listing-skeleton-card span, .listing-skeleton-card b, .listing-skeleton-card em, .listing-skeleton-card strong { display: block; border-radius: 8px; background: linear-gradient(90deg, #edf1f5, #f7f9fb, #edf1f5); background-size: 200% 100%; animation: listing-shimmer 1.2s infinite linear; }
+.listing-skeleton-card { overflow: hidden; border: 1px solid #eef1f5; border-radius: 14px; background: #fff; box-shadow: 0 12px 30px rgb(20 32 50 / 7%); }
+.listing-skeleton-card span, .listing-skeleton-card b, .listing-skeleton-card em, .listing-skeleton-card strong { display: block; border-radius: 999px; background: linear-gradient(100deg, #edf1f5 20%, #f9fbfd 38%, #edf1f5 58%); background-size: 220% 100%; animation: listing-shimmer 1.15s infinite linear; }
 .listing-skeleton-card > span { aspect-ratio: 3 / 2; border-radius: 0; }
-.listing-skeleton-card div { padding: 16px; }
-.listing-skeleton-card b { width: 65%; height: 18px; margin-bottom: 14px; }
-.listing-skeleton-card em { width: 90%; height: 12px; margin-top: 9px; }
-.listing-skeleton-card strong { width: 45%; height: 18px; margin-top: 18px; }
+.listing-skeleton-card div { padding: 18px; }
+.listing-skeleton-card b { width: 64%; height: 19px; margin: 0 auto 16px; }
+.listing-skeleton-card em { width: 92%; height: 12px; margin: 10px auto 0; }
+.listing-skeleton-card em:nth-of-type(2) { width: 72%; }
+.listing-skeleton-card strong { width: 48%; height: 20px; margin: 20px auto 0; }
 @keyframes listing-shimmer { to { background-position: -200% 0; } }
 
 .pagination .page-link {
