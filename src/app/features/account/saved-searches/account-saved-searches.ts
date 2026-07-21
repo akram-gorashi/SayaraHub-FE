@@ -1,16 +1,17 @@
-import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { LocalizedDatePipe } from '../../../shared/pipes/localized-date.pipe';
+import { SarCurrencyPipe } from '../../../shared/pipes/sar-currency.pipe';
 
 import { SavedSearch, SavedSearchRequest } from '../../../core/models/saved-search.models';
 import { SavedSearchesStore } from './saved-searches.store';
 
 @Component({
   selector: 'app-account-saved-searches',
-  imports: [DatePipe, ReactiveFormsModule, RouterLink, TranslatePipe],
+  imports: [LocalizedDatePipe, ReactiveFormsModule, RouterLink, SarCurrencyPipe, TranslatePipe],
   templateUrl: './account-saved-searches.html',
   styleUrl: './account-saved-searches.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

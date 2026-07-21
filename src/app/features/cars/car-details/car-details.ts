@@ -9,7 +9,7 @@ import { CarDetailsStore } from './car-details.store';
 import { AuthSessionService } from '../../../core/services/auth-session.service';
 import { CarsService } from '../../../core/services/cars.service';
 import { ChatsService } from '../../../core/services/chats.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LocalizedCurrencyPipe, LocalizedDatePipe, LocalizedNumberPipe } from '../../../shared/i18n/localized-value.pipe';
 
 @Component({
@@ -36,6 +36,7 @@ export class CarDetailsPage {
   private readonly chats = inject(ChatsService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly translate = inject(TranslateService);
   private touchStartX = 0;
 
   constructor() {
@@ -83,14 +84,14 @@ export class CarDetailsPage {
       return;
     }
     this.messageLoading.set(true);
-    this.chats.create(car.id, { message: `Hi, is ${car.title} still available?` }).pipe(
+    this.chats.create(car.id, { message: this.translate.instant('details.defaultChatMessage', { title: car.title }) }).pipe(
       takeUntilDestroyed(this.destroyRef),
       finalize(() => this.messageLoading.set(false)),
     ).subscribe({
       next: response => response.success
         ? void this.router.navigate(['/account/messages'])
-        : this.actionMessage.set(response.message || 'Unable to start conversation.'),
-      error: () => this.actionMessage.set('Unable to start conversation.'),
+        : this.actionMessage.set(response.message || this.translate.instant('details.startConversationFailed')),
+      error: () => this.actionMessage.set(this.translate.instant('details.startConversationFailed')),
     });
   }
 
@@ -106,8 +107,8 @@ export class CarDetailsPage {
       takeUntilDestroyed(this.destroyRef),
       finalize(() => this.favoriteLoading.set(false)),
     ).subscribe({
-      next: response => this.actionMessage.set(response.message || 'Added to favorites.'),
-      error: () => this.actionMessage.set('Unable to update favorites.'),
+      next: response => this.actionMessage.set(response.message || this.translate.instant('details.addedToFavorites')),
+      error: () => this.actionMessage.set(this.translate.instant('details.favoriteUpdateFailed')),
     });
   }
 

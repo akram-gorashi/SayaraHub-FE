@@ -31,18 +31,18 @@
       <article [class.disabled-search]="!search.isEnabled">
         <div class="saved-search-icon"><i class="far fa-magnifying-glass-location"></i></div>
         <div class="saved-search-details">
-          <div class="saved-search-title"><h3>{{ search.name }}</h3><span [class.enabled]="search.isEnabled">{{ search.isEnabled ? 'Active' : 'Paused' }}</span></div>
-          <p>{{ search.brandName || 'Any brand' }}@if (search.modelName) { · {{ search.modelName }} } · {{ search.city || 'Any location' }}</p>
-          <div class="saved-search-meta"><span><strong>Price:</strong> {{ search.minPrice ?? 0 }} – {{ search.maxPrice ?? 'Any' }}</span><span><strong>Alerts:</strong> @if (search.notifyNewListings) { New } @if (search.notifyPriceDrops) { · Price drops } @if (search.notifySold) { · Sold }</span><span>Updated {{ search.updatedAt | date:'mediumDate' }}</span></div>
+          <div class="saved-search-title"><h3>{{ search.name }}</h3><span [class.enabled]="search.isEnabled">{{ (search.isEnabled ? 'account.active' : 'account.paused') | translate }}</span></div>
+          <p>{{ search.brandName || ('cars.anyBrand' | translate) }}@if (search.modelName) { · {{ search.modelName }} } · {{ search.city || ('account.anyLocation' | translate) }}</p>
+          <div class="saved-search-meta"><span><strong>{{ 'listing.price' | translate }}:</strong> {{ search.minPrice ? (search.minPrice | sarCurrency) : ('account.any' | translate) }} – {{ search.maxPrice ? (search.maxPrice | sarCurrency) : ('account.any' | translate) }}</span><span><strong>{{ 'account.alerts' | translate }}:</strong> @if (search.notifyNewListings) { {{ 'account.new' | translate }} } @if (search.notifyPriceDrops) { · {{ 'account.priceDrops' | translate }} } @if (search.notifySold) { · {{ 'account.sold' | translate }} }</span><span>{{ 'account.updated' | translate }} {{ search.updatedAt | localizedDate }}</span></div>
         </div>
         <div class="saved-search-item-actions">
-          <a class="btn btn-outline-secondary btn-sm" routerLink="/cars" [queryParams]="browseParams(search)"><i class="far fa-eye"></i> View</a>
-          <button type="button" class="btn btn-outline-secondary btn-sm" (click)="edit(search)"><i class="far fa-pen"></i> Edit</button>
-          <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="store.saving()" (click)="store.toggle(search)">{{ search.isEnabled ? 'Pause' : 'Enable' }}</button>
-          <button type="button" class="btn btn-outline-danger btn-sm" [disabled]="store.processing() === search.id" (click)="deleting.set(search)" aria-label="Delete saved search"><i class="far fa-trash-can"></i></button>
+          <a class="btn btn-outline-secondary btn-sm" routerLink="/cars" [queryParams]="browseParams(search)"><i class="far fa-eye"></i> {{ 'account.view' | translate }}</a>
+          <button type="button" class="btn btn-outline-secondary btn-sm" (click)="edit(search)"><i class="far fa-pen"></i> {{ 'account.edit' | translate }}</button>
+          <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="store.saving()" (click)="store.toggle(search)">{{ (search.isEnabled ? 'account.pause' : 'account.enable') | translate }}</button>
+          <button type="button" class="btn btn-outline-danger btn-sm" [disabled]="store.processing() === search.id" (click)="deleting.set(search)" [attr.aria-label]="'account.deleteSavedSearch' | translate"><i class="far fa-trash-can"></i></button>
         </div>
       </article>
-    } @empty { @if (!store.loading()) { <div class="saved-search-empty"><i class="far fa-bell-slash"></i><p>You have not saved any searches yet.</p></div> } }
+    } @empty { @if (!store.loading()) { <div class="saved-search-empty"><i class="far fa-bell-slash"></i><p>{{ 'account.noSavedSearches' | translate }}</p></div> } }
   </div>
 </section>
 

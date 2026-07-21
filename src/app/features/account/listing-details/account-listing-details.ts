@@ -1,12 +1,14 @@
-import { CurrencyPipe, DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { LocalizedDatePipe } from '../../../shared/pipes/localized-date.pipe';
+import { LocalizedNumberPipe } from '../../../shared/pipes/localized-number.pipe';
+import { SarCurrencyPipe } from '../../../shared/pipes/sar-currency.pipe';
 import { ListingDetailsStore } from './listing-details.store';
 
 @Component({
   selector: 'app-account-listing-details',
-  imports: [CurrencyPipe, DatePipe, RouterLink, TranslatePipe],
+  imports: [LocalizedDatePipe, LocalizedNumberPipe, RouterLink, SarCurrencyPipe, TranslatePipe],
   templateUrl: './account-listing-details.html',
   styleUrl: './account-listing-details.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
