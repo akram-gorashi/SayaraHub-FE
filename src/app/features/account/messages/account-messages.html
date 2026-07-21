@@ -19,7 +19,7 @@
               @if (chat.unreadCount) { <span class="badge badge-danger unread-badge">{{ chat.unreadCount }}</span> }
             </button>
           </li>
-        } @empty { <li class="empty-chat">No conversations yet.</li> }
+        } @empty { <li class="empty-chat">{{ 'account.noConversations' | translate }}</li> }
       </ul>
     </aside>
     <div class="message-content">
@@ -34,18 +34,35 @@
             <p>{{ chat.carTitle }}</p>
           </div>
         </div>
-        <div #messageList class="message-content-info">
-          @for (message of store.messages(); track message.id) {
+        <div #messageList class="message-content-info" (scroll)="onMessagesScroll($event)">
+          @for (message of store.messages(); track message.id; let index = $index) {
+            @if (store.showDateSeparator(index)) {
+              <div class="message-date-separator"><span>{{ store.dateLabel(message.sentAt) }}</span></div>
+            }
             <div class="message-item" [class.me]="store.isMine(message)">
-              <div class="message-description"><p>{{ message.content }}</p><small>{{ message.sentAt | date:'short' }}</small></div>
+              <div class="message-description">
+                <p>{{ message.content }}</p>
+                <small>{{ message.sentAt | date:'shortTime' }} @if (store.isMine(message)) { <span>{{ store.deliveryLabel(message) }}</span> }</small>
+              </div>
+            </div>
+          }
+          @if (store.isTyping(chat.id)) {
+            <div class="typing-indicator" aria-live="polite">
+              <span></span><span></span><span></span>
+              <em>{{ 'account.chatTyping' | translate:{ name: chat.otherUserName } }}</em>
             </div>
           }
         </div>
+        @if (showJumpToLatest()) {
+          <button type="button" class="jump-latest" (click)="scrollToLatest()" [attr.aria-label]="'account.jumpToLatest' | translate">
+            <i class="far fa-arrow-down"></i>
+          </button>
+        }
         <form class="message-reply" (submit)="send($event)">
-          <textarea class="form-control" rows="2" [placeholder]="'account.writeMessage' | translate" [value]="draft()" (input)="updateDraft($event)"></textarea>
+          <textarea class="form-control" rows="1" [placeholder]="'account.writeMessage' | translate" [value]="draft()" (input)="updateDraft($event)"></textarea>
           <button type="submit" class="theme-btn" [disabled]="store.sending() || !draft().trim()"><i class="far fa-paper-plane"></i>{{ 'account.sendMessage' | translate }}</button>
         </form>
-      } @else { <div class="empty-message">Select a conversation to view messages.</div> }
+      } @else { <div class="empty-message">{{ 'account.selectConversation' | translate }}</div> }
     </div>
   </div>
 </section>
