@@ -4,6 +4,7 @@ select.form-control { appearance: auto; }
 .listing-validation-summary { scroll-margin-top: 120px; }
 .add-listing-form .form-control.ng-invalid.ng-touched { border-color: var(--bs-danger); }
 .add-listing-form .form-control.ng-invalid.ng-touched:focus { box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .15); }
+.field-error { display: block; margin-top: 6px; color: var(--bs-danger); font-size: 12px; line-height: 1.4; }
 .listing-image-previews { display: grid; gap: 14px; }
 .photo-drop-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px; min-height: 1px; }
 .listing-image-preview { position: relative; overflow: hidden; height: 105px; border-radius: 8px; background: #f5f5f5; }
@@ -13,6 +14,9 @@ select.form-control { appearance: auto; }
 .image-actions button { width: 26px; height: 26px; padding: 0; color: #fff; background: rgba(20, 26, 36, .82); border: 0; border-radius: 50%; font-size: 11px; }
 .image-actions button:disabled { opacity: .35; }
 .listing-image-preview .main-label { position: absolute; inset-inline-start: 6px; bottom: 6px; padding: 2px 7px; color: #fff; background: #29bf6c; border-radius: 4px; font-size: 11px; }
+.image-status { position: absolute; right: 6px; bottom: 6px; left: 6px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; padding: 3px 6px; border-radius: 5px; color: #0f5132; background: rgba(209, 231, 221, .94); font-size: 10px; font-weight: 700; }
+.image-status.failed { color: #842029; background: rgba(248, 215, 218, .94); }
+.listing-image-preview.is-main .image-status { bottom: 28px; }
 .drag-handle { position: absolute; inset-inline-start: 6px; top: 6px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #fff; background: rgb(20 26 36 / 82%); cursor: grab; }
 .mobile-photo-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .mobile-photo-actions .list-img-upload { display: grid; place-items: center; min-height: 72px; margin: 0; text-align: center; }
@@ -22,6 +26,13 @@ select.form-control { appearance: auto; }
 .draft-banner span { display: flex; align-items: center; gap: 8px; }
 .draft-banner button { flex: 0 0 auto; padding: 5px 8px; border: 0; color: #a21120; background: transparent; font-size: 12px; font-weight: 700; }
 .draft-saved { position: fixed; z-index: 1090; right: 18px; bottom: 92px; display: flex; align-items: center; gap: 7px; padding: 9px 12px; border-radius: 18px; color: #fff; background: #1f9d5a; box-shadow: 0 6px 20px rgb(0 0 0 / 18%); font-size: 12px; }
+.draft-dialog-backdrop { position: fixed; z-index: 2000; inset: 0; display: grid; place-items: center; padding: 18px; background: rgb(15 23 42 / 48%); }
+.draft-dialog { width: min(430px, 100%); padding: 24px; border-radius: 18px; background: #fff; box-shadow: 0 24px 70px rgb(15 23 42 / 32%); text-align: center; }
+.draft-dialog__icon { display: grid; place-items: center; width: 54px; height: 54px; margin: 0 auto 14px; border-radius: 50%; color: var(--theme-color); background: rgb(245 30 48 / 10%); font-size: 22px; }
+.draft-dialog h3 { margin-bottom: 8px; font-size: 21px; }
+.draft-dialog p { margin-bottom: 18px; color: #667085; }
+.draft-dialog__actions { display: grid; gap: 10px; }
+.draft-dialog__actions .theme-btn, .draft-dialog__actions .btn { width: 100%; min-height: 44px; border-radius: 10px; font-weight: 700; }
 .cdk-drag-preview { overflow: hidden; border-radius: 8px; box-shadow: 0 12px 30px rgb(0 0 0 / 25%); }
 .cdk-drag-placeholder { opacity: .25; }
 .upload-progress { position: relative; height: 28px; overflow: hidden; background: #edf0f4; border-radius: 20px; }

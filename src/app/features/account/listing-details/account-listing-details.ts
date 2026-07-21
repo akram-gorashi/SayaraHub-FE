@@ -1,11 +1,12 @@
 import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ListingDetailsStore } from './listing-details.store';
 
 @Component({
   selector: 'app-account-listing-details',
-  imports: [CurrencyPipe, DatePipe, RouterLink, TitleCasePipe],
+  imports: [CurrencyPipe, DatePipe, RouterLink, TitleCasePipe, TranslatePipe],
   templateUrl: './account-listing-details.html',
   styleUrl: './account-listing-details.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

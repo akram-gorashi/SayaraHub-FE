@@ -8,6 +8,8 @@ import { CarQuery, CarSummary } from '../models/car.models';
 import {
   SellerCarDetails,
   SellerCarImage,
+  CarListingDraft,
+  SaveCarListingDraftRequest,
   SellerDashboardStatistics,
   UpdateCarStatusRequest,
 } from '../models/seller-dashboard.models';
@@ -44,5 +46,17 @@ export class SellerDashboardService {
       `${API_ENDPOINTS.seller}/cars/${carId}/images/${imageId}/retry`,
       {},
     );
+  }
+
+  getListingDraft(): Observable<ApiResponse<CarListingDraft | null>> {
+    return this.http.get<ApiResponse<CarListingDraft | null>>(`${API_ENDPOINTS.seller}/listing-draft`);
+  }
+
+  saveListingDraft(request: SaveCarListingDraftRequest): Observable<ApiResponse<CarListingDraft>> {
+    return this.http.put<ApiResponse<CarListingDraft>>(`${API_ENDPOINTS.seller}/listing-draft`, request);
+  }
+
+  deleteListingDraft(): Observable<void> {
+    return this.http.delete<void>(`${API_ENDPOINTS.seller}/listing-draft`);
   }
 }

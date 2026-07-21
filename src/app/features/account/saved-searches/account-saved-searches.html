@@ -1,6 +1,6 @@
 <section class="user-profile-card saved-search-page" aria-labelledby="saved-searches-title">
   <div class="user-profile-card-header">
-    <div><h2 id="saved-searches-title" class="user-profile-card-title">Saved Searches</h2><p>Save vehicle filters and receive live alerts when matching cars change.</p></div>
+    <div><h2 id="saved-searches-title" class="user-profile-card-title">{{ 'account.savedSearches' | translate }}</h2><p>{{ 'account.savedSearchesIntro' | translate }}</p></div>
   </div>
 
   @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
@@ -9,12 +9,12 @@
   <form class="saved-search-form" [formGroup]="form" (ngSubmit)="save()" novalidate>
     <h3>{{ editingId() ? 'Edit saved search' : 'Create a saved search' }}</h3>
     <div class="row">
-      <div class="col-md-6"><div class="form-group"><label for="search-name">Search name</label><input id="search-name" class="form-control" formControlName="name" placeholder="Example: Toyota in Riyadh" /></div></div>
+      <div class="col-md-6"><div class="form-group"><label for="search-name">{{ 'account.searchName' | translate }}</label><input id="search-name" class="form-control" formControlName="name" [placeholder]="'account.searchNamePlaceholder' | translate" /></div></div>
       <div class="col-md-3"><div class="form-group"><label for="search-brand">Brand</label><select id="search-brand" class="form-select" formControlName="carBrandId"><option [ngValue]="null">Any brand</option>@for (brand of store.brands(); track brand.id) { <option [ngValue]="brand.id">{{ brand.name }}</option> }</select></div></div>
       <div class="col-md-3"><div class="form-group"><label for="search-model">Model</label><select id="search-model" class="form-select" formControlName="carModelId" [disabled]="!form.controls.carBrandId.value"><option [ngValue]="null">Any model</option>@for (model of store.models(); track model.id) { <option [ngValue]="model.id">{{ model.name }}</option> }</select></div></div>
-      <div class="col-md-3"><div class="form-group"><label for="search-min-price">Minimum price</label><input id="search-min-price" class="form-control" type="number" min="0" formControlName="minPrice" placeholder="No minimum" /></div></div>
-      <div class="col-md-3"><div class="form-group"><label for="search-max-price">Maximum price</label><input id="search-max-price" class="form-control" type="number" min="0" formControlName="maxPrice" placeholder="No maximum" />@if (form.controls.maxPrice.hasError('range')) { <small class="text-danger">Maximum must be greater than minimum.</small> }</div></div>
-      <div class="col-md-6"><div class="form-group"><label for="search-city">Location</label><input id="search-city" class="form-control" formControlName="city" placeholder="City, for example Riyadh" /></div></div>
+      <div class="col-md-3"><div class="form-group"><label for="search-min-price">{{ 'cars.minPrice' | translate }}</label><input id="search-min-price" class="form-control" type="number" min="0" formControlName="minPrice" [placeholder]="'account.noMinimum' | translate" /></div></div>
+      <div class="col-md-3"><div class="form-group"><label for="search-max-price">{{ 'cars.maxPrice' | translate }}</label><input id="search-max-price" class="form-control" type="number" min="0" formControlName="maxPrice" [placeholder]="'account.noMaximum' | translate" />@if (form.controls.maxPrice.hasError('range')) { <small class="text-danger">{{ 'account.maximumGreater' | translate }}</small> }</div></div>
+      <div class="col-md-6"><div class="form-group"><label for="search-city">{{ 'details.location' | translate }}</label><input id="search-city" class="form-control" formControlName="city" [placeholder]="'account.cityExample' | translate" /></div></div>
     </div>
     <div class="alert-options">
       <div class="form-check form-switch"><input id="alert-new" class="form-check-input" type="checkbox" formControlName="notifyNewListings" /><label for="alert-new" class="form-check-label">New matching cars</label></div>
@@ -22,7 +22,7 @@
       <div class="form-check form-switch"><input id="alert-sold" class="form-check-input" type="checkbox" formControlName="notifySold" /><label for="alert-sold" class="form-check-label">Sold cars</label></div>
       <div class="form-check form-switch"><input id="search-enabled" class="form-check-input" type="checkbox" formControlName="isEnabled" /><label for="search-enabled" class="form-check-label">Alerts enabled</label></div>
     </div>
-    <div class="saved-search-actions"><button type="submit" class="theme-btn" [disabled]="store.saving()"><i class="far fa-bell"></i> {{ store.saving() ? 'Saving...' : editingId() ? 'Update Search' : 'Save Search' }}</button>@if (editingId()) { <button type="button" class="btn btn-outline-secondary" (click)="reset()">Cancel</button> }</div>
+    <div class="saved-search-actions"><button type="submit" class="theme-btn" [disabled]="store.saving()"><i class="far fa-bell"></i>{{ (store.saving() ? 'listing.saving' : editingId() ? 'account.updateSearch' : 'account.saveSearch') | translate }}</button>@if (editingId()) { <button type="button" class="btn btn-outline-secondary" (click)="reset()">{{ 'common.cancel' | translate }}</button> }</div>
   </form>
 
   <div class="saved-search-list">
@@ -47,5 +47,5 @@
 </section>
 
 @if (deleting(); as search) {
-  <div class="confirmation-backdrop" role="presentation" (click)="deleting.set(null)"><div class="confirmation-dialog" role="alertdialog" aria-modal="true" aria-labelledby="delete-search-title" (click)="$event.stopPropagation()"><div class="confirmation-icon"><i class="far fa-trash-can"></i></div><h3 id="delete-search-title">Delete this saved search?</h3><p>“{{ search.name }}” and its future alerts will be removed.</p><div class="confirmation-actions"><button type="button" class="btn btn-outline-secondary" (click)="deleting.set(null)">Cancel</button><button type="button" class="theme-btn" (click)="confirmDelete()">Delete</button></div></div></div>
+  <div class="confirmation-backdrop" role="presentation" (click)="deleting.set(null)"><div class="confirmation-dialog" role="alertdialog" aria-modal="true" aria-labelledby="delete-search-title" (click)="$event.stopPropagation()"><div class="confirmation-icon"><i class="far fa-trash-can"></i></div><h3 id="delete-search-title">{{ 'account.deleteSavedSearch' | translate }}</h3><p>{{ 'account.deleteSavedSearchBody' | translate:{ name: search.name } }}</p><div class="confirmation-actions"><button type="button" class="btn btn-outline-secondary" (click)="deleting.set(null)">{{ 'common.cancel' | translate }}</button><button type="button" class="theme-btn" (click)="confirmDelete()">{{ 'account.delete' | translate }}</button></div></div></div>
 }

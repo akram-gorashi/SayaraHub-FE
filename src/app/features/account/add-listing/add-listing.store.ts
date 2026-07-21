@@ -95,7 +95,7 @@ export class AddListingStore {
       });
   }
 
-  update(carId: number, request: UpdateCarRequest): void {
+  update(carId: number, request: UpdateCarRequest, onSuccess?: () => void): void {
     this.submittingState.set(true);
     this.uploadProgressState.set(0);
     this.errorState.set(null);
@@ -103,7 +103,7 @@ export class AddListingStore {
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.submittingState.set(false)))
       .subscribe({
         next: (response) => {
-          if (response.success && response.data) void this.router.navigate(['/account/listings', carId]);
+          if (response.success && response.data) { onSuccess?.(); void this.router.navigate(['/account/listings', carId]); }
           else this.errorState.set(response.message);
         },
         error: (error: unknown) => this.errorState.set(this.errorMessage(error, 'Unable to update the car.')),
@@ -112,5 +112,26 @@ export class AddListingStore {
 
   private errorMessage(error: unknown, fallback: string): string {
     return this.localizedError.message(error, fallback);
+  }
+
+  loadDraft(apply: (payload: string) => void): void {
+    this.sellerDashboard.getListingDraft().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: (response) => {
+        if (response.success && response.data?.payload) apply(response.data.payload);
+      },
+      error: () => undefined,
+    });
+  }
+
+  saveDraft(payload: string, step: number): void {
+    this.sellerDashboard.saveListingDraft({ payload, step })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({ error: () => undefined });
+  }
+
+  deleteDraft(): void {
+    this.sellerDashboard.deleteListingDraft()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({ error: () => undefined });
   }
 }

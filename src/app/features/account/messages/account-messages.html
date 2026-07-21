@@ -1,5 +1,5 @@
 <section class="user-profile-card profile-message" aria-labelledby="messages-title">
-  <div class="user-profile-card-header"><h2 id="messages-title" class="user-profile-card-title">Messages</h2></div>
+  <div class="user-profile-card-header"><h2 id="messages-title" class="user-profile-card-title">{{ 'footer.messages' | translate }}</h2></div>
   @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
   <div class="profile-message-wrapper">
     <aside class="profile-message-inbox" aria-label="Conversations">
