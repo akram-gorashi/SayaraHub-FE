@@ -18,6 +18,8 @@ export interface Chat {
   otherUserId: number;
   otherUserName: string;
   otherUserImageUrl: string | null;
+  otherUserIsVerified: boolean;
+  otherUserIsPhoneVerified: boolean;
   otherUserIsOnline: boolean;
   otherUserLastSeenAt: string | null;
   lastMessage: string | null;

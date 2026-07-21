@@ -1,6 +1,7 @@
 <section class="user-profile-card profile-message" aria-labelledby="messages-title">
   <div class="user-profile-card-header"><h2 id="messages-title" class="user-profile-card-title">{{ 'footer.messages' | translate }}</h2></div>
   @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
+  @if (store.success(); as success) { <div class="alert alert-success">{{ success }}</div> }
   <div class="profile-message-wrapper">
     <aside class="profile-message-inbox" aria-label="Conversations">
       <ul class="profile-message-list">
@@ -26,14 +27,37 @@
       @if (store.activeChat(); as chat) {
         <div class="mobile-chat-header">
           <div class="message-avatar" [class.online]="chat.otherUserIsOnline"><img [src]="chat.otherUserImageUrl || 'assets/img/account/user-v2.jpg'" [alt]="chat.otherUserName" /></div>
-          <div>
+          <div class="mobile-chat-identity">
             <h3>{{ chat.otherUserName }}</h3>
+            <div class="chat-trust-badges">
+              @if (chat.otherUserIsVerified) { <span><i class="far fa-badge-check"></i>{{ 'trust.verifiedSeller' | translate }}</span> }
+              @if (chat.otherUserIsPhoneVerified) { <span><i class="far fa-phone-check"></i>{{ 'trust.verifiedPhone' | translate }}</span> }
+            </div>
             <p class="mobile-chat-status" [class.online]="chat.otherUserIsOnline">
               {{ store.presenceLabel(chat) }}@if (!chat.otherUserIsOnline && chat.otherUserLastSeenAt) { {{ chat.otherUserLastSeenAt | date:'short' }} }
             </p>
             <p>{{ chat.carTitle }}</p>
           </div>
+          <div class="chat-safety-actions">
+            <button type="button" class="chat-icon-action" [attr.aria-label]="'account.reportConversation' | translate" (click)="reportOpen.set(!reportOpen())"><i class="far fa-flag"></i></button>
+            <button type="button" class="chat-icon-action danger" [disabled]="store.safetyAction()" [attr.aria-label]="'account.blockUser' | translate" (click)="store.blockActiveChat()"><i class="far fa-ban"></i></button>
+          </div>
         </div>
+        <div class="chat-safety-notice">
+          <i class="far fa-shield-check"></i>
+          <span>{{ 'account.chatSafetyNotice' | translate }}</span>
+        </div>
+        @if (reportOpen()) {
+          <form class="chat-report-panel" (submit)="submitReport($event)">
+            <h4>{{ 'account.reportConversation' | translate }}</h4>
+            <input class="form-control" maxlength="200" required [placeholder]="'account.reportReason' | translate" [value]="reportReason()" (input)="reportReason.set($any($event.target).value)" />
+            <textarea class="form-control" rows="2" maxlength="1000" [placeholder]="'account.reportDetails' | translate" [value]="reportDetails()" (input)="reportDetails.set($any($event.target).value)"></textarea>
+            <div>
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="reportOpen.set(false)">{{ 'common.cancel' | translate }}</button>
+              <button type="submit" class="theme-btn btn-sm" [disabled]="store.safetyAction() || !reportReason().trim()">{{ 'account.submitReport' | translate }}</button>
+            </div>
+          </form>
+        }
         <div #messageList class="message-content-info" (scroll)="onMessagesScroll($event)">
           @for (message of store.messages(); track message.id; let index = $index) {
             @if (store.showDateSeparator(index)) {

@@ -13,6 +13,9 @@ export class AccountMessages {
   protected readonly store = inject(MessagesStore);
   protected readonly draft = signal('');
   protected readonly showJumpToLatest = signal(false);
+  protected readonly reportOpen = signal(false);
+  protected readonly reportReason = signal('');
+  protected readonly reportDetails = signal('');
   private readonly messageList = viewChild<ElementRef<HTMLDivElement>>('messageList');
   private typingStopTimer: ReturnType<typeof setTimeout> | null = null;
   private lastMessageCount = 0;
@@ -61,6 +64,15 @@ export class AccountMessages {
       if (!list) return;
       list.scrollTo({ top: list.scrollHeight, behavior: 'smooth' });
       this.showJumpToLatest.set(false);
+    });
+  }
+
+  protected submitReport(event: Event): void {
+    event.preventDefault();
+    this.store.reportActiveChat(this.reportReason(), this.reportDetails(), () => {
+      this.reportOpen.set(false);
+      this.reportReason.set('');
+      this.reportDetails.set('');
     });
   }
 
