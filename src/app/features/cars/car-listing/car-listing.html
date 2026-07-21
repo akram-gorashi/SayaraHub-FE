@@ -188,9 +188,10 @@
           }
 
           @if (store.loading()) {
-            <div class="listing-state" role="status">
-              <span class="spinner-border text-primary" aria-hidden="true"></span>
-              <span>{{ 'cars.loadingCars' | translate }}</span>
+            <div class="listing-skeleton-grid" role="status" [attr.aria-label]="'cars.loadingCars' | translate">
+              @for (item of [1,2,3,4,5,6]; track item) {
+                <article class="listing-skeleton-card"><span></span><div><b></b><em></em><em></em><strong></strong></div></article>
+              }
             </div>
           } @else {
             <div class="row">

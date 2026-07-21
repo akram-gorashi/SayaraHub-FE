@@ -121,7 +121,21 @@
     "draftPromptTitle": "Save this advert as a draft?",
     "draftPromptBody": "You have not completed this car advert. Save it so you can resume later, discard it, or keep editing.",
     "saveDraft": "Save draft",
-    "keepEditing": "Keep editing"
+    "keepEditing": "Keep editing",
+    "photoSlots": {
+      "front": "Front",
+      "frontHint": "Main front angle",
+      "side": "Side",
+      "sideHint": "Left or right profile",
+      "back": "Back",
+      "backHint": "Rear angle",
+      "interior": "Interior",
+      "interiorHint": "Seats and dashboard",
+      "other": "Other",
+      "otherHint": "Engine, tires, documents"
+    },
+    "photoProgress": "{{count}} of {{total}} recommended photos added",
+    "photoProgressHint": "Front, side, back, and interior help buyers trust the advert."
   },
   "validation": {
     "completeStep": "Please complete the required fields before continuing.",

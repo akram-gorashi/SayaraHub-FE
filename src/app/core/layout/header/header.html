@@ -18,8 +18,22 @@
   </div></div></div>
 
   <div class="main-navigation"><nav class="navbar navbar-expand-lg"><div class="container position-relative">
-    <a class="navbar-brand sayaramatch-brand" routerLink="/" aria-label="SayaraMatch home"><span class="sayaramatch-brand__mark"><i class="far fa-car-side"></i></span><span class="sayaramatch-brand__name">SAYARA<span>MATCH</span></span></a>
-    <button type="button" class="language-switch" (click)="language.toggle()" [attr.aria-label]="'language.switch' | translate"><i class="far fa-globe"></i><span>{{ 'language.switch' | translate }}</span></button>
+    <a class="navbar-brand sayaramatch-brand" routerLink="/" aria-label="SayaraMatch home">
+      <picture>
+        <source media="(max-width: 380px)" srcset="assets/img/logo/sayaramatch-logo-compact.svg">
+        <img src="assets/img/logo/sayaramatch-logo.svg" alt="SayaraMatch" width="220" height="54" />
+      </picture>
+    </a>
+    <div class="language-menu">
+      <button type="button" class="language-switch" (click)="toggleLanguageMenu($event)"
+        [attr.aria-label]="'language.switch' | translate" [attr.aria-expanded]="languageMenuOpen()">
+        <i class="far fa-globe"></i><span>{{ 'language.switch' | translate }}</span><i class="far fa-angle-down" aria-hidden="true"></i>
+      </button>
+      <div class="language-dropdown" [class.show]="languageMenuOpen()">
+        <button type="button" [class.active]="language.language() === 'en'" (click)="setLanguage('en')">English</button>
+        <button type="button" [class.active]="language.language() === 'ar'" (click)="setLanguage('ar')">العربية</button>
+      </div>
+    </div>
     <div class="mobile-menu-right"><button class="navbar-toggler" type="button" aria-controls="main_nav" [attr.aria-expanded]="mobileNavigationOpen()" aria-label="Toggle navigation" (click)="toggleMobileNavigation($event)"><span class="navbar-toggler-mobile-icon"><i class="far fa-bars"></i></span></button></div>
     <div class="collapse navbar-collapse" id="main_nav" [class.show]="mobileNavigationOpen()">
       <ul class="navbar-nav">

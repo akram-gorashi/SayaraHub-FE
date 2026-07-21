@@ -5,8 +5,15 @@
 .car-img img {
   aspect-ratio: 3 / 2;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity .2s ease;
   width: 100%;
 }
+
+.car-img img.is-loaded { opacity: 1; }
+.car-image-skeleton { position: absolute; inset: 0; background: linear-gradient(90deg, #edf1f5, #f7f9fb, #edf1f5); background-size: 200% 100%; animation: car-card-shimmer 1.15s infinite linear; }
+.car-image-processing { position: absolute; inset-inline-start: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 6px; padding: 5px 9px; border-radius: 999px; color: #495466; background: rgb(255 255 255 / 88%); font-size: 11px; font-weight: 700; z-index: 1; }
+@keyframes car-card-shimmer { to { background-position: -200% 0; } }
 
 .car-btns a.active {
   background: var(--color-dark);

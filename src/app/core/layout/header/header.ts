@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { finalize } from 'rxjs';
 
@@ -6,7 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { AuthSessionService } from '../../services/auth-session.service';
 import { Notification } from '../../models/notification.models';
 import { NotificationCenterService } from '../../services/notification-center.service';
-import { LanguageService } from '../../services/language.service';
+import { AppLanguage, LanguageService } from '../../services/language.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -17,6 +17,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '(document:click)': 'closeMenus()',
+    '[class.header-scrolled]': 'scrolled()',
   },
 })
 export class Header {
@@ -29,18 +30,39 @@ export class Header {
   protected readonly notificationOpen = signal(false);
   protected readonly pagesOpen = signal(false);
   protected readonly mobileNavigationOpen = signal(false);
+  protected readonly languageMenuOpen = signal(false);
+  protected readonly scrolled = signal(false);
   protected readonly language = inject(LanguageService);
+
+  @HostListener('window:scroll')
+  protected onWindowScroll(): void {
+    this.scrolled.set(globalThis.scrollY > 8);
+  }
 
   protected toggleNotifications(event: Event): void {
     event.stopPropagation();
     this.notificationOpen.update(open => !open);
     this.pagesOpen.set(false);
+    this.languageMenuOpen.set(false);
   }
 
   protected togglePages(event: Event): void {
     event.stopPropagation();
     this.pagesOpen.update(open => !open);
     this.notificationOpen.set(false);
+    this.languageMenuOpen.set(false);
+  }
+
+  protected toggleLanguageMenu(event: Event): void {
+    event.stopPropagation();
+    this.languageMenuOpen.update(open => !open);
+    this.notificationOpen.set(false);
+    this.pagesOpen.set(false);
+  }
+
+  protected setLanguage(language: AppLanguage): void {
+    this.language.setLanguage(language);
+    this.languageMenuOpen.set(false);
   }
 
   protected toggleMobileNavigation(event: Event): void {
@@ -51,6 +73,7 @@ export class Header {
   protected closeMenus(): void {
     this.notificationOpen.set(false);
     this.pagesOpen.set(false);
+    this.languageMenuOpen.set(false);
   }
 
   protected closeNavigation(): void {

@@ -1,4 +1,18 @@
 .account-state { display: flex; justify-content: center; align-items: center; gap: 10px; min-height: 140px; }
+.listing-success-panel { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 18px; padding: 14px 16px; border-radius: 12px; color: #0f5132; background: #eaf8f0; }
+.listing-success-panel div { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.listing-success-panel i { font-size: 20px; }
+.account-skeleton-list { display: grid; gap: 12px; }
+.account-skeleton-card { display: grid; grid-template-columns: 90px 1fr; gap: 14px; padding: 14px; border-radius: 12px; background: #fff; }
+.account-skeleton-card span, .account-skeleton-card b, .account-skeleton-card em { display: block; border-radius: 8px; background: linear-gradient(90deg, #edf1f5, #f7f9fb, #edf1f5); background-size: 200% 100%; animation: skeleton-shimmer 1.2s infinite linear; }
+.account-skeleton-card span { height: 64px; }
+.account-skeleton-card b { width: 55%; height: 16px; margin: 6px 0 12px; }
+.account-skeleton-card em { width: 80%; height: 12px; margin-top: 8px; }
+.rich-empty-state { display: grid; justify-items: center; gap: 9px; padding: 28px; color: #697386; }
+.rich-empty-state i { color: var(--theme-color); font-size: 36px; }
+.rich-empty-state h3 { margin: 0; color: #172133; font-size: 20px; }
+.rich-empty-state p { margin: 0 0 8px; }
+@keyframes skeleton-shimmer { to { background-position: -200% 0; } }
 .table-list-info img { height: 58px; object-fit: cover; }
 .table-list-info h3 { margin: 0 0 3px; font-size: 16px; }
 .listing-actions { display: flex; gap: 6px; }
@@ -176,6 +190,9 @@
     padding: 42px 20px;
     text-align: center;
   }
+
+  .mobile-cars-empty h3 { margin: 8px 0 4px; font-size: 19px; }
+  .mobile-cars-empty p { margin-bottom: 14px; }
 
   .mobile-cars-empty i {
     color: var(--theme-color);

@@ -11,10 +11,18 @@
       <a routerLink="/account/add-listing" class="theme-btn"><i class="far fa-plus-circle"></i>Sell a Car</a>
     </div>
   </div>
+  @if (submitSuccess(); as message) {
+    <div class="listing-success-panel" role="status">
+      <div><i class="far fa-circle-check"></i><span>{{ message }}</span></div>
+      <a routerLink="/account/add-listing" class="theme-btn theme-btn2"><i class="far fa-plus-circle"></i>Add another car</a>
+    </div>
+  }
   @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
   @if (store.success(); as success) { <div class="alert alert-success">{{ success }}</div> }
   @if (store.loading()) {
-    <div class="account-state"><span class="spinner-border text-primary"></span> Loading your cars...</div>
+    <div class="account-skeleton-list" role="status" aria-label="Loading your cars">
+      @for (item of [1,2,3]; track item) { <div class="account-skeleton-card"><span></span><div><b></b><em></em><em></em></div></div> }
+    </div>
   } @else {
     <div class="table-responsive desktop-cars-table">
       <table class="table text-nowrap">
@@ -36,7 +44,7 @@
                 <button type="button" class="btn btn-outline-danger btn-sm rounded-2" title="Delete car ad" [disabled]="store.removingId() === car.id" (click)="ask('delete', car)"><i class="far fa-trash-can"></i></button>
               </div></td>
             </tr>
-          } @empty { <tr><td colspan="6" class="text-center py-4">No cars found.</td></tr> }
+          } @empty { <tr><td colspan="6" class="text-center py-4"><div class="rich-empty-state"><i class="far fa-car"></i><h3>No cars listed yet</h3><p>Start with clear photos and a few basic details.</p><a routerLink="/account/add-listing" class="theme-btn">Sell a Car</a></div></td></tr> }
         </tbody>
       </table>
     </div>
@@ -86,7 +94,7 @@
           </div>
         </article>
       } @empty {
-        <div class="mobile-cars-empty"><i class="far fa-car" aria-hidden="true"></i><p>No cars found.</p></div>
+        <div class="mobile-cars-empty"><i class="far fa-car" aria-hidden="true"></i><h3>No cars listed yet</h3><p>Start with clear photos and a few basic details.</p><a routerLink="/account/add-listing" class="theme-btn">Sell a Car</a></div>
       }
     </div>
   }

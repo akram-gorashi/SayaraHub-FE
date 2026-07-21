@@ -29,10 +29,14 @@ export class CarCard {
   protected readonly isFavorite = signal(false);
   protected readonly favoriteLoading = signal(false);
   protected readonly actionMessage = signal<string | null>(null);
+  protected readonly imageLoaded = signal(false);
 
   protected useFallbackImage(event: Event): void {
     (event.target as HTMLImageElement).src = 'assets/img/car/01-v2.jpg';
+    this.imageLoaded.set(true);
   }
+
+  protected markImageLoaded(): void { this.imageLoaded.set(true); }
 
   protected isNewCondition(): boolean {
     return this.car().condition.trim().toLowerCase() === 'new';

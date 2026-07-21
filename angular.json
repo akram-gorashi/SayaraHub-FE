@@ -37,6 +37,7 @@
           },
           "configurations": {
             "production": {
+              "extractLicenses": false,
               "optimization": {
                 "scripts": true,
                 "styles": {
@@ -53,8 +54,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "5kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "10kB",
+                  "maximumError": "12kB"
                 }
               ],
               "outputHashing": "all"

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 108" role="img" aria-labelledby="title desc">
+  <title id="title">SayaraMatch</title>
+  <desc id="desc">Compact SayaraMatch logo</desc>
+  <defs>
+    <linearGradient id="sm-red" x1="12" y1="10" x2="88" y2="98" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff4050"/>
+      <stop offset="1" stop-color="#d90f24"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#d90f24" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <g transform="translate(6 10)">
+    <rect width="88" height="88" rx="24" fill="url(#sm-red)" filter="url(#shadow)"/>
+    <path d="M18 55c6-15 14-24 26-24s20 9 26 24" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+    <path d="M24 54h40c4 0 6 2 7 6l2 6H15l2-6c1-4 3-6 7-6Z" fill="#fff"/>
+    <path d="M27 52l6-9h23l6 9" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+    <circle cx="29" cy="66" r="4" fill="#d90f24"/>
+    <circle cx="59" cy="66" r="4" fill="#d90f24"/>
+    <path d="M44 14c-8 0-14 6-14 14 0 11 14 23 14 23s14-12 14-23c0-8-6-14-14-14Z" fill="#111827"/>
+    <circle cx="44" cy="28" r="5" fill="#fff"/>
+  </g>
+  <text x="110" y="48" font-family="Inter, Montserrat, Arial, sans-serif" font-size="38" font-weight="900" letter-spacing="-1.8" fill="#101828">SAYARA</text>
+  <text x="110" y="84" font-family="Inter, Montserrat, Arial, sans-serif" font-size="38" font-weight="900" letter-spacing="-1.8" fill="#f51e30">MATCH</text>
+</svg>
