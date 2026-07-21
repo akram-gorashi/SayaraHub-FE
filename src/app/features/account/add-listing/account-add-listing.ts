@@ -13,7 +13,9 @@ import { AddListingStore } from './add-listing.store';
 import { AuthSessionService } from '../../../core/services/auth-session.service';
 
 type ImagePreviewStatus = 'processing' | 'ready' | 'failed';
-type ImagePreview = { file: File; url: string; status: ImagePreviewStatus; originalSize: number; optimizedSize: number; error?: string };
+type PhotoSlot = 'front' | 'side' | 'back' | 'interior' | 'other';
+type ImagePreview = { file: File; url: string; slot: PhotoSlot; status: ImagePreviewStatus; originalSize: number; optimizedSize: number; error?: string };
+type PhotoSlotConfig = { key: PhotoSlot; icon: string; label: string; hint: string; multiple: boolean };
 
 @Component({
   selector: 'app-account-add-listing',
@@ -48,6 +50,13 @@ export class AccountAddListing {
   protected readonly currentStep = signal(1);
   protected readonly stepError = signal<string | null>(null);
   protected readonly mobileSteps = ['listing.steps.basics', 'listing.steps.details', 'listing.steps.photos', 'listing.steps.finish'];
+  protected readonly photoSlots: PhotoSlotConfig[] = [
+    { key: 'front', icon: 'assets/img/listing-upload/photo-slot-front.png', label: 'listing.photoSlots.front', hint: 'listing.photoSlots.frontHint', multiple: false },
+    { key: 'side', icon: 'assets/img/listing-upload/photo-slot-side.png', label: 'listing.photoSlots.side', hint: 'listing.photoSlots.sideHint', multiple: false },
+    { key: 'back', icon: 'assets/img/listing-upload/photo-slot-back.png', label: 'listing.photoSlots.back', hint: 'listing.photoSlots.backHint', multiple: false },
+    { key: 'interior', icon: 'assets/img/listing-upload/photo-slot-interior.png', label: 'listing.photoSlots.interior', hint: 'listing.photoSlots.interiorHint', multiple: true },
+    { key: 'other', icon: 'assets/img/listing-upload/photo-slot-other.png', label: 'listing.photoSlots.other', hint: 'listing.photoSlots.otherHint', multiple: true },
+  ];
   protected readonly draftRestored = signal(false);
   protected readonly draftSaved = signal(false);
   protected readonly draftPromptOpen = signal(false);
@@ -153,7 +162,7 @@ export class AccountAddListing {
     this.form.markAsDirty();
   }
 
-  protected async chooseImages(event: Event): Promise<void> {
+  protected async chooseImages(event: Event, slot: PhotoSlot = 'other'): Promise<void> {
     const input = event.target as HTMLInputElement;
     const files = Array.from(input.files ?? []);
     const remaining = 10 - this.existingImages().length - this.selectedImages().length;
@@ -172,6 +181,7 @@ export class AccountAddListing {
       this.imagePreviews.update(previews => [...previews, ...optimized.map(item => ({
         file: item.optimized,
         url: URL.createObjectURL(item.optimized),
+        slot,
         status: 'ready' as const,
         originalSize: item.original.size,
         optimizedSize: item.optimized.size,
@@ -238,6 +248,14 @@ export class AccountAddListing {
   protected moveNew(index: number, offset: -1 | 1): void {
     this.imagePreviews.update((previews) => this.move(previews, index, offset));
     this.selectedImages.set(this.imagePreviews().map((preview) => preview.file));
+  }
+
+  protected slotCount(slot: PhotoSlot): number {
+    return this.imagePreviews().filter(preview => preview.slot === slot).length;
+  }
+
+  protected slotLabel(slot: PhotoSlot): string {
+    return this.translate.instant(this.photoSlots.find(item => item.key === slot)?.label ?? 'listing.photoSlots.other');
   }
 
   protected submit(): void {
