@@ -5,7 +5,7 @@ import { finalize } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { AuthSessionService } from '../../services/auth-session.service';
 import { Notification } from '../../models/notification.models';
-import { NotificationCenterService } from '../../services/notification-center.service';
+import { DjangoNotificationCenterService } from '../../services/django-notification-center.service';
 import { AppLanguage, LanguageService } from '../../services/language.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -26,7 +26,7 @@ export class Header {
 
   protected readonly session = inject(AuthSessionService);
   protected readonly loggingOut = signal(false);
-  protected readonly notifications = inject(NotificationCenterService);
+  protected readonly notifications = inject(DjangoNotificationCenterService);
   protected readonly notificationOpen = signal(false);
   protected readonly pagesOpen = signal(false);
   protected readonly mobileNavigationOpen = signal(false);

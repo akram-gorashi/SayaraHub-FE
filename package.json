@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:django": "ng serve --proxy-config proxy.django.conf.json",
     "build": "ng build",
     "deploy": "npm run build -- --configuration production && wrangler deploy",
     "watch": "ng build --watch --configuration development",
