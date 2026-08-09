@@ -5,7 +5,7 @@
   @if (store.car(); as car) {
     <div class="user-profile-card-header">
       <div><h2 id="listing-details-title" class="user-profile-card-title">{{ car.title }}</h2><span class="badge">{{ 'account.statuses.' + car.status.toLowerCase() | translate }}</span></div>
-      <div class="listing-header-actions"><a routerLink="/account/listings" class="btn btn-outline-secondary"><i class="far fa-arrow-left"></i> {{ 'common.back' | translate }}</a><a [routerLink]="['/account/listings', car.id, 'edit']" class="theme-btn"><i class="far fa-pen"></i>{{ 'listing.editTitle' | translate }}</a></div>
+      <div class="listing-header-actions"><a routerLink="/account/listings" class="btn btn-outline-secondary"><i class="far fa-arrow-left rtl-mirror"></i> {{ 'common.back' | translate }}</a><a [routerLink]="['/account/listings', car.id, 'edit']" class="theme-btn"><i class="far fa-pen"></i>{{ 'listing.editTitle' | translate }}</a></div>
     </div>
     @if (car.moderationReason) { <div class="alert alert-danger"><strong>{{ 'account.moderationFeedback' | translate }}:</strong> {{ car.moderationReason }}</div> }
     <div class="listing-gallery">@for (image of car.imageProcessing; track image.id) { <figure><img [src]="image.thumbnailUrl || image.imageUrl" [alt]="car.title" /><figcaption>{{ (image.isMain ? 'account.mainImage' : 'account.carPhoto') | translate }} · {{ image.processingStatus }}</figcaption></figure> }</div>

@@ -5,10 +5,11 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { Breadcrumb } from '../../../shared/ui/breadcrumb/breadcrumb';
 import { CarCard } from '../components/car-card/car-card';
 import { CarSortOption, CarListingStore, MultiSelectFilter } from './car-listing.store';
+import { LocalizedTextPipe } from '../../../shared/i18n/localized-value.pipe';
 
 @Component({
   selector: 'app-car-listing',
-  imports: [Breadcrumb, CarCard, TranslatePipe],
+  imports: [Breadcrumb, CarCard, TranslatePipe, LocalizedTextPipe],
   templateUrl: './car-listing.html',
   styleUrl: './car-listing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

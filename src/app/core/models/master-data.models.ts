@@ -7,11 +7,13 @@ export interface MasterDataQuery extends PageQuery {
 export interface MasterDataItem {
   id: number;
   name: string;
+  nameAr?: string;
 }
 
 export interface CarModelMasterData extends MasterDataItem {
   carBrandId: number;
   carBrandName: string;
+  carBrandNameAr?: string;
 }
 
 export interface MasterData {

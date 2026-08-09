@@ -5,13 +5,14 @@ import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LocalizedDatePipe } from '../../../shared/pipes/localized-date.pipe';
 import { SarCurrencyPipe } from '../../../shared/pipes/sar-currency.pipe';
+import { LocalizedTextPipe } from '../../../shared/i18n/localized-value.pipe';
 
 import { SavedSearch, SavedSearchRequest } from '../../../core/models/saved-search.models';
 import { SavedSearchesStore } from './saved-searches.store';
 
 @Component({
   selector: 'app-account-saved-searches',
-  imports: [LocalizedDatePipe, ReactiveFormsModule, RouterLink, SarCurrencyPipe, TranslatePipe],
+  imports: [LocalizedDatePipe, ReactiveFormsModule, RouterLink, SarCurrencyPipe, TranslatePipe, LocalizedTextPipe],
   templateUrl: './account-saved-searches.html',
   styleUrl: './account-saved-searches.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -57,7 +57,7 @@
                     <img [src]="car.seller.imageUrl || 'assets/img/car/author-v2.jpg'" [alt]="car.seller.fullName"
                       (error)="useAvatarFallback($event)">
                     <div><span>{{ 'details.listedBy' | translate }}</span><h4>{{ car.seller.fullName }}</h4><div class="seller-trust-badges">@if (car.seller.isVerified) { <span><i class="far fa-badge-check"></i>{{ 'trust.verifiedSeller' | translate }}</span> } @if (car.seller.isPhoneVerified) { <span><i class="far fa-phone-check"></i>{{ 'trust.verifiedPhone' | translate }}</span> }</div></div>
-                    <a [routerLink]="['/sellers', car.seller.id]" [attr.aria-label]="'details.viewSeller' | translate"><i class="far fa-chevron-right"></i></a>
+                    <a [routerLink]="['/sellers', car.seller.id]" [attr.aria-label]="'details.viewSeller' | translate"><i class="far fa-chevron-right rtl-mirror"></i></a>
                   </div>
                 </div>
 
@@ -67,12 +67,12 @@
                   </button>
                   <h4 class="desktop-section-title mb-4">{{ 'details.keyInfo' | translate }}</h4>
                   <div class="car-key-info row collapsible-content">
-                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-car"></i></div><div class="car-key-content"><span>{{ 'listing.bodyType' | translate }}</span><h6>{{ car.bodyType }}</h6></div></div></div>
-                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>{{ 'listing.condition' | translate }}</span><h6>{{ car.condition }}</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-car"></i></div><div class="car-key-content"><span>{{ 'listing.bodyType' | translate }}</span><h6>{{ car.bodyType | smLocalizedText:car.bodyTypeAr }}</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>{{ 'listing.condition' | translate }}</span><h6>{{ car.condition | smLocalizedText:car.conditionAr }}</h6></div></div></div>
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-speedometer"></i></div><div class="car-key-content"><span>{{ 'listing.mileage' | translate }}</span><h6>{{ car.mileage | smNumber }} {{ 'listing.km' | translate }}</h6></div></div></div>
-                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-gear"></i></div><div class="car-key-content"><span>{{ 'listing.transmission' | translate }}</span><h6>{{ car.transmission }}</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-gear"></i></div><div class="car-key-content"><span>{{ 'listing.transmission' | translate }}</span><h6>{{ car.transmission | smLocalizedText:car.transmissionAr }}</h6></div></div></div>
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-calendar"></i></div><div class="car-key-content"><span>{{ 'listing.year' | translate }}</span><h6>{{ car.year | smNumber }}</h6></div></div></div>
-                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-gas-station"></i></div><div class="car-key-content"><span>{{ 'listing.fuelType' | translate }}</span><h6>{{ car.fuelType }}</h6></div></div></div>
+                    <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-gas-station"></i></div><div class="car-key-content"><span>{{ 'listing.fuelType' | translate }}</span><h6>{{ car.fuelType | smLocalizedText:car.fuelTypeAr }}</h6></div></div></div>
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>{{ 'listing.color' | translate }}</span><h6>{{ car.color || ('common.notAvailable' | translate) }}</h6></div></div></div>
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>{{ 'listing.doors' | translate }}</span><h6>{{ car.doors | smNumber }}</h6></div></div></div>
                     <div class="col-lg-3 col-md-4 col-6"><div class="car-key-item"><div class="car-key-icon"><i class="flaticon-drive"></i></div><div class="car-key-content"><span>{{ 'listing.cylinders' | translate }}</span><h6>{{ car.cylinders | smNumber }}</h6></div></div></div>
@@ -92,9 +92,9 @@
                     <h4 class="mb-3">{{ 'details.features' | translate }}</h4>
                     @if (car.features.length) {
                       <div class="row mb-4">
-                        @for (feature of car.features; track feature) {
+                        @for (feature of car.features; track feature; let featureIndex = $index) {
                           <div class="col-md-6 col-lg-4">
-                            <ul class="car-single-list"><li><i class="far fa-check-circle"></i>{{ feature }}</li></ul>
+                            <ul class="car-single-list"><li><i class="far fa-check-circle"></i>{{ feature | smLocalizedText:car.featuresAr?.[featureIndex] }}</li></ul>
                           </div>
                         }
                       </div>

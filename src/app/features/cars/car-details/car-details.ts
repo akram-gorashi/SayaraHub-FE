@@ -10,11 +10,11 @@ import { AuthSessionService } from '../../../core/services/auth-session.service'
 import { CarsService } from '../../../core/services/cars.service';
 import { ChatsService } from '../../../core/services/chats.service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { LocalizedCurrencyPipe, LocalizedDatePipe, LocalizedNumberPipe } from '../../../shared/i18n/localized-value.pipe';
+import { LocalizedCurrencyPipe, LocalizedDatePipe, LocalizedNumberPipe, LocalizedTextPipe } from '../../../shared/i18n/localized-value.pipe';
 
 @Component({
   selector: 'app-car-details',
-  imports: [Breadcrumb, CarCard, RouterLink, TranslatePipe, LocalizedCurrencyPipe, LocalizedDatePipe, LocalizedNumberPipe],
+  imports: [Breadcrumb, CarCard, RouterLink, TranslatePipe, LocalizedCurrencyPipe, LocalizedDatePipe, LocalizedNumberPipe, LocalizedTextPipe],
   templateUrl: './car-details.html',
   styleUrl: './car-details.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

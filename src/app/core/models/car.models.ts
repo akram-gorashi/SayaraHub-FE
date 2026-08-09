@@ -6,12 +6,17 @@ export interface CarSummary {
   price: number;
   status: string;
   brand: string;
+  brandAr?: string;
   model: string;
+  modelAr?: string;
   condition: string;
+  conditionAr?: string;
   year: number;
   mileage: number;
   transmission: string;
+  transmissionAr?: string;
   fuelType: string;
+  fuelTypeAr?: string;
   city: string;
   listedDate: string;
   mainImageUrl: string | null;
@@ -32,17 +37,23 @@ export interface CarDetails {
   price: number;
   status: string;
   brand: string;
+  brandAr?: string;
   model: string;
+  modelAr?: string;
   rating: number;
   reviewCount: number;
   views: number;
   listedDate: string;
   bodyType: string;
+  bodyTypeAr?: string;
   condition: string;
+  conditionAr?: string;
   mileage: number;
   transmission: string;
+  transmissionAr?: string;
   year: number;
   fuelType: string;
+  fuelTypeAr?: string;
   color: string;
   doors: number;
   cylinders: number;
@@ -54,6 +65,7 @@ export interface CarDetails {
   seller: SellerSummary;
   images: string[];
   features: string[];
+  featuresAr?: string[];
   vehicleHistories: string[];
 }
 

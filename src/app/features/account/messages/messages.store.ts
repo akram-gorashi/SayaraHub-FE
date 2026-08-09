@@ -10,6 +10,7 @@ import { ChatsService } from '../../../core/services/chats.service';
 import { DjangoChatRealtimeService } from '../../../core/services/django-chat-realtime.service';
 import { AccountStore } from '../data-access/account.store';
 import { UserSafetyService } from '../../../core/services/user-safety.service';
+import { MessageCenterService } from '../../../core/services/message-center.service';
 
 @Injectable()
 export class MessagesStore {
@@ -17,6 +18,7 @@ export class MessagesStore {
   private readonly realtime = inject(DjangoChatRealtimeService);
   private readonly account = inject(AccountStore);
   private readonly safety = inject(UserSafetyService);
+  private readonly messageCenter = inject(MessageCenterService);
   private readonly translate = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly chatsState = signal<Chat[]>([]);
@@ -299,7 +301,10 @@ export class MessagesStore {
   private markRead(chatId: number): void {
     void this.realtime.sendRead(chatId);
     this.chatsService.markRead(chatId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: () => this.chatsState.update((chats) => chats.map((chat) => chat.id === chatId ? { ...chat, unreadCount: 0 } : chat)),
+      next: () => {
+        this.chatsState.update((chats) => chats.map((chat) => chat.id === chatId ? { ...chat, unreadCount: 0 } : chat));
+        this.messageCenter.refresh();
+      },
     });
   }
 

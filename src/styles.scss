@@ -48,9 +48,50 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  #scroll-top {
+  #scroll-top,
+  #scroll-top.active {
     bottom: calc(84px + env(safe-area-inset-bottom));
+    right: 16px;
+    z-index: 1090;
   }
+
+  body:has(.mobile-buyer-actions) #scroll-top,
+  body:has(.mobile-buyer-actions) #scroll-top.active {
+    bottom: calc(174px + env(safe-area-inset-bottom));
+  }
+
+  .pagination-area {
+    padding-bottom: 42px;
+  }
+
+  .pagination .page-link {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .pagination .page-link i {
+    display: block;
+    line-height: 1;
+    margin: 0;
+  }
+}
+
+#scroll-top {
+  align-items: center;
+  display: grid;
+  justify-items: center;
+  line-height: 1;
+  padding: 0;
+}
+
+#scroll-top i,
+#scroll-top i::before {
+  display: block;
+  line-height: 1;
+  margin: 0;
 }
 
 .language-preference { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 24px; padding: 14px; border: 1px solid #e8ebef; border-radius: 10px; }
@@ -63,7 +104,11 @@
 
 /* Runtime Arabic layout. Component rules continue to own sizing; these rules only
    switch writing direction and the few legacy physical offsets from the theme. */
-html[dir="rtl"] body { direction: rtl; text-align: right; font-family: "Tahoma", "Arial", sans-serif; }
+html[dir="rtl"] {
+  --body-font: "Tajawal", "Tahoma", "Arial", sans-serif;
+  --heading-font: "Tajawal", "Tahoma", "Arial", sans-serif;
+}
+html[dir="rtl"] body { direction: rtl; text-align: right; font-family: var(--body-font); }
 html[dir="rtl"] input, html[dir="rtl"] textarea, html[dir="rtl"] select { direction: rtl; text-align: right; }
 html[dir="rtl"] .navbar-nav, html[dir="rtl"] .header-top-wrapper, html[dir="rtl"] .header-top-link,
 html[dir="rtl"] .breadcrumb-menu, html[dir="rtl"] .car-single-meta { direction: rtl; }
@@ -74,8 +119,11 @@ html[dir="rtl"] .form-check .form-check-input { float: right; margin-right: -1.5
 html[dir="rtl"] .site-breadcrumb .breadcrumb-menu li { margin-right: 25px; margin-left: 0; }
 html[dir="rtl"] .site-breadcrumb .breadcrumb-menu li:first-child { margin-right: 0; }
 html[dir="rtl"] .site-breadcrumb .breadcrumb-menu li::before { right: auto; left: -21px; transform: scaleX(-1); }
-html[dir="rtl"] .fa-arrow-right, html[dir="rtl"] .fa-arrow-left,
-html[dir="rtl"] .fa-chevron-right, html[dir="rtl"] .fa-chevron-left,
+/* Mirror arrows only when they express reading/navigation direction. Physical
+   left/right controls (for example, the image gallery) keep their direction. */
+html[dir="rtl"] .rtl-mirror,
+html[dir="rtl"] .pagination .fa-arrow-right,
+html[dir="rtl"] .pagination .fa-arrow-left,
 html[dir="rtl"] .fa-arrow-right-long { transform: scaleX(-1); }
 html[dir="rtl"] .mobile-bottom-nav { direction: rtl; }
 html[dir="rtl"] a i,
@@ -85,6 +133,16 @@ html[dir="rtl"] span i,
 html[dir="rtl"] li i {
   margin-left: 8px;
   margin-right: 0;
+}
+html[dir="rtl"] .mobile-bottom-nav i,
+html[dir="rtl"] .mobile-buyer-actions i,
+html[dir="rtl"] #scroll-top i,
+html[dir="rtl"] .language-switch i,
+html[dir="rtl"] .notification-trigger i,
+html[dir="rtl"] .navbar-toggler i,
+html[dir="rtl"] .car-favorite i,
+html[dir="rtl"] .car-compare i {
+  margin: 0;
 }
 html[dir="rtl"] .theme-btn,
 html[dir="rtl"] .mobile-filter-button,
@@ -108,4 +166,37 @@ html[dir="rtl"] .fa-caret-right {
   html[dir="rtl"] .mobile-listing-stepper ol,
   html[dir="rtl"] .mobile-filter-chips,
   html[dir="rtl"] .gallery-thumbnails { direction: rtl; }
+  html[dir="rtl"] #scroll-top,
+  html[dir="rtl"] #scroll-top.active { left: 16px; right: auto; }
+}
+@font-face {
+  font-family: "Tajawal";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/tajawal/v12/Iura6YBj_oCad4k1rzY.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Tajawal";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l8KiLrY.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Tajawal";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l4qkLrY.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Tajawal";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l5anLrY.ttf") format("truetype");
 }

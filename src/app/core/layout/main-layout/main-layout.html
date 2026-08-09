@@ -127,7 +127,7 @@
                                         (change)="updateSelectFilter('brandId', $event)">
                                         <option value="">All brands</option>
                                         @for (brand of store.brands(); track brand.id) {
-                                            <option [value]="brand.id">{{ brand.name }}</option>
+                                            <option [value]="brand.id">{{ brand.name | smLocalizedText:brand.nameAr }}</option>
                                         }
                                     </select>
                                 </div>
@@ -140,7 +140,7 @@
                                         (change)="updateSelectFilter('transmissionId', $event)">
                                         <option value="">All transmissions</option>
                                         @for (transmission of store.transmissions(); track transmission.id) {
-                                            <option [value]="transmission.id">{{ transmission.name }}</option>
+                                            <option [value]="transmission.id">{{ transmission.name | smLocalizedText:transmission.nameAr }}</option>
                                         }
                                     </select>
                                 </div>
@@ -153,7 +153,7 @@
                                         (change)="updateSelectFilter('fuelTypeId', $event)">
                                         <option value="">All fuel types</option>
                                         @for (fuelType of store.fuelTypes(); track fuelType.id) {
-                                            <option [value]="fuelType.id">{{ fuelType.name }}</option>
+                                            <option [value]="fuelType.id">{{ fuelType.name | smLocalizedText:fuelType.nameAr }}</option>
                                         }
                                     </select>
                                 </div>
@@ -737,7 +737,7 @@
                                 class="brand-item brand-button wow fadeInUp"
                                 (click)="browseBrand(brand.id)">
                                 <span class="brand-placeholder" aria-hidden="true">{{ brand.name.charAt(0) }}</span>
-                                <h5>{{ brand.name }}</h5>
+                                <h5>{{ brand.name | smLocalizedText:brand.nameAr }}</h5>
                             </button>
                         </div>
                     } @empty {

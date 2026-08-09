@@ -173,6 +173,28 @@ button.nav-link {
 .notification-history-link { display: block; margin: 7px 0 0 !important; padding: 10px; color: var(--color-dark) !important; text-align: center; border-radius: 5px; font-weight: 600; }
 .notification-history-link:hover { color: var(--theme-color) !important; background: #fff3f3; }
 
+:host-context(html[dir="rtl"]) .header i {
+  margin: 0;
+}
+
+:host-context(html[dir="rtl"]) .header-top-contact a,
+:host-context(html[dir="rtl"]) .header-top-contact span,
+:host-context(html[dir="rtl"]) .header-top-link > a,
+:host-context(html[dir="rtl"]) .header-top-link > button {
+  align-items: center;
+  display: inline-flex;
+  gap: 7px;
+}
+
+:host-context(html[dir="rtl"]) .language-switch {
+  flex-direction: row;
+}
+
+:host-context(html[dir="rtl"]) .navbar .dropdown-toggle::after {
+  margin-left: 0;
+  margin-right: 6px;
+}
+
 @media (min-width: 992px) {
   .navbar .nav-item .nav-link,
   .navbar .nav-item .dropdown-toggle {
@@ -199,6 +221,49 @@ button.nav-link {
 
   :host-context(body.rtl-mode) .navbar .nav-right-btn {
     margin-left: 0;
+  }
+
+  :host-context(html[dir="rtl"]) .main-navigation .navbar > .container {
+    align-items: center;
+    column-gap: clamp(18px, 2vw, 32px);
+    display: grid;
+    grid-template-areas: "brand language navigation";
+    grid-template-columns: auto auto minmax(0, 1fr);
+  }
+
+  :host-context(html[dir="rtl"]) .sayaramatch-brand {
+    grid-area: brand;
+    margin: 0;
+  }
+
+  :host-context(html[dir="rtl"]) .language-menu {
+    grid-area: language;
+    margin: 0;
+  }
+
+  :host-context(html[dir="rtl"]) #main_nav {
+    align-items: center;
+    display: flex !important;
+    gap: clamp(18px, 2vw, 34px);
+    grid-area: navigation;
+    justify-content: space-between !important;
+    min-width: 0;
+  }
+
+  :host-context(html[dir="rtl"]) .navbar-nav {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  :host-context(html[dir="rtl"]) .nav-right {
+    flex: 0 0 auto;
+    margin: 0 !important;
+  }
+
+  :host-context(html[dir="rtl"]) .navbar .nav-item .nav-link,
+  :host-context(html[dir="rtl"]) .navbar .nav-item .dropdown-toggle {
+    margin-left: clamp(12px, 1.15vw, 22px);
+    margin-right: 0;
   }
 }
 
@@ -251,6 +316,10 @@ button.nav-link {
     padding: 7px 12px;
     gap: 7px;
     font-size: 12px;
+  }
+
+  :host-context(html[dir="rtl"]) .main-navigation .container {
+    direction: rtl;
   }
 }
 

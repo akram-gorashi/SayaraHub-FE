@@ -11,6 +11,7 @@ import { CreateCarRequest, UpdateCarRequest } from '../../../core/models/car.mod
 import { SellerCarImage } from '../../../core/models/seller-dashboard.models';
 import { AddListingStore } from './add-listing.store';
 import { AuthSessionService } from '../../../core/services/auth-session.service';
+import { LocalizedTextPipe } from '../../../shared/i18n/localized-value.pipe';
 
 type ImagePreviewStatus = 'processing' | 'ready' | 'failed';
 type PhotoSlot = 'front' | 'side' | 'back' | 'interior' | 'other';
@@ -19,7 +20,7 @@ type PhotoSlotConfig = { key: PhotoSlot; icon: string; label: string; hint: stri
 
 @Component({
   selector: 'app-account-add-listing',
-  imports: [ReactiveFormsModule, CdkDropList, CdkDrag, TranslatePipe, DecimalPipe],
+  imports: [ReactiveFormsModule, CdkDropList, CdkDrag, TranslatePipe, DecimalPipe, LocalizedTextPipe],
   templateUrl: './account-add-listing.html',
   styleUrl: './account-add-listing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

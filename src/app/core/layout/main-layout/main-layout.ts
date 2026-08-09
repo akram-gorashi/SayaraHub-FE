@@ -6,10 +6,11 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { CarCard } from '../../../features/cars/components/car-card/car-card';
 import { TemplatePluginsService } from '../../services/template-plugins';
 import { LandingFilters, LandingStore } from './landing.store';
+import { LocalizedTextPipe } from '../../../shared/i18n/localized-value.pipe';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [CarCard, DecimalPipe, TranslatePipe],
+  imports: [CarCard, DecimalPipe, TranslatePipe, LocalizedTextPipe],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

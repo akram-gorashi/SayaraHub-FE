@@ -32,6 +32,50 @@
   z-index: 2;
 }
 
+.car-btns a {
+  align-items: center;
+  display: grid;
+  justify-items: center;
+  line-height: 1;
+}
+
+.car-btns a i,
+.car-btns a i::before {
+  display: block;
+  line-height: 1;
+  margin: 0;
+}
+
+.car-rate,
+.car-list li {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+}
+
+.car-rate i,
+.car-list li i {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 18px;
+  height: 18px;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  width: 18px;
+}
+
+.car-rate i::before,
+.car-list li i::before {
+  display: block;
+  line-height: 1;
+}
+
+:host-context(html[dir="rtl"]) .car-rate,
+:host-context(html[dir="rtl"]) .car-list li {
+  direction: rtl;
+}
+
 @media (max-width: 767px) {
   .car-item {
     align-items: stretch !important;
@@ -67,6 +111,7 @@
 
   .car-list li {
     margin: 0;
+    min-width: 0;
   }
 
   .car-footer .theme-btn {
