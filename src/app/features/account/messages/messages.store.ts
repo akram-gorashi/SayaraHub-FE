@@ -7,16 +7,18 @@ import { TranslateService } from '@ngx-translate/core';
 import { ApiResponse } from '../../../core/models/api.models';
 import { Chat, ChatMessage } from '../../../core/models/chat.models';
 import { ChatsService } from '../../../core/services/chats.service';
-import { ChatRealtimeService } from '../../../core/services/chat-realtime.service';
+import { DjangoChatRealtimeService } from '../../../core/services/django-chat-realtime.service';
 import { AccountStore } from '../data-access/account.store';
 import { UserSafetyService } from '../../../core/services/user-safety.service';
+import { MessageCenterService } from '../../../core/services/message-center.service';
 
 @Injectable()
 export class MessagesStore {
   private readonly chatsService = inject(ChatsService);
-  private readonly realtime = inject(ChatRealtimeService);
+  private readonly realtime = inject(DjangoChatRealtimeService);
   private readonly account = inject(AccountStore);
   private readonly safety = inject(UserSafetyService);
+  private readonly messageCenter = inject(MessageCenterService);
   private readonly translate = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly chatsState = signal<Chat[]>([]);
@@ -51,6 +53,12 @@ export class MessagesStore {
       const activeChat = this.activeChatState();
       if (typing.userId === this.account.profile()?.id) return;
       this.setTyping(typing.chatId, typing.isTyping && activeChat?.id === typing.chatId);
+    });
+    this.realtime.readReceipts$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((receipt) => {
+      this.messagesState.update((messages) => messages.map((message) =>
+        message.chatId === receipt.chatId && message.senderId !== receipt.readerId
+          ? { ...message, isRead: true }
+          : message));
     });
   }
 
@@ -291,8 +299,12 @@ export class MessagesStore {
   }
 
   private markRead(chatId: number): void {
+    void this.realtime.sendRead(chatId);
     this.chatsService.markRead(chatId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: () => this.chatsState.update((chats) => chats.map((chat) => chat.id === chatId ? { ...chat, unreadCount: 0 } : chat)),
+      next: () => {
+        this.chatsState.update((chats) => chats.map((chat) => chat.id === chatId ? { ...chat, unreadCount: 0 } : chat));
+        this.messageCenter.refresh();
+      },
     });
   }
 

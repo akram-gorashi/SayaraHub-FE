@@ -34,3 +34,13 @@ export class LocalizedDatePipe implements PipeTransform {
       : { year: 'numeric', month: 'short', day: 'numeric' }).format(date);
   }
 }
+
+@Pipe({ name: 'smLocalizedText', standalone: true, pure: false })
+export class LocalizedTextPipe implements PipeTransform {
+  private readonly language = inject(LanguageService);
+
+  transform(english: string | null | undefined, arabic: string | null | undefined): string {
+    if (this.language.language() === 'ar' && arabic?.trim()) return arabic;
+    return english?.trim() || arabic?.trim() || '';
+  }
+}

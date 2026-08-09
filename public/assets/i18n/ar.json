@@ -8,7 +8,8 @@
     "retry": "إعادة المحاولة",
     "clear": "مسح الكل",
     "optional": "اختياري",
-    "confirm": "تأكيد"
+    "confirm": "تأكيد",
+    "notAvailable": "غير متاح"
   },
   "language": {
     "switch": "English",
@@ -137,7 +138,8 @@
       "otherHint": "المحرك، الإطارات، المستندات"
     },
     "photoProgress": "تمت إضافة {{count}} من {{total}} صور موصى بها",
-    "photoProgressHint": "صور الأمام والجانب والخلف والداخلية تزيد ثقة المشترين."
+    "photoProgressHint": "صور الأمام والجانب والخلف والداخلية تزيد ثقة المشترين.",
+    "km": "كم"
   },
   "validation": {
     "completeStep": "يرجى إكمال الحقول المطلوبة قبل المتابعة.",
@@ -187,7 +189,9 @@
     "clearFilters": "مسح الفلاتر",
     "resultPages": "صفحات نتائج السيارات",
     "previousPage": "الصفحة السابقة",
-    "nextPage": "الصفحة التالية"
+    "nextPage": "الصفحة التالية",
+    "anyBrand": "أي ماركة",
+    "anyModel": "أي موديل"
   },
   "contact": {
     "phone": "رقم الجوال",
@@ -195,7 +199,8 @@
     "subject": "موضوع الرسالة",
     "message": "اكتب رسالتك",
     "send": "إرسال الرسالة",
-    "opening": "جاري الفتح..."
+    "opening": "جاري الفتح...",
+    "sending": "جاري الإرسال..."
   },
   "account": {
     "search": "بحث...",
@@ -385,7 +390,27 @@
     "updated": "تم التحديث",
     "pause": "إيقاف مؤقت",
     "enable": "تفعيل",
-    "noSavedSearches": "لم تحفظ أي عمليات بحث بعد."
+    "noSavedSearches": "لم تحفظ أي عمليات بحث بعد.",
+    "placeholderReady": "هذا القسم من الحساب جاهز لربطه بواجهة البرمجة.",
+    "recordType": "نوع السجل",
+    "serviceDate": "تاريخ الخدمة",
+    "mileageLimit": "لا يمكن أن يتجاوز {{mileage}} كم",
+    "provider": "مقدم الخدمة",
+    "providerPlaceholder": "الورشة أو مقدم الخدمة",
+    "costSar": "التكلفة (ر.س)",
+    "documentHint": "PDF أو صورة، الحد الأقصى 10 ميجابايت",
+    "historyDescriptionPlaceholder": "صف الخدمة أو سجل تاريخ المركبة",
+    "updateRecord": "تحديث السجل",
+    "addRecord": "إضافة سجل",
+    "historyTypes": {
+      "service": "صيانة",
+      "repair": "إصلاح",
+      "inspection": "فحص",
+      "accident": "حادث",
+      "ownership": "ملكية",
+      "other": "أخرى"
+    },
+    "submitting": "جاري الإرسال..."
   },
   "footer": {
     "tagline": "السوق الذي يطابق المشترين مع السيارات المناسبة والبائعين مع المشترين الجادين.",
@@ -423,7 +448,27 @@
     "listedOn": "تاريخ الإعلان",
     "views": "المشاهدات",
     "reportReason": "سبب البلاغ",
-    "reportDetails": "تفاصيل إضافية (اختياري)"
+    "reportDetails": "تفاصيل إضافية (اختياري)",
+    "favorites": "المفضلات",
+    "title": "تفاصيل السيارة",
+    "loading": "جاري تحميل تفاصيل السيارة...",
+    "backToCars": "العودة إلى السيارات",
+    "previousImage": "الصورة السابقة",
+    "nextImage": "الصورة التالية",
+    "carImages": "صور السيارة",
+    "thumbnail": "صورة مصغرة",
+    "noDescription": "لم يتم توفير وصف لهذه السيارة.",
+    "noFeatures": "لم يتم إدراج أي ميزات.",
+    "noHistory": "لم يتم توفير سجل تاريخ لهذه السيارة.",
+    "contactSellerLocation": "تواصل مع البائع لمعرفة الموقع الدقيق.",
+    "reviewsCount": "{{count}} تقييم",
+    "contactDetails": "تفاصيل التواصل",
+    "reportCarAd": "الإبلاغ عن إعلان السيارة",
+    "carActions": "إجراءات السيارة",
+    "defaultChatMessage": "مرحباً، هل {{title}} لا تزال متاحة؟",
+    "startConversationFailed": "تعذر بدء المحادثة.",
+    "addedToFavorites": "تمت الإضافة إلى المفضلة.",
+    "favoriteUpdateFailed": "تعذر تحديث المفضلة."
   },
   "trust": {
     "verifiedSeller": "بائع موثّق",

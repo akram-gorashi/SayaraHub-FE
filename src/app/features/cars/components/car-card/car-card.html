@@ -1,6 +1,6 @@
 <article class="car-item">
   <div class="car-img">
-    <span class="car-status status-1">{{ car().condition }}</span>
+    <span class="car-status status-1">{{ car().condition | smLocalizedText:car().conditionAr }}</span>
     @if (!imageLoaded()) { <span class="car-image-skeleton" aria-hidden="true"></span> }
     <img
       [src]="car().mainImageUrl || 'assets/img/car/01-v2.jpg'"
@@ -33,14 +33,14 @@
       <h4><a [routerLink]="['/cars', car().id]">{{ car().title }}</a></h4>
       <div class="car-rate">
         <i class="fas fa-car" aria-hidden="true"></i>
-        <span>{{ car().brand }} {{ car().model }}</span>
+        <span>{{ car().brand | smLocalizedText:car().brandAr }} {{ car().model | smLocalizedText:car().modelAr }}</span>
       </div>
     </div>
     <ul class="car-list">
-      <li><i class="far fa-steering-wheel"></i>{{ car().transmission }}</li>
+      <li><i class="far fa-steering-wheel"></i>{{ car().transmission | smLocalizedText:car().transmissionAr }}</li>
       <li><i class="far fa-road"></i>{{ car().mileage | smNumber }} km</li>
       <li><i class="far fa-car"></i>{{ 'listing.model' | translate }}: {{ car().year | smNumber }}</li>
-      <li><i class="far fa-gas-pump"></i>{{ car().fuelType }}</li>
+      <li><i class="far fa-gas-pump"></i>{{ car().fuelType | smLocalizedText:car().fuelTypeAr }}</li>
     </ul>
     @if (viewMode() === 'list') {
       <p>{{ car().city }} | {{ 'details.listedOn' | translate }} {{ car().listedDate | smDate }}</p>

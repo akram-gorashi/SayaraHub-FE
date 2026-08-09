@@ -8,11 +8,11 @@ import { AuthSessionService } from '../../../../core/services/auth-session.servi
 import { CarsService } from '../../../../core/services/cars.service';
 import { CarViewMode } from '../../models/car-view-mode';
 import { TranslatePipe } from '@ngx-translate/core';
-import { LocalizedCurrencyPipe, LocalizedDatePipe, LocalizedNumberPipe } from '../../../../shared/i18n/localized-value.pipe';
+import { LocalizedCurrencyPipe, LocalizedDatePipe, LocalizedNumberPipe, LocalizedTextPipe } from '../../../../shared/i18n/localized-value.pipe';
 
 @Component({
   selector: 'app-car-card',
-  imports: [RouterLink, TranslatePipe, LocalizedCurrencyPipe, LocalizedDatePipe, LocalizedNumberPipe],
+  imports: [RouterLink, TranslatePipe, LocalizedCurrencyPipe, LocalizedDatePipe, LocalizedNumberPipe, LocalizedTextPipe],
   templateUrl: './car-card.html',
   styleUrl: './car-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

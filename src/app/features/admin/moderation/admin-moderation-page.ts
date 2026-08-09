@@ -8,7 +8,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 import { ModerationCar, ModerationDecision } from '../../../core/models/admin-moderation.models';
 import { AdminModerationService } from '../../../core/services/admin-moderation.service';
-import { NotificationCenterService } from '../../../core/services/notification-center.service';
+import { DjangoNotificationCenterService } from '../../../core/services/django-notification-center.service';
 import { AdminModerationStore } from './admin-moderation.store';
 
 @Component({
@@ -22,7 +22,7 @@ import { AdminModerationStore } from './admin-moderation.store';
 export class AdminModerationPage {
   protected readonly store = inject(AdminModerationStore);
   private readonly service = inject(AdminModerationService);
-  private readonly notifications = inject(NotificationCenterService);
+  private readonly notifications = inject(DjangoNotificationCenterService);
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
   protected readonly selected = signal<ModerationCar | null>(null);

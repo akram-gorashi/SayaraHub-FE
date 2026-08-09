@@ -34,8 +34,8 @@
                 <img [src]="car.mainImageUrl || 'assets/img/car/01-v2.jpg'" [alt]="car.title" />
                 <div><h3>{{ car.title }}</h3><span>{{ 'account.carId' | translate }} #{{ car.id }}</span></div>
               </a></div></td>
-              <td>{{ car.brand }}</td><td>{{ car.listedDate | date:'mediumDate' }}</td>
-              <td>{{ car.price | currency:'SAR':'symbol-narrow':'1.0-0' }}</td>
+              <td>{{ car.brand }}</td><td>{{ car.listedDate | localizedDate }}</td>
+              <td>{{ car.price | sarCurrency }}</td>
               <td><span class="badge" [class]="statusClass(car.status)">{{ 'account.statuses.' + car.status.toLowerCase() | translate }}</span>@if (car.moderationReason) { <small class="rejection-reason" [title]="car.moderationReason"><i class="far fa-circle-exclamation"></i> {{ car.moderationReason }}</small> }</td>
               <td><div class="listing-actions">
                 <a [routerLink]="['/account/listings', car.id]" class="btn btn-outline-secondary btn-sm rounded-2" [title]="'account.viewCar' | translate"><i class="far fa-eye"></i></a>
@@ -66,8 +66,8 @@
             </div>
 
             <div class="mobile-car-card__meta">
-              <span><i class="far fa-tag" aria-hidden="true"></i>{{ car.price | currency:'SAR':'symbol-narrow':'1.0-0' }}</span>
-              <span><i class="far fa-calendar" aria-hidden="true"></i>{{ car.listedDate | date:'mediumDate' }}</span>
+              <span><i class="far fa-tag" aria-hidden="true"></i>{{ car.price | sarCurrency }}</span>
+              <span><i class="far fa-calendar" aria-hidden="true"></i>{{ car.listedDate | localizedDate }}</span>
               <span><i class="far fa-location-dot" aria-hidden="true"></i>{{ car.city }}</span>
             </div>
 

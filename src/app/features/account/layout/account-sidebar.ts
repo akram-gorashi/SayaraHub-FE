@@ -5,6 +5,8 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { AccountStore } from '../data-access/account.store';
 import { InquiryCenterService } from '../../../core/services/inquiry-center.service';
+import { DjangoNotificationCenterService } from '../../../core/services/django-notification-center.service';
+import { MessageCenterService } from '../../../core/services/message-center.service';
 
 @Component({
   selector: 'app-account-sidebar',
@@ -20,6 +22,8 @@ export class AccountSidebar {
 
   protected readonly store = inject(AccountStore);
   protected readonly inquiries = inject(InquiryCenterService);
+  protected readonly messages = inject(MessageCenterService);
+  protected readonly notifications = inject(DjangoNotificationCenterService);
   protected readonly mobileMenuOpen = signal(false);
 
   constructor() {

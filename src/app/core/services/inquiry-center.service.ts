@@ -2,12 +2,12 @@ import { Injectable, computed, effect, inject, signal } from '@angular/core';
 
 import { AuthSessionService } from './auth-session.service';
 import { ContactMessagesService } from './contact-messages.service';
-import { NotificationCenterService } from './notification-center.service';
+import { DjangoNotificationCenterService } from './django-notification-center.service';
 
 @Injectable({ providedIn: 'root' })
 export class InquiryCenterService {
   private readonly api = inject(ContactMessagesService);
-  private readonly notifications = inject(NotificationCenterService);
+  private readonly notifications = inject(DjangoNotificationCenterService);
   private readonly session = inject(AuthSessionService);
   private readonly unreadState = signal(0);
   private readonly versionState = signal(0);

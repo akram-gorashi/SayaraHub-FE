@@ -8,7 +8,8 @@
     "retry": "Try again",
     "clear": "Clear all",
     "optional": "optional",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "notAvailable": "N/A"
   },
   "language": {
     "switch": "العربية",
@@ -137,7 +138,8 @@
       "otherHint": "Engine, tires, documents"
     },
     "photoProgress": "{{count}} of {{total}} recommended photos added",
-    "photoProgressHint": "Front, side, back, and interior help buyers trust the advert."
+    "photoProgressHint": "Front, side, back, and interior help buyers trust the advert.",
+    "km": "km"
   },
   "validation": {
     "completeStep": "Please complete the required fields before continuing.",
@@ -187,7 +189,9 @@
     "clearFilters": "Clear filters",
     "resultPages": "Car result pages",
     "previousPage": "Previous page",
-    "nextPage": "Next page"
+    "nextPage": "Next page",
+    "anyBrand": "Any brand",
+    "anyModel": "Any model"
   },
   "contact": {
     "phone": "Phone Number",
@@ -195,7 +199,8 @@
     "subject": "Your Subject",
     "message": "Write Your Message",
     "send": "Send Message",
-    "opening": "Opening..."
+    "opening": "Opening...",
+    "sending": "Sending..."
   },
   "account": {
     "search": "Search...",
@@ -385,7 +390,27 @@
     "updated": "Updated",
     "pause": "Pause",
     "enable": "Enable",
-    "noSavedSearches": "You have not saved any searches yet."
+    "noSavedSearches": "You have not saved any searches yet.",
+    "placeholderReady": "This account section is ready for its API integration.",
+    "recordType": "Record type",
+    "serviceDate": "Service date",
+    "mileageLimit": "Cannot exceed {{mileage}} km",
+    "provider": "Provider",
+    "providerPlaceholder": "Workshop or service provider",
+    "costSar": "Cost (SAR)",
+    "documentHint": "PDF or image, maximum 10 MB",
+    "historyDescriptionPlaceholder": "Describe the service or history record",
+    "updateRecord": "Update Record",
+    "addRecord": "Add Record",
+    "historyTypes": {
+      "service": "Service",
+      "repair": "Repair",
+      "inspection": "Inspection",
+      "accident": "Accident",
+      "ownership": "Ownership",
+      "other": "Other"
+    },
+    "submitting": "Submitting..."
   },
   "footer": {
     "tagline": "The marketplace that matches buyers with the right cars and sellers with serious buyers.",
@@ -423,7 +448,27 @@
     "listedOn": "Listed on",
     "views": "Views",
     "reportReason": "Reason for reporting",
-    "reportDetails": "Additional details (optional)"
+    "reportDetails": "Additional details (optional)",
+    "favorites": "Favorites",
+    "title": "Car Details",
+    "loading": "Loading car details...",
+    "backToCars": "Back to cars",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "carImages": "Car images",
+    "thumbnail": "thumbnail",
+    "noDescription": "No description has been provided for this vehicle.",
+    "noFeatures": "No features have been listed.",
+    "noHistory": "No vehicle history has been provided.",
+    "contactSellerLocation": "Contact the seller for the exact location.",
+    "reviewsCount": "{{count}} reviews",
+    "contactDetails": "Contact Details",
+    "reportCarAd": "Report Car Ad",
+    "carActions": "Car actions",
+    "defaultChatMessage": "Hi, is {{title}} still available?",
+    "startConversationFailed": "Unable to start conversation.",
+    "addedToFavorites": "Added to favorites.",
+    "favoriteUpdateFailed": "Unable to update favorites."
   },
   "trust": {
     "verifiedSeller": "Verified seller",

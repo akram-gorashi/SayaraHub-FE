@@ -34,7 +34,7 @@ export class UsersService {
 
   replaceImage(file: File): Observable<ApiResponse<UserImageResult>> {
     const formData = new FormData();
-    formData.append('File', file);
+    formData.append('file', file, file.name);
     return this.http.post<ApiResponse<UserImageResult>>(`${API_ENDPOINTS.users}/me/image`, formData);
   }
 

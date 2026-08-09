@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-account-placeholder',
+  imports: [TranslatePipe],
   template: `
     <div class="user-profile-card">
       <h2 class="user-profile-card-title">{{ title }}</h2>
-      <p>This account section is ready for its API integration.</p>
+      <p>{{ 'account.placeholderReady' | translate }}</p>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

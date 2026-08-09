@@ -73,7 +73,7 @@
                         [id]="'brand-' + brand.id"
                         [checked]="store.isSelected('brandIds', brand.id)"
                         (change)="toggleFilter('brandIds', brand.id, $event)">
-                      <label class="form-check-label" [for]="'brand-' + brand.id">{{ brand.name }}</label>
+                      <label class="form-check-label" [for]="'brand-' + brand.id">{{ brand.name | smLocalizedText:brand.nameAr }}</label>
                     </div>
                   </li>
                 }
@@ -105,7 +105,7 @@
                         [checked]="store.isSelected('transmissionIds', transmission.id)"
                         (change)="toggleFilter('transmissionIds', transmission.id, $event)">
                       <label class="form-check-label" [for]="'transmission-' + transmission.id">
-                        {{ transmission.name }}
+                        {{ transmission.name | smLocalizedText:transmission.nameAr }}
                       </label>
                     </div>
                   </li>
@@ -123,7 +123,7 @@
                         [id]="'fuel-' + fuelType.id"
                         [checked]="store.isSelected('fuelTypeIds', fuelType.id)"
                         (change)="toggleFilter('fuelTypeIds', fuelType.id, $event)">
-                      <label class="form-check-label" [for]="'fuel-' + fuelType.id">{{ fuelType.name }}</label>
+                      <label class="form-check-label" [for]="'fuel-' + fuelType.id">{{ fuelType.name | smLocalizedText:fuelType.nameAr }}</label>
                     </div>
                   </li>
                 }
@@ -140,7 +140,7 @@
                         [id]="'feature-' + feature.id"
                         [checked]="store.isSelected('featureIds', feature.id)"
                         (change)="toggleFilter('featureIds', feature.id, $event)">
-                      <label class="form-check-label" [for]="'feature-' + feature.id">{{ feature.name }}</label>
+                      <label class="form-check-label" [for]="'feature-' + feature.id">{{ feature.name | smLocalizedText:feature.nameAr }}</label>
                     </div>
                   </li>
                 }

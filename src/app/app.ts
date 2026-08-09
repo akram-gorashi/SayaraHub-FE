@@ -3,7 +3,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Header } from "./core/layout/header/header";
 import { Footer } from "./core/layout/footer/footer";
 import { AuthSessionService } from './core/services/auth-session.service';
-import { NotificationCenterService } from './core/services/notification-center.service';
+import { DjangoNotificationCenterService } from './core/services/django-notification-center.service';
 import { LanguageService } from './core/services/language.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -16,7 +16,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class App {
   protected readonly title = signal('sayara-hub-FE');
   protected readonly session = inject(AuthSessionService);
-  protected readonly notifications = inject(NotificationCenterService);
+  protected readonly notifications = inject(DjangoNotificationCenterService);
   protected readonly language = inject(LanguageService);
   private readonly destroyRef = inject(DestroyRef);
 

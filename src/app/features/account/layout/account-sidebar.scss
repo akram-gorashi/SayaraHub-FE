@@ -34,7 +34,39 @@
     color: var(--theme-color);
   }
 }
-.account-nav-count { min-width: 24px; height: 24px; margin-left: auto; padding: 0 7px; border-radius: 20px; color: #fff; background: var(--theme-color); font-size: 12px; line-height: 24px; text-align: center; }
+.user-profile-sidebar-list li a {
+  align-items: center;
+  display: flex;
+}
+
+.user-profile-sidebar-list li a > i {
+  flex: 0 0 20px;
+  margin-inline-end: 6px;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
+}
+
+.account-nav-count {
+  align-items: center;
+  background: #ffe0e3;
+  border-radius: 8px;
+  color: var(--theme-color);
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  height: 24px;
+  justify-content: center;
+  line-height: 1;
+  margin-inline-start: auto;
+  min-width: 30px;
+  padding: 0 7px;
+}
+
+.user-profile-sidebar-list a.active .account-nav-count {
+  background: rgb(255 255 255 / 22%);
+  color: #fff;
+}
 
 .account-mobile-menu-trigger,
 .account-menu-close,

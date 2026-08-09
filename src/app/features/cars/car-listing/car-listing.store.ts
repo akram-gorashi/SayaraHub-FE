@@ -8,6 +8,7 @@ import { MasterData } from '../../../core/models/master-data.models';
 import { CarsService } from '../../../core/services/cars.service';
 import { MasterDataService } from '../../../core/services/master-data.service';
 import { LocalizedApiErrorService } from '../../../core/services/localized-api-error.service';
+import { LanguageService } from '../../../core/services/language.service';
 import { CarViewMode } from '../models/car-view-mode';
 
 export type MultiSelectFilter = 'brandIds' | 'transmissionIds' | 'fuelTypeIds' | 'featureIds';
@@ -49,6 +50,7 @@ export class CarListingStore {
   private readonly masterDataService = inject(MasterDataService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly localizedError = inject(LocalizedApiErrorService);
+  private readonly language = inject(LanguageService);
 
   private readonly carsState = signal<CarSummary[]>([]);
   private readonly masterDataState = signal<MasterData | null>(null);
@@ -301,7 +303,16 @@ export class CarListingStore {
       .filter((value) => Number.isInteger(value) && value > 0);
   }
 
-  private appendNames(labels: string[], ids: number[], items: ReadonlyArray<{ id: number; name: string }>): void {
-    ids.forEach(id => labels.push(items.find(item => item.id === id)?.name ?? `Filter #${id}`));
+  private appendNames(
+    labels: string[],
+    ids: number[],
+    items: ReadonlyArray<{ id: number; name: string; nameAr?: string }>,
+  ): void {
+    ids.forEach(id => {
+      const item = items.find(candidate => candidate.id === id);
+      labels.push(item
+        ? (this.language.language() === 'ar' && item.nameAr ? item.nameAr : item.name)
+        : `Filter #${id}`);
+    });
   }
 }
