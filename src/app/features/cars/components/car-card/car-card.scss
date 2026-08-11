@@ -46,14 +46,23 @@
   margin: 0;
 }
 
-.car-rate,
-.car-list li {
+.car-rate {
   align-items: center;
   display: flex;
   gap: 6px;
 }
 
-.car-rate i,
+.car-stars {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.car-list li {
+  align-items: center;
+  display: inline-flex;
+  gap: 6px;
+}
+
 .car-list li i {
   align-items: center;
   display: inline-flex;
@@ -65,7 +74,15 @@
   width: 18px;
 }
 
-.car-rate i::before,
+.car-rate .car-stars i {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  color: var(--color-yellow);
+  line-height: 1;
+}
+
+.car-rate .car-stars i::before,
 .car-list li i::before {
   display: block;
   line-height: 1;

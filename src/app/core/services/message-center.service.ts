@@ -2,12 +2,12 @@ import { Injectable, effect, inject, signal } from '@angular/core';
 
 import { AuthSessionService } from './auth-session.service';
 import { ChatsService } from './chats.service';
-import { DjangoChatRealtimeService } from './django-chat-realtime.service';
+import { ChatRealtimeService } from './chat-realtime.service';
 
 @Injectable({ providedIn: 'root' })
 export class MessageCenterService {
   private readonly api = inject(ChatsService);
-  private readonly realtime = inject(DjangoChatRealtimeService);
+  private readonly realtime = inject(ChatRealtimeService);
   private readonly session = inject(AuthSessionService);
   private readonly unreadState = signal(0);
 

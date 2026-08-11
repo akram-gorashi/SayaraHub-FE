@@ -1,0 +1,100 @@
+
+> sayara-hub-fe@0.0.0 start
+> ng serve --proxy-config proxy.dotnet.conf.json --host 0.0.0.0
+
+> Building...
+√ Building...
+Initial chunk files | Names                   |  Raw size
+main.js             | main                    |  94.06 kB | 
+chunk-EIFWNDIW.js   | -                       |   6.06 kB | 
+styles.css          | styles                  |   5.79 kB | 
+chunk-BQ2Q34K5.js   | -                       |   4.98 kB | 
+chunk-A547TKYS.js   | -                       |   3.34 kB | 
+chunk-DVTKQTME.js   | -                       |   3.01 kB | 
+chunk-6ZR4JN36.js   | -                       |   1.77 kB | 
+chunk-4GF7NFS5.js   | -                       |   1.77 kB | 
+chunk-GOMI4DH3.js   | -                       |   1.37 kB | 
+chunk-TGLSZDWZ.js   | -                       | 690 bytes | 
+chunk-HADNFOJP.js   | -                       | 605 bytes | 
+
+                    | Initial total           | 123.44 kB
+
+Lazy chunk files    | Names                   |  Raw size
+chunk-AXERDK4E.js   | main-layout             | 152.48 kB | 
+chunk-YKKGTUYN.js   | account-add-listing     | 142.94 kB | 
+chunk-HRW3RY2O.js   | car-details             | 109.28 kB | 
+chunk-IDO2NBEP.js   | admin-operations-page   | 102.66 kB | 
+chunk-XZT42KPE.js   | account-messages        |  87.27 kB | 
+chunk-46GH3EID.js   | car-listing             |  73.87 kB | 
+chunk-K6D5MZMV.js   | admin-moderation-page   |  66.19 kB | 
+chunk-IFFY36DL.js   | account-listing-details |  61.97 kB | 
+chunk-PCIS4U2V.js   | account-saved-searches  |  56.40 kB | 
+chunk-PZCMYGOA.js   | account-listings        |  53.90 kB | 
+chunk-EUDHSX2J.js   | seller-profile          |  45.12 kB | 
+chunk-AZHOCHOZ.js   | account-notifications   |  42.97 kB | 
+chunk-7P5MFGVE.js   | account-inquiries       |  33.71 kB | 
+chunk-XGGLUCT6.js   | account-sessions        |  33.60 kB | 
+chunk-RFZA3PYL.js   | account-shell           |  33.50 kB | 
+...and 35 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [28.082 seconds] - 2026-08-11T04:34:06.863Z
+
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://172.27.208.1:[1m4200[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.0.99:[1m4200[22m/[39m
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [24.782 seconds] - 2026-08-11T04:39:31.204Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [3.297 seconds] - 2026-08-11T04:39:34.525Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [3.229 seconds] - 2026-08-11T04:40:53.507Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [29.084 seconds] - 2026-08-11T04:53:10.941Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Initial chunk files | Names                   |  Raw size
+main.js             | main                    |  94.06 kB | 
+chunk-EIFWNDIW.js   | -                       |   6.06 kB | 
+styles.css          | styles                  |   5.79 kB | 
+chunk-BQ2Q34K5.js   | -                       |   4.98 kB | 
+chunk-A547TKYS.js   | -                       |   3.34 kB | 
+chunk-DVTKQTME.js   | -                       |   3.01 kB | 
+chunk-6ZR4JN36.js   | -                       |   1.77 kB | 
+chunk-4GF7NFS5.js   | -                       |   1.77 kB | 
+chunk-GOMI4DH3.js   | -                       |   1.37 kB | 
+chunk-TGLSZDWZ.js   | -                       | 690 bytes | 
+chunk-HADNFOJP.js   | -                       | 605 bytes | 
+
+                    | Initial total           | 123.44 kB
+
+Lazy chunk files    | Names                   |  Raw size
+chunk-LE7XP26A.js   | main-layout             | 152.48 kB | 
+chunk-YKKGTUYN.js   | account-add-listing     | 142.94 kB | 
+chunk-WMGETW7X.js   | car-details             | 109.28 kB | 
+chunk-IDO2NBEP.js   | admin-operations-page   | 102.66 kB | 
+chunk-XZT42KPE.js   | account-messages        |  87.27 kB | 
+chunk-QDVGI7MZ.js   | car-listing             |  73.87 kB | 
+chunk-K6D5MZMV.js   | admin-moderation-page   |  66.19 kB | 
+chunk-IFFY36DL.js   | account-listing-details |  61.97 kB | 
+chunk-PCIS4U2V.js   | account-saved-searches  |  56.40 kB | 
+chunk-PZCMYGOA.js   | account-listings        |  53.90 kB | 
+chunk-5MFHFR66.js   | seller-profile          |  45.12 kB | 
+chunk-AZHOCHOZ.js   | account-notifications   |  42.97 kB | 
+chunk-7P5MFGVE.js   | account-inquiries       |  33.71 kB | 
+chunk-XGGLUCT6.js   | account-sessions        |  33.60 kB | 
+chunk-RFZA3PYL.js   | account-shell           |  33.50 kB | 
+...and 35 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [5.006 seconds] - 2026-08-11T04:53:16.183Z
+
+Page reload sent to client(s).

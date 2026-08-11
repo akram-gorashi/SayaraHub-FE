@@ -1,12 +1,15 @@
-import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, afterRenderEffect, inject, signal, viewChild } from '@angular/core';
+import { DatePipe, DecimalPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ElementRef, afterRenderEffect, computed, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { MessagesStore } from './messages.store';
+import { Chat } from '../../../core/models/chat.models';
+
+type ChatFilter = 'all' | 'buying' | 'selling' | 'unread';
 
 @Component({
-  selector: 'app-account-messages', imports: [DatePipe, FormsModule, TranslatePipe], templateUrl: './account-messages.html',
+  selector: 'app-account-messages', imports: [DatePipe, DecimalPipe, FormsModule, TranslatePipe], templateUrl: './account-messages.html',
   styleUrl: './account-messages.scss', changeDetection: ChangeDetectionStrategy.OnPush, providers: [MessagesStore],
 })
 export class AccountMessages {
@@ -16,6 +19,21 @@ export class AccountMessages {
   protected readonly reportOpen = signal(false);
   protected readonly reportReason = signal('');
   protected readonly reportDetails = signal('');
+  protected readonly searchTerm = signal('');
+  protected readonly activeFilter = signal<ChatFilter>('all');
+  protected readonly detailOpen = signal(false);
+  protected readonly filteredChats = computed(() => {
+    const query = this.searchTerm().trim().toLocaleLowerCase();
+    const filter = this.activeFilter();
+    return this.store.chats().filter((chat) => {
+      const matchesQuery = !query || `${chat.carTitle} ${chat.otherUserName} ${chat.lastMessage ?? ''}`.toLocaleLowerCase().includes(query);
+      const matchesFilter = filter === 'all'
+        || (filter === 'buying' && !chat.currentUserIsSeller)
+        || (filter === 'selling' && chat.currentUserIsSeller)
+        || (filter === 'unread' && chat.unreadCount > 0);
+      return matchesQuery && matchesFilter;
+    });
+  });
   private readonly messageList = viewChild<ElementRef<HTMLDivElement>>('messageList');
   private typingStopTimer: ReturnType<typeof setTimeout> | null = null;
   private lastMessageCount = 0;
@@ -51,6 +69,20 @@ export class AccountMessages {
       if (textarea) this.resizeComposer(textarea);
       this.scrollToLatest();
     });
+  }
+
+  protected selectChat(chat: Chat): void {
+    this.store.select(chat);
+    this.detailOpen.set(true);
+  }
+
+  protected showInbox(): void {
+    this.detailOpen.set(false);
+    this.reportOpen.set(false);
+  }
+
+  protected setFilter(filter: ChatFilter): void {
+    this.activeFilter.set(filter);
   }
 
   protected onMessagesScroll(event: Event): void {
