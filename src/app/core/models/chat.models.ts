@@ -15,6 +15,11 @@ export interface Chat {
   id: number;
   carId: number;
   carTitle: string;
+  carImageUrl: string | null;
+  carPrice: number;
+  carCity: string;
+  carStatus: string;
+  currentUserIsSeller: boolean;
   otherUserId: number;
   otherUserName: string;
   otherUserImageUrl: string | null;

@@ -10,6 +10,12 @@ import { Subject } from 'rxjs';
 import { ChatMessage, ChatPresence, ChatTyping } from '../models/chat.models';
 import { AuthSessionService } from './auth-session.service';
 
+export interface ChatReadReceipt {
+  chatId: number;
+  readerId: number;
+  markedReadCount: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class ChatRealtimeService {
   private readonly authSession = inject(AuthSessionService);
@@ -18,6 +24,7 @@ export class ChatRealtimeService {
   private readonly messageSubject = new Subject<ChatMessage>();
   private readonly presenceSubject = new Subject<ChatPresence>();
   private readonly typingSubject = new Subject<ChatTyping>();
+  private readonly readSubject = new Subject<ChatReadReceipt>();
   private startPromise: Promise<void> | null = null;
   private readonly connectedState = signal(false);
 
@@ -33,6 +40,7 @@ export class ChatRealtimeService {
   readonly messages$ = this.messageSubject.asObservable();
   readonly presence$ = this.presenceSubject.asObservable();
   readonly typing$ = this.typingSubject.asObservable();
+  readonly readReceipts$ = this.readSubject.asObservable();
 
   constructor() {
     this.connection.on('MessageReceived', (message: ChatMessage) => {
@@ -61,6 +69,12 @@ export class ChatRealtimeService {
   async sendTyping(chatId: number, isTyping: boolean): Promise<void> {
     await this.ensureStarted();
     await this.connection.invoke('Typing', chatId, isTyping);
+  }
+
+  // The .NET API marks messages as read through the authenticated REST endpoint.
+  // This compatibility method keeps the realtime abstraction consistent.
+  async sendRead(_chatId: number): Promise<void> {
+    return Promise.resolve();
   }
 
   private async ensureStarted(): Promise<void> {

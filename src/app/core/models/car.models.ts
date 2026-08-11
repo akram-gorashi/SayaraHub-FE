@@ -9,6 +9,8 @@ export interface CarSummary {
   brandAr?: string;
   model: string;
   modelAr?: string;
+  rating?: number;
+  reviewCount?: number;
   condition: string;
   conditionAr?: string;
   year: number;

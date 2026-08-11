@@ -31,9 +31,13 @@
   <div class="car-content">
     <div class="car-top">
       <h4><a [routerLink]="['/cars', car().id]">{{ car().title }}</a></h4>
-      <div class="car-rate">
-        <i class="fas fa-car" aria-hidden="true"></i>
-        <span>{{ car().brand | smLocalizedText:car().brandAr }} {{ car().model | smLocalizedText:car().modelAr }}</span>
+      <div class="car-rate" [attr.aria-label]="(car().rating ?? 5) + ' out of 5 stars, ' + (car().reviewCount ?? 0) + ' reviews'">
+        <span class="car-stars" aria-hidden="true">
+          @for (star of [1, 2, 3, 4, 5]; track star) {
+            <i [class]="star <= (car().rating ?? 5) ? 'fas fa-star' : 'far fa-star'"></i>
+          }
+        </span>
+        <span>{{ (car().rating ?? 5) | smNumber:1 }} ({{ (car().reviewCount ?? 0) | smNumber }} Review)</span>
       </div>
     </div>
     <ul class="car-list">
