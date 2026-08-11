@@ -38,7 +38,9 @@ export class AuthSessionService {
     const { refreshToken: _legacyRefreshToken, ...safeSession } = session;
     this.sessionState.set(safeSession);
     this.nowState.set(Date.now());
-    this.storage?.setItem(SESSION_STORAGE_KEY, JSON.stringify(safeSession));
+    // Keep bearer tokens in memory only. The persisted session retains enough
+    // metadata to renew through the HttpOnly refresh cookie after a reload.
+    this.storage?.setItem(SESSION_STORAGE_KEY, JSON.stringify({ ...safeSession, token: '' }));
     this.scheduleExpiryCheck();
   }
 
@@ -67,7 +69,9 @@ export class AuthSessionService {
 
     try {
       const session = JSON.parse(value) as AuthSession;
-      return { ...session, roles: session.roles ?? [] };
+      const sanitized = { ...session, token: '', refreshToken: undefined, roles: session.roles ?? [] };
+      this.storage?.setItem(SESSION_STORAGE_KEY, JSON.stringify(sanitized));
+      return sanitized;
     } catch {
       this.storage?.removeItem(SESSION_STORAGE_KEY);
       return null;
