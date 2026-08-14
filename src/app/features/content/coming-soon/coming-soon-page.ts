@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { interval } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 
-@Component({ selector: 'app-coming-soon-page', templateUrl: './coming-soon-page.html', changeDetection: ChangeDetectionStrategy.OnPush })
+@Component({ selector: 'app-coming-soon-page', imports: [TranslatePipe], templateUrl: './coming-soon-page.html', changeDetection: ChangeDetectionStrategy.OnPush })
 export class ComingSoonPage {
   private readonly destroyRef = inject(DestroyRef);
   private readonly launchAt = Date.now() + 30 * 24 * 60 * 60 * 1000;

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { Breadcrumb } from '../../../shared/ui/breadcrumb/breadcrumb';
 import { AccountStore } from '../data-access/account.store';
@@ -9,7 +10,7 @@ import { AccountSidebar } from './account-sidebar';
 
 @Component({
   selector: 'app-account-shell',
-  imports: [AccountSidebar, Breadcrumb, RouterOutlet],
+  imports: [AccountSidebar, Breadcrumb, RouterOutlet, TranslatePipe],
   templateUrl: './account-shell.html',
   styleUrl: './account-shell.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

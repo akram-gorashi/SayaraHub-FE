@@ -1,36 +1,37 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PageHero } from '../shared/page-hero';
+import { TranslatePipe } from '@ngx-translate/core';
 
 type LegalDocument = 'privacy' | 'terms';
 
 const LEGAL_CONTENT = {
   privacy: {
-    title: 'Privacy Policy',
+    title: 'content.legal.privacy.title',
     sections: [
-      { heading: 'Information We Collect', body: 'We collect account details, profile information, listing content, favorites, conversations, and technical information needed to operate and protect SayaraMatch.' },
-      { heading: 'How We Use Information', body: 'Information is used to provide marketplace features, connect buyers and sellers, personalize results, prevent abuse, communicate service updates, and improve reliability.' },
-      { heading: 'Sharing and Visibility', body: 'Listing information is public. Private account details and conversations are only shared as required to provide the service, meet legal obligations, or protect users.' },
-      { heading: 'Security and Retention', body: 'We apply access controls and security safeguards appropriate to the data we process. Information is retained only while needed for the service, security, and legal requirements.' },
-      { heading: 'Your Choices', body: 'You can update profile and notification settings, manage listings and favorites, or request account deletion from your dashboard settings.' },
+      { heading: 'content.legal.privacy.heading1', body: 'content.legal.privacy.body1' },
+      { heading: 'content.legal.privacy.heading2', body: 'content.legal.privacy.body2' },
+      { heading: 'content.legal.privacy.heading3', body: 'content.legal.privacy.body3' },
+      { heading: 'content.legal.privacy.heading4', body: 'content.legal.privacy.body4' },
+      { heading: 'content.legal.privacy.heading5', body: 'content.legal.privacy.body5' },
     ],
   },
   terms: {
-    title: 'Terms Of Service',
+    title: 'content.legal.terms.title',
     sections: [
-      { heading: 'Using SayaraMatch', body: 'You must provide accurate information, keep your account secure, and use the marketplace only for lawful vehicle-related activity.' },
-      { heading: 'Listings', body: 'Sellers are responsible for listing accuracy, ownership, condition, pricing, and images. SayaraMatch may review, reject, or remove misleading or unsafe content.' },
-      { heading: 'Buyer and Seller Transactions', body: 'SayaraMatch helps users discover vehicles and communicate. Buyers and sellers remain responsible for inspection, payment, transfer, and completing transactions safely.' },
-      { heading: 'Prohibited Conduct', body: 'Fraud, harassment, impersonation, scraping, malicious uploads, unlawful goods, and attempts to interfere with the platform are prohibited.' },
-      { heading: 'Account Suspension or Deletion', body: 'Accounts may be restricted for violations or security risks. You may delete your account from Settings, subject to retention required for security and legal compliance.' },
-      { heading: 'Service Availability', body: 'Features may change or occasionally be unavailable. SayaraMatch is provided without guarantees that every listing or user-submitted statement is accurate.' },
+      { heading: 'content.legal.terms.heading1', body: 'content.legal.terms.body1' },
+      { heading: 'content.legal.terms.heading2', body: 'content.legal.terms.body2' },
+      { heading: 'content.legal.terms.heading3', body: 'content.legal.terms.body3' },
+      { heading: 'content.legal.terms.heading4', body: 'content.legal.terms.body4' },
+      { heading: 'content.legal.terms.heading5', body: 'content.legal.terms.body5' },
+      { heading: 'content.legal.terms.heading6', body: 'content.legal.terms.body6' },
     ],
   },
 } as const;
 
 @Component({
   selector: 'app-legal-page',
-  imports: [PageHero],
+  imports: [PageHero, TranslatePipe],
   templateUrl: './legal-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

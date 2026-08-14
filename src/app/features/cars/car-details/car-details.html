@@ -137,7 +137,7 @@
                 <div class="car-single-widget">
                   <div class="car-single-review">
                     <div class="blog-comments mb-0">
-                      <h4>Reviews ({{ car.reviewCount }})</h4>
+                      <h4>{{ 'details.reviewsCount' | translate:{ count: car.reviewCount } }}</h4>
                       @if (store.reviews().length) {
                         <div class="blog-comments-wrapper">
                           @for (review of store.reviews(); track review.id) {
@@ -148,7 +148,7 @@
                                 <h5>{{ review.reviewerName }}</h5>
                                 <span><i class="far fa-clock"></i>{{ review.createdAt | smDate }}</span>
                                 <p>{{ review.comment }}</p>
-                                <div class="review-stars" [attr.aria-label]="review.rating + ' out of 5 stars'">
+                                <div class="review-stars" [attr.aria-label]="'seller.ratingOutOfFive' | translate:{ count: review.rating }">
                                   @for (star of [1, 2, 3, 4, 5]; track star) {
                                     <i [class]="star <= review.rating ? 'fas fa-star' : 'far fa-star'"></i>
                                   }
@@ -158,7 +158,7 @@
                           }
                         </div>
                       } @else {
-                        <p>No seller reviews are available yet.</p>
+                        <p>{{ 'seller.noReviews' | translate }}</p>
                       }
                     </div>
                   </div>

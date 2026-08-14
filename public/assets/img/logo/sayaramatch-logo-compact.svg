@@ -1,25 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 108" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 108" role="img" aria-labelledby="title desc">
   <title id="title">SayaraMatch</title>
   <desc id="desc">Compact SayaraMatch logo</desc>
   <defs>
-    <linearGradient id="sm-red" x1="12" y1="10" x2="88" y2="98" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#ff4050"/>
-      <stop offset="1" stop-color="#d90f24"/>
-    </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
-      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#d90f24" flood-opacity=".18"/>
-    </filter>
+    <linearGradient id="bg" x1="12" y1="8" x2="94" y2="102" gradientUnits="userSpaceOnUse"><stop stop-color="#17243d"/><stop offset="1" stop-color="#080d18"/></linearGradient>
+    <linearGradient id="coral" x1="20" y1="24" x2="68" y2="72" gradientUnits="userSpaceOnUse"><stop stop-color="#ff5261"/><stop offset="1" stop-color="#f51e30"/></linearGradient>
   </defs>
-  <g transform="translate(6 10)">
-    <rect width="88" height="88" rx="24" fill="url(#sm-red)" filter="url(#shadow)"/>
-    <path d="M18 55c6-15 14-24 26-24s20 9 26 24" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-    <path d="M24 54h40c4 0 6 2 7 6l2 6H15l2-6c1-4 3-6 7-6Z" fill="#fff"/>
-    <path d="M27 52l6-9h23l6 9" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
-    <circle cx="29" cy="66" r="4" fill="#d90f24"/>
-    <circle cx="59" cy="66" r="4" fill="#d90f24"/>
-    <path d="M44 14c-8 0-14 6-14 14 0 11 14 23 14 23s14-12 14-23c0-8-6-14-14-14Z" fill="#111827"/>
-    <circle cx="44" cy="28" r="5" fill="#fff"/>
+  <g transform="translate(4 4)">
+    <rect width="100" height="100" rx="26" fill="url(#bg)"/>
+    <path d="M81 24H50C32 24 19 34 19 47c0 12 10 19 25 19h10" fill="none" stroke="url(#coral)" stroke-width="14" stroke-linecap="round"/>
+    <path d="M22 80h31c18 0 31-10 31-23 0-12-10-19-25-19H49" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round"/>
   </g>
-  <text x="110" y="48" font-family="Inter, Montserrat, Arial, sans-serif" font-size="38" font-weight="900" letter-spacing="-1.8" fill="#101828">SAYARA</text>
-  <text x="110" y="84" font-family="Inter, Montserrat, Arial, sans-serif" font-size="38" font-weight="900" letter-spacing="-1.8" fill="#f51e30">MATCH</text>
+  <text x="122" y="66" font-family="Inter, Arial, sans-serif" font-size="43" font-weight="800" letter-spacing="-2.2" fill="#101828">Sayara</text>
+  <text x="269" y="66" font-family="Inter, Arial, sans-serif" font-size="43" font-weight="800" letter-spacing="-2.2" fill="#f51e30">Match</text>
 </svg>

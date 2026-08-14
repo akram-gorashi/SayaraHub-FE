@@ -8,17 +8,17 @@
                         <div class="row align-items-center">
                             <div class="col-md-12 col-lg-6">
                                 <div class="hero-content">
-                                    <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">Saudi Arabia's Car Marketplace</h6>
+                                    <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">{{ 'home.hero.marketplace' | translate }}</h6>
                                     <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
-                                        Find Your Next <span>Car</span> With Confidence
+                                        {{ 'home.hero.title1' | translate }}
                                     </h1>
                                     <p data-animation="fadeInLeft" data-delay=".75s">
-                                        Compare real cars, contact sellers directly, and find the right match for your budget.
+                                        {{ 'home.hero.description1' | translate }}
                                     </p>
                                     <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
-                                        <a href="/cars" class="theme-btn">Browse Cars<i
+                                        <a href="/cars" class="theme-btn">{{ 'footer.browseCars' | translate }}<i
                                                 class="fas fa-arrow-right-long"></i></a>
-                                        <a href="/account/add-listing" class="theme-btn theme-btn2">Sell a Car<i
+                                        <a href="/account/add-listing" class="theme-btn theme-btn2">{{ 'nav.sellCar' | translate }}<i
                                                 class="fas fa-arrow-right-long"></i></a>
                                     </div>
                                 </div>
@@ -34,17 +34,17 @@
                         <div class="row align-items-center">
                             <div class="col-md-12 col-lg-6">
                                 <div class="hero-content">
-                                    <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">Simple, Clear, Trusted</h6>
+                                    <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">{{ 'home.hero.trusted' | translate }}</h6>
                                     <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
-                                        Discover Cars That <span>Fit</span> Your Life
+                                        {{ 'home.hero.title2' | translate }}
                                     </h1>
                                     <p data-animation="fadeInLeft" data-delay=".75s">
-                                        Refine by make, price, model year, fuel type, and the features that matter to you.
+                                        {{ 'home.hero.description2' | translate }}
                                     </p>
                                     <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
-                                        <a href="/cars" class="theme-btn">Browse Cars<i
+                                        <a href="/cars" class="theme-btn">{{ 'footer.browseCars' | translate }}<i
                                                 class="fas fa-arrow-right-long"></i></a>
-                                        <a href="/account/add-listing" class="theme-btn theme-btn2">Sell a Car<i
+                                        <a href="/account/add-listing" class="theme-btn theme-btn2">{{ 'nav.sellCar' | translate }}<i
                                                 class="fas fa-arrow-right-long"></i></a>
                                     </div>
                                 </div>
@@ -60,17 +60,17 @@
                         <div class="row align-items-center">
                             <div class="col-md-12 col-lg-6">
                                 <div class="hero-content">
-                                    <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">Sell Smarter With SayaraMatch</h6>
+                                    <h6 class="hero-sub-title" data-animation="fadeInUp" data-delay=".25s">{{ 'home.hero.sellSmarter' | translate }}</h6>
                                     <h1 class="hero-title" data-animation="fadeInRight" data-delay=".50s">
-                                        Reach Serious <span>Car Buyers</span> Faster
+                                        {{ 'home.hero.title3' | translate }}
                                     </h1>
                                     <p data-animation="fadeInLeft" data-delay=".75s">
-                                        Create a clear car advert, manage inquiries, and follow its progress from one place.
+                                        {{ 'home.hero.description3' | translate }}
                                     </p>
                                     <div class="hero-btn" data-animation="fadeInUp" data-delay="1s">
-                                        <a href="/account/add-listing" class="theme-btn">Sell a Car<i
+                                        <a href="/account/add-listing" class="theme-btn">{{ 'nav.sellCar' | translate }}<i
                                                 class="fas fa-arrow-right-long"></i></a>
-                                        <a href="/cars" class="theme-btn theme-btn2">Browse Cars<i
+                                        <a href="/cars" class="theme-btn theme-btn2">{{ 'footer.browseCars' | translate }}<i
                                                 class="fas fa-arrow-right-long"></i></a>
                                     </div>
                                 </div>
@@ -91,28 +91,28 @@
             <div class="container">
                 <button class="mobile-home-search-trigger" type="button" aria-controls="landing-search-panel"
                     [attr.aria-expanded]="mobileSearchOpen()" (click)="openMobileSearch()">
-                    <span><i class="far fa-search" aria-hidden="true"></i> Search make, model, or city</span>
+                    <span><i class="far fa-search" aria-hidden="true"></i> {{ 'home.searchPrompt' | translate }}</span>
                     <i class="far fa-sliders" aria-hidden="true"></i>
                 </button>
                 @if (mobileSearchOpen()) {
-                    <button class="mobile-search-backdrop" type="button" aria-label="Close search"
+                    <button class="mobile-search-backdrop" type="button" [attr.aria-label]="'cars.closeFilters' | translate"
                         (click)="closeMobileSearch()"></button>
                 }
                 <div id="landing-search-panel" class="find-car-form" [class.mobile-open]="mobileSearchOpen()"
                     [attr.role]="mobileSearchOpen() ? 'dialog' : null"
                     [attr.aria-modal]="mobileSearchOpen() ? 'true' : null" aria-labelledby="mobile-search-title">
                     <div class="mobile-search-header">
-                        <div><span>Find your next car</span><h2 id="mobile-search-title">Search filters</h2></div>
-                        <button type="button" aria-label="Close search" (click)="closeMobileSearch()">
+                        <div><span>{{ 'home.findNextCar' | translate }}</span><h2 id="mobile-search-title">{{ 'home.searchFilters' | translate }}</h2></div>
+                        <button type="button" [attr.aria-label]="'cars.closeFilters' | translate" (click)="closeMobileSearch()">
                             <i class="far fa-times" aria-hidden="true"></i>
                         </button>
                     </div>
-                    <h4 class="find-car-title">Let's Find Your Perfect Car</h4>
+                    <h4 class="find-car-title">{{ 'home.findPerfectCar' | translate }}</h4>
                     <form (submit)="submitSearch($event)">
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label for="landing-search">Search</label>
+                                    <label for="landing-search">{{ 'cars.search' | translate }}</label>
                                     <input id="landing-search" class="form-control" type="search"
                                         [placeholder]="'cars.homeSearchPlaceholder' | translate"
                                         [value]="store.filters().search"
@@ -121,24 +121,27 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label for="landing-brand">Brand</label>
+                                    <label for="landing-brand">{{ 'listing.brand' | translate }}</label>
                                     <select id="landing-brand" class="form-select"
                                         [value]="store.filters().brandId ?? ''"
                                         (change)="updateSelectFilter('brandId', $event)">
-                                        <option value="">All brands</option>
-                                        @for (brand of store.brands(); track brand.id) {
+                                        <option value="">{{ 'home.allBrands' | translate }}</option>
+                                        @for (brand of visibleFilterBrands(); track brand.id) {
                                             <option [value]="brand.id">{{ brand.name | smLocalizedText:brand.nameAr }}</option>
+                                        }
+                                        @if (filterBrandDisplayLimit() < store.brands().length) {
+                                            <option value="__load_more_brands__">{{ 'common.loadMore' | translate }}</option>
                                         }
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label for="landing-transmission">Transmission</label>
+                                    <label for="landing-transmission">{{ 'listing.transmission' | translate }}</label>
                                     <select id="landing-transmission" class="form-select"
                                         [value]="store.filters().transmissionId ?? ''"
                                         (change)="updateSelectFilter('transmissionId', $event)">
-                                        <option value="">All transmissions</option>
+                                        <option value="">{{ 'home.allTransmissions' | translate }}</option>
                                         @for (transmission of store.transmissions(); track transmission.id) {
                                             <option [value]="transmission.id">{{ transmission.name | smLocalizedText:transmission.nameAr }}</option>
                                         }
@@ -147,11 +150,11 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label for="landing-fuel">Fuel type</label>
+                                    <label for="landing-fuel">{{ 'listing.fuelType' | translate }}</label>
                                     <select id="landing-fuel" class="form-select"
                                         [value]="store.filters().fuelTypeId ?? ''"
                                         (change)="updateSelectFilter('fuelTypeId', $event)">
-                                        <option value="">All fuel types</option>
+                                        <option value="">{{ 'home.allFuelTypes' | translate }}</option>
                                         @for (fuelType of store.fuelTypes(); track fuelType.id) {
                                             <option [value]="fuelType.id">{{ fuelType.name | smLocalizedText:fuelType.nameAr }}</option>
                                         }
@@ -160,11 +163,11 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label for="landing-min-year">Minimum year</label>
+                                    <label for="landing-min-year">{{ 'home.minimumYear' | translate }}</label>
                                     <select id="landing-min-year" class="form-select"
                                         [value]="store.filters().minYear ?? ''"
                                         (change)="updateYearFilter('minYear', $event)">
-                                        <option value="">Any year</option>
+                                        <option value="">{{ 'home.anyYear' | translate }}</option>
                                         @for (year of store.years(); track year) {
                                             <option [value]="year">{{ year }}</option>
                                         }
@@ -173,11 +176,11 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label for="landing-max-year">Maximum year</label>
+                                    <label for="landing-max-year">{{ 'home.maximumYear' | translate }}</label>
                                     <select id="landing-max-year" class="form-select"
                                         [value]="store.filters().maxYear ?? ''"
                                         (change)="updateYearFilter('maxYear', $event)">
-                                        <option value="">Any year</option>
+                                        <option value="">{{ 'home.anyYear' | translate }}</option>
                                         @for (year of store.years(); track year) {
                                             <option [value]="year">{{ year }}</option>
                                         }
@@ -186,7 +189,7 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label for="landing-city">City</label>
+                                    <label for="landing-city">{{ 'listing.city' | translate }}</label>
                                     <input id="landing-city" class="form-control" type="text"
                                         [placeholder]="'cars.anyCity' | translate"
                                         [value]="store.filters().city"
@@ -194,9 +197,8 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 align-self-end d-flex gap-2 find-car-actions">
-                                <button class="theme-btn" type="submit"><span class="far fa-search"></span> Find Your
-                                    Car</button>
-                                <button class="theme-btn theme-btn2" type="button" (click)="store.reset()">Reset</button>
+                                <button class="theme-btn" type="submit"><span class="far fa-search"></span> {{ 'home.findCar' | translate }}</button>
+                                <button class="theme-btn theme-btn2" type="button" (click)="store.reset()">{{ 'cars.reset' | translate }}</button>
                             </div>
                         </div>
                     </form>
@@ -219,7 +221,7 @@
                                 <div class="about-experience-icon">
                                     <i class="flaticon-car"></i>
                                 </div>
-                                <b>Built For Car <br> Buyers &amp; Sellers</b>
+                                <b>{{ 'home.about.builtFor' | translate }}<br>{{ 'home.about.buyersSellers' | translate }}</b>
                             </div>
                         </div>
                     </div>
@@ -227,29 +229,29 @@
                         <div class="about-right wow fadeInRight" data-wow-delay=".25s">
                             <div class="site-heading mb-3">
                                 <span class="site-title-tagline justify-content-start">
-                                    <i class="flaticon-drive"></i> About Us
+                                    <i class="flaticon-drive"></i> {{ 'content.about.title' | translate }}
                                 </span>
                                 <h2 class="site-title">
-                                    A Better Way To <span>Buy And Sell</span> Cars.
+                                    {{ 'content.about.heading' | translate }}
                                 </h2>
                             </div>
                             <p class="about-text">
-                                SayaraMatch brings clear car information, focused search tools, and direct seller communication into one easy marketplace.
+                                {{ 'home.about.description' | translate }}
                             </p>
                             <div class="about-list-wrapper">
                                 <ul class="about-list list-unstyled">
                                     <li>
-                                        Search and compare cars without unnecessary clutter.
+                                        {{ 'home.about.point1' | translate }}
                                     </li>
                                     <li>
-                                        Save favorites and manage conversations in your account.
+                                        {{ 'home.about.point2' | translate }}
                                     </li>
                                     <li>
-                                        Sell with clear photos, specifications, and pricing.
+                                        {{ 'home.about.point3' | translate }}
                                     </li>
                                 </ul>
                             </div>
-                            <a href="/about" class="theme-btn mt-4">Discover More<i
+                            <a href="/about" class="theme-btn mt-4">{{ 'home.about.discoverMore' | translate }}<i
                                     class="fas fa-arrow-right-long"></i></a>
                         </div>
                     </div>
@@ -270,7 +272,7 @@
                             </div>
                             <div>
                                 <span class="counter" data-count="+" data-to="500" data-speed="3000">500</span>
-                                <h6 class="title">+ Available Cars </h6>
+                                <h6 class="title">+ {{ 'content.about.availableCars' | translate }}</h6>
                             </div>
                         </div>
                     </div>
@@ -281,7 +283,7 @@
                             </div>
                             <div>
                                 <span class="counter" data-count="+" data-to="900" data-speed="3000">900</span>
-                                <h6 class="title">+ Happy Clients</h6>
+                                <h6 class="title">+ {{ 'content.about.happyCustomers' | translate }}</h6>
                             </div>
                         </div>
                     </div>
@@ -292,7 +294,7 @@
                             </div>
                             <div>
                                 <span class="counter" data-count="+" data-to="1500" data-speed="3000">1500</span>
-                                <h6 class="title">+ Team Workers</h6>
+                                <h6 class="title">+ {{ 'home.teamMembers' | translate }}</h6>
                             </div>
                         </div>
                     </div>
@@ -303,7 +305,7 @@
                             </div>
                             <div>
                                 <span class="counter" data-count="+" data-to="30" data-speed="3000">30</span>
-                                <h6 class="title">+ Years Of Experience</h6>
+                                <h6 class="title">+ {{ 'content.about.yearsExperience' | translate }}</h6>
                             </div>
                         </div>
                     </div>
@@ -319,11 +321,11 @@
                 <div class="row">
                     <div class="col-lg-6 mx-auto">
                         <div class="site-heading text-center">
-                            <span class="site-title-tagline"><i class="flaticon-drive"></i> New Arrivals</span>
-                            <h2 id="latest-cars-title" class="site-title">Let's Check Latest <span>Cars</span></h2>
+                            <span class="site-title-tagline"><i class="flaticon-drive"></i> {{ 'home.newArrivals' | translate }}</span>
+                            <h2 id="latest-cars-title" class="site-title">{{ 'home.latestCars' | translate }}</h2>
                             <div class="heading-divider"></div>
                             @if (store.totalCount() > 0) {
-                                <p>{{ store.totalCount() | number }} cars available</p>
+                                <p>{{ 'home.carsAvailable' | translate:{ count: (store.totalCount() | number) } }}</p>
                             }
                         </div>
                     </div>
@@ -332,14 +334,14 @@
                 @if (store.error(); as errorMessage) {
                     <div class="alert alert-danger landing-alert" role="alert">
                         <span>{{ errorMessage }}</span>
-                        <button class="btn btn-sm btn-outline-danger" type="button" (click)="store.search()">Try again</button>
+                        <button class="btn btn-sm btn-outline-danger" type="button" (click)="store.search()">{{ 'common.retry' | translate }}</button>
                     </div>
                 }
 
                 @if (store.loading() && store.cars().length === 0) {
                     <div class="landing-loading" role="status">
                         <span class="spinner-border text-primary" aria-hidden="true"></span>
-                        <span>Loading the latest cars...</span>
+                        <span>{{ 'home.loadingLatestCars' | translate }}</span>
                     </div>
                 } @else {
                     <div class="row">
@@ -351,9 +353,9 @@
                             <div class="col-12">
                                 <div class="landing-empty">
                                     <i class="far fa-car" aria-hidden="true"></i>
-                                    <h3>No cars match these filters</h3>
-                                    <p>Try changing or clearing your search criteria.</p>
-                                    <button class="theme-btn" type="button" (click)="store.reset()">Clear filters</button>
+                                    <h3>{{ 'home.noCarsMatch' | translate }}</h3>
+                                    <p>{{ 'home.noCarsHint' | translate }}</p>
+                                    <button class="theme-btn" type="button" (click)="store.reset()">{{ 'cars.clearFilters' | translate }}</button>
                                 </div>
                             </div>
                         }
@@ -370,8 +372,8 @@
                 <div class="row">
                     <div class="col-lg-6 mx-auto">
                         <div class="site-heading text-center">
-                            <span class="site-title-tagline"><i class="flaticon-drive"></i> Car Category</span>
-                            <h2 class="site-title">Car By Body <span>Types</span></h2>
+                            <span class="site-title-tagline"><i class="flaticon-drive"></i> {{ 'home.carCategory' | translate }}</span>
+                            <h2 class="site-title">{{ 'home.carByBodyType' | translate }}</h2>
                             <div class="heading-divider"></div>
                         </div>
                     </div>
@@ -382,7 +384,7 @@
                             <div class="category-img">
                                 <img src="assets/img/category/01.png" alt="" loading="lazy" decoding="async">
                             </div>
-                            <h5>Sedan</h5>
+                            <h5>{{ 'home.bodyTypes.sedan' | translate }}</h5>
                         </a>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
@@ -390,7 +392,7 @@
                             <div class="category-img">
                                 <img src="assets/img/category/02.png" alt="" loading="lazy" decoding="async">
                             </div>
-                            <h5>Compact</h5>
+                            <h5>{{ 'home.bodyTypes.compact' | translate }}</h5>
                         </a>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
@@ -398,7 +400,7 @@
                             <div class="category-img">
                                 <img src="assets/img/category/03.png" alt="" loading="lazy" decoding="async">
                             </div>
-                            <h5>Convertible</h5>
+                            <h5>{{ 'home.bodyTypes.convertible' | translate }}</h5>
                         </a>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
@@ -406,7 +408,7 @@
                             <div class="category-img">
                                 <img src="assets/img/category/04.png" alt="" loading="lazy" decoding="async">
                             </div>
-                            <h5>SUV</h5>
+                            <h5>{{ 'home.bodyTypes.suv' | translate }}</h5>
                         </a>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
@@ -414,7 +416,7 @@
                             <div class="category-img">
                                 <img src="assets/img/category/05.png" alt="" loading="lazy" decoding="async">
                             </div>
-                            <h5>Crossover</h5>
+                            <h5>{{ 'home.bodyTypes.crossover' | translate }}</h5>
                         </a>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
@@ -422,7 +424,7 @@
                             <div class="category-img">
                                 <img src="assets/img/category/06.png" alt="" loading="lazy" decoding="async">
                             </div>
-                            <h5>Wagon</h5>
+                            <h5>{{ 'home.bodyTypes.wagon' | translate }}</h5>
                         </a>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
@@ -430,7 +432,7 @@
                             <div class="category-img">
                                 <img src="assets/img/category/07.png" alt="" loading="lazy" decoding="async">
                             </div>
-                            <h5>Sports</h5>
+                            <h5>{{ 'home.bodyTypes.sports' | translate }}</h5>
                         </a>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
@@ -438,7 +440,7 @@
                             <div class="category-img">
                                 <img src="assets/img/category/08.png" alt="" loading="lazy" decoding="async">
                             </div>
-                            <h5>Pickup</h5>
+                            <h5>{{ 'home.bodyTypes.pickup' | translate }}</h5>
                         </a>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
@@ -446,7 +448,7 @@
                             <div class="category-img">
                                 <img src="assets/img/category/09.png" alt="" loading="lazy" decoding="async">
                             </div>
-                            <h5>Family MPV</h5>
+                            <h5>{{ 'home.bodyTypes.mpv' | translate }}</h5>
                         </a>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
@@ -454,7 +456,7 @@
                             <div class="category-img">
                                 <img src="assets/img/category/10.png" alt="" loading="lazy" decoding="async">
                             </div>
-                            <h5>Coupe</h5>
+                            <h5>{{ 'home.bodyTypes.coupe' | translate }}</h5>
                         </a>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
@@ -462,7 +464,7 @@
                             <div class="category-img">
                                 <img src="assets/img/category/11.png" alt="" loading="lazy" decoding="async">
                             </div>
-                            <h5>Electric</h5>
+                            <h5>{{ 'home.bodyTypes.electric' | translate }}</h5>
                         </a>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
@@ -470,7 +472,7 @@
                             <div class="category-img">
                                 <img src="assets/img/category/12.png" alt="" loading="lazy" decoding="async">
                             </div>
-                            <h5>Luxury</h5>
+                            <h5>{{ 'home.bodyTypes.luxury' | translate }}</h5>
                         </a>
                     </div>
                 </div>
@@ -504,8 +506,8 @@
                 <div class="row">
                     <div class="col-lg-6 mx-auto">
                         <div class="site-heading text-center">
-                            <span class="site-title-tagline"><i class="flaticon-drive"></i> Car Dealers</span>
-                            <h2 class="site-title">Best Dealers In <span>Your City</span></h2>
+                            <span class="site-title-tagline"><i class="flaticon-drive"></i> {{ 'home.carDealers' | translate }}</span>
+                            <h2 class="site-title">{{ 'home.bestDealers' | translate }}</h2>
                             <div class="heading-divider"></div>
                         </div>
                     </div>
@@ -645,11 +647,11 @@
                         <div class="choose-content">
                             <div class="site-heading wow fadeInDown" data-wow-delay=".25s">
                                 <span class="site-title-tagline text-white justify-content-start">
-                                    <i class="flaticon-drive"></i> Why Choose Us
+                                     <i class="flaticon-drive"></i> {{ 'home.whyChooseUs' | translate }}
                                 </span>
-                                <h2 class="site-title text-white mb-10">We are dedicated <span>to provide</span> quality service</h2>
+                                <h2 class="site-title text-white mb-10">{{ 'home.qualityHeading' | translate }}</h2>
                                 <p class="text-white">
-                                    There are many variations of passages available but the majority have suffered alteration in some form going to use a passage by injected humour randomised words which don't look even slightly believable. 
+                                    {{ 'home.qualityDescription' | translate }}
                                 </p>
                             </div>
                             <div class="choose-img wow fadeInUp" data-wow-delay=".25s">
@@ -667,9 +669,8 @@
                                             <i class="flaticon-car"></i>
                                         </div>
                                         <div class="choose-item-info">
-                                            <h3>Best Quality Cars</h3>
-                                            <p>There are many variations of the passages available but the
-                                                majo have suffered fact that reader will be dist alteration.</p>
+                                            <h3>{{ 'home.qualityCars' | translate }}</h3>
+                                            <p>{{ 'home.qualityCarsDescription' | translate }}</p>
                                         </div>
                                     </div>
                                     <div class="choose-item mb-lg-0">
@@ -678,9 +679,8 @@
                                             <i class="flaticon-drive-thru"></i>
                                         </div>
                                         <div class="choose-item-info">
-                                            <h3>Popular Brands</h3>
-                                            <p>There are many variations of the passages available but the
-                                                majo have suffered fact that reader will be dist alteration.</p>
+                                            <h3>{{ 'home.popularBrands' | translate }}</h3>
+                                            <p>{{ 'home.popularBrandsDescription' | translate }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -691,9 +691,8 @@
                                             <i class="flaticon-chauffeur"></i>
                                         </div>
                                         <div class="choose-item-info">
-                                            <h3>Certified Mechanics</h3>
-                                            <p>There are many variations of the passages available but the
-                                                majo have suffered fact that reader will be dist alteration.</p>
+                                            <h3>{{ 'home.verifiedListings' | translate }}</h3>
+                                            <p>{{ 'home.verifiedListingsDescription' | translate }}</p>
                                         </div>
                                     </div>
                                     <div class="choose-item mb-lg-0">
@@ -702,9 +701,8 @@
                                             <i class="flaticon-online-payment"></i>
                                         </div>
                                         <div class="choose-item-info">
-                                            <h3>Reasonable Price</h3>
-                                            <p>There are many variations of the passages available but the
-                                                majo have suffered fact that reader will be dist alteration.</p>
+                                            <h3>{{ 'home.clearPrices' | translate }}</h3>
+                                            <p>{{ 'home.clearPricesDescription' | translate }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -723,14 +721,14 @@
                 <div class="row">
                     <div class="col-lg-6 mx-auto">
                         <div class="site-heading text-center">
-                            <span class="site-title-tagline"><i class="flaticon-drive"></i> Popular Brands</span>
-                            <h2 id="popular-brands-title" class="site-title">Browse Our <span>Brands</span></h2>
+                            <span class="site-title-tagline"><i class="flaticon-drive"></i> {{ 'home.popularBrands' | translate }}</span>
+                            <h2 id="popular-brands-title" class="site-title">{{ 'home.browseBrands' | translate }}</h2>
                             <div class="heading-divider"></div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    @for (brand of store.brands(); track brand.id) {
+                    @for (brand of visibleBrands(); track brand.id) {
                         <div class="col-6 col-md-3 col-lg-2">
                             <button
                                 type="button"
@@ -744,11 +742,22 @@
                         @if (store.loading()) {
                             <div class="col-12 landing-loading" role="status">
                                 <span class="spinner-border text-primary" aria-hidden="true"></span>
-                                <span>Loading brands...</span>
+                                <span>{{ 'home.loadingBrands' | translate }}</span>
                             </div>
                         }
                     }
                 </div>
+                @if (brandDisplayLimit() < store.brands().length) {
+                    <div class="brand-load-more">
+                        <button
+                            type="button"
+                            class="theme-btn"
+                            (click)="loadMoreBrands()">
+                            {{ 'common.loadMore' | translate }}
+                            <i class="far fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                }
             </div>
         </section>
         <!-- car brand end-->
@@ -760,8 +769,8 @@
                 <div class="row">
                     <div class="col-lg-6 mx-auto">
                         <div class="site-heading text-center">
-                            <span class="site-title-tagline"><i class="flaticon-drive"></i> Testimonials</span>
-                            <h2 class="site-title">What Our Client <span>Say's</span></h2>
+                            <span class="site-title-tagline"><i class="flaticon-drive"></i> {{ 'home.testimonials' | translate }}</span>
+                            <h2 class="site-title">{{ 'home.clientFeedback' | translate }}</h2>
                             <div class="heading-divider"></div>
                         </div>
                     </div>
@@ -774,14 +783,13 @@
                             </div>
                             <div class="testimonial-author-info">
                                 <h4>Sylvia H Green</h4>
-                                <p>Customer</p>
+                                <p>{{ 'home.customer' | translate }}</p>
                             </div>
                         </div>
                         <div class="testimonial-quote">
                             <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
                             <p>
-                                There are many variations of passages available but the majority have
-                                suffered to the alteration in some injected.
+                                {{ 'home.testimonialText' | translate }}
                             </p>
                         </div>
                         <div class="testimonial-rate">
@@ -799,14 +807,13 @@
                             </div>
                             <div class="testimonial-author-info">
                                 <h4>Gordo Novak</h4>
-                                <p>Customer</p>
+                                <p>{{ 'home.customer' | translate }}</p>
                             </div>
                         </div>
                         <div class="testimonial-quote">
                             <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
                             <p>
-                                There are many variations of passages available but the majority have
-                                suffered to the alteration in some injected.
+                                {{ 'home.testimonialText' | translate }}
                             </p>
                         </div>
                         <div class="testimonial-rate">
@@ -824,14 +831,13 @@
                             </div>
                             <div class="testimonial-author-info">
                                 <h4>Reid E Butt</h4>
-                                <p>Customer</p>
+                                <p>{{ 'home.customer' | translate }}</p>
                             </div>
                         </div>
                         <div class="testimonial-quote">
                             <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
                             <p>
-                                There are many variations of passages available but the majority have
-                                suffered to the alteration in some injected.
+                                {{ 'home.testimonialText' | translate }}
                             </p>
                         </div>
                         <div class="testimonial-rate">
@@ -849,14 +855,13 @@
                             </div>
                             <div class="testimonial-author-info">
                                 <h4>Parker Jimenez</h4>
-                                <p>Customer</p>
+                                <p>{{ 'home.customer' | translate }}</p>
                             </div>
                         </div>
                         <div class="testimonial-quote">
                             <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
                             <p>
-                                There are many variations of passages available but the majority have
-                                suffered to the alteration in some injected.
+                                {{ 'home.testimonialText' | translate }}
                             </p>
                         </div>
                         <div class="testimonial-rate">
@@ -874,14 +879,13 @@
                             </div>
                             <div class="testimonial-author-info">
                                 <h4>Heruli Nez</h4>
-                                <p>Customer</p>
+                                <p>{{ 'home.customer' | translate }}</p>
                             </div>
                         </div>
                         <div class="testimonial-quote">
                             <span class="testimonial-quote-icon"><i class="flaticon-quote"></i></span>
                             <p>
-                                There are many variations of passages available but the majority have
-                                suffered to the alteration in some injected.
+                                {{ 'home.testimonialText' | translate }}
                             </p>
                         </div>
                         <div class="testimonial-rate">
@@ -904,8 +908,8 @@
                 <div class="row">
                     <div class="col-lg-6 mx-auto">
                         <div class="site-heading text-center">
-                            <span class="site-title-tagline"><i class="flaticon-drive"></i> Our Blog</span>
-                            <h2 class="site-title">Latest News & <span>Blog</span></h2>
+                            <span class="site-title-tagline"><i class="flaticon-drive"></i> {{ 'content.blog.ourBlog' | translate }}</span>
+                            <h2 class="site-title">{{ 'content.blog.heading' | translate }}</h2>
                             <div class="heading-divider"></div>
                         </div>
                     </div>
@@ -919,14 +923,14 @@
                             <div class="blog-item-info">
                                 <div class="blog-item-meta">
                                     <ul>
-                                        <li><a href="#"><i class="far fa-user-circle"></i> By Alicia Davis</a></li>
-                                        <li><a href="#"><i class="far fa-calendar-alt"></i> January 29, 2023</a></li>
+                                        <li><a href="#"><i class="far fa-user-circle"></i> {{ 'content.blog.byAuthor' | translate }}</a></li>
+                                        <li><a href="#"><i class="far fa-calendar-alt"></i> {{ 'content.blog.publishedDate' | translate }}</a></li>
                                     </ul>
                                 </div>
                                 <h4 class="blog-title">
-                                    <a href="#">There are many variations of passage available.</a>
+                                    <a href="#">{{ 'content.blog.post1' | translate }}</a>
                                 </h4>
-                                <a class="theme-btn" href="#">Read More<i class="fas fa-arrow-right-long"></i></a>
+                                <a class="theme-btn" href="#">{{ 'content.blog.readMore' | translate }}<i class="fas fa-arrow-right-long"></i></a>
                             </div>
                         </div>
                     </div>
@@ -938,14 +942,14 @@
                             <div class="blog-item-info">
                                 <div class="blog-item-meta">
                                     <ul>
-                                        <li><a href="#"><i class="far fa-user-circle"></i> By Alicia Davis</a></li>
-                                        <li><a href="#"><i class="far fa-calendar-alt"></i> January 29, 2023</a></li>
+                                        <li><a href="#"><i class="far fa-user-circle"></i> {{ 'content.blog.byAuthor' | translate }}</a></li>
+                                        <li><a href="#"><i class="far fa-calendar-alt"></i> {{ 'content.blog.publishedDate' | translate }}</a></li>
                                     </ul>
                                 </div>
                                 <h4 class="blog-title">
-                                    <a href="#">There are many variations of passage available.</a>
+                                    <a href="#">{{ 'content.blog.post2' | translate }}</a>
                                 </h4>
-                                <a class="theme-btn" href="#">Read More<i class="fas fa-arrow-right-long"></i></a>
+                                <a class="theme-btn" href="#">{{ 'content.blog.readMore' | translate }}<i class="fas fa-arrow-right-long"></i></a>
                             </div>
                         </div>
                     </div>
@@ -957,14 +961,14 @@
                             <div class="blog-item-info">
                                 <div class="blog-item-meta">
                                     <ul>
-                                        <li><a href="#"><i class="far fa-user-circle"></i> By Alicia Davis</a></li>
-                                        <li><a href="#"><i class="far fa-calendar-alt"></i> January 29, 2023</a></li>
+                                        <li><a href="#"><i class="far fa-user-circle"></i> {{ 'content.blog.byAuthor' | translate }}</a></li>
+                                        <li><a href="#"><i class="far fa-calendar-alt"></i> {{ 'content.blog.publishedDate' | translate }}</a></li>
                                     </ul>
                                 </div>
                                 <h4 class="blog-title">
-                                    <a href="#">There are many variations of passage available.</a>
+                                    <a href="#">{{ 'content.blog.post3' | translate }}</a>
                                 </h4>
-                                <a class="theme-btn" href="#">Read More<i class="fas fa-arrow-right-long"></i></a>
+                                <a class="theme-btn" href="#">{{ 'content.blog.readMore' | translate }}<i class="fas fa-arrow-right-long"></i></a>
                             </div>
                         </div>
                     </div>
@@ -983,25 +987,25 @@
                             <div class="download-content">
                                 <div class="site-heading mb-4">
                                     <span class="site-title-tagline justify-content-start">
-                                        <i class="flaticon-drive"></i> Get Our App
+                                        <i class="flaticon-drive"></i> {{ 'home.getOurApp' | translate }}
                                     </span>
-                                    <h2 class="site-title mb-10">Take <span>SayaraMatch</span> Wherever You Go</h2>
+                                    <h2 class="site-title mb-10">{{ 'home.appHeading' | translate }}</h2>
                                     <p>
-                                        Browse and manage your cars from any phone with our fast, mobile-friendly experience.
+                                        {{ 'home.appDescription' | translate }}
                                     </p>
                                 </div>
                                 <div class="download-btn">
                                     <a href="#">
                                         <i class="fab fa-google-play"></i>
                                         <div class="download-btn-content">
-                                            <span>Get It On</span>
+                                            <span>{{ 'home.getItOn' | translate }}</span>
                                             <strong>Google Play</strong>
                                         </div>
                                     </a>
                                     <a href="#">
                                         <i class="fab fa-app-store"></i>
                                         <div class="download-btn-content">
-                                            <span>Get It On</span>
+                                            <span>{{ 'home.getItOn' | translate }}</span>
                                             <strong>App Store</strong>
                                         </div>
                                     </a>

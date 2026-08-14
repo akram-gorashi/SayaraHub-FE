@@ -1,5 +1,5 @@
 <main class="main">
-  <app-breadcrumb title="Cars for Sale" />
+  <app-breadcrumb [title]="'account.carsForSale' | translate" />
 
   <section
     class="car-area bg py-120"
@@ -21,7 +21,7 @@
         </button>
       </div>
       @if (store.activeFilterLabels().length) {
-        <div class="mobile-filter-chips" aria-label="Active filters">
+            <div class="mobile-filter-chips" [attr.aria-label]="'cars.activeFilters' | translate">
           @for (label of store.activeFilterLabels(); track $index) { <span>{{ label }}</span> }
           <button type="button" (click)="store.resetFilters()">{{ 'common.clear' | translate }}</button>
         </div>
@@ -64,7 +64,7 @@
             <div class="car-widget">
               <h4 class="car-widget-title">{{ 'cars.brands' | translate }}</h4>
               <ul>
-                @for (brand of store.brands(); track brand.id) {
+                @for (brand of visibleBrands(); track brand.id) {
                   <li>
                     <div class="form-check">
                       <input
@@ -78,6 +78,15 @@
                   </li>
                 }
               </ul>
+              @if (brandDisplayLimit() < store.brands().length) {
+                <button
+                  type="button"
+                  class="brand-filter-toggle"
+                  (click)="loadMoreBrands()">
+                  {{ 'common.loadMore' | translate }}
+                  <i class="far fa-chevron-down" aria-hidden="true"></i>
+                </button>
+              }
             </div>
 
             <div class="car-widget">

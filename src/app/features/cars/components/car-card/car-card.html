@@ -10,7 +10,7 @@
       decoding="async"
       (load)="markImageLoaded()"
       (error)="useFallbackImage($event)">
-    @if (!car().mainImageUrl) { <span class="car-image-processing"><i class="far fa-image"></i> Image coming soon</span> }
+    @if (!car().mainImageUrl) { <span class="car-image-processing"><i class="far fa-image"></i> {{ 'cars.imageComingSoon' | translate }}</span> }
     @if (showActions()) {
       <div class="car-btns">
         <a href="/cars" [class.active]="isFavorite()" [attr.aria-pressed]="isFavorite()"
@@ -19,7 +19,7 @@
           (click)="toggleFavorite($event)">
           <i [class]="isFavorite() ? 'fas fa-heart' : 'far fa-heart'" aria-hidden="true"></i>
         </a>
-        <a href="/cars" aria-label="Share car" title="Share car" (click)="shareCar($event)">
+      <a href="/cars" [attr.aria-label]="'cars.shareCar' | translate" [title]="'cars.shareCar' | translate" (click)="shareCar($event)">
           <i class="far fa-arrows-repeat" aria-hidden="true"></i>
         </a>
       </div>

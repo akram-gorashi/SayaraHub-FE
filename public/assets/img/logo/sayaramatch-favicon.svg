@@ -1,16 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="SayaraMatch">
   <defs>
-    <linearGradient id="sm-red" x1="18" y1="12" x2="108" y2="116" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#ff4050"/>
-      <stop offset="1" stop-color="#d90f24"/>
-    </linearGradient>
+    <linearGradient id="bg" x1="18" y1="10" x2="111" y2="120" gradientUnits="userSpaceOnUse"><stop stop-color="#17243d"/><stop offset="1" stop-color="#080d18"/></linearGradient>
+    <linearGradient id="coral" x1="24" y1="30" x2="77" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#ff5261"/><stop offset="1" stop-color="#f51e30"/></linearGradient>
   </defs>
-  <rect x="10" y="10" width="108" height="108" rx="30" fill="url(#sm-red)"/>
-  <path d="M31 77c8-19 17-31 33-31s25 12 33 31" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-  <path d="M39 75h50c4 0 8 3 9 7l2 8H28l2-8c1-4 5-7 9-7Z" fill="#fff"/>
-  <path d="M43 73l7-12h29l7 12" fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
-  <circle cx="44" cy="90" r="5" fill="#d90f24"/>
-  <circle cx="84" cy="90" r="5" fill="#d90f24"/>
-  <path d="M64 25c-10 0-18 8-18 18 0 14 18 30 18 30s18-16 18-30c0-10-8-18-18-18Z" fill="#111827"/>
-  <circle cx="64" cy="43" r="7" fill="#fff"/>
+  <rect width="128" height="128" rx="30" fill="url(#bg)"/>
+  <path d="M103 29H62C38 29 22 42 22 58c0 15 13 25 32 25h12" fill="none" stroke="url(#coral)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M25 99h41c24 0 40-13 40-29 0-15-13-25-32-25H62" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
 </svg>

@@ -1,20 +1,21 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { PageHero } from '../shared/page-hero';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-faq-page',
-  imports: [PageHero],
+  imports: [PageHero, TranslatePipe],
   templateUrl: './faq-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FaqPage {
   protected readonly activeQuestion = signal(0);
   protected readonly questions = [
-    { question: 'How do I contact a seller?', answer: 'Open a car and start a conversation. Your messages remain available from your account dashboard.' },
-    { question: 'How can I add my own vehicle?', answer: 'Create a seller account, choose Sell a Car, complete the vehicle details, and upload clear photos for review.' },
-    { question: 'Can I save cars for later?', answer: 'Yes. Select the favorite icon on a car and find it later under My Favorites in your account.' },
-    { question: 'How are car details managed?', answer: 'Sellers manage their own cars while SayaraMatch provides structured vehicle data and moderation tools.' },
-    { question: 'Can I delete my account?', answer: 'Yes. Open account Settings, choose a deletion reason, confirm the action, and submit the request.' },
+    { question: 'content.faq.q1', answer: 'content.faq.a1' },
+    { question: 'content.faq.q2', answer: 'content.faq.a2' },
+    { question: 'content.faq.q3', answer: 'content.faq.a3' },
+    { question: 'content.faq.q4', answer: 'content.faq.a4' },
+    { question: 'content.faq.q5', answer: 'content.faq.a5' },
   ];
 
   protected toggle(index: number): void {

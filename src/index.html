@@ -10,17 +10,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Browse, compare, buy, and sell cars across Saudi Arabia with SayaraMatch.">
   <meta name="keywords" content="cars Saudi Arabia, buy car, sell car, SayaraMatch">
-  <meta name="theme-color" content="#f51e30">
+  <meta name="theme-color" content="#101828">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SayaraMatch">
 
   <!-- title -->
   <title>SayaraMatch | The Right Car. The Right Match.</title>
 
   <!-- favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/img/logo/sayaramatch-favicon.svg?v=3">
-  <link rel="alternate icon" type="image/png" href="assets/img/logo/favicon.png?v=3">
-  <link rel="shortcut icon" href="favicon.ico?v=3">
-  <link rel="apple-touch-icon" href="assets/img/logo/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo/sayaramatch-favicon.svg?v=4">
+  <link rel="alternate icon" type="image/png" href="assets/img/logo/favicon.png?v=4">
+  <link rel="shortcut icon" type="image/png" href="assets/img/logo/favicon.png?v=4">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo/apple-touch-icon.png?v=4">
   <link rel="manifest" href="manifest.webmanifest">
+
+  <!-- Native launch screens for common iPhone and iPad sizes. -->
+  <link rel="apple-touch-startup-image" href="assets/img/splash/apple-splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/img/splash/apple-splash-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/img/splash/apple-splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/img/splash/apple-splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/img/splash/apple-splash-1179x2556.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/img/splash/apple-splash-1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/img/splash/apple-splash-1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/img/splash/apple-splash-2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
 
   <!-- Discover web fonts immediately instead of waiting for style.css @import. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,14 +43,18 @@
 
   <!-- Critical loader CSS must be available before the theme styles download. -->
   <style>
-    #boot-preloader { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; background: #fff; }
-    #boot-preloader .loader-ripple { position: relative; width: 80px; height: 80px; }
-    #boot-preloader .loader-ripple div { position: absolute; border: 4px solid #f51e30; border-radius: 50%; animation: boot-loader-ripple 1s cubic-bezier(0, .2, .8, 1) infinite; }
-    #boot-preloader .loader-ripple div:nth-child(2) { animation-delay: -.5s; }
-    @keyframes boot-loader-ripple {
-      0% { top: 36px; left: 36px; width: 0; height: 0; opacity: 1; }
-      100% { top: 0; left: 0; width: 72px; height: 72px; opacity: 0; }
-    }
+    #boot-preloader { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at 50% 38%, #263653 0, #101828 48%, #080d18 100%); color: #fff; }
+    #boot-preloader::before { position: absolute; width: min(78vw, 620px); aspect-ratio: 1; border: 1px solid rgb(255 255 255 / 5%); border-radius: 50%; box-shadow: 0 0 0 80px rgb(255 255 255 / 1.5%), 0 0 0 160px rgb(255 255 255 / 1%); content: ''; }
+    #boot-preloader .boot-brand { position: relative; display: grid; justify-items: center; padding: 32px; text-align: center; animation: boot-brand-enter 500ms ease-out both; }
+    #boot-preloader .boot-mark { width: clamp(112px, 27vw, 168px); height: auto; filter: drop-shadow(0 20px 28px rgb(0 0 0 / 28%)); }
+    #boot-preloader .boot-name { margin-top: 28px; font: 800 clamp(34px, 9vw, 54px)/1 Inter, Arial, sans-serif; letter-spacing: -.055em; }
+    #boot-preloader .boot-name b { color: #ff4050; font: inherit; }
+    #boot-preloader .boot-tagline { margin: 10px 0 0; color: #aeb8ca; font: 700 clamp(10px, 2.6vw, 13px)/1.4 Inter, Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+    #boot-preloader .boot-progress { width: 72px; height: 4px; margin-top: 52px; overflow: hidden; border-radius: 999px; background: rgb(255 255 255 / 12%); }
+    #boot-preloader .boot-progress::after { display: block; width: 42%; height: 100%; border-radius: inherit; background: #f51e30; content: ''; animation: boot-progress 1.2s ease-in-out infinite; }
+    @keyframes boot-brand-enter { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+    @keyframes boot-progress { 0% { transform: translateX(-120%); } 50% { transform: translateX(120%); } 100% { transform: translateX(300%); } }
+    @media (prefers-reduced-motion: reduce) { #boot-preloader .boot-brand, #boot-preloader .boot-progress::after { animation: none; } }
   </style>
 
   <!-- Only the theme styles used by Angular templates are loaded globally. -->
@@ -50,10 +68,12 @@
 
 <body>
   <!-- preloader -->
-  <div id="boot-preloader" class="preloader" role="status" aria-label="Loading application">
-    <div class="loader-ripple">
-      <div></div>
-      <div></div>
+  <div id="boot-preloader" role="status" aria-label="Loading SayaraMatch">
+    <div class="boot-brand">
+      <img class="boot-mark" src="assets/img/logo/sayaramatch-mark.svg" alt="" width="168" height="168">
+      <div class="boot-name" aria-hidden="true">Sayara <b>Match</b></div>
+      <p class="boot-tagline">The right car · The right match</p>
+      <div class="boot-progress" aria-hidden="true"></div>
     </div>
   </div>
   <!-- preloader end -->

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -21,6 +21,14 @@ import { LocalizedTextPipe } from '../../../shared/i18n/localized-value.pipe';
 export class CarListing {
   protected readonly store = inject(CarListingStore);
   protected readonly filtersOpen = signal(false);
+  protected readonly brandDisplayLimit = signal(12);
+  protected readonly visibleBrands = computed(() => {
+    const brands = this.store.brands();
+    const selectedBrandIds = new Set(this.store.filters().brandIds);
+    return brands.filter(
+      (brand, index) => index < this.brandDisplayLimit() || selectedBrandIds.has(brand.id),
+    );
+  });
   private readonly route = inject(ActivatedRoute);
   private filterTrigger: HTMLElement | null = null;
 
@@ -65,5 +73,9 @@ export class CarListing {
     if (!this.filtersOpen()) return;
     this.filtersOpen.set(false);
     setTimeout(() => this.filterTrigger?.focus());
+  }
+
+  protected loadMoreBrands(): void {
+    this.brandDisplayLimit.update(current => Math.min(current + 12, this.store.brands().length));
   }
 }
