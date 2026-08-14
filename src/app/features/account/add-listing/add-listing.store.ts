@@ -45,7 +45,7 @@ export class AddListingStore {
   load(carId?: number): void {
     this.loadingState.set(true);
     this.errorState.set(null);
-    this.masterDataService.getAll({ pageNumber: 1, pageSize: 50 })
+    this.masterDataService.getAll({ pageNumber: 1, pageSize: 250 })
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.loadingState.set(false)))
       .subscribe({
         next: (response) => {
@@ -69,7 +69,7 @@ export class AddListingStore {
     this.modelsState.set([]);
     if (!carBrandId) return;
     this.loadingModelsState.set(true);
-    this.masterDataService.getCarModelsByBrand(carBrandId, { pageNumber: 1, pageSize: 50 })
+    this.masterDataService.getCarModelsByBrand(carBrandId, { pageNumber: 1, pageSize: 250 })
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.loadingModelsState.set(false)))
       .subscribe({
         next: (response) => {

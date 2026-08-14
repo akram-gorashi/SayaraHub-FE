@@ -4,7 +4,13 @@ import { Observable, shareReplay } from 'rxjs';
 
 import { API_ENDPOINTS } from '../api/api-endpoints';
 import { ApiResponse, PagedResponse, QueryParams } from '../models/api.models';
-import { CarModelMasterData, MasterData, MasterDataItem, MasterDataQuery } from '../models/master-data.models';
+import {
+  CarGenerationMasterData,
+  CarModelMasterData,
+  MasterData,
+  MasterDataItem,
+  MasterDataQuery,
+} from '../models/master-data.models';
 import { toHttpParams } from '../utils/http-params';
 
 type MasterDataItemPath = 'body-types' | 'car-brands' | 'car-conditions' | 'features' | 'fuel-types' | 'transmissions';
@@ -56,6 +62,16 @@ export class MasterDataService {
   ): Observable<ApiResponse<PagedResponse<CarModelMasterData>>> {
     return this.getCached<PagedResponse<CarModelMasterData>>(
       `${API_ENDPOINTS.masterData}/car-brands/${carBrandId}/models`,
+      query,
+    );
+  }
+
+  getCarGenerationsByModel(
+    carModelId: number,
+    query: MasterDataQuery = {},
+  ): Observable<ApiResponse<PagedResponse<CarGenerationMasterData>>> {
+    return this.getCached<PagedResponse<CarGenerationMasterData>>(
+      `${API_ENDPOINTS.masterData}/car-models/${carModelId}/generations`,
       query,
     );
   }

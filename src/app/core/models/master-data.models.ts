@@ -16,6 +16,17 @@ export interface CarModelMasterData extends MasterDataItem {
   carBrandNameAr?: string;
 }
 
+export interface CarGenerationMasterData extends MasterDataItem {
+  carModelId: number;
+  carModelName: string;
+  carModelNameAr?: string;
+  carBrandId: number;
+  carBrandName: string;
+  carBrandNameAr?: string;
+  yearFrom: number;
+  yearTo: number | null;
+}
+
 export interface MasterData {
   bodyTypes: PagedResponse<MasterDataItem>;
   carBrands: PagedResponse<MasterDataItem>;

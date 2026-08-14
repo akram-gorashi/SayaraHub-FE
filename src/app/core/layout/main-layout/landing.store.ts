@@ -109,7 +109,7 @@ export class LandingStore {
   private loadMasterData(): void {
     this.beginRequest();
     this.masterDataService
-      .getAll({ pageNumber: 1, pageSize: 50 })
+      .getAll({ pageNumber: 1, pageSize: 250 })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         finalize(() => this.endRequest()),

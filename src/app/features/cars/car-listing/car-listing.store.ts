@@ -227,7 +227,7 @@ export class CarListingStore {
       return;
     }
     this.masterDataService
-      .getAll({ pageNumber: 1, pageSize: 50 })
+      .getAll({ pageNumber: 1, pageSize: 250 })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
