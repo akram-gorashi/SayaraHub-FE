@@ -53,11 +53,11 @@
   </div>
 
   @if (store.total() > 0) {
-    <nav class="pagination-area" aria-label="Notification history pages">
+    <nav class="pagination-area" [attr.aria-label]="'notifications.historyPages' | translate">
       <ul class="pagination">
-        <li class="page-item" [class.disabled]="store.currentPage() === 1"><button class="page-link" type="button" aria-label="Previous page" [disabled]="store.currentPage() === 1" (click)="page(store.currentPage() - 1)"><i class="far fa-arrow-left"></i></button></li>
+        <li class="page-item" [class.disabled]="store.currentPage() === 1"><button class="page-link" type="button" [attr.aria-label]="'cars.previousPage' | translate" [disabled]="store.currentPage() === 1" (click)="page(store.currentPage() - 1)"><i class="far fa-arrow-left"></i></button></li>
         @for (pageNumber of store.visiblePages(); track pageNumber) { <li class="page-item" [class.active]="pageNumber === store.currentPage()"><button class="page-link" type="button" (click)="page(pageNumber)">{{ pageNumber }}</button></li> }
-        <li class="page-item" [class.disabled]="store.currentPage() >= store.totalPages()"><button class="page-link" type="button" aria-label="Next page" [disabled]="store.currentPage() >= store.totalPages()" (click)="page(store.currentPage() + 1)"><i class="far fa-arrow-right"></i></button></li>
+        <li class="page-item" [class.disabled]="store.currentPage() >= store.totalPages()"><button class="page-link" type="button" [attr.aria-label]="'cars.nextPage' | translate" [disabled]="store.currentPage() >= store.totalPages()" (click)="page(store.currentPage() + 1)"><i class="far fa-arrow-right"></i></button></li>
       </ul>
     </nav>
   }

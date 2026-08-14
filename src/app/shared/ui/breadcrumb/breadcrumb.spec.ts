@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { provideTranslateService } from '@ngx-translate/core';
 
 import { Breadcrumb } from './breadcrumb';
 
@@ -10,7 +11,7 @@ describe('Breadcrumb', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Breadcrumb],
-      providers: [provideRouter([])],
+      providers: [provideRouter([]), provideTranslateService({ fallbackLang: 'en', lang: 'en' })],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Breadcrumb);

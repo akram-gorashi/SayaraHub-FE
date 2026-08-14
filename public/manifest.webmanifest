@@ -1,26 +1,58 @@
 {
-  "name": "SayaraMatch",
+  "id": "/",
+  "name": "SayaraMatch — Buy & Sell Cars",
   "short_name": "SayaraMatch",
-  "description": "Buy and sell cars across Saudi Arabia.",
-  "start_url": "/",
+  "description": "Find the right car or reach the right buyer across Saudi Arabia.",
+  "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#f51e30",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "background_color": "#0b1220",
+  "theme_color": "#101828",
+  "categories": ["shopping", "lifestyle", "automotive"],
   "dir": "auto",
   "lang": "en",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/assets/img/logo/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/assets/img/logo/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/logo/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/img/logo/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Browse cars",
+      "short_name": "Browse",
+      "description": "Explore cars available on SayaraMatch",
+      "url": "/cars?source=pwa-shortcut",
+      "icons": [{ "src": "/assets/img/logo/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Sell a car",
+      "short_name": "Sell",
+      "description": "Create a new vehicle listing",
+      "url": "/account/add-listing?source=pwa-shortcut",
+      "icons": [{ "src": "/assets/img/logo/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }

@@ -2,7 +2,7 @@
   @if (store.error(); as error) { <div class="alert alert-danger chat-alert">{{ error }}</div> }
   @if (store.success(); as success) { <div class="alert alert-success chat-alert">{{ success }}</div> }
 
-  <aside class="chat-inbox" aria-label="Conversations">
+  <aside class="chat-inbox" [attr.aria-label]="'account.conversations' | translate">
     <header class="inbox-header">
       <div>
         <span class="eyebrow">SayaraMatch</span>
@@ -13,18 +13,18 @@
 
     <label class="chat-search">
       <i class="far fa-search" aria-hidden="true"></i>
-      <span class="visually-hidden">Search conversations</span>
-      <input type="search" placeholder="Search by car or seller" [value]="searchTerm()" (input)="searchTerm.set($any($event.target).value)" />
+      <span class="visually-hidden">{{ 'account.searchConversations' | translate }}</span>
+      <input type="search" [placeholder]="'account.searchByCarOrSeller' | translate" [value]="searchTerm()" (input)="searchTerm.set($any($event.target).value)" />
       @if (searchTerm()) {
-        <button type="button" aria-label="Clear search" (click)="searchTerm.set('')"><i class="far fa-times"></i></button>
+        <button type="button" [attr.aria-label]="'account.clearSearch' | translate" (click)="searchTerm.set('')"><i class="far fa-times"></i></button>
       }
     </label>
 
-    <div class="chat-filters" role="group" aria-label="Filter conversations">
-      <button type="button" [class.active]="activeFilter() === 'all'" (click)="setFilter('all')">All</button>
-      <button type="button" [class.active]="activeFilter() === 'buying'" (click)="setFilter('buying')">Buying</button>
-      <button type="button" [class.active]="activeFilter() === 'selling'" (click)="setFilter('selling')">Selling</button>
-      <button type="button" [class.active]="activeFilter() === 'unread'" (click)="setFilter('unread')">Unread</button>
+    <div class="chat-filters" role="group" [attr.aria-label]="'account.filterConversations' | translate">
+      <button type="button" [class.active]="activeFilter() === 'all'" (click)="setFilter('all')">{{ 'notifications.all' | translate }}</button>
+      <button type="button" [class.active]="activeFilter() === 'buying'" (click)="setFilter('buying')">{{ 'account.buying' | translate }}</button>
+      <button type="button" [class.active]="activeFilter() === 'selling'" (click)="setFilter('selling')">{{ 'account.selling' | translate }}</button>
+      <button type="button" [class.active]="activeFilter() === 'unread'" (click)="setFilter('unread')">{{ 'notifications.unread' | translate }}</button>
     </div>
 
     <ul class="chat-list">
@@ -42,7 +42,7 @@
               </span>
               <span class="seller-line">
                 {{ chat.otherUserName }}
-                @if (chat.otherUserIsVerified) { <i class="fas fa-badge-check verified" title="Verified seller"></i> }
+                @if (chat.otherUserIsVerified) { <i class="fas fa-badge-check verified" [title]="'trust.verifiedSeller' | translate"></i> }
               </span>
               <span class="preview">{{ chat.lastMessage || chat.carTitle }}</span>
             </span>
@@ -50,7 +50,7 @@
           </button>
         </li>
       } @empty {
-        <li class="empty-state"><i class="far fa-comments"></i><strong>No conversations found</strong><span>Try another search or filter.</span></li>
+        <li class="empty-state"><i class="far fa-comments"></i><strong>{{ 'account.noConversationsFound' | translate }}</strong><span>{{ 'account.tryAnotherChatFilter' | translate }}</span></li>
       }
     </ul>
   </aside>
@@ -58,7 +58,7 @@
   <div class="conversation">
     @if (store.activeChat(); as chat) {
       <header class="conversation-header">
-        <button type="button" class="back-button" aria-label="Back to chats" (click)="showInbox()"><i class="far fa-arrow-left"></i></button>
+        <button type="button" class="back-button" [attr.aria-label]="'account.backToChats' | translate" (click)="showInbox()"><i class="far fa-arrow-left"></i></button>
         <span class="header-avatar"><img [src]="chat.otherUserImageUrl || 'assets/img/account/user-v2.jpg'" [alt]="chat.otherUserName" /></span>
         <div class="conversation-identity">
           <h3>{{ chat.otherUserName }} @if (chat.otherUserIsVerified) { <i class="fas fa-badge-check verified"></i> }</h3>
@@ -101,11 +101,11 @@
 
       @if (showJumpToLatest()) { <button type="button" class="jump-latest" (click)="scrollToLatest()"><i class="far fa-arrow-down"></i></button> }
       <form class="composer" (submit)="send($event)">
-        <textarea rows="1" placeholder="Message..." [value]="draft()" (input)="updateDraft($event)"></textarea>
-        <button type="submit" class="send" [disabled]="store.sending() || !draft().trim()" aria-label="Send message"><i class="far fa-paper-plane"></i></button>
+        <textarea rows="1" [placeholder]="'account.writeMessage' | translate" [value]="draft()" (input)="updateDraft($event)"></textarea>
+        <button type="submit" class="send" [disabled]="store.sending() || !draft().trim()" [attr.aria-label]="'account.sendMessage' | translate"><i class="far fa-paper-plane"></i></button>
       </form>
     } @else {
-      <div class="conversation-empty"><span><i class="far fa-comments"></i></span><h3>Your conversations</h3><p>Select a chat to view messages.</p></div>
+      <div class="conversation-empty"><span><i class="far fa-comments"></i></span><h3>{{ 'account.conversations' | translate }}</h3><p>{{ 'account.selectConversation' | translate }}</p></div>
     }
   </div>
 </section>

@@ -24,6 +24,36 @@
   padding: 8px 10px;
 }
 
+.brand-filter-toggle {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--theme-color);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 700;
+  gap: 7px;
+  margin-top: 10px;
+  padding: 4px 0;
+}
+
+.brand-filter-toggle:hover,
+.brand-filter-toggle:focus-visible {
+  color: var(--color-dark);
+}
+
+.car-sort-list-grid a {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  line-height: 1;
+}
+
+.car-sort-list-grid a i {
+  line-height: 1;
+  margin: 0;
+}
+
 .listing-sort-select {
   background-color: var(--color-white);
   border: 1px solid var(--border-info-color);

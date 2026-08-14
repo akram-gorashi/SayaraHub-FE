@@ -5,7 +5,7 @@
     @if (store.error(); as error) { <div class="alert alert-danger">{{ error }}</div> }
     @if (store.success(); as success) { <div class="alert alert-success">{{ success }}</div> }
 
-    <section class="moderation-filters user-profile-card" aria-label="Moderation filters">
+    <section class="moderation-filters user-profile-card" [attr.aria-label]="'admin.moderationFilters' | translate">
       <div class="form-group"><label for="moderation-search">{{ 'cars.search' | translate }}</label><input id="moderation-search" class="form-control" type="search" [formControl]="search" [placeholder]="'admin.moderationSearch' | translate" /></div>
       <div class="form-group"><label for="listed-from">{{ 'admin.listedFrom' | translate }}</label><input id="listed-from" class="form-control" type="date" [formControl]="listedFrom" /></div>
       <div class="form-group"><label for="listed-to">{{ 'admin.listedTo' | translate }}</label><input id="listed-to" class="form-control" type="date" [formControl]="listedTo" /></div>
@@ -13,57 +13,57 @@
       <button type="button" class="btn btn-outline-secondary rounded-2" (click)="clearFilters()">{{ 'common.clear' | translate }}</button>
     </section>
 
-    <div class="status-tabs" aria-label="Moderation status">
-      @for (status of statuses; track status) { <button type="button" class="btn btn-outline-secondary rounded-pill" [class.active]="store.status() === status" (click)="chooseStatus(status)">{{ status === 'Available' ? 'Approved' : status }}</button> }
+    <div class="status-tabs" [attr.aria-label]="'admin.moderationStatus' | translate">
+      @for (status of statuses; track status) { <button type="button" class="btn btn-outline-secondary rounded-pill" [class.active]="store.status() === status" (click)="chooseStatus(status)">{{ (status === 'Available' ? 'admin.approved' : status === 'Pending' ? 'admin.pending' : 'admin.rejected') | translate }}</button> }
     </div>
     <div class="moderation-layout">
       <div class="queue-column">
-        <section class="queue user-profile-card" aria-label="Moderation listings">
+        <section class="queue user-profile-card" [attr.aria-label]="'admin.moderationListings' | translate">
           @if (store.loading()) { <div class="queue-empty"><span class="spinner-border"></span>{{ 'cars.loadingCars' | translate }}</div> }
           @for (car of store.cars(); track car.id) {
             <button type="button" class="queue-item" [class.active]="selected()?.id === car.id" (click)="review(car)">
               <img [src]="car.images[0] || 'assets/img/car/01-v2.jpg'" [alt]="car.title" loading="lazy" decoding="async" />
               <span><strong>{{ car.title }}</strong><small>{{ car.sellerName }} · {{ car.listedDate | date:'mediumDate' }}</small><small>{{ car.brand }} {{ car.model }} · {{ car.price | currency:'SAR':'symbol-narrow':'1.0-0' }}</small></span>
             </button>
-          } @empty { @if (!store.loading()) { <div class="queue-empty">No {{ store.status() | titlecase }} cars match these filters.</div> } }
+          } @empty { @if (!store.loading()) { <div class="queue-empty">{{ 'admin.noCarsMatch' | translate }}</div> } }
         </section>
         @if (store.total() > 0) {
           <div class="queue-footer">
-            <span>{{ store.total() | number }} cars</span>
-            <select class="form-select" aria-label="Cars per page" [value]="store.query().pageSize" (change)="changePageSize($event)">@for (size of pageSizes; track size) { <option [value]="size">{{ size }} / page</option> }</select>
+            <span>{{ 'admin.carCount' | translate:{ count: (store.total() | number) } }}</span>
+            <select class="form-select" [attr.aria-label]="'admin.carsPerPage' | translate" [value]="store.query().pageSize" (change)="changePageSize($event)">@for (size of pageSizes; track size) { <option [value]="size">{{ 'admin.perPage' | translate:{ count: size } }}</option> }</select>
           </div>
-          <nav class="pagination-area moderation-pagination" aria-label="Moderation listing pages">
+          <nav class="pagination-area moderation-pagination" [attr.aria-label]="'admin.moderationPages' | translate">
             <ul class="pagination">
-              <li class="page-item" [class.disabled]="store.currentPage() === 1"><button class="page-link" type="button" aria-label="Previous page" [disabled]="store.currentPage() === 1" (click)="changePage(store.currentPage() - 1)"><i class="far fa-arrow-left"></i></button></li>
+              <li class="page-item" [class.disabled]="store.currentPage() === 1"><button class="page-link" type="button" [attr.aria-label]="'cars.previousPage' | translate" [disabled]="store.currentPage() === 1" (click)="changePage(store.currentPage() - 1)"><i class="far fa-arrow-left"></i></button></li>
               @for (pageNumber of store.visiblePages(); track pageNumber) { <li class="page-item" [class.active]="pageNumber === store.currentPage()"><button class="page-link" type="button" (click)="changePage(pageNumber)">{{ pageNumber }}</button></li> }
-              <li class="page-item" [class.disabled]="store.currentPage() >= store.totalPages()"><button class="page-link" type="button" aria-label="Next page" [disabled]="store.currentPage() >= store.totalPages()" (click)="changePage(store.currentPage() + 1)"><i class="far fa-arrow-right"></i></button></li>
+              <li class="page-item" [class.disabled]="store.currentPage() >= store.totalPages()"><button class="page-link" type="button" [attr.aria-label]="'cars.nextPage' | translate" [disabled]="store.currentPage() >= store.totalPages()" (click)="changePage(store.currentPage() + 1)"><i class="far fa-arrow-right"></i></button></li>
             </ul>
           </nav>
         }
       </div>
       <section class="review-panel user-profile-card">
         @if (selected(); as car) {
-          <div class="review-gallery">@for (image of car.images; track image) { <button type="button" (click)="fullscreenImage.set(image)" aria-label="Open image fullscreen"><img [src]="image" [alt]="car.title" loading="lazy" decoding="async" /></button> }</div>
-          <div class="review-title"><div><span class="badge" [class]="statusClass(car.status)">{{ car.status | titlecase }}</span><h2>{{ car.title }}</h2><p>Submitted by {{ car.sellerName }}</p></div><strong>{{ car.price | currency:'SAR':'symbol-narrow':'1.0-0' }}</strong></div>
-          <dl><div><dt>Vehicle</dt><dd>{{ car.year }} {{ car.brand }} {{ car.model }}</dd></div><div><dt>Mileage</dt><dd>{{ car.mileage | number }} km</dd></div><div><dt>City</dt><dd>{{ car.city }}</dd></div><div><dt>VIN</dt><dd>{{ car.vin }}</dd></div></dl>
+          <div class="review-gallery">@for (image of car.images; track image) { <button type="button" (click)="fullscreenImage.set(image)" [attr.aria-label]="'admin.openImage' | translate"><img [src]="image" [alt]="car.title" loading="lazy" decoding="async" /></button> }</div>
+          <div class="review-title"><div><span class="badge" [class]="statusClass(car.status)">{{ car.status | titlecase }}</span><h2>{{ car.title }}</h2><p>{{ 'admin.submittedBy' | translate:{ name: car.sellerName } }}</p></div><strong>{{ car.price | currency:'SAR':'symbol-narrow':'1.0-0' }}</strong></div>
+          <dl><div><dt>{{ 'admin.vehicle' | translate }}</dt><dd>{{ car.year }} {{ car.brand }} {{ car.model }}</dd></div><div><dt>{{ 'listing.mileage' | translate }}</dt><dd>{{ car.mileage | number }} {{ 'listing.km' | translate }}</dd></div><div><dt>{{ 'listing.city' | translate }}</dt><dd>{{ car.city }}</dd></div><div><dt>{{ 'listing.vin' | translate }}</dt><dd>{{ car.vin }}</dd></div></dl>
           <p class="description">{{ car.description }}</p>
           @if (car.status === 'Pending' || car.status === 'Inactive') {
             <label for="rejection-reason">{{ 'admin.rejectionReason' | translate }}</label><textarea id="rejection-reason" class="form-control" rows="4" [value]="rejectionReason()" (input)="rejectionReason.set($any($event.target).value)" [placeholder]="'admin.rejectionPlaceholder' | translate"></textarea>
             <div class="moderation-actions"><button type="button" class="theme-btn approve" [disabled]="store.moderating() === car.id" (click)="approve()"><i class="far fa-check"></i>{{ 'admin.approve' | translate }}</button><button type="button" class="theme-btn reject" [disabled]="store.moderating() === car.id || rejectionReason().trim().length < 10" (click)="reject()"><i class="far fa-xmark"></i>{{ 'admin.reject' | translate }}</button></div>
-          } @else if (car.moderationReason) { <div class="decision-reason"><strong>Decision reason</strong><p>{{ car.moderationReason }}</p></div> }
-          <section class="moderation-history" aria-labelledby="history-title"><h3 id="history-title">Moderation history</h3>
-            @if (store.historyLoading()) { <p>Loading history...</p> }
-            @for (entry of store.history(); track entry.id) { <article><span>{{ entry.createdAt | date:'medium' }}</span><strong>{{ entry.previousStatus }} → {{ entry.newStatus }}</strong><small>by {{ entry.adminName }}</small>@if (entry.reason) { <p>{{ entry.reason }}</p> }</article> } @empty { @if (!store.historyLoading()) { <p>No previous decisions for this car.</p> } }
+          } @else if (car.moderationReason) { <div class="decision-reason"><strong>{{ 'admin.decisionReason' | translate }}</strong><p>{{ car.moderationReason }}</p></div> }
+          <section class="moderation-history" aria-labelledby="history-title"><h3 id="history-title">{{ 'admin.moderationHistory' | translate }}</h3>
+            @if (store.historyLoading()) { <p>{{ 'admin.loadingHistory' | translate }}</p> }
+            @for (entry of store.history(); track entry.id) { <article><span>{{ entry.createdAt | date:'medium' }}</span><strong>{{ entry.previousStatus }} → {{ entry.newStatus }}</strong><small>{{ 'admin.byAdmin' | translate:{ name: entry.adminName } }}</small>@if (entry.reason) { <p>{{ entry.reason }}</p> }</article> } @empty { @if (!store.historyLoading()) { <p>{{ 'admin.noHistory' | translate }}</p> } }
           </section>
-        } @else { <div class="review-placeholder"><i class="far fa-clipboard-check"></i><p>Select a car to inspect its details and history.</p></div> }
+        } @else { <div class="review-placeholder"><i class="far fa-clipboard-check"></i><p>{{ 'admin.selectCar' | translate }}</p></div> }
       </section>
     </div>
   </div>
 </main>
 
 @if (fullscreenImage(); as image) {
-  <div class="image-lightbox" role="dialog" aria-modal="true" aria-label="Listing image preview" (click)="fullscreenImage.set(null)" (keydown.escape)="fullscreenImage.set(null)" tabindex="-1">
-    <button type="button" aria-label="Close preview" (click)="fullscreenImage.set(null)"><i class="far fa-xmark"></i></button>
-    <img [src]="image" alt="Fullscreen listing preview" (click)="$event.stopPropagation()" />
+  <div class="image-lightbox" role="dialog" aria-modal="true" [attr.aria-label]="'admin.imagePreview' | translate" (click)="fullscreenImage.set(null)" (keydown.escape)="fullscreenImage.set(null)" tabindex="-1">
+    <button type="button" [attr.aria-label]="'admin.closePreview' | translate" (click)="fullscreenImage.set(null)"><i class="far fa-xmark"></i></button>
+    <img [src]="image" [alt]="'admin.fullscreenPreview' | translate" (click)="$event.stopPropagation()" />
   </div>
 }

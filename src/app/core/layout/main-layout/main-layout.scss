@@ -57,6 +57,17 @@
   width: 80px;
 }
 
+.brand-load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.brand-load-more .theme-btn {
+  min-width: 160px;
+  padding: 12px 24px;
+}
+
 .mobile-home-search-trigger,
 .mobile-search-header,
 .mobile-search-backdrop {

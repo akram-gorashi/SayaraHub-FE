@@ -162,6 +162,53 @@ html[dir="rtl"] .fa-caret-right {
   transform: scaleX(-1);
 }
 
+/* The legacy theme positions these decorations and controls with physical LTR
+   offsets. Mirror them explicitly so Arabic headings and form controls line up. */
+html[dir="rtl"] .car-widget-title::before,
+html[dir="rtl"] .footer-widget-title::before {
+  left: auto;
+  right: 0;
+}
+
+html[dir="rtl"] .car-widget-title::after {
+  left: auto;
+  right: 35px;
+}
+
+html[dir="rtl"] .footer-widget-title::after {
+  left: auto;
+  right: 18px;
+}
+
+html[dir="rtl"] .form-select {
+  background-position: left .9rem center;
+  padding-left: 3rem;
+  padding-right: 1rem;
+}
+
+html[dir="rtl"] .find-car-form .form-select {
+  background-position: left 1.15rem center;
+  padding-left: 3.25rem;
+  padding-right: 1.25rem;
+}
+
+html[dir="rtl"] .car-search-form .form-control {
+  padding-left: 50px;
+  padding-right: 15px;
+}
+
+html[dir="rtl"] .car-search-form button {
+  left: 0;
+  right: auto;
+}
+
+html[dir="rtl"] .car-search-form button i,
+html[dir="rtl"] .car-sort-list-grid i,
+html[dir="rtl"] .jump-latest i,
+html[dir="rtl"] .composer .send i {
+  margin: 0;
+}
+
 @media (max-width: 767px) {
   html[dir="rtl"] .mobile-listing-stepper ol,
   html[dir="rtl"] .mobile-filter-chips,

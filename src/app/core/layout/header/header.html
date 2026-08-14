@@ -2,23 +2,23 @@
   <div class="header-top"><div class="container"><div class="header-top-wrapper">
     <div class="header-top-left"><div class="header-top-contact"><ul>
       <li><a href="mailto:support@sayaramatch.com"><i class="far fa-envelopes"></i> support&#64;sayaramatch.com</a></li>
-      <li><span><i class="far fa-alarm-clock"></i> Sun - Thu (09:00 - 18:00)</span></li>
+      <li><span><i class="far fa-alarm-clock"></i> {{ 'header.supportHoursValue' | translate }}</span></li>
     </ul></div></div>
     <div class="header-top-right"><div class="header-top-link">
       @if (session.isAuthenticated()) {
-        <div class="notification-menu dropdown"><button type="button" class="notification-trigger" [attr.aria-expanded]="notificationOpen()" aria-label="Notifications" (click)="toggleNotifications($event)"><i class="far fa-bell"></i>@if (notifications.unread()) { <span>{{ notifications.unread() > 99 ? '99+' : notifications.unread() }}</span> }</button><div class="dropdown-menu notification-dropdown" [class.show]="notificationOpen()">@for (notification of notifications.items(); track notification.id) { <button type="button" [class.unread]="!notification.isRead" (click)="openNotification(notification)"><strong>{{ notification.title }}</strong><small>{{ notification.message }}</small></button> } @empty { <p>No notifications yet.</p> }<a routerLink="/account/notifications" class="notification-history-link" (click)="closeNavigation()">View all notifications</a></div></div>
-        @if (session.isAdmin()) { <a routerLink="/admin/moderation"><i class="far fa-shield-check"></i> Moderation</a><a routerLink="/admin/operations"><i class="far fa-user-shield"></i> Operations</a> }
+        <div class="notification-menu dropdown"><button type="button" class="notification-trigger" [attr.aria-expanded]="notificationOpen()" [attr.aria-label]="'notifications.title' | translate" (click)="toggleNotifications($event)"><i class="far fa-bell"></i>@if (notifications.unread()) { <span>{{ notifications.unread() > 99 ? '99+' : notifications.unread() }}</span> }</button><div class="dropdown-menu notification-dropdown" [class.show]="notificationOpen()">@for (notification of notifications.items(); track notification.id) { <button type="button" [class.unread]="!notification.isRead" (click)="openNotification(notification)"><strong>{{ notification.title }}</strong><small>{{ notification.message }}</small></button> } @empty { <p>{{ 'header.noNotifications' | translate }}</p> }<a routerLink="/account/notifications" class="notification-history-link" (click)="closeNavigation()">{{ 'header.viewAllNotifications' | translate }}</a></div></div>
+        @if (session.isAdmin()) { <a routerLink="/admin/moderation"><i class="far fa-shield-check"></i> {{ 'header.moderation' | translate }}</a><a routerLink="/admin/operations"><i class="far fa-user-shield"></i> {{ 'header.operations' | translate }}</a> }
         <a class="auth-user" routerLink="/account/dashboard"><i class="far fa-user"></i> {{ session.session()?.fullName }}</a>
-        <button type="button" class="auth-link-button" [disabled]="loggingOut()" (click)="logout()"><i class="far fa-arrow-right-from-bracket"></i> {{ loggingOut() ? 'Logging out...' : 'Logout' }}</button>
+        <button type="button" class="auth-link-button" [disabled]="loggingOut()" (click)="logout()"><i class="far fa-arrow-right-from-bracket"></i> {{ (loggingOut() ? 'header.loggingOut' : 'auth.logout') | translate }}</button>
       } @else {
-        <a routerLink="/login"><i class="far fa-arrow-right-to-arc"></i> Login</a>
-        <a routerLink="/register"><i class="far fa-user-vneck"></i> Register</a>
+        <a routerLink="/login"><i class="far fa-arrow-right-to-arc"></i> {{ 'auth.login' | translate }}</a>
+        <a routerLink="/register"><i class="far fa-user-vneck"></i> {{ 'auth.register' | translate }}</a>
       }
     </div></div>
   </div></div></div>
 
   <div class="main-navigation"><nav class="navbar navbar-expand-lg"><div class="container position-relative">
-    <a class="navbar-brand sayaramatch-brand" routerLink="/" aria-label="SayaraMatch home">
+    <a class="navbar-brand sayaramatch-brand" routerLink="/" [attr.aria-label]="'header.homeAriaLabel' | translate">
       <picture>
         <source media="(max-width: 380px)" srcset="assets/img/logo/sayaramatch-logo-compact.svg">
         <img src="assets/img/logo/sayaramatch-logo.svg" alt="SayaraMatch" width="220" height="54" />
@@ -34,7 +34,7 @@
         <button type="button" [class.active]="language.language() === 'ar'" (click)="setLanguage('ar')">العربية</button>
       </div>
     </div>
-    <div class="mobile-menu-right"><button class="navbar-toggler" type="button" aria-controls="main_nav" [attr.aria-expanded]="mobileNavigationOpen()" aria-label="Toggle navigation" (click)="toggleMobileNavigation($event)"><span class="navbar-toggler-mobile-icon"><i class="far fa-bars"></i></span></button></div>
+    <div class="mobile-menu-right"><button class="navbar-toggler" type="button" aria-controls="main_nav" [attr.aria-expanded]="mobileNavigationOpen()" [attr.aria-label]="'header.toggleNavigation' | translate" (click)="toggleMobileNavigation($event)"><span class="navbar-toggler-mobile-icon"><i class="far fa-bars"></i></span></button></div>
     <div class="collapse navbar-collapse" id="main_nav" [class.show]="mobileNavigationOpen()">
       <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeNavigation()">{{ 'nav.home' | translate }}</a></li>
@@ -43,8 +43,8 @@
         <li class="nav-item dropdown" routerLinkActive="active" [class.show]="pagesOpen()">
           <button type="button" class="nav-link dropdown-toggle" [attr.aria-expanded]="pagesOpen()" (click)="togglePages($event)">{{ 'nav.pages' | translate }}</button>
           <ul class="dropdown-menu fade-down" [class.show]="pagesOpen()">
-            <li><a class="dropdown-item" routerLink="/team" routerLinkActive="active" (click)="closeNavigation()">Our Team</a></li>
-            <li><a class="dropdown-item" routerLink="/faq" routerLinkActive="active" (click)="closeNavigation()">FAQ</a></li>
+            <li><a class="dropdown-item" routerLink="/team" routerLinkActive="active" (click)="closeNavigation()">{{ 'footer.team' | translate }}</a></li>
+            <li><a class="dropdown-item" routerLink="/faq" routerLinkActive="active" (click)="closeNavigation()">{{ 'footer.faq' | translate }}</a></li>
           </ul>
         </li>
         <li class="nav-item"><a class="nav-link" routerLink="/blog" routerLinkActive="active" (click)="closeNavigation()">{{ 'nav.blog' | translate }}</a></li>

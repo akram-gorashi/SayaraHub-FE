@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -22,6 +22,18 @@ import { LocalizedTextPipe } from '../../../shared/i18n/localized-value.pipe';
 export class MainLayout {
   protected readonly store = inject(LandingStore);
   protected readonly mobileSearchOpen = signal(false);
+  protected readonly brandDisplayLimit = signal(12);
+  protected readonly filterBrandDisplayLimit = signal(12);
+  protected readonly visibleBrands = computed(() =>
+    this.store.brands().slice(0, this.brandDisplayLimit()),
+  );
+  protected readonly visibleFilterBrands = computed(() => {
+    const brands = this.store.brands();
+    const selectedBrandId = this.store.filters().brandId;
+    return brands.filter(
+      (brand, index) => index < this.filterBrandDisplayLimit() || brand.id === selectedBrandId,
+    );
+  });
   private readonly templatePlugins = inject(TemplatePluginsService);
   private readonly router = inject(Router);
   private searchTrigger: HTMLElement | null = null;
@@ -39,7 +51,15 @@ export class MainLayout {
     key: 'brandId' | 'transmissionId' | 'fuelTypeId',
     event: Event,
   ): void {
-    const value = (event.target as HTMLSelectElement).value;
+    const select = event.target as HTMLSelectElement;
+    const value = select.value;
+    if (key === 'brandId' && value === '__load_more_brands__') {
+      this.filterBrandDisplayLimit.update(current =>
+        Math.min(current + 12, this.store.brands().length),
+      );
+      select.value = String(this.store.filters().brandId ?? '');
+      return;
+    }
     this.store.updateFilter(key, value ? Number(value) : null);
   }
 
@@ -68,6 +88,10 @@ export class MainLayout {
 
   protected browseBrand(brandId: number): void {
     void this.router.navigate(['/cars'], { queryParams: { brandIds: brandId } });
+  }
+
+  protected loadMoreBrands(): void {
+    this.brandDisplayLimit.update(current => Math.min(current + 12, this.store.brands().length));
   }
 
   private navigateToCarList(): void {

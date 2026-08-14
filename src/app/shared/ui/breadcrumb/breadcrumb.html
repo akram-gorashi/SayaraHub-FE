@@ -2,7 +2,7 @@
   <div class="container">
     <h1 class="breadcrumb-title">{{ title() }}</h1>
     <ul class="breadcrumb-menu">
-      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/">{{ 'nav.home' | translate }}</a></li>
       @if (title() !== parentLabel()) {
         <li><a [routerLink]="parentLink()">{{ parentLabel() }}</a></li>
       }

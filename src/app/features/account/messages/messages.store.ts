@@ -1,16 +1,15 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { DestroyRef, Injectable, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
-import { ApiResponse } from '../../../core/models/api.models';
 import { Chat, ChatMessage } from '../../../core/models/chat.models';
 import { ChatsService } from '../../../core/services/chats.service';
 import { ChatRealtimeService } from '../../../core/services/chat-realtime.service';
 import { AccountStore } from '../data-access/account.store';
 import { UserSafetyService } from '../../../core/services/user-safety.service';
 import { MessageCenterService } from '../../../core/services/message-center.service';
+import { LocalizedApiErrorService } from '../../../core/services/localized-api-error.service';
 
 @Injectable()
 export class MessagesStore {
@@ -19,6 +18,7 @@ export class MessagesStore {
   private readonly account = inject(AccountStore);
   private readonly safety = inject(UserSafetyService);
   private readonly messageCenter = inject(MessageCenterService);
+  private readonly localizedError = inject(LocalizedApiErrorService);
   private readonly translate = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly chatsState = signal<Chat[]>([]);
@@ -309,8 +309,6 @@ export class MessagesStore {
   }
 
   private errorMessage(error: unknown): string {
-    return error instanceof HttpErrorResponse
-      ? (error.error as Partial<ApiResponse<unknown>> | null)?.message || 'Unable to load messages.'
-      : 'Unable to load messages.';
+    return this.localizedError.message(error, 'Unable to load messages.');
   }
 }

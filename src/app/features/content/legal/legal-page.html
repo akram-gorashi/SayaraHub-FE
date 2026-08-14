@@ -1,5 +1,5 @@
-<main class="main"><app-page-hero [title]="document().title" />
+<main class="main"><app-page-hero [title]="document().title | translate" />
   <section class="py-120"><div class="container"><div class="row"><div class="col">@for (section of document().sections; track section.heading) {
-    <div class="terms-content"><h2>{{ section.heading }}</h2><p>{{ section.body }}</p></div>
+    <div class="terms-content"><h2>{{ section.heading | translate }}</h2><p>{{ section.body | translate }}</p></div>
   }</div></div></div></section>
 </main>

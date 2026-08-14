@@ -11,15 +11,27 @@ export class LocalizedApiErrorService {
 
   message(error: unknown, englishFallback = 'Something went wrong. Please try again.'): string {
     if (!(error instanceof HttpErrorResponse)) return this.fallback(englishFallback);
+    const response = error.error as {
+      message?: string;
+      title?: string;
+      errors?: Record<string, string[]>;
+      data?: Array<{ message?: string }>;
+    } | null;
+    const validation = [
+      ...(response?.errors ? Object.values(response.errors).flat() : []),
+      ...(Array.isArray(response?.data) ? response.data.map(item => item.message) : []),
+    ].filter((message): message is string => Boolean(message)).join(' ');
+
     if (error.status === 0) return this.translate.instant('errors.offline');
+    if (response?.message && response.message !== 'Validation failed') {
+      return validation ? `${response.message} ${validation}` : response.message;
+    }
+    if (validation) return validation;
     if (error.status === 401) return this.translate.instant('errors.unauthorized');
     if (error.status === 403) return this.translate.instant('errors.forbidden');
     if (error.status === 404) return this.translate.instant('errors.notFound');
     if (error.status >= 500) return this.translate.instant('errors.server');
-    if (this.language.language() === 'ar') return this.translate.instant('errors.generic');
-    const response = error.error as { message?: string; title?: string; errors?: Record<string, string[]> } | null;
-    const validation = response?.errors ? Object.values(response.errors).flat().filter(Boolean).join(' ') : '';
-    return response?.message || validation || response?.title || englishFallback;
+    return response?.title || this.fallback(englishFallback);
   }
 
   private fallback(englishFallback: string): string {

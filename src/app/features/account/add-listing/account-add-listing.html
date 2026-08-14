@@ -2,7 +2,7 @@
   <h2 id="add-listing-title" class="user-profile-card-title">{{ (isEditing ? 'listing.editTitle' : 'listing.sellTitle') | translate }}</h2>
   @if (store.error(); as error) { <div class="alert alert-danger" role="alert">{{ error }}</div> }
   @if (store.loading()) {
-    <div class="text-center py-5"><span class="spinner-border text-primary" aria-label="Loading"></span></div>
+    <div class="text-center py-5"><span class="spinner-border text-primary" [attr.aria-label]="'common.loading' | translate"></span></div>
   } @else {
     <div class="add-listing-form">
       @if (draftRestored()) { <div class="draft-banner" role="status"><span><i class="far fa-clock-rotate-left"></i>{{ 'listing.draftRestored' | translate }}</span><button type="button" (click)="discardDraft()">{{ 'listing.discardDraft' | translate }}</button></div> }
@@ -21,7 +21,7 @@
           </div>
         </div>
       }
-      <div class="mobile-listing-stepper" aria-label="Car advert progress">
+        <div class="mobile-listing-stepper" [attr.aria-label]="'listing.advertProgress' | translate">
         <div class="mobile-listing-stepper__summary"><span>{{ 'listing.steps.count' | translate:{ current: currentStep(), total: mobileSteps.length } }}</span><strong>{{ mobileSteps[currentStep() - 1] | translate }}</strong></div>
         <ol>@for (step of mobileSteps; track step; let number = $index) { <li [class.active]="number + 1 === currentStep()" [class.complete]="number + 1 < currentStep()"><span>{{ number + 1 }}</span><small>{{ step | translate }}</small></li> }</ol>
       </div>
