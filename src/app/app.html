@@ -1,3 +1,12 @@
+@if (isLoading()) {
+  <div class="route-preloader" role="status" aria-live="polite" aria-label="Loading page">
+    <div class="route-loader-ripple" aria-hidden="true">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+}
+
 <app-header></app-header>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

@@ -30,4 +30,6 @@ export class AccountShell {
     this.navigationId();
     return this.route.firstChild?.snapshot.data['accountTitle'] as string || 'My Account';
   });
+
+  protected readonly isMessagesPage = computed(() => this.title() === 'Messages');
 }

@@ -22,22 +22,35 @@
   <link rel="apple-touch-icon" href="assets/img/logo/icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
 
-  <!-- Legacy theme styles are served as static assets so their relative URLs stay intact. -->
+  <!-- Discover web fonts immediately instead of waiting for style.css @import. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap">
+
+  <!-- Critical loader CSS must be available before the theme styles download. -->
+  <style>
+    #boot-preloader { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; background: #fff; }
+    #boot-preloader .loader-ripple { position: relative; width: 80px; height: 80px; }
+    #boot-preloader .loader-ripple div { position: absolute; border: 4px solid #f51e30; border-radius: 50%; animation: boot-loader-ripple 1s cubic-bezier(0, .2, .8, 1) infinite; }
+    #boot-preloader .loader-ripple div:nth-child(2) { animation-delay: -.5s; }
+    @keyframes boot-loader-ripple {
+      0% { top: 36px; left: 36px; width: 0; height: 0; opacity: 1; }
+      100% { top: 0; left: 0; width: 72px; height: 72px; opacity: 0; }
+    }
+  </style>
+
+  <!-- Only the theme styles used by Angular templates are loaded globally. -->
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/all-fontawesome.min.css">
   <link rel="stylesheet" href="./assets/css/flaticon.css">
   <link rel="stylesheet" href="./assets/css/animate.min.css">
-  <link rel="stylesheet" href="./assets/css/jquery-ui.min.css">
-  <link rel="stylesheet" href="./assets/css/magnific-popup.min.css">
-  <link rel="stylesheet" href="./assets/css/nice-select.min.css">
   <link rel="stylesheet" href="./assets/css/owl.carousel.min.css">
-  <link rel="stylesheet" href="./assets/css/flex-slider.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
   <!-- preloader -->
-  <div class="preloader">
+  <div id="boot-preloader" class="preloader" role="status" aria-label="Loading application">
     <div class="loader-ripple">
       <div></div>
       <div></div>
