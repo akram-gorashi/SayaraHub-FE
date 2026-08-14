@@ -1,15 +1,5 @@
 import { afterNextRender, Component, DestroyRef, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  NavigationCancel,
-  NavigationEnd,
-  NavigationError,
-  NavigationStart,
-  Router,
-  RouterLink,
-  RouterLinkActive,
-  RouterOutlet,
-} from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Header } from "./core/layout/header/header";
 import { Footer } from "./core/layout/footer/footer";
 import { AuthSessionService } from './core/services/auth-session.service';
@@ -25,34 +15,14 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class App {
   protected readonly title = signal('sayara-hub-FE');
-  protected readonly isLoading = signal(true);
   protected readonly session = inject(AuthSessionService);
   protected readonly notifications = inject(DjangoNotificationCenterService);
   protected readonly language = inject(LanguageService);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly router = inject(Router);
 
   constructor() {
-    this.router.events
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(event => {
-        if (event instanceof NavigationStart) {
-          this.isLoading.set(true);
-          return;
-        }
-
-        if (
-          event instanceof NavigationEnd ||
-          event instanceof NavigationCancel ||
-          event instanceof NavigationError
-        ) {
-          this.isLoading.set(false);
-        }
-      });
-
     afterNextRender(() => {
       document.querySelector('#boot-preloader')?.remove();
-      if (this.router.navigated) this.isLoading.set(false);
 
       document.querySelectorAll<HTMLElement>('[data-background]').forEach(element => {
         const image = element.dataset['background'];
