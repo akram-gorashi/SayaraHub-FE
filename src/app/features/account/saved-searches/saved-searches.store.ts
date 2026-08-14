@@ -44,7 +44,7 @@ export class SavedSearchesStore {
         : this.errorState.set(response.message),
       error: error => this.errorState.set(this.errorMessage(error)),
     });
-    this.masterData.getCarBrands({ pageSize: 100 }).pipe(
+    this.masterData.getCarBrands({ pageSize: 250 }).pipe(
       takeUntilDestroyed(this.destroyRef),
     ).subscribe({ next: response => this.brandsState.set(response.data?.items ?? []) });
   }
@@ -52,7 +52,7 @@ export class SavedSearchesStore {
   loadModels(brandId: number | null): void {
     this.modelsState.set([]);
     if (!brandId) return;
-    this.masterData.getCarModelsByBrand(brandId, { pageSize: 100 }).pipe(
+    this.masterData.getCarModelsByBrand(brandId, { pageSize: 250 }).pipe(
       takeUntilDestroyed(this.destroyRef),
     ).subscribe({ next: response => this.modelsState.set(response.data?.items ?? []) });
   }

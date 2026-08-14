@@ -32,4 +32,14 @@ describe('MasterDataService', () => {
     );
     request.flush({ success: true, message: 'ok', data: {} });
   });
+
+  it('loads generations for a selected model', () => {
+    service.getCarGenerationsByModel(42, { pageSize: 250 }).subscribe();
+
+    const request = http.expectOne(
+      value => value.url === `${API_ENDPOINTS.masterData}/car-models/42/generations` &&
+        value.params.get('pageSize') === '250',
+    );
+    request.flush({ success: true, message: 'ok', data: { items: [] } });
+  });
 });
